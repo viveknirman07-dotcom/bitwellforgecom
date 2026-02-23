@@ -16,16 +16,16 @@ const ScrollReveal = ({
   className,
   delay = 0,
   direction = "up",
-  duration = 700,
+  duration = 900,
   once = true,
 }: ScrollRevealProps) => {
   const { ref, isVisible } = useScrollReveal({ once });
 
   const directionStyles: Record<string, string> = {
-    up: "translate-y-8",
-    down: "-translate-y-8",
-    left: "translate-x-8",
-    right: "-translate-x-8",
+    up: "translate-y-5",
+    down: "-translate-y-5",
+    left: "translate-x-5",
+    right: "-translate-x-5",
     none: "",
   };
 

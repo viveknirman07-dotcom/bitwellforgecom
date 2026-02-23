@@ -108,11 +108,14 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.65;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -126,7 +129,7 @@
   }
 
   .section-y {
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-20 md:py-28 lg:py-36;
   }
 
   .text-balance {
@@ -134,22 +137,22 @@
   }
 
   .animate-fade-up {
-    animation: fadeUp 0.8s ease-out forwards;
+    animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-1 {
-    animation: fadeUp 0.8s ease-out 0.15s forwards;
+    animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-2 {
-    animation: fadeUp 0.8s ease-out 0.3s forwards;
+    animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-3 {
-    animation: fadeUp 0.8s ease-out 0.45s forwards;
+    animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
     opacity: 0;
   }
 }
@@ -157,7 +160,7 @@
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;

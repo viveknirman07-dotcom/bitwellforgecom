@@ -41,7 +41,7 @@ const Index = () => {
                   to="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-300"
                 >
-                  Book a Strategy Call
+                  Start the Conversation
                   <ArrowRight size={16} />
                 </Link>
                 <Link
