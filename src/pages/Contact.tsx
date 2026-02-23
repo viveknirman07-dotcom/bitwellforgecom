@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -21,27 +22,35 @@ const Contact = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
             <div>
-              <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6 animate-fade-up">Contact</p>
-              <h1 className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-8 text-balance animate-fade-up-delay-1">
-                Let's discuss your growth architecture.
-              </h1>
-              <p className="text-muted-foreground leading-relaxed mb-10 animate-fade-up-delay-2">
-                Every engagement begins with a conversation. Share your current challenge, and we'll explore whether a structured approach could help.
-              </p>
+              <ScrollReveal>
+                <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Contact</p>
+              </ScrollReveal>
+              <ScrollReveal delay={150}>
+                <h1 className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-8 text-balance">
+                  Let's discuss your growth architecture.
+                </h1>
+              </ScrollReveal>
+              <ScrollReveal delay={300}>
+                <p className="text-muted-foreground leading-relaxed mb-10">
+                  Every engagement begins with a conversation. Share your current challenge, and we'll explore whether a structured approach could help.
+                </p>
+              </ScrollReveal>
 
-              <div className="space-y-6 animate-fade-up-delay-3">
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">hello@bitwellforge.com</p>
+              <ScrollReveal delay={400}>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-sm font-semibold text-foreground mb-1">Email</h3>
+                    <p className="text-sm text-muted-foreground">hello@bitwellforge.com</p>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-foreground mb-1">Response Time</h3>
+                    <p className="text-sm text-muted-foreground">Within 24 hours</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">Response Time</h3>
-                  <p className="text-sm text-muted-foreground">Within 24 hours</p>
-                </div>
-              </div>
+              </ScrollReveal>
             </div>
 
-            <div className="animate-fade-up-delay-2">
+            <ScrollReveal delay={200}>
               {submitted ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center">
@@ -107,7 +116,7 @@ const Contact = () => {
                   </button>
                 </form>
               )}
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
