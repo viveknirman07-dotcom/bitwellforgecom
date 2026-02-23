@@ -4,22 +4,22 @@ import { ReactNode } from "react";
 const pageVariants = {
   initial: {
     opacity: 0,
-    y: 12,
+    y: 8,
   },
   enter: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
-      ease: [0.25, 0.1, 0.25, 1] as const,
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
   exit: {
     opacity: 0,
-    y: -8,
+    y: -4,
     transition: {
-      duration: 0.3,
-      ease: [0.25, 0.1, 0.25, 1] as const,
+      duration: 0.35,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };

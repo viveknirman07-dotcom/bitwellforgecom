@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import SocialLinks from "@/components/SocialLinks";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -37,14 +38,18 @@ const Contact = () => {
               </ScrollReveal>
 
               <ScrollReveal delay={400}>
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <div>
-                    <h3 className="text-sm font-semibold text-foreground mb-1">Email</h3>
-                    <p className="text-sm text-muted-foreground">hello@bitwellforge.com</p>
+                    <h3 className="text-[13px] font-semibold text-foreground mb-1">Email</h3>
+                    <a href="mailto:v@bitwellforge.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-300">v@bitwellforge.com</a>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-foreground mb-1">Response Time</h3>
-                    <p className="text-sm text-muted-foreground">Within 24 hours</p>
+                    <h3 className="text-[13px] font-semibold text-foreground mb-1">Response Time</h3>
+                    <p className="text-[13px] text-muted-foreground">Within 24 hours</p>
+                  </div>
+                  <div>
+                    <h3 className="text-[13px] font-semibold text-foreground mb-1">Follow Us</h3>
+                    <SocialLinks size={17} />
                   </div>
                 </div>
               </ScrollReveal>
@@ -111,7 +116,7 @@ const Contact = () => {
                     type="submit"
                     className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-300 mt-4"
                   >
-                    Book a Strategy Call
+                    Start the Conversation
                     <ArrowRight size={16} />
                   </button>
                 </form>

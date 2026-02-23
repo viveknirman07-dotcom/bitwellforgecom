@@ -11,7 +11,7 @@ interface CTABlockProps {
 const CTABlock = ({
   heading = "Ready to build your growth system?",
   subtext = "Let's design the infrastructure your business deserves.",
-  buttonLabel = "Book a Strategy Call",
+  buttonLabel = "Start the Conversation",
   href = "/contact",
 }: CTABlockProps) => {
   return (
