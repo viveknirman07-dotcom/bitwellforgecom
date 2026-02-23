@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
+import heroTexture from "@/assets/hero-texture.jpg";
 
 const services = [
   { title: "Growth Strategy", description: "Architecting acquisition roadmaps built on data, clarity, and sustainable momentum.", href: "/services#growth-strategy" },
@@ -17,8 +18,12 @@ const Index = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="section-padding min-h-screen flex items-center">
-        <div className="max-w-[1400px] mx-auto w-full pt-20">
+      <section className="section-padding min-h-screen flex items-center relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.07] dark:opacity-[0.15] pointer-events-none"
+          style={{ backgroundImage: `url(${heroTexture})` }}
+        />
+        <div className="max-w-[1400px] mx-auto w-full pt-20 relative z-10">
           <div className="max-w-3xl">
             <ScrollReveal>
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-8">
