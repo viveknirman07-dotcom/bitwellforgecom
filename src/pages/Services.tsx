@@ -1,4 +1,5 @@
 import CTABlock from "@/components/CTABlock";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const services = [
   {
@@ -57,43 +58,52 @@ const Services = () => {
       <section className="section-padding section-y">
         <div className="max-w-[1400px] mx-auto">
           <div className="max-w-3xl mb-20">
-            <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6 animate-fade-up">Services</p>
-            <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance animate-fade-up-delay-1">
-              Systems designed for every stage of growth.
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed animate-fade-up-delay-2">
-              Each service pillar operates as part of an integrated growth architecture — designed to work independently or as a unified system.
-            </p>
+            <ScrollReveal>
+              <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Services</p>
+            </ScrollReveal>
+            <ScrollReveal delay={150}>
+              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
+                Systems designed for every stage of growth.
+              </h1>
+            </ScrollReveal>
+            <ScrollReveal delay={300}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Each service pillar operates as part of an integrated growth architecture — designed to work independently or as a unified system.
+              </p>
+            </ScrollReveal>
           </div>
 
           <div className="space-y-0">
             {services.map((service, i) => (
-              <div
-                key={service.id}
-                id={service.id}
-                className="group border-t border-border py-12 md:py-16 scroll-mt-24"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
-                  <div className="md:col-span-1">
-                    <span className="text-sm text-muted-foreground font-medium">0{i + 1}</span>
-                  </div>
-                  <div className="md:col-span-4">
-                    <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300">
-                      {service.title}
-                    </h2>
-                  </div>
-                  <div className="md:col-span-7">
-                    <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{service.details}</p>
+              <ScrollReveal key={service.id}>
+                <div
+                  id={service.id}
+                  className="group border-t border-border py-12 md:py-16 scroll-mt-24"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
+                    <div className="md:col-span-1">
+                      <span className="text-sm text-muted-foreground font-medium">0{i + 1}</span>
+                    </div>
+                    <div className="md:col-span-4">
+                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300">
+                        {service.title}
+                      </h2>
+                    </div>
+                    <div className="md:col-span-7">
+                      <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{service.details}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <CTABlock />
+      <ScrollReveal>
+        <CTABlock />
+      </ScrollReveal>
     </div>
   );
 };

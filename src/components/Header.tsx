@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 
 const navItems = [
   { label: "About", href: "/about" },
@@ -14,6 +15,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -53,21 +55,36 @@ const Header = () => {
               {item.label}
             </Link>
           ))}
+          <button
+            onClick={toggle}
+            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-300"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-foreground p-2"
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {/* Mobile */}
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            onClick={toggle}
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-foreground p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border animate-fade-up">
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border">
           <div className="section-padding py-6 flex flex-col gap-5">
             {navItems.map((item) => (
               <Link
