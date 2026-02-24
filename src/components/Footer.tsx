@@ -3,7 +3,7 @@ import SocialLinks from "@/components/SocialLinks";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="border-t border-border bg-background/80 backdrop-blur-sm">
       <div className="section-padding max-w-[1400px] mx-auto py-14 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
