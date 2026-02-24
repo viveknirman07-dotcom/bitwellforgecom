@@ -10,11 +10,16 @@ const Contact = () => {
     company: "",
     challenge: "",
   });
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    
+    const subject = encodeURIComponent("New Inquiry from BitwellForge Website");
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nCurrent Challenge: ${form.challenge}`
+    );
+    
+    window.location.href = `mailto:v@bitwellforge.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -33,7 +38,7 @@ const Contact = () => {
               </ScrollReveal>
               <ScrollReveal delay={300}>
                 <p className="text-muted-foreground leading-relaxed mb-10">
-                  Every engagement begins with a conversation. Share your current challenge, and we'll explore whether a structured approach could help.
+                  Every engagement begins with a conversation. Share your current challenge and explore whether a structured approach could help.
                 </p>
               </ScrollReveal>
 
@@ -56,71 +61,62 @@ const Contact = () => {
             </div>
 
             <ScrollReveal delay={200}>
-              {submitted ? (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center">
-                    <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">Thank you.</h2>
-                    <p className="text-muted-foreground">We'll be in touch within 24 hours.</p>
-                  </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
+                    placeholder="Your name"
+                  />
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">Name</label>
-                    <input
-                      id="name"
-                      type="text"
-                      required
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">Email</label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">Company</label>
-                    <input
-                      id="company"
-                      type="text"
-                      value={form.company}
-                      onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
-                      placeholder="Your company"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="challenge" className="block text-sm font-medium text-foreground mb-2">Current Challenge</label>
-                    <textarea
-                      id="challenge"
-                      required
-                      rows={4}
-                      value={form.challenge}
-                      onChange={(e) => setForm({ ...form, challenge: e.target.value })}
-                      className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 resize-none text-sm"
-                      placeholder="Describe your current growth challenge..."
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-300 mt-4"
-                  >
-                    Start the Conversation
-                    <ArrowRight size={16} />
-                  </button>
-                </form>
-              )}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">Company</label>
+                  <input
+                    id="company"
+                    type="text"
+                    value={form.company}
+                    onChange={(e) => setForm({ ...form, company: e.target.value })}
+                    className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
+                    placeholder="Your company"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="challenge" className="block text-sm font-medium text-foreground mb-2">Current Challenge</label>
+                  <textarea
+                    id="challenge"
+                    required
+                    rows={4}
+                    value={form.challenge}
+                    onChange={(e) => setForm({ ...form, challenge: e.target.value })}
+                    className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 resize-none text-sm"
+                    placeholder="Describe your current growth challenge..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-300 mt-4"
+                >
+                  Start the Conversation
+                  <ArrowRight size={16} />
+                </button>
+              </form>
             </ScrollReveal>
           </div>
         </div>

@@ -6,12 +6,12 @@ import ScrollReveal from "@/components/ScrollReveal";
 import heroTexture from "@/assets/hero-texture.jpg";
 
 const services = [
-  { title: "Growth Strategy", description: "Architecting acquisition roadmaps built on data, clarity, and sustainable momentum.", href: "/services#growth-strategy" },
-  { title: "High-Ticket Sales Systems", description: "Structured pipelines that convert qualified prospects into long-term clients.", href: "/services#sales-systems" },
-  { title: "Performance Marketing", description: "Precision-engineered campaigns that deliver measurable, compounding returns.", href: "/services#performance-marketing" },
-  { title: "B2B Lead Generation", description: "Systematic outbound and inbound engines designed for enterprise-grade demand.", href: "/services#lead-generation" },
-  { title: "LinkedIn Positioning", description: "Authority-building frameworks for founders and leadership teams.", href: "/services#linkedin" },
-  { title: "AI & Automation", description: "Intelligent workflows that eliminate friction and scale operations effortlessly.", href: "/services#ai-automation" },
+  { title: "Growth Strategy", description: "A clear roadmap connecting your goals to measurable acquisition outcomes, built for long-term momentum.", href: "/services#growth-strategy" },
+  { title: "High-Ticket Sales Systems", description: "Structured pipelines that turn qualified prospects into committed, long-term clients.", href: "/services#sales-systems" },
+  { title: "Performance Marketing", description: "Precision campaigns engineered for compounding returns, not vanity metrics.", href: "/services#performance-marketing" },
+  { title: "B2B Lead Generation", description: "Systematic engines filling your pipeline with qualified, high-intent prospects at enterprise scale.", href: "/services#lead-generation" },
+  { title: "LinkedIn Positioning", description: "Authority frameworks that position founders and leadership teams as trusted voices in their market.", href: "/services#linkedin" },
+  { title: "AI & Automation", description: "Intelligent workflows that remove friction from your operations and scale without adding headcount.", href: "/services#ai-automation" },
 ];
 
 const Index = () => {
@@ -37,7 +37,7 @@ const Index = () => {
             </ScrollReveal>
             <ScrollReveal delay={300}>
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed">
-                We design the acquisition systems that create consistent, qualified demand for ambitious businesses.
+                The acquisition systems behind consistent, qualified demand for businesses ready to scale with clarity.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={450}>
@@ -53,7 +53,7 @@ const Index = () => {
                   to="/about"
                   className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary transition-colors duration-300"
                 >
-                  Our Philosophy
+                  The Philosophy
                 </Link>
               </div>
             </ScrollReveal>
@@ -69,13 +69,13 @@ const Index = () => {
               <div>
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Philosophy</p>
                 <h2 className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
-                  Clarity is the foundation of every growth system we build.
+                  Clarity is the foundation of every growth system worth building.
                 </h2>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <p className="text-muted-foreground leading-relaxed text-lg">
-                Most businesses don't lack ambition — they lack architecture. We replace scattered tactics with structured systems that compound over time. Every engagement begins with understanding, not execution.
+                Most businesses don't lack ambition. They lack architecture. When scattered tactics are replaced with structured systems, results compound naturally over time.
               </p>
             </ScrollReveal>
           </div>
@@ -86,7 +86,7 @@ const Index = () => {
       <section className="section-padding section-y bg-secondary/50">
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
-            <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Systems We Build</p>
+            <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Systems Built for You</p>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-16 text-balance">
               Infrastructure for sustainable growth.
             </h2>
@@ -112,13 +112,13 @@ const Index = () => {
                   From clarity to compounding results.
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Our five-phase framework transforms ambiguity into actionable growth architecture.
+                  A five-phase framework that transforms ambiguity into actionable growth architecture, step by deliberate step.
                 </p>
                 <Link
                   to="/process"
                   className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors duration-300"
                 >
-                  View our process
+                  View the process
                   <ArrowRight size={14} />
                 </Link>
               </div>
@@ -141,16 +141,16 @@ const Index = () => {
       <section className="section-padding section-y bg-primary text-primary-foreground">
         <div className="max-w-[1400px] mx-auto text-center">
           <ScrollReveal>
-            <p className="text-sm font-medium opacity-60 tracking-widest uppercase mb-6">Why BitwellForge</p>
+            <p className="text-sm font-medium opacity-60 tracking-widest uppercase mb-6">Why It Works</p>
             <h2 className="font-heading text-3xl md:text-5xl font-semibold mb-16 text-balance max-w-3xl mx-auto">
-              We don't chase trends. We build systems that outlast them.
+              Systems that outlast trends, built for businesses that think long term.
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
             {[
-              { title: "Systems, Not Tactics", desc: "Every engagement produces infrastructure — not one-off campaigns that expire." },
-              { title: "Clarity First", desc: "We diagnose before we prescribe. Understanding always precedes execution." },
-              { title: "Long-Term Partnerships", desc: "We grow alongside our clients. Our success is measured by yours." },
+              { title: "Systems, Not Tactics", desc: "Every engagement produces infrastructure that compounds, not campaigns that expire." },
+              { title: "Clarity First", desc: "Diagnosis before prescription. Understanding always precedes execution." },
+              { title: "Long-Term Partnership", desc: "Success is measured alongside yours, in years, not quarters." },
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 150}>
                 <div>

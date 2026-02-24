@@ -13,12 +13,12 @@ const About = () => {
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
-                We believe sustainable growth is designed, not forced.
+                Sustainable growth is designed, not forced.
               </h1>
             </ScrollReveal>
             <ScrollReveal delay={300}>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                BitwellForge exists to bring structural clarity to ambitious businesses. We are not a marketing agency. We are growth systems architects.
+                BitwellForge brings structural clarity to ambitious businesses. Not a marketing agency. A growth systems architecture practice.
               </p>
             </ScrollReveal>
           </div>
@@ -30,23 +30,23 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
           <ScrollReveal>
             <div>
-              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6">Our Philosophy</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6">The Philosophy</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Most growth failures aren't caused by a lack of effort — they're caused by a lack of architecture. Businesses invest in channels, campaigns, and tools without a unifying structure.
+                Most growth failures aren't caused by a lack of effort. They're caused by a lack of architecture. Businesses invest in channels, campaigns, and tools without a unifying structure.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                We start with the question most skip: <em className="text-foreground">"What system would make growth inevitable?"</em> Then we build it.
+                The question most skip: <em className="text-foreground">"What system would make growth inevitable?"</em> That's where every engagement begins.
               </p>
             </div>
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <div>
-              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6">Our Belief</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6">The Belief</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Growth is not a series of tactics. It is infrastructure. When acquisition, conversion, and retention are designed as interconnected systems, results compound naturally.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                We build that infrastructure with precision, patience, and partnership.
+                That infrastructure is built with precision, patience, and partnership.
               </p>
             </div>
           </ScrollReveal>
@@ -60,10 +60,10 @@ const About = () => {
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Long-Term Vision</p>
               <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-8 text-balance">
-                We envision a world where businesses grow through design, not desperation.
+                A world where businesses grow through design, not desperation.
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Every system we create is built for longevity. We don't optimize for quick wins — we engineer for enduring impact. Our work is measured in years, not quarters.
+                Every system is built for longevity. Not optimized for quick wins, but engineered for enduring impact. Success is measured in years, not quarters.
               </p>
             </div>
           </ScrollReveal>
@@ -78,12 +78,12 @@ const About = () => {
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { title: "Diagnose First", desc: "We never prescribe solutions before understanding the full picture. Every engagement begins with deep strategic analysis." },
-              { title: "Architecture Over Execution", desc: "A well-designed system outperforms a well-executed tactic every time. We invest heavily in structural design." },
-              { title: "Compounding Returns", desc: "Our systems are designed to improve with time. The longer they run, the more effective they become." },
+              { title: "Diagnose First", desc: "Solutions are never prescribed before understanding the full picture. Every engagement begins with deep strategic analysis." },
+              { title: "Architecture Over Execution", desc: "A well-designed system outperforms a well-executed tactic every time. The investment goes into structural design." },
+              { title: "Compounding Returns", desc: "Systems designed to improve with time. The longer they run, the more effective they become." },
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 150}>
-                <div className="p-8 rounded-2xl border border-border bg-card">
+                <div className="p-8 rounded-2xl border border-border bg-card/70 backdrop-blur-sm">
                   <h3 className="font-heading text-xl font-semibold text-foreground mb-3">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>

@@ -5,27 +5,27 @@ const steps = [
   {
     number: "01",
     title: "Clarity Mapping",
-    description: "We begin by understanding your business deeply — goals, market position, current systems, and growth constraints. This diagnostic phase reveals the structural gaps most businesses overlook.",
+    description: "The engagement begins with a deep understanding of your business: goals, market position, current systems, and growth constraints. This diagnostic phase reveals the structural gaps most businesses overlook.",
   },
   {
     number: "02",
     title: "System Architecture",
-    description: "Using insights from the clarity phase, we design the acquisition architecture — defining channels, flows, messaging frameworks, and conversion pathways that align with your growth objectives.",
+    description: "Insights from the clarity phase shape the acquisition architecture. Channels, flows, messaging frameworks, and conversion pathways are defined to align with your growth objectives.",
   },
   {
     number: "03",
     title: "Acquisition Engineering",
-    description: "We build and deploy the systems — from campaign infrastructure to sales processes — with precision engineering that prioritizes reliability over speed.",
+    description: "Systems are built and deployed, from campaign infrastructure to sales processes, with precision engineering that prioritizes reliability over speed.",
   },
   {
     number: "04",
     title: "Integration & Automation",
-    description: "We connect every component into a unified growth machine. Automation handles the repetitive. Intelligence handles the complex. Your team focuses on what matters.",
+    description: "Every component connects into a unified growth machine. Automation handles the repetitive. Intelligence handles the complex. Your team focuses on what matters.",
   },
   {
     number: "05",
     title: "Measurement & Optimization",
-    description: "With systems running, we measure what matters. Continuous optimization ensures your growth infrastructure compounds in effectiveness over time.",
+    description: "With systems running, what matters gets measured. Continuous optimization ensures your growth infrastructure compounds in effectiveness over time.",
   },
 ];
 
@@ -45,7 +45,7 @@ const Process = () => {
             </ScrollReveal>
             <ScrollReveal delay={300}>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Our framework transforms complexity into structured, compounding growth — phase by deliberate phase.
+                A framework that transforms complexity into structured, compounding growth, phase by deliberate phase.
               </p>
             </ScrollReveal>
           </div>
@@ -58,7 +58,7 @@ const Process = () => {
                 <ScrollReveal key={step.number} delay={i * 100}>
                   <div className="relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-12 md:py-16 border-t border-border md:border-t-0">
                     <div className="md:col-span-1 flex items-start">
-                      <div className="relative z-10 w-20 h-20 rounded-full bg-secondary flex items-center justify-center border border-border">
+                      <div className="relative z-10 w-20 h-20 rounded-full bg-secondary/70 backdrop-blur-sm flex items-center justify-center border border-border">
                         <span className="text-sm font-medium text-foreground">{step.number}</span>
                       </div>
                     </div>

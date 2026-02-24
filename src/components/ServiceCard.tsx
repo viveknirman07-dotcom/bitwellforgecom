@@ -12,7 +12,7 @@ const ServiceCard = ({ title, description, href, index }: ServiceCardProps) => {
   return (
     <Link
       to={href}
-      className={`group block p-8 md:p-10 rounded-2xl border border-border bg-card hover:shadow-soft transition-all duration-500 animate-fade-up`}
+      className={`group block p-8 md:p-10 rounded-2xl border border-border bg-card/70 backdrop-blur-sm hover:shadow-soft transition-all duration-500 animate-fade-up`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
