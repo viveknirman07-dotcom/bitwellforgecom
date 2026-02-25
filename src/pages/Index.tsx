@@ -6,12 +6,12 @@ import ScrollReveal from "@/components/ScrollReveal";
 import heroTexture from "@/assets/hero-texture.jpg";
 
 const services = [
-  { title: "Growth Strategy", description: "A clear roadmap connecting your goals to measurable acquisition outcomes, built for long-term momentum.", href: "/services#growth-strategy" },
-  { title: "High-Ticket Sales Systems", description: "Structured pipelines that turn qualified prospects into committed, long-term clients.", href: "/services#sales-systems" },
-  { title: "Performance Marketing", description: "Precision campaigns engineered for compounding returns, not vanity metrics.", href: "/services#performance-marketing" },
-  { title: "B2B Lead Generation", description: "Systematic engines filling your pipeline with qualified, high-intent prospects at enterprise scale.", href: "/services#lead-generation" },
-  { title: "LinkedIn Positioning", description: "Authority frameworks that position founders and leadership teams as trusted voices in their market.", href: "/services#linkedin" },
-  { title: "AI & Automation", description: "Intelligent workflows that remove friction from your operations and scale without adding headcount.", href: "/services#ai-automation" },
+  { title: "Growth Strategy", description: "A clear roadmap connecting your goals to measurable acquisition outcomes, built for long-term momentum.", href: "/services/growth-strategy" },
+  { title: "High-Ticket Sales Systems", description: "Structured pipelines that turn qualified prospects into committed, long-term clients.", href: "/services/sales-systems" },
+  { title: "Performance Marketing", description: "Precision campaigns engineered for compounding returns, not vanity metrics.", href: "/services/performance-marketing" },
+  { title: "B2B Lead Generation", description: "Systematic engines filling your pipeline with qualified, high-intent prospects at enterprise scale.", href: "/services/lead-generation" },
+  { title: "LinkedIn Positioning", description: "Authority frameworks that position founders and leadership teams as trusted voices in their market.", href: "/services/linkedin" },
+  { title: "AI & Automation", description: "Intelligent workflows that remove friction from your operations and scale without adding headcount.", href: "/services/ai-automation" },
 ];
 
 const Index = () => {
@@ -44,14 +44,16 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 transition-opacity duration-300"
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-500"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   Start the Conversation
                   <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary transition-colors duration-300"
+                  className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.02] active:scale-[0.98] transition-all duration-500"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   The Philosophy
                 </Link>

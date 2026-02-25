@@ -10,15 +10,15 @@ const pageVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.9,
       ease: [0.16, 1, 0.3, 1] as const,
     },
   },
   exit: {
     opacity: 0,
-    y: -3,
+    y: -2,
     transition: {
-      duration: 0.4,
+      duration: 0.5,
       ease: [0.16, 1, 0.3, 1] as const,
     },
   },
