@@ -29,10 +29,10 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-1000 ${
         scrolled
-          ? "bg-background/70 backdrop-blur-2xl border-b border-border/50"
-          : "bg-transparent"
+          ? "bg-background/60 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
+          : "bg-background/20 backdrop-blur-lg"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -76,25 +78,29 @@ const Services = () => {
           <div className="space-y-0">
             {services.map((service, i) => (
               <ScrollReveal key={service.id}>
-                <div
-                  id={service.id}
-                  className="group border-t border-border py-12 md:py-16 scroll-mt-24"
+                <Link
+                  to={`/services/${service.id}`}
+                  className="group block border-t border-border py-12 md:py-16 scroll-mt-24 hover:bg-card/40 transition-all duration-700 -mx-6 px-6 rounded-xl"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
                     <div className="md:col-span-1">
                       <span className="text-sm text-muted-foreground font-medium">0{i + 1}</span>
                     </div>
                     <div className="md:col-span-4">
-                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300">
+                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-500">
                         {service.title}
                       </h2>
                     </div>
-                    <div className="md:col-span-7">
+                    <div className="md:col-span-6">
                       <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
                       <p className="text-sm text-muted-foreground leading-relaxed">{service.details}</p>
                     </div>
+                    <div className="md:col-span-1 flex items-center justify-end">
+                      <ArrowRight size={16} className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all duration-500" />
+                    </div>
                   </div>
-                </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>

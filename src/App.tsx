@@ -12,6 +12,8 @@ import Insights from "./pages/Insights";
 import InsightArticle from "./pages/InsightArticle";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ServiceDetail from "./pages/ServiceDetail";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -21,11 +23,13 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/process" element={<Process />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:slug" element={<InsightArticle />} />
