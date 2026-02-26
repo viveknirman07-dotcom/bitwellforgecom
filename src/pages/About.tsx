@@ -83,7 +83,7 @@ const About = () => {
               { title: "Compounding Returns", desc: "Systems designed to improve with time. The longer they run, the more effective they become." },
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 150}>
-                <div className="p-8 rounded-2xl border border-border bg-card/70 backdrop-blur-sm">
+                <div className="p-8 rounded-2xl border border-border bg-card/70 backdrop-blur-sm hover:bg-card/80 hover:shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] hover:-translate-y-0.5 hover:scale-[1.02] transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
                   <h3 className="font-heading text-xl font-semibold text-foreground mb-3">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
