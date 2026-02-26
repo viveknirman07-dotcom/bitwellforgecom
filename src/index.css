@@ -129,22 +129,46 @@
     line-height: 1.65;
   }
 
-  /* Mobile-only typography: reduced scale */
-  @media (max-width: 767px) {
+  /* Mobile-only typography: exact scale */
+  @media (max-width: 768px) {
     body {
       font-size: 15px;
+      line-height: 1.6;
     }
 
+    p {
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+
+    /* Section labels (uppercase tracking labels) */
+    .tracking-widest {
+      font-size: 12px !important;
+      letter-spacing: 0.12em !important;
+    }
+
+    /* Primary hero headings */
     h1 {
-      font-size: 1.85rem !important;
+      font-size: clamp(28px, 7vw, 34px) !important;
+      line-height: 1.15 !important;
     }
 
+    /* Section headings */
     h2 {
-      font-size: 1.5rem !important;
+      font-size: clamp(22px, 6vw, 26px) !important;
+      line-height: 1.2 !important;
     }
 
+    /* Card titles */
     h3 {
-      font-size: 1.2rem !important;
+      font-size: 18px !important;
+      line-height: 1.25 !important;
+    }
+
+    /* Buttons */
+    a[class*="rounded-full"],
+    button[class*="rounded-full"] {
+      font-size: 15px;
     }
   }
 
