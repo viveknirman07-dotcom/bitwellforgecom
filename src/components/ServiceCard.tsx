@@ -12,7 +12,7 @@ const ServiceCard = ({ title, description, href, index }: ServiceCardProps) => {
   return (
     <Link
       to={href}
-      className={`group block p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl hover:bg-card/80 hover:shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] hover:-translate-y-0.5 transition-all duration-700 animate-fade-up`}
+      className={`group block p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl hover:bg-card/80 hover:shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.99] transition-all duration-500 animate-fade-up`}
       style={{ animationDelay: `${index * 0.1}s`, transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">

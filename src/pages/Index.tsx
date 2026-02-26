@@ -30,21 +30,21 @@ const Index = () => {
                 Strategic Growth Systems
               </p>
             </ScrollReveal>
-            <ScrollReveal delay={150}>
+            <ScrollReveal delay={300}>
               <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-[1.1] mb-8 text-balance">
                 Growth doesn't fail from lack of effort. It fails from lack of structure.
               </h1>
             </ScrollReveal>
-            <ScrollReveal delay={300}>
+            <ScrollReveal delay={450}>
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed">
                 The acquisition systems behind consistent, qualified demand for businesses ready to scale with clarity.
               </p>
             </ScrollReveal>
-            <ScrollReveal delay={450}>
+            <ScrollReveal delay={600}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-500"
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.015] active:scale-[0.98] transition-all duration-300"
                   style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   Start the Conversation
@@ -52,7 +52,7 @@ const Index = () => {
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.02] active:scale-[0.98] transition-all duration-500"
+                  className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.015] active:scale-[0.98] transition-all duration-300"
                   style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   The Philosophy

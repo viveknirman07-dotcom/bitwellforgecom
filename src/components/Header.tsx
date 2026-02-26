@@ -14,8 +14,14 @@ const navItems = [
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const location = useLocation();
   const { isDark, toggle } = useDarkMode();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 150);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -33,7 +39,7 @@ const Header = () => {
         scrolled
           ? "bg-background/60 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
           : "bg-background/20 backdrop-blur-lg"
-      }`}
+      } ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5"}`}
       style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <nav className="section-padding flex items-center justify-between h-16 md:h-20 max-w-[1400px] mx-auto">
