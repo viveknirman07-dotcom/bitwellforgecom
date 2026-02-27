@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
+import CaseStudiesSection from "@/components/CaseStudiesSection";
 import heroTexture from "@/assets/hero-texture.jpg";
 
 const services = [
@@ -102,6 +103,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Case Studies */}
+      <CaseStudiesSection showLink />
 
       {/* Process Preview */}
       <section className="section-padding section-y border-t border-border">

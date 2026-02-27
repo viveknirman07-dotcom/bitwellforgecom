@@ -6,6 +6,7 @@ import { useDarkMode } from "@/hooks/use-dark-mode";
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Process", href: "/process" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
