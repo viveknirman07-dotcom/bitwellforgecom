@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ServiceDetail from "./pages/ServiceDetail";
 import CaseStudies from "./pages/CaseStudies";
+import CaseStudyArticle from "./pages/CaseStudyArticle";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/case-studies/:id" element={<CaseStudyArticle />} />
             <Route path="/process" element={<Process />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:slug" element={<InsightArticle />} />
