@@ -79,7 +79,7 @@ The urge to scale is natural. Revenue targets are pressing. Competitors are movi
 
 Clarity isn't a vague understanding of your market. It's precise, documented answers to fundamental questions:
 
-Who exactly are the best-fit clients? Not demographics, but psychographics, motivations, and decision-making patterns.
+Who exactly are the best fit clients? Not demographics, but psychographics, motivations, and decision making patterns.
 
 What specific problem are you solving? Not features, but the transformation your clients experience.
 
@@ -119,7 +119,7 @@ Tactics work. Briefly. Then they stop working, and the search for the next tacti
 
 Tactics are solutions to symptoms. A company struggles with lead volume, so it tries a new channel. Conversion rates drop, so it redesigns landing pages. Churn increases, so it launches a retention campaign.
 
-Each tactic addresses a surface-level problem without examining the structural cause. The result is a growing collection of disconnected initiatives, none of which reinforce each other.
+Each tactic addresses a surface level problem without examining the structural cause. The result is a growing collection of disconnected initiatives, none of which reinforce each other.
 
 **What Systems Look Like**
 
@@ -167,13 +167,13 @@ When these questions are answered continuously and fed back into the system, the
 
 **Beyond the Funnel**
 
-The deeper issue is that funnels represent a linear model of a non-linear process. Buying decisions aren't sequential. Prospects research, compare, wait, revisit, consult, and decide on their own timeline.
+The deeper issue is that funnels represent a linear model of a non linear process. Buying decisions aren't sequential. Prospects research, compare, wait, revisit, consult, and decide on their own timeline.
 
 Sustainable acquisition architecture accounts for this complexity. It creates multiple entry points, nurtures at different speeds, and adapts messaging to where each prospect actually is, not where the funnel assumes they should be.
 
 **Building for Longevity**
 
-Design acquisition systems, not funnels. Build in feedback mechanisms. Allow for non-linear journeys. Optimize for learning speed, not just conversion rates.
+Design acquisition systems, not funnels. Build in feedback mechanisms. Allow for non linear journeys. Optimize for learning speed, not just conversion rates.
 
 The result is an acquisition engine that improves with every interaction, getting more efficient and more effective over time.
     `,
@@ -242,9 +242,9 @@ const Insights = () => {
 
           <div className="space-y-0">
             {articles.map((article, i) => (
-              <ScrollReveal key={i}>
+              <ScrollReveal key={i} direction="right" delay={i * 100}>
                 <Link to={`/insights/${article.slug}`}>
-                  <article className="group border-t border-border py-10 md:py-14 cursor-pointer">
+                  <article className="group border-t border-border py-10 md:py-14 cursor-pointer hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-start">
                       <div className="md:col-span-2">
                         <span className="text-xs font-medium text-muted-foreground tracking-wide uppercase">{article.category}</span>

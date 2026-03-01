@@ -55,7 +55,7 @@ const Process = () => {
 
             <div className="space-y-0">
               {steps.map((step, i) => (
-                <ScrollReveal key={step.number} delay={i * 100}>
+                <ScrollReveal key={step.number} delay={i * 200} direction="left">
                   <div className="relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-12 md:py-16 border-t border-border md:border-t-0">
                     <div className="md:col-span-1 flex items-start">
                       <div className="relative z-10 w-20 h-20 rounded-full bg-secondary/70 backdrop-blur-sm flex items-center justify-center border border-border">

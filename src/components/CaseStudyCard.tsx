@@ -17,14 +17,13 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
         "bg-card/60 backdrop-blur-xl hover:bg-card/80",
         "hover:shadow-[0_8px_30px_hsl(var(--foreground)/0.06)]",
         "hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.99]",
-        "transition-all duration-500 animate-fade-up"
+        "transition-all duration-500"
       )}
       style={{
-        animationDelay: `${index * 0.1}s`,
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
-      <span className="inline-block text-xs font-medium tracking-widest uppercase text-accent mb-4">
+      <span className="inline-block text-xs font-medium tracking-widest uppercase text-accent mb-4 group-hover:brightness-125 transition-all duration-300">
         {study.tag}
       </span>
       <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
