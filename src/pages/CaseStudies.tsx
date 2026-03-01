@@ -40,7 +40,7 @@ const CaseStudies = () => {
 
           <ScrollReveal delay={400}>
             <p className="mt-12 text-xs text-muted-foreground text-center max-w-2xl mx-auto leading-relaxed">
-              Case studies marked as Concept Studies represent system designs and projected outcomes based on our methodology — not specific client engagements.
+              Case studies marked as Concept Studies represent system designs and projected outcomes based on our methodology, not specific client engagements.
             </p>
           </ScrollReveal>
         </div>

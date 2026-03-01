@@ -22,7 +22,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Full-spectrum growth audit across all channels and touchpoints",
       "Revenue attribution mapping to connect activity to actual outcomes",
       "Competitive positioning analysis to identify structural advantages",
-      "Channel prioritization framework based on highest-leverage opportunities",
+      "Channel prioritization framework based on highest leverage opportunities",
       "Quarterly milestone architecture with measurable benchmarks",
       "Cross-functional alignment to unify sales, marketing, and operations",
     ],

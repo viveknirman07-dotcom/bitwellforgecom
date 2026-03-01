@@ -118,7 +118,7 @@ const Index = () => {
                   From clarity to compounding results.
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  A five-phase framework that transforms ambiguity into actionable growth architecture, step by deliberate step.
+                  A five phase framework that transforms ambiguity into actionable growth architecture, step by deliberate step.
                 </p>
                 <Link
                   to="/process"
@@ -154,9 +154,9 @@ const Index = () => {
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
             {[
-              { title: "Systems, Not Tactics", desc: "Every engagement produces infrastructure that compounds, not campaigns that expire." },
+              { title: "Systems, Not Tactics", desc: "Every engagement produces infrastructure that compounds. Not campaigns that expire." },
               { title: "Clarity First", desc: "Diagnosis before prescription. Understanding always precedes execution." },
-              { title: "Long-Term Partnership", desc: "Success is measured alongside yours, in years, not quarters." },
+              { title: "Long Term Partnership", desc: "Success is measured alongside yours. In years, not quarters." },
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 150}>
                 <div>
