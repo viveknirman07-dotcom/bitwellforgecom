@@ -172,6 +172,34 @@
     }
   }
 
+  /* Tablet alignment fixes */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    h1 {
+      font-size: clamp(32px, 5vw, 42px) !important;
+      line-height: 1.12 !important;
+    }
+
+    h2 {
+      font-size: clamp(24px, 4vw, 32px) !important;
+      line-height: 1.18 !important;
+    }
+
+    h3 {
+      font-size: clamp(17px, 2.5vw, 20px) !important;
+      line-height: 1.22 !important;
+    }
+
+    .section-padding {
+      padding-left: 2rem !important;
+      padding-right: 2rem !important;
+    }
+
+    .section-y {
+      padding-top: 4rem !important;
+      padding-bottom: 4rem !important;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
