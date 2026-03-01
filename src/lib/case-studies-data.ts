@@ -59,4 +59,20 @@ export const caseStudies: CaseStudy[] = [
     result: "Pipeline grew 3x in 90 days. Owner reclaimed 8 hrs/week previously spent on random prospecting.",
     label: "Concept Study: framework based on real system design",
   },
+  {
+    id: "ai-automation",
+    tag: "AI Automation & Systems",
+    title: "14 Hours Saved Per Week for a Solo Consultant",
+    subtitle: "How an independent consultant eliminated repetitive operations and reclaimed time for high value client work.",
+    clientType: "Independent business consultant, solo operator, B2B focused",
+    challenge: "Spending 3+ hours daily on repetitive tasks: manual follow ups, lead tracking, report generation, and calendar coordination. No time left for strategy or business development.",
+    whatWeBuilt: [
+      "AI powered follow up sequence with automated triggers based on lead behavior",
+      "CRM automation connecting outreach to pipeline tracking in real time",
+      "Automated weekly reporting dashboard with zero manual data entry",
+      "Calendar and task management workflows integrated with existing tools",
+    ],
+    result: "14 hours saved per week. Consultant shifted 80% of recovered time toward business development. Pipeline activity increased 2x within 60 days without adding headcount or budget.",
+    label: "Concept Study: framework based on real system design",
+  },
 ];
