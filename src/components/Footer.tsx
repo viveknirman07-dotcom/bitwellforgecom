@@ -7,11 +7,20 @@ const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ once: true });
 
   return (
-    <footer ref={ref} className="border-t border-border bg-background/80 backdrop-blur-sm">
+    <footer ref={ref} className="border-t border-border bg-background/80 backdrop-blur-sm relative overflow-hidden">
+      {/* Subtle grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(0deg, #c9a96e 0px, transparent 1px, transparent 80px),
+            repeating-linear-gradient(90deg, #c9a96e 0px, transparent 1px, transparent 80px)`,
+        }}
+      />
+
       <motion.div
-        className="section-padding max-w-[1400px] mx-auto py-14 md:py-16"
-        initial={{ opacity: 0 }}
-        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+        className="section-padding max-w-[1400px] mx-auto py-14 md:py-16 relative z-10"
+        initial={{ opacity: 0, y: 30 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -36,9 +45,10 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-[13px] text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300"
+                  className="text-[13px] text-muted-foreground hover:text-[#f0ebe0] hover:-translate-y-0.5 transition-all duration-300 relative group inline-block"
                 >
                   {link.label}
+                  <span className="absolute -bottom-px left-0 h-px bg-[#c9a96e] w-0 group-hover:w-full transition-all duration-300 origin-left" />
                 </Link>
               ))}
             </div>
@@ -49,15 +59,17 @@ const Footer = () => {
             <div className="flex flex-col gap-2.5">
               <Link
                 to="/contact"
-                className="text-[13px] text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300"
+                className="text-[13px] text-muted-foreground hover:text-[#f0ebe0] hover:-translate-y-0.5 transition-all duration-300 relative group inline-block"
               >
                 Start the Conversation
+                <span className="absolute -bottom-px left-0 h-px bg-[#c9a96e] w-0 group-hover:w-full transition-all duration-300 origin-left" />
               </Link>
               <a
                 href="mailto:v@bitwellforge.com"
-                className="text-[13px] text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300"
+                className="text-[13px] text-muted-foreground hover:text-[#f0ebe0] hover:-translate-y-0.5 transition-all duration-300 relative group inline-block"
               >
                 v@bitwellforge.com
+                <span className="absolute -bottom-px left-0 h-px bg-[#c9a96e] w-0 group-hover:w-full transition-all duration-300 origin-left" />
               </a>
             </div>
           </div>

@@ -6,7 +6,8 @@ import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import { AnimatedWords, AnimatedChars } from "@/components/AnimatedText";
-import heroTexture from "@/assets/hero-texture.jpg";
+import HeroScene from "@/components/HeroScene";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 const services = [
   { title: "Growth Strategy", description: "A clear roadmap connecting your goals to measurable acquisition outcomes, built for long term momentum.", href: "/services/growth-strategy" },
@@ -22,13 +23,9 @@ const Index = () => {
     <div>
       {/* Hero */}
       <section className="section-padding min-h-screen flex items-center relative overflow-hidden">
-        {/* Background texture */}
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center opacity-[0.07] dark:opacity-[0.15] pointer-events-none"
-          style={{ backgroundImage: `url(${heroTexture})` }}
-          animate={{ scale: [1, 1.02, 1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
+        {/* Three.js background */}
+        <HeroScene />
+
         {/* Subtle grain overlay */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.04]"
@@ -71,15 +68,18 @@ const Index = () => {
             >
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                className="cta-primary inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:scale-[1.04] active:scale-[0.98] transition-all duration-200 relative overflow-hidden group"
                 style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
-                Start the Conversation
-                <ArrowRight size={16} />
+                <span className="relative z-10 flex items-center gap-2 group-hover:text-[#0a0a0a] transition-colors duration-350">
+                  Start the Conversation
+                  <ArrowRight size={16} />
+                </span>
+                <span className="absolute inset-0 bg-[#c9a96e] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-350" style={{ transitionTimingFunction: "cubic-bezier(0.65, 0, 0.35, 1)" }} />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:border-[#c9a96e] hover:text-[#f0ebe0] hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
                 style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 The Philosophy
@@ -87,6 +87,8 @@ const Index = () => {
             </motion.div>
           </div>
         </div>
+
+        <ScrollIndicator />
       </section>
 
       {/* Philosophy */}
@@ -150,7 +152,7 @@ const Index = () => {
                 </p>
                 <Link
                   to="/process"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-[#c9a96e] transition-colors duration-300"
                 >
                   View the process
                   <ArrowRight size={14} />
@@ -161,7 +163,7 @@ const Index = () => {
               {["Clarity Mapping", "System Architecture", "Acquisition Engineering", "Integration & Automation", "Measurement & Optimization"].map((step, i) => (
                 <ScrollReveal key={step} delay={i * 200} direction="left">
                   <div className="flex gap-4 items-start group">
-                    <span className="text-sm font-medium text-muted-foreground w-6 mt-0.5 group-[.is-visible]:text-accent transition-colors duration-500">0{i + 1}</span>
+                    <span className="text-sm font-medium text-muted-foreground w-6 mt-0.5 group-[.is-visible]:text-[#c9a96e] transition-colors duration-500">0{i + 1}</span>
                     <h4 className="font-heading text-lg font-medium text-foreground">{step}</h4>
                   </div>
                 </ScrollReveal>
