@@ -20,7 +20,7 @@ const Header = () => {
   const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -36,29 +36,14 @@ const Header = () => {
       transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
-          ? "backdrop-blur-[20px] border-b border-[rgba(201,169,110,0.15)] shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
+          ? "bg-background/60 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
           : "bg-background/20 backdrop-blur-lg"
       }`}
-      style={{
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-        backgroundColor: scrolled ? "rgba(10,10,10,0.85)" : undefined,
-      }}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <nav className="section-padding flex items-center justify-between h-16 md:h-20 max-w-[1400px] mx-auto">
-        <Link
-          to="/"
-          className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground relative group overflow-hidden"
-        >
-          <span className="relative z-10">BitwellForge</span>
-          {/* Gold shimmer on hover */}
-          <span
-            className="absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.3) 50%, transparent 100%)",
-              backgroundSize: "200% 100%",
-              animation: "shimmer 0.6s ease forwards",
-            }}
-          />
+        <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+          BitwellForge
         </Link>
 
         {/* Desktop */}
@@ -72,21 +57,19 @@ const Header = () => {
             >
               <Link
                 to={item.href}
-                className={`relative text-sm font-medium tracking-wide transition-all duration-200 group nav-link-hover ${
+                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
                   location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
-                style={{ letterSpacing: "0.04em" }}
               >
                 {item.label}
                 <span
-                  className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-px bg-[#c9a96e] transition-all duration-300 ease-out ${
+                  className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ease-out ${
                     location.pathname === item.href
-                      ? "w-full opacity-40"
+                      ? "w-full"
                       : "w-0 group-hover:w-full"
                   }`}
-                  style={{ transformOrigin: "center" }}
                 />
               </Link>
             </motion.div>
