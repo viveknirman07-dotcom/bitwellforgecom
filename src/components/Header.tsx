@@ -47,7 +47,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-10">
           {navItems.map((item, i) => (
             <motion.div
               key={item.href}
@@ -87,8 +87,8 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* Mobile */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Mobile + Tablet */}
+        <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={toggle}
             className="p-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -113,7 +113,7 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden bg-background/80 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
+            className="lg:hidden bg-background/80 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
           >
             <div className="section-padding py-6 flex flex-col gap-5">
               {navItems.map((item, i) => (
