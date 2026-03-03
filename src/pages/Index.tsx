@@ -159,8 +159,8 @@ const Index = () => {
             </ScrollReveal>
             <div className="space-y-6">
               {["Clarity Mapping", "System Architecture", "Acquisition Engineering", "Integration & Automation", "Measurement & Optimization"].map((step, i) => (
-                <ScrollReveal key={step} delay={i * 200} direction="left">
-                  <div className="flex gap-4 items-start group">
+                <ScrollReveal key={step} delay={i * 180} direction="left">
+                  <div className="flex gap-4 items-start group hover:translate-x-1.5 transition-transform duration-250" style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
                     <span className="text-sm font-medium text-muted-foreground w-6 mt-0.5 group-[.is-visible]:text-accent transition-colors duration-500">0{i + 1}</span>
                     <h4 className="font-heading text-lg font-medium text-foreground">{step}</h4>
                   </div>

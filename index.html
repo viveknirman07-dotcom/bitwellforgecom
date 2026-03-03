@@ -31,6 +31,16 @@
 </head>
 
   <body>
+    <script>
+      // GitHub Pages SPA redirect: restore path from sessionStorage
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.pathname) {
+          history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

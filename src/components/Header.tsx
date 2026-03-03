@@ -20,8 +20,8 @@ const Header = () => {
   const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -65,11 +65,12 @@ const Header = () => {
               >
                 {item.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ease-out ${
+                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-250 ${
                     location.pathname === item.href
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
+                      ? "scale-x-100 origin-left"
+                      : "scale-x-0 origin-left group-hover:scale-x-100 group-hover:origin-left"
                   }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 />
               </Link>
             </motion.div>
@@ -111,16 +112,16 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="md:hidden bg-background/80 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
           >
             <div className="section-padding py-6 flex flex-col gap-5">
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                  transition={{ delay: i * 0.07, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link
                     to={item.href}

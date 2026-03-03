@@ -1,4 +1,6 @@
 import { Instagram, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const XIcon = ({ size = 18 }: { size?: number }) => (
   <svg
@@ -42,20 +44,26 @@ const socials = [
   },
 ];
 
-const SocialLinks = ({ size = 18 }: { size?: number }) => {
+const SocialLinks = ({ size = 18, animate = false }: { size?: number; animate?: boolean }) => {
+  const { ref, isVisible } = useScrollReveal({ once: true });
+
   return (
-    <div className="flex items-center gap-4">
-      {socials.map((s) => (
-        <a
+    <div ref={ref} className="flex items-center gap-4">
+      {socials.map((s, i) => (
+        <motion.a
           key={s.label}
           href={s.href}
           target={s.href.startsWith("mailto:") ? undefined : "_blank"}
           rel="noopener noreferrer"
           aria-label={s.label}
-          className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-300"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+          initial={animate ? { opacity: 0, scale: 0.8 } : false}
+          animate={animate && isVisible ? { opacity: 1, scale: 1 } : undefined}
+          transition={{ duration: 0.4, delay: 0.3 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.15, y: -2 }}
         >
           {s.isCustom ? <s.icon size={size} /> : <s.icon size={size} strokeWidth={1.5} />}
-        </a>
+        </motion.a>
       ))}
     </div>
   );
