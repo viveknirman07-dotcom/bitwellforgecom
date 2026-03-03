@@ -6,7 +6,19 @@ import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import { AnimatedWords, AnimatedChars } from "@/components/AnimatedText";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import heroTexture from "@/assets/hero-texture.jpg";
+
+const faqItems = [
+  { question: "Do I need a large team or big budget to work with BitwellForge", answer: "No. Most of our clients start as solo operators or small teams. We build systems that work with the resources you already have and scale as your business grows" },
+  { question: "How is this different from hiring a marketing agency", answer: "A typical agency runs campaigns for you. We build the infrastructure that makes all your acquisition efforts compound over time. You own the system. It runs whether or not we are actively involved" },
+  { question: "How long before I start seeing results", answer: "Most clients see pipeline movement within the first 30 to 45 days. Full system compounding typically becomes visible between 60 and 90 days depending on the engagement" },
+  { question: "Do you work with businesses outside Switzerland", answer: "Yes. We work with clients across multiple countries. Our systems are built for remote collaboration and are not limited by geography" },
+  { question: "What does the process look like after I reach out", answer: "We start with a discovery call to understand your business, goals, and current acquisition situation. From there we map out a system tailored to your specific needs before any engagement begins" },
+  { question: "Is there a minimum commitment period", answer: "Engagements are structured based on what your business actually needs. We discuss timeline and commitment openly during the discovery call so there are no surprises" },
+  { question: "Do you run ads or is this purely organic", answer: "We build systems that work without ad dependency. If paid channels make strategic sense for your business we can incorporate them but we never build growth that collapses when ad spend stops" },
+  { question: "What kind of businesses do you work with", answer: "We work with agencies, independent consultants, coaches, and service based businesses that are ready to replace unpredictable referral based growth with a structured acquisition system" },
+];
 
 const services = [
   { title: "Growth Strategy", description: "A clear roadmap connecting your goals to measurable acquisition outcomes, built for long term momentum.", href: "/services/growth-strategy" },
@@ -129,6 +141,86 @@ const Index = () => {
               </ScrollReveal>
             ))}
           </div>
+
+          {/* Engagement Options */}
+          <div className="mt-24">
+            <ScrollReveal>
+              <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-4">Engagement Options</p>
+              <p className="text-sm text-muted-foreground mb-12">All engagements begin with a discovery call to ensure the right fit</p>
+            </ScrollReveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Foundation */}
+              <ScrollReveal delay={0}>
+                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl">
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Foundation</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    For businesses ready to build their first structured acquisition system
+                  </p>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-2 mb-8 flex-1">
+                    <p>Clarity mapping and ICP definition</p>
+                    <p>Outreach system setup</p>
+                    <p>Lead qualification framework</p>
+                  </div>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                  >
+                    Start the Conversation
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </ScrollReveal>
+
+              {/* Growth System */}
+              <ScrollReveal delay={150}>
+                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-accent/40 bg-card/80 backdrop-blur-xl shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] relative">
+                  <span className="absolute top-4 right-4 text-xs font-medium text-accent tracking-wide uppercase">Most Popular</span>
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Growth System</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    Full stack demand infrastructure for businesses ready to scale consistently
+                  </p>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-2 mb-8 flex-1">
+                    <p>Everything in Foundation</p>
+                    <p>High ticket sales system</p>
+                    <p>LinkedIn positioning</p>
+                    <p>Content distribution</p>
+                    <p>Pipeline automation</p>
+                  </div>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                  >
+                    Start the Conversation
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </ScrollReveal>
+
+              {/* Enterprise */}
+              <ScrollReveal delay={300}>
+                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl">
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Enterprise</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    Custom growth architecture for established businesses scaling across multiple markets
+                  </p>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-2 mb-8 flex-1">
+                    <p>Full system design</p>
+                    <p>Performance marketing</p>
+                    <p>AI automation</p>
+                    <p>PR and brand credibility</p>
+                    <p>Ongoing optimization</p>
+                  </div>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                  >
+                    Let's Talk
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -194,6 +286,29 @@ const Index = () => {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="section-padding section-y border-t border-border">
+        <div className="max-w-[1400px] mx-auto">
+          <ScrollReveal>
+            <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Frequently Asked Questions</p>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <Accordion type="single" collapsible className="w-full max-w-3xl">
+              {faqItems.map((item, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border-border/60">
+                  <AccordionTrigger className="text-left font-heading text-base md:text-lg font-medium text-foreground hover:no-underline py-5">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </ScrollReveal>
         </div>
       </section>
 
