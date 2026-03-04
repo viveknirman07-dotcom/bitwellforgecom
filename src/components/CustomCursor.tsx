@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, useSpring } from "framer-motion";
 
 const CustomCursor = () => {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
+  const [clicking, setClicking] = useState(false);
 
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
+  const springConfig = { damping: 20, stiffness: 250, mass: 0.4 };
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
 
+  const handleMouseDown = useCallback(() => setClicking(true), []);
+  const handleMouseUp = useCallback(() => setClicking(false), []);
+
   useEffect(() => {
-    // Only show on devices with fine pointer (no touch)
     const mql = window.matchMedia("(pointer: fine)");
     if (!mql.matches) return;
 
@@ -27,7 +30,8 @@ const CustomCursor = () => {
         target.closest("button") ||
         target.closest("[role='button']") ||
         target.tagName === "INPUT" ||
-        target.tagName === "TEXTAREA"
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT"
       ) {
         setHovering(true);
       }
@@ -42,6 +46,8 @@ const CustomCursor = () => {
     document.addEventListener("mouseout", handleOut);
     document.addEventListener("mouseleave", handleLeave);
     document.addEventListener("mouseenter", handleEnter);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
 
     return () => {
       window.removeEventListener("mousemove", move);
@@ -49,10 +55,15 @@ const CustomCursor = () => {
       document.removeEventListener("mouseout", handleOut);
       document.removeEventListener("mouseleave", handleLeave);
       document.removeEventListener("mouseenter", handleEnter);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [cursorX, cursorY, visible]);
+  }, [cursorX, cursorY, visible, handleMouseDown, handleMouseUp]);
 
   if (!visible) return null;
+
+  const size = clicking ? 6 : hovering ? 32 : 8;
+  const offset = size / -2;
 
   return (
     <motion.div
@@ -60,15 +71,15 @@ const CustomCursor = () => {
       style={{ x: cursorX, y: cursorY }}
     >
       <motion.div
-        className="rounded-full bg-foreground/80"
+        className="rounded-full bg-accent"
         animate={{
-          width: hovering ? 40 : 12,
-          height: hovering ? 40 : 12,
-          x: hovering ? -20 : -6,
-          y: hovering ? -20 : -6,
-          opacity: hovering ? 0.6 : 0.8,
+          width: size,
+          height: size,
+          x: offset,
+          y: offset,
+          opacity: hovering ? 0.4 : 0.8,
         }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
       />
     </motion.div>
   );

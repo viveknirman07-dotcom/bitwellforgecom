@@ -22,10 +22,10 @@ const ScrollReveal = ({
   const { ref, isVisible } = useScrollReveal({ once });
 
   const directionStyles: Record<string, string> = {
-    up: "translate-y-5",
-    down: "-translate-y-5",
-    left: "translate-x-3",
-    right: "-translate-x-3",
+    up: "translate-y-8",
+    down: "-translate-y-8",
+    left: "translate-x-4",
+    right: "-translate-x-4",
     none: "",
   };
 
@@ -34,13 +34,15 @@ const ScrollReveal = ({
       ref={ref}
       className={cn(
         "transition-all",
-        isVisible ? "opacity-100 translate-x-0 translate-y-0" : `opacity-0 ${directionStyles[direction]}`,
+        isVisible
+          ? "opacity-100 translate-x-0 translate-y-0 blur-0"
+          : `opacity-0 ${directionStyles[direction]} blur-[3px]`,
         className
       )}
       style={{
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
       }}
     >
       {children}

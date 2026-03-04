@@ -22,19 +22,20 @@ const AnimatedWords = ({
   return (
     <Tag ref={ref as any} className={className}>
       {words.map((word, i) => (
-        <motion.span
-          key={i}
-          className="inline-block mr-[0.3em]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{
-            duration: 0.5,
-            delay: delay + i * stagger,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          {word}
-        </motion.span>
+        <span key={i} className="inline-block mr-[0.3em] overflow-hidden">
+          <motion.span
+            className="inline-block"
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            animate={isVisible ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
+            transition={{
+              duration: 0.6,
+              delay: delay + i * stagger,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
       ))}
     </Tag>
   );

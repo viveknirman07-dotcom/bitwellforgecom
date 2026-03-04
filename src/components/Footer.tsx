@@ -57,7 +57,7 @@ const Footer = () => {
             <h4 className="text-[13px] font-semibold mb-3 text-foreground tracking-wide">Connect</h4>
             <div className="flex flex-col gap-2.5">
               <Link
-                to="/contact"
+                to="/contact?service=General+Inquiry"
                 className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-200"
               >
                 Start the Conversation
