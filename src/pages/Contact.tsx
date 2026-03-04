@@ -1,24 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SocialLinks from "@/components/SocialLinks";
 
+const serviceOptions = [
+  "General Inquiry",
+  "Growth Strategy",
+  "B2B Lead Generation",
+  "High Ticket Sales System",
+  "LinkedIn Positioning",
+  "AI Automation and Systems",
+  "Performance Marketing",
+  "Foundation Engagement",
+  "Growth System Engagement",
+  "Enterprise Engagement",
+];
+
 const Contact = () => {
+  const [searchParams] = useSearchParams();
   const [form, setForm] = useState({
     name: "",
     email: "",
     company: "",
+    service: "General Inquiry",
     challenge: "",
   });
+  const [prefilled, setPrefilled] = useState(false);
+
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      const decoded = decodeURIComponent(serviceParam).replace(/\+/g, " ");
+      const match = serviceOptions.find(
+        (opt) => opt.toLowerCase() === decoded.toLowerCase()
+      );
+      if (match) {
+        setForm((prev) => ({ ...prev, service: match }));
+        setPrefilled(true);
+      }
+    }
+  }, [searchParams]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const subject = encodeURIComponent("New Inquiry from BitwellForge Website");
     const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nCurrent Challenge: ${form.challenge}`
+      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nInterested In: ${form.service}\nCurrent Challenge: ${form.challenge}`
     );
-    
+
     window.location.href = `mailto:v@bitwellforge.com?subject=${subject}&body=${body}`;
   };
 
@@ -96,6 +127,29 @@ const Contact = () => {
                     className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 text-sm"
                     placeholder="Your company"
                   />
+                </div>
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium text-foreground mb-2">What are you interested in</label>
+                  <select
+                    id="service"
+                    value={form.service}
+                    onChange={(e) => {
+                      setForm({ ...form, service: e.target.value });
+                      setPrefilled(false);
+                    }}
+                    className="w-full bg-transparent border-b border-border px-0 py-3 text-foreground focus:outline-none focus:border-foreground transition-colors duration-300 text-sm appearance-none cursor-pointer"
+                  >
+                    {serviceOptions.map((opt) => (
+                      <option key={opt} value={opt} className="bg-background text-foreground">
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  {prefilled && (
+                    <p className="text-xs text-accent mt-2">
+                      Pre-selected based on your interest. You can change this
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="challenge" className="block text-sm font-medium text-foreground mb-2">Current Challenge</label>

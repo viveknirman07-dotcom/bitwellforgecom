@@ -52,8 +52,8 @@ const Index = () => {
           <div className="max-w-3xl">
             <motion.p
               className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-8"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, letterSpacing: "0.3em" }}
+              animate={{ opacity: 1, letterSpacing: "0.1em" }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               Strategic Growth Systems
@@ -68,8 +68,8 @@ const Index = () => {
 
             <motion.p
               className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
             >
               The acquisition systems behind consistent, qualified demand for businesses ready to scale with clarity.
@@ -77,12 +77,12 @@ const Index = () => {
 
             <motion.div
               className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.94, filter: "blur(4px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.6, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
-                to="/contact"
+                to="/contact?service=General+Inquiry"
                 className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
                 style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
@@ -162,7 +162,7 @@ const Index = () => {
                     <p>Lead qualification framework</p>
                   </div>
                   <Link
-                    to="/contact"
+                    to="/contact?service=Foundation+Engagement"
                     className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
                   >
                     Start the Conversation
@@ -187,7 +187,7 @@ const Index = () => {
                     <p>Pipeline automation</p>
                   </div>
                   <Link
-                    to="/contact"
+                    to="/contact?service=Growth+System+Engagement"
                     className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
                   >
                     Start the Conversation
@@ -211,7 +211,7 @@ const Index = () => {
                     <p>Ongoing optimization</p>
                   </div>
                   <Link
-                    to="/contact"
+                    to="/contact?service=Enterprise+Engagement"
                     className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
                   >
                     Let's Talk

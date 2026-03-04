@@ -20,7 +20,7 @@ const Header = () => {
   const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -31,15 +31,19 @@ const Header = () => {
 
   return (
     <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ clipPath: "inset(0 100% 0 0)" }}
+      animate={{ clipPath: "inset(0 0% 0 0)" }}
+      transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
           ? "bg-background/60 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
           : "bg-background/20 backdrop-blur-lg"
       }`}
-      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+      style={{
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        backdropFilter: scrolled ? "blur(20px) saturate(180%)" : "blur(12px)",
+        WebkitBackdropFilter: scrolled ? "blur(20px) saturate(180%)" : "blur(12px)",
+      }}
     >
       <nav className="section-padding flex items-center justify-between h-16 md:h-20 max-w-[1400px] mx-auto">
         <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
@@ -65,7 +69,7 @@ const Header = () => {
               >
                 {item.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-250 ${
+                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-500 ${
                     location.pathname === item.href
                       ? "scale-x-100 origin-left"
                       : "scale-x-0 origin-left group-hover:scale-x-100 group-hover:origin-left"

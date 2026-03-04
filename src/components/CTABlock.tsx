@@ -8,6 +8,7 @@ interface CTABlockProps {
   subtext?: string;
   buttonLabel?: string;
   href?: string;
+  service?: string;
 }
 
 const CTABlock = ({
@@ -15,8 +16,13 @@ const CTABlock = ({
   subtext = "The right infrastructure makes growth feel inevitable.",
   buttonLabel = "Start the Conversation",
   href = "/contact",
+  service = "General Inquiry",
 }: CTABlockProps) => {
   const { ref, isVisible } = useScrollReveal({ once: true });
+
+  const contactHref = href === "/contact"
+    ? `/contact?service=${encodeURIComponent(service)}`
+    : href;
 
   return (
     <section ref={ref} className="section-padding section-y">
@@ -43,7 +49,7 @@ const CTABlock = ({
           transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <Link
-            to={href}
+            to={contactHref}
             className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide overflow-hidden hover:scale-[1.04] active:scale-[0.98] transition-transform duration-200"
             style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
           >

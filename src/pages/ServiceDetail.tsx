@@ -10,6 +10,7 @@ interface ServiceContent {
   strategy: string;
   approach: string[];
   outcomes: string[];
+  contactService: string;
 }
 
 const serviceData: Record<string, ServiceContent> = {
@@ -33,6 +34,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Predictable pipeline growth with defined leading indicators",
       "A scalable foundation that compounds over quarters, not weeks",
     ],
+    contactService: "Growth Strategy",
   },
   "sales-systems": {
     title: "High-Ticket Sales Systems",
@@ -54,6 +56,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Reliable pipeline forecasting based on system-level data",
       "Scalable sales operations that grow with your team",
     ],
+    contactService: "High Ticket Sales System",
   },
   "performance-marketing": {
     title: "Performance Marketing Infrastructure",
@@ -75,6 +78,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Compounding returns as optimization intelligence accumulates",
       "Marketing investment tied directly to revenue outcomes",
     ],
+    contactService: "Performance Marketing",
   },
   "lead-generation": {
     title: "B2B Lead Generation",
@@ -96,6 +100,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Scalable systems that maintain quality as volume increases",
       "Predictable pipeline coverage with clear leading indicators",
     ],
+    contactService: "B2B Lead Generation",
   },
   "linkedin": {
     title: "LinkedIn Positioning",
@@ -117,6 +122,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Content systems that maintain consistency without burnout",
       "Measurable connection between LinkedIn activity and revenue",
     ],
+    contactService: "LinkedIn Positioning",
   },
   "ai-automation": {
     title: "AI & Automation Systems",
@@ -138,6 +144,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Scalable operations without proportional headcount increases",
       "Freed team capacity for high-value strategic work",
     ],
+    contactService: "AI Automation and Systems",
   },
   "seo": {
     title: "SEO & Digital Visibility",
@@ -159,6 +166,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Compounding organic traffic as authority accumulates",
       "Reduced dependency on paid channels for demand generation",
     ],
+    contactService: "General Inquiry",
   },
   "digital-products": {
     title: "Digital Product Systems",
@@ -180,6 +188,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Post-launch data systems for continuous improvement",
       "Scalable digital revenue streams independent of services",
     ],
+    contactService: "General Inquiry",
   },
 };
 
@@ -267,7 +276,7 @@ const ServiceDetail = () => {
       </section>
 
       <ScrollReveal>
-        <CTABlock />
+        <CTABlock service={service.contactService} />
       </ScrollReveal>
     </div>
   );
