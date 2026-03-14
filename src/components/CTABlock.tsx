@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 interface CTABlockProps {
@@ -19,6 +19,7 @@ const CTABlock = ({
   service = "General Inquiry",
 }: CTABlockProps) => {
   const { ref, isVisible } = useScrollReveal({ once: true });
+  const prefersReduced = useReducedMotion();
 
   const contactHref = href === "/contact"
     ? `/contact?service=${encodeURIComponent(service)}`
@@ -29,33 +30,33 @@ const CTABlock = ({
       <div className="max-w-[1400px] mx-auto text-center">
         <motion.h2
           className="font-heading text-3xl md:text-5xl font-semibold text-foreground mb-6 text-balance"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          initial={prefersReduced ? false : { opacity: 0, y: 30, filter: "blur(8px)" }}
+          animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)" } : undefined}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           {heading}
         </motion.h2>
         <motion.p
           className="text-muted-foreground text-lg mb-10 max-w-lg mx-auto"
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          initial={prefersReduced ? false : { opacity: 0, y: 15 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           {subtext}
         </motion.p>
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          initial={prefersReduced ? false : { opacity: 0, y: 20, scale: 0.9 }}
+          animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : undefined}
+          transition={{ duration: 0.7, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
         >
           <Link
             to={contactHref}
-            className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide overflow-hidden hover:scale-[1.04] active:scale-[0.98] transition-transform duration-200"
-            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+            className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide overflow-hidden hover:scale-[1.06] active:scale-[0.97] transition-transform duration-300"
+            style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
           >
             <span className="relative z-10 flex items-center gap-2">
               {buttonLabel}
-              <ArrowRight size={16} />
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }} />
             </span>
           </Link>
         </motion.div>

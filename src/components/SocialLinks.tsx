@@ -57,10 +57,11 @@ const SocialLinks = ({ size = 18, animate = false }: { size?: number; animate?: 
           rel="noopener noreferrer"
           aria-label={s.label}
           className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-          initial={animate ? { opacity: 0, scale: 0.8 } : false}
-          animate={animate && isVisible ? { opacity: 1, scale: 1 } : undefined}
-          transition={{ duration: 0.4, delay: 0.3 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-          whileHover={{ scale: 1.15, y: -2 }}
+          initial={animate ? { opacity: 0, y: 10, scale: 0.8 } : false}
+          animate={animate && isVisible ? { opacity: 1, y: 0, scale: 1 } : undefined}
+          transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ scale: 1.2, y: -3, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
         >
           {s.isCustom ? <s.icon size={size} /> : <s.icon size={size} strokeWidth={1.5} />}
         </motion.a>

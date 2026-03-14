@@ -7,9 +7,9 @@ const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ once: true });
 
   const stagger = (i: number, base = 0.1) => ({
-    initial: { opacity: 0, y: 20 },
-    animate: isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    transition: { duration: 0.6, delay: base + i * 0.12, ease: [0.16, 1, 0.3, 1] as const },
+    initial: { opacity: 0, y: 30, filter: "blur(4px)" } as const,
+    animate: isVisible ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" },
+    transition: { duration: 0.7, delay: base + i * 0.15, ease: [0.22, 1, 0.36, 1] as const },
   });
 
   return (
@@ -32,7 +32,7 @@ const Footer = () => {
             <SocialLinks size={16} animate />
           </div>
 
-          <motion.div {...stagger(0, 0.2)}>
+          <motion.div {...stagger(0, 0.25)}>
             <h4 className="text-[13px] font-semibold mb-3 text-foreground tracking-wide">Navigate</h4>
             <div className="flex flex-col gap-2.5">
               {[
@@ -45,7 +45,8 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-200"
+                  className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
                 >
                   {link.label}
                 </Link>
@@ -53,18 +54,20 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          <motion.div {...stagger(1, 0.2)}>
+          <motion.div {...stagger(1, 0.25)}>
             <h4 className="text-[13px] font-semibold mb-3 text-foreground tracking-wide">Connect</h4>
             <div className="flex flex-col gap-2.5">
               <Link
                 to="/contact?service=General+Inquiry"
-                className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-200"
+                className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300"
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
               >
                 Start the Conversation
               </Link>
               <a
                 href="mailto:v@bitwellforge.com"
-                className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-200"
+                className="text-[13px] text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300"
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
               >
                 v@bitwellforge.com
               </a>
@@ -76,7 +79,7 @@ const Footer = () => {
           className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} BitwellForge. All rights reserved.
