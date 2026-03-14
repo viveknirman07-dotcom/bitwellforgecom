@@ -34,14 +34,14 @@ const Index = () => {
     <div>
       {/* Hero */}
       <section className="section-padding min-h-screen flex items-center relative overflow-hidden">
-        {/* Background texture */}
+        {/* Background texture with parallax */}
         <motion.div
           className="absolute inset-0 bg-cover bg-center opacity-[0.07] dark:opacity-[0.15] pointer-events-none"
           style={{ backgroundImage: `url(${heroTexture})` }}
-          animate={{ scale: [1, 1.02, 1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          animate={{ scale: [1, 1.04, 1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
-        {/* Subtle grain overlay */}
+        {/* Grain */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.04]"
           style={{
@@ -52,9 +52,9 @@ const Index = () => {
           <div className="max-w-3xl">
             <motion.p
               className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-8"
-              initial={{ opacity: 0, letterSpacing: "0.3em" }}
-              animate={{ opacity: 1, letterSpacing: "0.1em" }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, letterSpacing: "0.4em", y: 10 }}
+              animate={{ opacity: 1, letterSpacing: "0.1em", y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
               Strategic Growth Systems
             </motion.p>
@@ -62,37 +62,37 @@ const Index = () => {
             <AnimatedWords
               text="Growth doesn't fail from lack of effort. It fails from lack of structure."
               className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-[1.1] mb-8 text-balance"
-              stagger={0.08}
-              delay={0.5}
+              stagger={0.06}
+              delay={0.7}
             />
 
             <motion.p
               className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
             >
               The acquisition systems behind consistent, qualified demand for businesses ready to scale with clarity.
             </motion.p>
 
             <motion.div
               className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, scale: 0.94, filter: "blur(4px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 25, scale: 0.92 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 1.8, ease: [0.34, 1.56, 0.64, 1] }}
             >
               <Link
                 to="/contact?service=General+Inquiry"
-                className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
-                style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:scale-[1.06] active:scale-[0.97] transition-transform duration-300"
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
               >
                 Start the Conversation
-                <ArrowRight size={16} />
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
-                style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                className="group inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.06] active:scale-[0.97] transition-all duration-300"
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
               >
                 The Philosophy
               </Link>
@@ -105,18 +105,18 @@ const Index = () => {
       <section className="section-padding section-y border-t border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-            <ScrollReveal>
+            <ScrollReveal variant="clip" direction="left">
               <div>
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Philosophy</p>
                 <AnimatedChars
                   text="Clarity is the foundation of every growth system worth building."
                   as="h2"
                   className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance"
-                  stagger={0.02}
+                  stagger={0.015}
                 />
               </div>
             </ScrollReveal>
-            <ScrollReveal delay={200}>
+            <ScrollReveal delay={300} duration={1000}>
               <p className="text-muted-foreground leading-relaxed text-lg">
                 Most businesses don't lack ambition. They lack architecture. When scattered tactics are replaced with structured systems, results compound naturally over time.
               </p>
@@ -128,7 +128,7 @@ const Index = () => {
       {/* Services */}
       <section className="section-padding section-y bg-secondary/50">
         <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
+          <ScrollReveal variant="clip" direction="left">
             <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Systems Built for You</p>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-16 text-balance">
               Infrastructure for sustainable growth.
@@ -136,7 +136,7 @@ const Index = () => {
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, i) => (
-              <ScrollReveal key={service.title} delay={i * 150}>
+              <ScrollReveal key={service.title} delay={i * 120} variant="scale">
                 <ServiceCard {...service} index={i} />
               </ScrollReveal>
             ))}
@@ -150,8 +150,8 @@ const Index = () => {
             </ScrollReveal>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Foundation */}
-              <ScrollReveal delay={0}>
-                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl">
+              <ScrollReveal delay={0} variant="scale">
+                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl hover:shadow-[0_20px_60px_hsl(var(--foreground)/0.08)] hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
                   <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Foundation</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     For businesses ready to build their first structured acquisition system
@@ -163,17 +163,18 @@ const Index = () => {
                   </div>
                   <Link
                     to="/contact?service=Foundation+Engagement"
-                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                    className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:scale-[1.06] active:scale-[0.97] transition-transform duration-300"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
                   >
                     Start the Conversation
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </div>
               </ScrollReveal>
 
               {/* Growth System */}
-              <ScrollReveal delay={150}>
-                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-accent/40 bg-card/80 backdrop-blur-xl shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] relative">
+              <ScrollReveal delay={150} variant="scale">
+                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-accent/40 bg-card/80 backdrop-blur-xl shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] relative hover:shadow-[0_20px_60px_hsl(var(--foreground)/0.1)] hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
                   <span className="absolute top-4 right-4 text-xs font-medium text-accent tracking-wide uppercase">Most Popular</span>
                   <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Growth System</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
@@ -188,17 +189,18 @@ const Index = () => {
                   </div>
                   <Link
                     to="/contact?service=Growth+System+Engagement"
-                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                    className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:scale-[1.06] active:scale-[0.97] transition-transform duration-300"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
                   >
                     Start the Conversation
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </div>
               </ScrollReveal>
 
               {/* Enterprise */}
-              <ScrollReveal delay={300}>
-                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl">
+              <ScrollReveal delay={300} variant="scale">
+                <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl hover:shadow-[0_20px_60px_hsl(var(--foreground)/0.08)] hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
                   <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Enterprise</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     Custom growth architecture for established businesses scaling across multiple markets
@@ -212,10 +214,11 @@ const Index = () => {
                   </div>
                   <Link
                     to="/contact?service=Enterprise+Engagement"
-                    className="inline-flex items-center justify-center gap-2 border border-border text-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.04] active:scale-[0.98] transition-all duration-200"
+                    className="group inline-flex items-center justify-center gap-2 border border-border text-foreground px-6 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.06] active:scale-[0.97] transition-all duration-300"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
                   >
                     Let's Talk
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </div>
               </ScrollReveal>
@@ -231,7 +234,7 @@ const Index = () => {
       <section className="section-padding section-y border-t border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <ScrollReveal>
+            <ScrollReveal variant="clip" direction="left">
               <div>
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Process</p>
                 <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6 text-balance">
@@ -242,18 +245,18 @@ const Index = () => {
                 </p>
                 <Link
                   to="/process"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors duration-300"
+                  className="group inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors duration-300"
                 >
                   View the process
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }} />
                 </Link>
               </div>
             </ScrollReveal>
             <div className="space-y-6">
               {["Clarity Mapping", "System Architecture", "Acquisition Engineering", "Integration & Automation", "Measurement & Optimization"].map((step, i) => (
-                <ScrollReveal key={step} delay={i * 180} direction="left">
-                  <div className="flex gap-4 items-start group hover:translate-x-1.5 transition-transform duration-250" style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
-                    <span className="text-sm font-medium text-muted-foreground w-6 mt-0.5 group-[.is-visible]:text-accent transition-colors duration-500">0{i + 1}</span>
+                <ScrollReveal key={step} delay={i * 150} direction="left">
+                  <div className="flex gap-4 items-start group hover:translate-x-2 transition-transform duration-400" style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}>
+                    <span className="text-sm font-medium text-muted-foreground w-6 mt-0.5 group-hover:text-accent transition-colors duration-500">0{i + 1}</span>
                     <h4 className="font-heading text-lg font-medium text-foreground">{step}</h4>
                   </div>
                 </ScrollReveal>
@@ -266,7 +269,7 @@ const Index = () => {
       {/* Why BitwellForge */}
       <section className="section-padding section-y bg-primary text-primary-foreground">
         <div className="max-w-[1400px] mx-auto text-center">
-          <ScrollReveal>
+          <ScrollReveal variant="scale">
             <p className="text-sm font-medium opacity-60 tracking-widest uppercase mb-6">Why It Works</p>
             <h2 className="font-heading text-3xl md:text-5xl font-semibold mb-16 text-balance max-w-3xl mx-auto">
               Systems that outlast trends, built for businesses that think long term.
@@ -278,7 +281,7 @@ const Index = () => {
               { title: "Clarity First", desc: "Diagnosis before prescription. Understanding always precedes execution." },
               { title: "Long Term Partnership", desc: "Success is measured alongside yours. In years, not quarters." },
             ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 200}>
+              <ScrollReveal key={item.title} delay={i * 200} variant="clip" direction="up">
                 <div>
                   <h3 className="font-heading text-xl font-semibold mb-3">{item.title}</h3>
                   <p className="text-sm opacity-70 leading-relaxed">{item.desc}</p>
@@ -292,7 +295,7 @@ const Index = () => {
       {/* FAQ */}
       <section className="section-padding section-y border-t border-border">
         <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
+          <ScrollReveal variant="clip" direction="left">
             <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Frequently Asked Questions</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
@@ -313,7 +316,7 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <ScrollReveal>
+      <ScrollReveal variant="scale">
         <CTABlock />
       </ScrollReveal>
     </div>
