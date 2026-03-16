@@ -30,9 +30,9 @@ const CTABlock = ({
       <div className="max-w-[1400px] mx-auto text-center">
         <motion.h2
           className="font-heading text-3xl md:text-5xl font-semibold text-foreground mb-6 text-balance"
-          initial={prefersReduced ? false : { opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          initial={prefersReduced ? false : { opacity: 0, y: 30, filter: "blur(8px)" }}
+          animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)" } : undefined}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           {heading}
         </motion.h2>
@@ -45,7 +45,7 @@ const CTABlock = ({
           {subtext}
         </motion.p>
         <motion.div
-          initial={prefersReduced ? false : { opacity: 0, y: 20, scale: 0.92 }}
+          initial={prefersReduced ? false : { opacity: 0, y: 20, scale: 0.9 }}
           animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : undefined}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
         >

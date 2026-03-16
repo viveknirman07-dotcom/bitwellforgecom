@@ -7,9 +7,9 @@ const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ once: true });
 
   const stagger = (i: number, base = 0.1) => ({
-    initial: { opacity: 0, y: 24 } as const,
-    animate: isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
-    transition: { duration: 0.6, delay: base + i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
+    initial: { opacity: 0, y: 30, filter: "blur(4px)" } as const,
+    animate: isVisible ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" },
+    transition: { duration: 0.7, delay: base + i * 0.15, ease: [0.22, 1, 0.36, 1] as const },
   });
 
   return (

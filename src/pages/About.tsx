@@ -93,7 +93,9 @@ const About = () => {
         </div>
       </section>
 
-      <CTABlock />
+      <ScrollReveal>
+        <CTABlock />
+      </ScrollReveal>
     </div>
   );
 };
