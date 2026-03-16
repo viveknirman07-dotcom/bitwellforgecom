@@ -68,8 +68,8 @@ const Index = () => {
 
             <motion.p
               className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
             >
               The acquisition systems behind consistent, qualified demand for businesses ready to scale with clarity.
@@ -105,18 +105,18 @@ const Index = () => {
       <section className="section-padding section-y border-t border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-            <div>
-              <ScrollReveal>
+            <ScrollReveal variant="clip" direction="left">
+              <div>
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Philosophy</p>
-              </ScrollReveal>
-              <AnimatedChars
-                text="Clarity is the foundation of every growth system worth building."
-                as="h2"
-                className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance"
-                stagger={0.015}
-              />
-            </div>
-            <ScrollReveal delay={200}>
+                <AnimatedChars
+                  text="Clarity is the foundation of every growth system worth building."
+                  as="h2"
+                  className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance"
+                  stagger={0.015}
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={300} duration={1000}>
               <p className="text-muted-foreground leading-relaxed text-lg">
                 Most businesses don't lack ambition. They lack architecture. When scattered tactics are replaced with structured systems, results compound naturally over time.
               </p>
@@ -128,7 +128,7 @@ const Index = () => {
       {/* Services */}
       <section className="section-padding section-y bg-secondary/50">
         <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
+          <ScrollReveal variant="clip" direction="left">
             <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Systems Built for You</p>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-16 text-balance">
               Infrastructure for sustainable growth.
@@ -136,7 +136,7 @@ const Index = () => {
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, i) => (
-              <ScrollReveal key={service.title} delay={i * 100} variant="scale">
+              <ScrollReveal key={service.title} delay={i * 120} variant="scale">
                 <ServiceCard {...service} index={i} />
               </ScrollReveal>
             ))}
@@ -234,21 +234,15 @@ const Index = () => {
       <section className="section-padding section-y border-t border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <div>
-              <ScrollReveal>
+            <ScrollReveal variant="clip" direction="left">
+              <div>
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Process</p>
-              </ScrollReveal>
-              <ScrollReveal delay={100}>
                 <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6 text-balance">
                   From clarity to compounding results.
                 </h2>
-              </ScrollReveal>
-              <ScrollReveal delay={200}>
                 <p className="text-muted-foreground leading-relaxed mb-8">
                   A five phase framework that transforms ambiguity into actionable growth architecture, step by deliberate step.
                 </p>
-              </ScrollReveal>
-              <ScrollReveal delay={300}>
                 <Link
                   to="/process"
                   className="group inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors duration-300"
@@ -256,11 +250,11 @@ const Index = () => {
                   View the process
                   <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }} />
                 </Link>
-              </ScrollReveal>
-            </div>
+              </div>
+            </ScrollReveal>
             <div className="space-y-6">
               {["Clarity Mapping", "System Architecture", "Acquisition Engineering", "Integration & Automation", "Measurement & Optimization"].map((step, i) => (
-                <ScrollReveal key={step} delay={i * 120} direction="left">
+                <ScrollReveal key={step} delay={i * 150} direction="left">
                   <div className="flex gap-4 items-start group hover:translate-x-2 transition-transform duration-400" style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}>
                     <span className="text-sm font-medium text-muted-foreground w-6 mt-0.5 group-hover:text-accent transition-colors duration-500">0{i + 1}</span>
                     <h4 className="font-heading text-lg font-medium text-foreground">{step}</h4>
@@ -287,7 +281,7 @@ const Index = () => {
               { title: "Clarity First", desc: "Diagnosis before prescription. Understanding always precedes execution." },
               { title: "Long Term Partnership", desc: "Success is measured alongside yours. In years, not quarters." },
             ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 150}>
+              <ScrollReveal key={item.title} delay={i * 200} variant="clip" direction="up">
                 <div>
                   <h3 className="font-heading text-xl font-semibold mb-3">{item.title}</h3>
                   <p className="text-sm opacity-70 leading-relaxed">{item.desc}</p>
@@ -301,7 +295,7 @@ const Index = () => {
       {/* FAQ */}
       <section className="section-padding section-y border-t border-border">
         <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
+          <ScrollReveal variant="clip" direction="left">
             <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Frequently Asked Questions</p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
@@ -322,7 +316,9 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <CTABlock />
+      <ScrollReveal variant="scale">
+        <CTABlock />
+      </ScrollReveal>
     </div>
   );
 };

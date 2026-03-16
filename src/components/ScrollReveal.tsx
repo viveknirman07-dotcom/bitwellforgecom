@@ -8,8 +8,8 @@ interface ScrollRevealProps {
   direction?: "up" | "down" | "left" | "right" | "none";
   duration?: number;
   once?: boolean;
-  /** "fade" = opacity+translate, "scale" = scale+opacity */
-  variant?: "fade" | "scale";
+  /** "fade" = opacity+translate, "clip" = clipPath wipe, "scale" = scale+opacity */
+  variant?: "fade" | "clip" | "scale";
 }
 
 const ScrollReveal = ({
@@ -17,7 +17,7 @@ const ScrollReveal = ({
   className,
   delay = 0,
   direction = "up",
-  duration = 800,
+  duration = 900,
   once = true,
   variant = "fade",
 }: ScrollRevealProps) => {
@@ -37,26 +37,12 @@ const ScrollReveal = ({
           setIsVisible(false);
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(el);
-
-    // Safety fallback: if element is already in viewport or observer missed it
-    const timeout = setTimeout(() => {
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          setIsVisible(true);
-        }
-      }
-    }, 1500 + delay);
-
-    return () => {
-      observer.disconnect();
-      clearTimeout(timeout);
-    };
-  }, [once, delay]);
+    return () => observer.disconnect();
+  }, [once]);
 
   // Remove will-change after animation completes
   const handleTransitionEnd = useCallback(() => {
@@ -67,34 +53,53 @@ const ScrollReveal = ({
 
   const getStyles = (): React.CSSProperties => {
     const base: React.CSSProperties = {
-      transitionProperty: "transform, opacity",
       transitionDuration: `${duration}ms`,
       transitionDelay: `${delay}ms`,
       transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
       willChange: isVisible ? "auto" : "transform, opacity",
     };
 
-    if (variant === "scale") {
+    if (variant === "clip") {
+      const clipMap: Record<string, string> = {
+        up: "inset(100% 0 0 0)",
+        down: "inset(0 0 100% 0)",
+        left: "inset(0 100% 0 0)",
+        right: "inset(0 0 0 100%)",
+        none: "inset(0 50% 0 50%)",
+      };
       return {
         ...base,
-        transform: isVisible ? "scale(1) translateY(0)" : "scale(0.95) translateY(20px)",
+        transitionProperty: "clip-path, opacity",
+        clipPath: isVisible ? "inset(0 0 0 0)" : clipMap[direction],
         opacity: isVisible ? 1 : 0,
       };
     }
 
-    // Default: fade with directional translate
+    if (variant === "scale") {
+      return {
+        ...base,
+        transitionProperty: "transform, opacity, filter",
+        transform: isVisible ? "scale(1) translateY(0)" : "scale(0.92) translateY(20px)",
+        opacity: isVisible ? 1 : 0,
+        filter: isVisible ? "blur(0px)" : "blur(6px)",
+      };
+    }
+
+    // Default: fade
     const translateMap: Record<string, string> = {
-      up: "translateY(32px)",
-      down: "translateY(-32px)",
-      left: "translateX(32px)",
-      right: "translateX(-32px)",
+      up: "translateY(40px)",
+      down: "translateY(-40px)",
+      left: "translateX(40px)",
+      right: "translateX(-40px)",
       none: "translateY(0)",
     };
 
     return {
       ...base,
+      transitionProperty: "transform, opacity, filter",
       transform: isVisible ? "translateY(0) translateX(0)" : translateMap[direction],
       opacity: isVisible ? 1 : 0,
+      filter: isVisible ? "blur(0px)" : "blur(4px)",
     };
   };
 
