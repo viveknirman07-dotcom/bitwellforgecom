@@ -271,13 +271,11 @@ const Insights = () => {
         </div>
       </section>
 
-      <ScrollReveal>
-        <CTABlock
-          heading="Have a growth challenge?"
-          subtext="Let's explore whether a structured approach could help."
-          buttonLabel="Start a Conversation"
-        />
-      </ScrollReveal>
+      <CTABlock
+        heading="Have a growth challenge?"
+        subtext="Let's explore whether a structured approach could help."
+        buttonLabel="Start a Conversation"
+      />
     </div>
   );
 };
