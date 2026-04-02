@@ -162,10 +162,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Philosophy */}
       <section className="section-padding section-y border-t border-border">
