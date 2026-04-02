@@ -56,6 +56,7 @@ interface AnimatedCharsProps {
   as?: "h1" | "h2" | "h3" | "p";
   stagger?: number;
   delay?: number;
+  style?: React.CSSProperties;
 }
 
 const AnimatedChars = ({
@@ -64,6 +65,7 @@ const AnimatedChars = ({
   as: Tag = "h2",
   stagger = 0.015,
   delay = 0,
+  style: externalStyle,
 }: AnimatedCharsProps) => {
   const { ref, isVisible } = useScrollReveal({ once: true });
   const prefersReduced = useReducedMotion();
@@ -73,28 +75,39 @@ const AnimatedChars = ({
     return <Tag className={className}>{text}</Tag>;
   }
 
+  const words = text.split(" ");
+  let charIndex = 0;
+
   return (
-    <Tag ref={ref as any} className={className}>
-      {chars.map((char, i) => (
-        <motion.span
-          key={i}
-          className="inline-block"
-          style={{ whiteSpace: char === " " ? "pre" : undefined }}
-          initial={{ opacity: 0, y: 18 }}
-          animate={
-            isVisible
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 18 }
-          }
-          transition={{
-            duration: 0.45,
-            delay: delay + i * stagger,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
+    <Tag ref={ref as any} className={className} style={{ wordBreak: "normal", overflowWrap: "break-word", hyphens: "none", whiteSpace: "normal", ...externalStyle }}>
+      {words.map((word, wi) => {
+        const startIndex = charIndex;
+        charIndex += word.length + 1; // +1 for space
+        return (
+          <span key={wi} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+            {word.split("").map((char, ci) => (
+              <motion.span
+                key={ci}
+                className="inline-block"
+                initial={{ opacity: 0, y: 18 }}
+                animate={
+                  isVisible
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 18 }
+                }
+                transition={{
+                  duration: 0.45,
+                  delay: delay + (startIndex + ci) * stagger,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+            {wi < words.length - 1 && <span>&nbsp;</span>}
+          </span>
+        );
+      })}
     </Tag>
   );
 };
