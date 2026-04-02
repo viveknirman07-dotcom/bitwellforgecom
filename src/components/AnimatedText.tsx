@@ -65,6 +65,7 @@ const AnimatedChars = ({
   as: Tag = "h2",
   stagger = 0.015,
   delay = 0,
+  style: externalStyle,
 }: AnimatedCharsProps) => {
   const { ref, isVisible } = useScrollReveal({ once: true });
   const prefersReduced = useReducedMotion();
