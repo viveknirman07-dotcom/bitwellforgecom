@@ -56,6 +56,7 @@ interface AnimatedCharsProps {
   as?: "h1" | "h2" | "h3" | "p";
   stagger?: number;
   delay?: number;
+  style?: React.CSSProperties;
 }
 
 const AnimatedChars = ({
