@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import ServiceCard from "@/components/ServiceCard";
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import { AnimatedWords, AnimatedChars } from "@/components/AnimatedText";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import heroTexture from "@/assets/hero-texture.jpg";
+
+const useIsTabletOrMobile = () => {
+  const [isTabletOrMobile, setIsTabletOrMobile] = React.useState(false);
+  React.useEffect(() => {
+    const check = () => setIsTabletOrMobile(window.innerWidth <= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isTabletOrMobile;
+};
+
+import * as React from "react";
 
 const faqItems = [
   { question: "Do I need a large team or big budget to work with BitwellForge", answer: "No. Most of our clients start as solo operators or small teams. We build systems that work with the resources you already have and scale as your business grows" },
