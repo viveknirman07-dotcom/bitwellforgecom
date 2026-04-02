@@ -44,10 +44,25 @@ const services = [
 ];
 
 const Index = () => {
+  const isMobile = useIsMobile();
+  const isTabletOrMobile = useIsTabletOrMobile();
+  const isTabletOnly = isTabletOrMobile && !isMobile;
+  const prefersReduced = useReducedMotion();
+
+  // Stagger delays for mobile/tablet scroll entry
+  const labelDelay = isTabletOrMobile ? 0.5 : 0.5;
+  const headingDelay = isTabletOrMobile ? 0.6 : 0.7;
+  const paraDelay = isTabletOrMobile ? 0.8 : 1.5;
+  const ctaDelay = isTabletOrMobile ? 1.0 : 1.8;
+
   return (
     <div>
       {/* Hero */}
-      <section className="section-padding min-h-screen flex items-center relative overflow-hidden">
+      <section
+        className={`section-padding min-h-screen flex items-center relative overflow-hidden ${
+          isTabletOrMobile ? "!px-[20px] md:!px-[32px]" : ""
+        }`}
+      >
         {/* Background texture with parallax */}
         <motion.div
           className="absolute inset-0 bg-cover bg-center opacity-[0.07] dark:opacity-[0.15] pointer-events-none"
@@ -62,54 +77,91 @@ const Index = () => {
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
           }}
         />
-        <div className="max-w-[1400px] mx-auto w-full pt-20 relative z-10">
-          <div className="max-w-3xl">
+        <div className={`max-w-[1400px] mx-auto w-full pt-20 relative z-10 ${isTabletOrMobile ? "text-left" : ""}`}>
+          <div className={`max-w-3xl ${isTabletOrMobile ? "w-full" : ""}`}>
             <motion.p
-              className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-8"
-              initial={{ opacity: 0, letterSpacing: "0.4em", y: 10 }}
-              animate={{ opacity: 1, letterSpacing: "0.1em", y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className={`font-medium text-muted-foreground uppercase ${
+                isTabletOrMobile
+                  ? "text-[11px] md:text-[12px] tracking-[1.5px] opacity-70 mb-[12px]"
+                  : "text-sm tracking-widest mb-8"
+              }`}
+              initial={prefersReduced ? false : { opacity: 0, letterSpacing: "0.4em", y: 10 }}
+              animate={{ opacity: isTabletOrMobile ? 0.7 : 1, letterSpacing: isTabletOrMobile ? "1.5px" : "0.1em", y: 0 }}
+              transition={{ duration: 0.8, delay: labelDelay, ease: [0.22, 1, 0.36, 1] }}
             >
               Strategic Growth Systems
             </motion.p>
 
             <AnimatedWords
               text="Growth doesn't fail from lack of effort. It fails from lack of structure."
-              className="font-heading text-4xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-[1.1] mb-8 text-balance"
+              className={`font-heading font-semibold text-foreground text-balance ${
+                isTabletOrMobile
+                  ? "text-[28px] md:text-[36px] leading-[1.25] mb-[16px] max-w-[95%]"
+                  : "text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8"
+              }`}
               stagger={0.06}
-              delay={0.7}
+              delay={headingDelay}
             />
 
             <motion.p
-              className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+              className={`text-muted-foreground leading-relaxed ${
+                isTabletOrMobile
+                  ? "text-[14px] md:text-[16px] leading-[1.6] opacity-80 max-w-[90%] mb-[28px]"
+                  : "text-lg md:text-xl max-w-xl mb-12"
+              }`}
+              initial={prefersReduced ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: isTabletOrMobile ? 0.8 : 1, y: 0 }}
+              transition={{ duration: 0.8, delay: paraDelay, ease: [0.22, 1, 0.36, 1] }}
             >
               The acquisition systems behind consistent, qualified demand for businesses ready to scale with clarity.
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 25, scale: 0.92 }}
+              className={`relative ${
+                isTabletOrMobile
+                  ? `flex flex-col gap-[12px] ${isTabletOnly ? "max-w-[480px] mx-auto" : "w-full"}`
+                  : "flex flex-col sm:flex-row gap-4"
+              }`}
+              initial={prefersReduced ? false : { opacity: 0, y: 25, scale: 0.92 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, delay: 1.8, ease: [0.34, 1.56, 0.64, 1] }}
+              transition={{ duration: 0.7, delay: ctaDelay, ease: [0.34, 1.56, 0.64, 1] }}
             >
+              {/* Radial gradient behind CTA - mobile/tablet only */}
+              {isTabletOrMobile && (
+                <div
+                  className="absolute inset-0 -bottom-8 pointer-events-none"
+                  style={{
+                    background: "radial-gradient(ellipse at center bottom, hsl(var(--primary) / 0.08), transparent 70%)",
+                  }}
+                />
+              )}
               <Link
                 to="/contact?service=General+Inquiry"
-                className="group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:scale-[1.06] active:scale-[0.97] transition-transform duration-300"
-                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+                className={`group inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-full text-sm font-medium tracking-wide transition-transform duration-300 relative z-10 ${
+                  isTabletOrMobile
+                    ? "w-full h-[52px] md:h-[54px] active:scale-[0.96] active:shadow-[0_0_20px_hsl(var(--primary)/0.25)]"
+                    : "px-8 py-4 hover:scale-[1.06] active:scale-[0.97]"
+                }`}
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)", borderRadius: "999px" }}
               >
                 Start the Conversation
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/about"
-                className="group inline-flex items-center justify-center gap-2 border border-border text-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:bg-secondary hover:scale-[1.06] active:scale-[0.97] transition-all duration-300"
-                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+                className={`group inline-flex items-center justify-center gap-2 border border-border text-foreground rounded-full text-sm font-medium tracking-wide transition-all duration-300 relative z-10 ${
+                  isTabletOrMobile
+                    ? "w-full h-[48px] opacity-[0.83] active:scale-[0.98] active:opacity-90 active:border-foreground/30"
+                    : "px-8 py-4 hover:bg-secondary hover:scale-[1.06] active:scale-[0.97]"
+                }`}
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)", borderRadius: "999px" }}
               >
                 The Philosophy
               </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
             </motion.div>
           </div>
         </div>
