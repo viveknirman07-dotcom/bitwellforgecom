@@ -5,6 +5,28 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export const articles = [
   {
+    slug: "the-follow-up-gap-is-where-most-deals-are-lost",
+    title: "The Follow-Up Gap Is Where Most Deals Are Lost",
+    excerpt: "The first conversation rarely closes the deal. What happens in the silence after it determines whether the revenue is won or lost.",
+    category: "Sales Systems",
+    date: "Apr 2026",
+    content: `
+The first conversation rarely closes the deal. What happens in the silence after it determines whether the revenue is won or lost.
+
+**Where the Revenue Actually Goes**
+
+Research on B2B sales consistently shows that the majority of closed deals require five or more follow-up touchpoints after the initial conversation. Most founders follow up once or twice before concluding the prospect is not interested. The prospect is often still interested. They are busy, distracted, or waiting for the right moment. The founder who disappears after one follow-up is not respecting the prospect's time. They are leaving revenue on the table because there is no system in place to maintain the conversation through the natural decision timeline.
+
+**The Difference Between Following Up and Pestering**
+
+Structured follow-up is not persistence for its own sake. Each touchpoint should carry a reason to re-engage. A useful piece of content, a relevant observation about their industry, a direct question about where they are in their decision process. The follow-up sequence should feel like continued service rather than repeated pressure. When it is structured this way, the prospect who was not ready in week one may be ready in week three and will respond to the touchpoint that arrives at the right moment rather than to the founder who gave up after the first attempt.
+
+**Building the Follow-Up System**
+
+A follow-up system is not complicated. It requires a defined sequence with specific timing, a template for each touchpoint that can be personalised quickly, and a tracking mechanism that shows which prospects are active and which need a next touch. The absence of this system is the follow-up gap. Closing it does not require a larger team or a more expensive tool. It requires the decision that consistent follow-up is part of the acquisition process rather than an optional extra.
+    `,
+  },
+  {
     slug: "the-positioning-problem-most-service-businesses-ignore",
     title: "The Positioning Problem Most Service Businesses Ignore",
     excerpt: "When everyone sounds the same, price becomes the only differentiator. Most service businesses have a positioning problem long before they have a pipeline problem.",
@@ -46,28 +68,6 @@ Outbound creates pipeline on demand. When a campaign is running, conversations a
 **What Inbound Does That Outbound Cannot**
 
 Inbound creates authority that changes the quality of every conversation. When a prospect arrives having already consumed your content, the sales conversation starts from a position of established credibility. Objections are fewer. Trust is higher. Conversion is faster. Outbound can generate the conversation but it cannot replicate the standing that arrives with an inbound lead who chose to engage before being contacted. The combination produces better conversations at higher volume than either approach alone.
-    `,
-  },
-  {
-    slug: "the-follow-up-gap-is-where-most-deals-are-lost",
-    title: "The Follow-Up Gap Is Where Most Deals Are Lost",
-    excerpt: "The first conversation rarely closes the deal. What happens in the silence after it determines whether the revenue is won or lost.",
-    category: "Sales Systems",
-    date: "Apr 2026",
-    content: `
-The first conversation rarely closes the deal. What happens in the silence after it determines whether the revenue is won or lost.
-
-**Where the Revenue Actually Goes**
-
-Research on B2B sales consistently shows that the majority of closed deals require five or more follow-up touchpoints after the initial conversation. Most founders follow up once or twice before concluding the prospect is not interested. The prospect is often still interested. They are busy, distracted, or waiting for the right moment. The founder who disappears after one follow-up is not respecting the prospect's time. They are leaving revenue on the table because there is no system in place to maintain the conversation through the natural decision timeline.
-
-**The Difference Between Following Up and Pestering**
-
-Structured follow-up is not persistence for its own sake. Each touchpoint should carry a reason to re-engage. A useful piece of content, a relevant observation about their industry, a direct question about where they are in their decision process. The follow-up sequence should feel like continued service rather than repeated pressure. When it is structured this way, the prospect who was not ready in week one may be ready in week three and will respond to the touchpoint that arrives at the right moment rather than to the founder who gave up after the first attempt.
-
-**Building the Follow-Up System**
-
-A follow-up system is not complicated. It requires a defined sequence with specific timing, a template for each touchpoint that can be personalised quickly, and a tracking mechanism that shows which prospects are active and which need a next touch. The absence of this system is the follow-up gap. Closing it does not require a larger team or a more expensive tool. It requires the decision that consistent follow-up is part of the acquisition process rather than an optional extra.
     `,
   },
   {
