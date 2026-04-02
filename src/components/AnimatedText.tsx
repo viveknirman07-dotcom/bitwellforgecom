@@ -79,7 +79,7 @@ const AnimatedChars = ({
   let charIndex = 0;
 
   return (
-    <Tag ref={ref as any} className={className} style={{ wordBreak: "normal", overflowWrap: "break-word", hyphens: "none", whiteSpace: "normal" }}>
+    <Tag ref={ref as any} className={className} style={{ wordBreak: "normal", overflowWrap: "break-word", hyphens: "none", whiteSpace: "normal", ...externalStyle }}>
       {words.map((word, wi) => {
         const startIndex = charIndex;
         charIndex += word.length + 1; // +1 for space
