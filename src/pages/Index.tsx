@@ -112,7 +112,8 @@ const Index = () => {
               <AnimatedChars
                 text="Clarity is the foundation of every growth system worth building."
                 as="h2"
-                className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance"
+                className="font-heading font-semibold text-foreground leading-tight mb-6"
+                style={{ fontSize: "clamp(26px, 4vw, 52px)", wordBreak: "normal", overflowWrap: "break-word", hyphens: "none" }}
                 stagger={0.015}
               />
             </div>
