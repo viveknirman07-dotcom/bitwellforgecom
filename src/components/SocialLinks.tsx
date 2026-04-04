@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
@@ -19,22 +19,10 @@ const XIcon = ({ size = 18 }: { size?: number }) => (
 
 const socials = [
   {
-    label: "Instagram",
-    href: "https://www.instagram.com/bitwellforge?igsh=MXZwaGRsNms4c3Q1Yg%3D%3D&utm_source=qr",
-    icon: Instagram,
-    isCustom: false,
-  },
-  {
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/bitwellforge/",
     icon: Linkedin,
     isCustom: false,
-  },
-  {
-    label: "X",
-    href: "https://x.com/bitwellforge?s=21",
-    icon: XIcon,
-    isCustom: true,
   },
   {
     label: "Email",
