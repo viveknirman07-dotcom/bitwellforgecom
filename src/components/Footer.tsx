@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
             <motion.h3
-              className="font-heading text-lg font-semibold mb-3 text-foreground"
+              className="font-heading text-lg font-extralight mb-3 text-foreground"
               {...stagger(0, 0.1)}
             >
               BitwellForge
@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
 
           <motion.div {...stagger(0, 0.25)}>
-            <h4 className="text-[13px] font-semibold mb-3 text-foreground tracking-wide">Navigate</h4>
+            <h4 className="text-[13px] font-extralight mb-3 text-foreground tracking-wide">Navigate</h4>
             <div className="flex flex-col gap-2.5">
               {[
                 { label: "About", href: "/about" },
@@ -55,7 +55,7 @@ const Footer = () => {
           </motion.div>
 
           <motion.div {...stagger(1, 0.25)}>
-            <h4 className="text-[13px] font-semibold mb-3 text-foreground tracking-wide">Connect</h4>
+            <h4 className="text-[13px] font-extralight mb-3 text-foreground tracking-wide">Connect</h4>
             <div className="flex flex-col gap-2.5">
               <Link
                 to="/contact?service=General+Inquiry"
