@@ -39,7 +39,7 @@ const Process = () => {
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Process</p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
+              <h1 className="font-heading text-4xl md:text-6xl font-black text-foreground leading-tight mb-8 text-balance">
                 Five phases. One coherent system.
               </h1>
             </ScrollReveal>
@@ -63,7 +63,7 @@ const Process = () => {
                       </div>
                     </div>
                     <div className="md:col-span-4 md:pt-5">
-                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground">
+                      <h2 className="font-heading text-2xl md:text-3xl font-black text-foreground">
                         {step.title}
                       </h2>
                     </div>

@@ -53,7 +53,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       <span className="inline-block text-xs font-medium tracking-widest uppercase text-accent mb-4 relative z-10">
         {study.tag}
       </span>
-      <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300 relative z-10">
+      <h3 className="font-heading text-xl md:text-2xl font-extralight text-foreground mb-3 group-hover:text-accent transition-colors duration-300 relative z-10">
         {study.title}
       </h3>
       <p className="text-muted-foreground text-sm leading-relaxed mb-6 relative z-10">
