@@ -15,7 +15,7 @@ const CaseStudies = () => {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={200}>
-            <h1 className="font-heading text-4xl md:text-6xl font-black text-foreground leading-[1.1] mb-6 text-balance max-w-3xl">
+            <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-[1.1] mb-6 text-balance max-w-3xl">
               Real frameworks. Structured outcomes.
             </h1>
           </ScrollReveal>

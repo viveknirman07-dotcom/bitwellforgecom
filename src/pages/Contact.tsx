@@ -63,7 +63,7 @@ const Contact = () => {
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Contact</p>
               </ScrollReveal>
               <ScrollReveal delay={150}>
-                <h1 className="font-heading text-4xl md:text-5xl font-black text-foreground leading-tight mb-8 text-balance">
+                <h1 className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-8 text-balance">
                   Let's discuss your growth architecture.
                 </h1>
               </ScrollReveal>
@@ -76,15 +76,15 @@ const Contact = () => {
               <ScrollReveal delay={400}>
                 <div className="space-y-5">
                   <div>
-                    <h3 className="text-[13px] font-extralight text-foreground mb-1">Email</h3>
+                    <h3 className="text-[13px] font-semibold text-foreground mb-1">Email</h3>
                     <a href="mailto:v@bitwellforge.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-300">v@bitwellforge.com</a>
                   </div>
                   <div>
-                    <h3 className="text-[13px] font-extralight text-foreground mb-1">Response Time</h3>
+                    <h3 className="text-[13px] font-semibold text-foreground mb-1">Response Time</h3>
                     <p className="text-[13px] text-muted-foreground">Within 24 hours</p>
                   </div>
                   <div>
-                    <h3 className="text-[13px] font-extralight text-foreground mb-1">Follow Us</h3>
+                    <h3 className="text-[13px] font-semibold text-foreground mb-1">Follow Us</h3>
                     <SocialLinks size={17} />
                   </div>
                 </div>

@@ -11,7 +11,7 @@ const InsightArticle = () => {
   if (!article) {
     return (
       <div className="pt-20 section-padding section-y text-center">
-        <h1 className="font-heading text-3xl font-black text-foreground mb-4">Article not found</h1>
+        <h1 className="font-heading text-3xl font-semibold text-foreground mb-4">Article not found</h1>
         <Link to="/insights" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
           Back to Insights
         </Link>
@@ -44,7 +44,7 @@ const InsightArticle = () => {
                 <span className="text-xs font-medium text-muted-foreground tracking-wide uppercase">{article.category}</span>
                 <span className="text-xs text-muted-foreground">{article.date}</span>
               </div>
-              <h1 className="font-heading text-3xl md:text-5xl font-black text-foreground leading-tight mb-6 text-balance">
+              <h1 className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
                 {article.title}
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
@@ -59,7 +59,7 @@ const InsightArticle = () => {
                 const trimmed = p.trim();
                 if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
                   return (
-                    <h2 key={i} className="font-heading text-xl md:text-2xl font-black text-foreground mt-10 mb-2">
+                    <h2 key={i} className="font-heading text-xl md:text-2xl font-semibold text-foreground mt-10 mb-2">
                       {trimmed.replace(/\*\*/g, "")}
                     </h2>
                   );

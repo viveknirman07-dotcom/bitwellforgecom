@@ -300,7 +300,7 @@ const Insights = () => {
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Insights</p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-4xl md:text-6xl font-black text-foreground leading-tight mb-8 text-balance">
+              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
                 Thinking on growth, systems, and strategic clarity.
               </h1>
             </ScrollReveal>
@@ -317,7 +317,7 @@ const Insights = () => {
                         <p className="text-xs text-muted-foreground mt-1">{article.date}</p>
                       </div>
                       <div className="md:col-span-7">
-                        <h2 className="font-heading text-xl md:text-2xl font-black text-foreground group-hover:text-accent transition-colors duration-300 mb-3">
+                        <h2 className="font-heading text-xl md:text-2xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">
                           {article.title}
                         </h2>
                         <p className="text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>

@@ -94,7 +94,7 @@ const Index = () => {
 
             <AnimatedWords
               text="Growth doesn't fail from lack of effort. It fails from lack of structure."
-              className={`font-heading font-black text-foreground text-balance ${
+              className={`font-heading font-semibold text-foreground text-balance ${
                 isTabletOrMobile
                   ? "text-[28px] md:text-[36px] leading-[1.25] mb-[16px] max-w-[95%]"
                   : "text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8"
@@ -174,7 +174,7 @@ const Index = () => {
               <AnimatedChars
                 text="Clarity is the foundation of every growth system worth building."
                 as="h2"
-                className="font-heading font-black text-foreground leading-tight mb-6"
+                className="font-heading font-semibold text-foreground leading-tight mb-6"
                 style={{ fontSize: "clamp(26px, 4vw, 50px)", wordBreak: "normal", overflowWrap: "break-word", hyphens: "none" }}
                 stagger={0.015}
               />
@@ -193,7 +193,7 @@ const Index = () => {
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
             <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Systems Built for You</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-black text-foreground mb-16 text-balance">
+            <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-16 text-balance">
               Infrastructure for sustainable growth.
             </h2>
           </ScrollReveal>
@@ -215,7 +215,7 @@ const Index = () => {
               {/* Foundation */}
               <ScrollReveal delay={0} variant="scale">
                 <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl hover:shadow-[0_20px_60px_hsl(var(--foreground)/0.08)] hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
-                  <h3 className="font-heading text-xl md:text-2xl font-extralight text-foreground mb-3">Foundation</h3>
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Foundation</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     For businesses ready to build their first structured acquisition system
                   </p>
@@ -239,7 +239,7 @@ const Index = () => {
               <ScrollReveal delay={150} variant="scale">
                 <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-accent/40 bg-card/80 backdrop-blur-xl shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] relative hover:shadow-[0_20px_60px_hsl(var(--foreground)/0.1)] hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
                   <span className="absolute top-4 right-4 text-xs font-medium text-accent tracking-wide uppercase">Most Popular</span>
-                  <h3 className="font-heading text-xl md:text-2xl font-extralight text-foreground mb-3">Growth System</h3>
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Growth System</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     Full stack demand infrastructure for businesses ready to scale consistently
                   </p>
@@ -264,7 +264,7 @@ const Index = () => {
               {/* Enterprise */}
               <ScrollReveal delay={300} variant="scale">
                 <div className="h-full flex flex-col p-8 md:p-10 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-xl hover:shadow-[0_20px_60px_hsl(var(--foreground)/0.08)] hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}>
-                  <h3 className="font-heading text-xl md:text-2xl font-extralight text-foreground mb-3">Enterprise</h3>
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3">Enterprise</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     Custom growth architecture for established businesses scaling across multiple markets
                   </p>
@@ -302,7 +302,7 @@ const Index = () => {
                 <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Process</p>
               </ScrollReveal>
               <ScrollReveal delay={100}>
-                <h2 className="font-heading text-3xl md:text-4xl font-black text-foreground mb-6 text-balance">
+                <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6 text-balance">
                   From clarity to compounding results.
                 </h2>
               </ScrollReveal>
@@ -340,7 +340,7 @@ const Index = () => {
         <div className="max-w-[1400px] mx-auto text-center">
           <ScrollReveal variant="scale">
             <p className="text-sm font-medium opacity-60 tracking-widest uppercase mb-6">Why It Works</p>
-            <h2 className="font-heading text-3xl md:text-5xl font-black mb-16 text-balance max-w-3xl mx-auto">
+            <h2 className="font-heading text-3xl md:text-5xl font-semibold mb-16 text-balance max-w-3xl mx-auto">
               Systems that outlast trends, built for businesses that think long term.
             </h2>
           </ScrollReveal>
@@ -352,7 +352,7 @@ const Index = () => {
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 150}>
                 <div>
-                  <h3 className="font-heading text-xl font-extralight mb-3">{item.title}</h3>
+                  <h3 className="font-heading text-xl font-semibold mb-3">{item.title}</h3>
                   <p className="text-sm opacity-70 leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>

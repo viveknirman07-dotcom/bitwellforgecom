@@ -64,7 +64,7 @@ const Services = () => {
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Services</p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-4xl md:text-6xl font-black text-foreground leading-tight mb-8 text-balance">
+              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
                 Systems designed for every stage of your growth.
               </h1>
             </ScrollReveal>
@@ -88,7 +88,7 @@ const Services = () => {
                       <span className="text-sm text-muted-foreground font-medium">0{i + 1}</span>
                     </div>
                     <div className="md:col-span-4">
-                      <h2 className="font-heading text-2xl md:text-3xl font-black text-foreground group-hover:text-accent transition-colors duration-500">
+                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-500">
                         {service.title}
                       </h2>
                     </div>

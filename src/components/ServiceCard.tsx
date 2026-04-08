@@ -52,7 +52,7 @@ const ServiceCard = ({ title, description, href, index }: ServiceCardProps) => {
           transition: "opacity 0.3s ease",
         }}
       />
-      <h3 className="font-heading text-xl md:text-2xl font-extralight text-foreground mb-3 group-hover:text-accent transition-colors duration-300 relative z-10">
+      <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300 relative z-10">
         {title}
       </h3>
       <p className="text-muted-foreground text-sm leading-relaxed mb-6 relative z-10">

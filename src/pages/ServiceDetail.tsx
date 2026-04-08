@@ -220,7 +220,7 @@ const ServiceDetail = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={100}>
-            <h1 className="font-heading text-4xl md:text-5xl font-black text-foreground leading-tight mb-6">
+            <h1 className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-6">
               {service.title}
             </h1>
           </ScrollReveal>
@@ -233,21 +233,21 @@ const ServiceDetail = () => {
 
           <ScrollReveal delay={300}>
             <div className="mb-14">
-              <h2 className="font-heading text-2xl font-black text-foreground mb-4">The Problem</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">The Problem</h2>
               <p className="text-muted-foreground leading-relaxed">{service.problem}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
-              <h2 className="font-heading text-2xl font-black text-foreground mb-4">The Strategy</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">The Strategy</h2>
               <p className="text-muted-foreground leading-relaxed">{service.strategy}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
-              <h2 className="font-heading text-2xl font-black text-foreground mb-4">System Approach</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">System Approach</h2>
               <ul className="space-y-3">
                 {service.approach.map((item, i) => (
                   <li key={i} className="flex gap-3 items-start text-muted-foreground leading-relaxed">
@@ -261,7 +261,7 @@ const ServiceDetail = () => {
 
           <ScrollReveal>
             <div className="mb-14">
-              <h2 className="font-heading text-2xl font-black text-foreground mb-4">Expected Outcomes</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">Expected Outcomes</h2>
               <ul className="space-y-3">
                 {service.outcomes.map((item, i) => (
                   <li key={i} className="flex gap-3 items-start text-muted-foreground leading-relaxed">
