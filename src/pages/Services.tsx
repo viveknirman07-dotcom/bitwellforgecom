@@ -88,7 +88,7 @@ const Services = () => {
                       <span className="text-sm text-muted-foreground font-medium">0{i + 1}</span>
                     </div>
                     <div className="md:col-span-4">
-                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-500">
+                      <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground group-hover:text-accent transition-colors duration-500">
                         {service.title}
                       </h2>
                     </div>

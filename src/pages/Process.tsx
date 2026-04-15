@@ -63,7 +63,7 @@ const Process = () => {
                       </div>
                     </div>
                     <div className="md:col-span-4 md:pt-5">
-                      <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground">
+                      <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground">
                         {step.title}
                       </h2>
                     </div>

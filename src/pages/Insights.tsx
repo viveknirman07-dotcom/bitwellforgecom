@@ -317,7 +317,7 @@ const Insights = () => {
                         <p className="text-xs text-muted-foreground mt-1">{article.date}</p>
                       </div>
                       <div className="md:col-span-7">
-                        <h2 className="font-heading text-xl md:text-2xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">
+                        <h2 className="font-display text-xl md:text-2xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">
                           {article.title}
                         </h2>
                         <p className="text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
