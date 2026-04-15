@@ -175,7 +175,7 @@ const Index = () => {
                 text="Clarity is the foundation of every growth system worth building."
                 as="h2"
                 className="font-heading font-semibold text-foreground leading-tight mb-6"
-                style={{ fontSize: "clamp(26px, 4vw, 45px)", wordBreak: "normal", overflowWrap: "break-word", hyphens: "none" }}
+                style={{ fontSize: "clamp(26px, 4vw, 41px)", wordBreak: "normal", overflowWrap: "break-word", hyphens: "none" }}
                 stagger={0.015}
               />
             </div>
