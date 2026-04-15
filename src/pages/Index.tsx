@@ -102,7 +102,6 @@ const Index = () => {
               stagger={0.06}
               delay={headingDelay}
             />
-            />
 
             <motion.p
               className={`text-muted-foreground leading-relaxed ${
