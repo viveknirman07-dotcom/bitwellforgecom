@@ -17,7 +17,7 @@ const CaseStudiesSection = ({ showLink = false }: CaseStudiesSectionProps) => {
           <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">
             Results We Engineer
           </p>
-          <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-16 text-balance">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-16 text-balance">
             Real frameworks. Structured outcomes. Built for businesses ready to grow with intention.
           </h2>
         </ScrollReveal>
