@@ -300,7 +300,7 @@ const Insights = () => {
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Insights</p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
+              <h1 className="font-display text-4xl md:text-6xl font-medium text-foreground leading-[1.1] tracking-[-0.025em] mb-8 text-balance">
                 Thinking on growth, systems, and strategic clarity.
               </h1>
             </ScrollReveal>

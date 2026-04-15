@@ -80,27 +80,28 @@ const Index = () => {
         <div className={`max-w-[1400px] mx-auto w-full pt-20 relative z-10 ${isTabletOrMobile ? "text-left" : ""}`}>
           <div className={`max-w-3xl ${isTabletOrMobile ? "w-full" : ""}`}>
             <motion.p
-              className={`font-medium text-muted-foreground uppercase ${
+              className={`font-display font-normal text-muted-foreground lowercase ${
                 isTabletOrMobile
                   ? "text-[11px] md:text-[12px] tracking-[1.5px] opacity-70 mb-[12px]"
-                  : "text-sm tracking-widest mb-8"
+                  : "text-[14px] tracking-[0.02em] mb-6"
               }`}
-              initial={prefersReduced ? false : { opacity: 0, letterSpacing: "0.4em", y: 10 }}
-              animate={{ opacity: isTabletOrMobile ? 0.7 : 1, letterSpacing: isTabletOrMobile ? "1.5px" : "0.1em", y: 0 }}
+              initial={prefersReduced ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: isTabletOrMobile ? 0.7 : 1, y: 0 }}
               transition={{ duration: 0.8, delay: labelDelay, ease: [0.22, 1, 0.36, 1] }}
             >
-              Strategic Growth Systems
+              bitwellforge
             </motion.p>
 
             <AnimatedWords
               text="Growth doesn't fail from lack of effort. It fails from lack of structure."
-              className={`font-heading font-semibold text-foreground text-balance ${
+              className={`font-display font-medium text-foreground text-balance ${
                 isTabletOrMobile
-                  ? "text-[28px] md:text-[36px] leading-[1.25] mb-[16px] max-w-[95%]"
-                  : "text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8"
+                  ? "text-[28px] md:text-[36px] leading-[1.15] mb-[16px] max-w-[95%] tracking-[-0.02em]"
+                  : "text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8 tracking-[-0.025em]"
               }`}
               stagger={0.06}
               delay={headingDelay}
+            />
             />
 
             <motion.p
