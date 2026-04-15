@@ -12,7 +12,7 @@ const About = () => {
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">About</p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-display text-4xl md:text-6xl font-medium text-foreground leading-[1.1] tracking-[-0.025em] mb-8 text-balance">
+              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
                 Sustainable growth is designed, not forced.
               </h1>
             </ScrollReveal>
@@ -30,7 +30,7 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
           <ScrollReveal>
             <div>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-6">The Philosophy</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6">The Philosophy</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Most growth failures aren't caused by a lack of effort. They're caused by a lack of architecture. Businesses invest in channels, campaigns, and tools without a unifying structure.
               </p>
@@ -41,7 +41,7 @@ const About = () => {
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <div>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-6">The Belief</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-6">The Belief</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Growth is not a series of tactics. It is infrastructure. When acquisition, conversion, and retention are designed as interconnected systems, results compound naturally.
               </p>
@@ -59,7 +59,7 @@ const About = () => {
           <ScrollReveal>
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Long-Term Vision</p>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-8 text-balance">
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-8 text-balance">
                 A world where businesses grow through design, not desperation.
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -84,7 +84,7 @@ const About = () => {
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 150}>
                 <div className="p-8 rounded-2xl border border-border bg-card/70 backdrop-blur-sm hover:bg-card/80 hover:shadow-[0_8px_30px_hsl(var(--foreground)/0.06)] hover:-translate-y-0.5 hover:scale-[1.02] transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">{item.title}</h3>
+                  <h3 className="font-heading text-xl font-semibold text-foreground mb-3">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
               </ScrollReveal>

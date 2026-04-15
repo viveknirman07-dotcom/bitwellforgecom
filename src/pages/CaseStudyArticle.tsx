@@ -11,7 +11,7 @@ const CaseStudyArticle = () => {
   if (!study) {
     return (
       <div className="pt-20 section-padding section-y text-center">
-        <h1 className="font-display text-3xl font-semibold text-foreground mb-4">Case study not found</h1>
+        <h1 className="font-heading text-3xl font-semibold text-foreground mb-4">Case study not found</h1>
         <Link to="/case-studies" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
           Back to Case Studies
         </Link>
@@ -38,7 +38,7 @@ const CaseStudyArticle = () => {
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-xs font-medium text-accent tracking-widest uppercase">{study.tag}</span>
               </div>
-              <h1 className="font-display text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
+              <h1 className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
                 {study.title}
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">

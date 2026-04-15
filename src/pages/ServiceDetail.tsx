@@ -199,7 +199,7 @@ const ServiceDetail = () => {
   if (!service) {
     return (
       <div className="pt-20 section-padding section-y text-center">
-        <h1 className="font-display text-3xl text-foreground mb-4">Service not found</h1>
+        <h1 className="font-heading text-3xl text-foreground mb-4">Service not found</h1>
         <Link to="/services" className="text-accent hover:underline">Back to Services</Link>
       </div>
     );
@@ -220,7 +220,7 @@ const ServiceDetail = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={100}>
-            <h1 className="font-display text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-6">
+            <h1 className="font-heading text-4xl md:text-5xl font-semibold text-foreground leading-tight mb-6">
               {service.title}
             </h1>
           </ScrollReveal>
@@ -233,21 +233,21 @@ const ServiceDetail = () => {
 
           <ScrollReveal delay={300}>
             <div className="mb-14">
-              <h2 className="font-display text-2xl font-semibold text-foreground mb-4">The Problem</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">The Problem</h2>
               <p className="text-muted-foreground leading-relaxed">{service.problem}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
-              <h2 className="font-display text-2xl font-semibold text-foreground mb-4">The Strategy</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">The Strategy</h2>
               <p className="text-muted-foreground leading-relaxed">{service.strategy}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
-              <h2 className="font-display text-2xl font-semibold text-foreground mb-4">System Approach</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">System Approach</h2>
               <ul className="space-y-3">
                 {service.approach.map((item, i) => (
                   <li key={i} className="flex gap-3 items-start text-muted-foreground leading-relaxed">
@@ -261,7 +261,7 @@ const ServiceDetail = () => {
 
           <ScrollReveal>
             <div className="mb-14">
-              <h2 className="font-display text-2xl font-semibold text-foreground mb-4">Expected Outcomes</h2>
+              <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">Expected Outcomes</h2>
               <ul className="space-y-3">
                 {service.outcomes.map((item, i) => (
                   <li key={i} className="flex gap-3 items-start text-muted-foreground leading-relaxed">

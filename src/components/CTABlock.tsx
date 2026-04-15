@@ -29,7 +29,7 @@ const CTABlock = ({
     <section ref={ref} className="section-padding section-y">
       <div className="max-w-[1400px] mx-auto text-center">
         <motion.h2
-          className="font-display text-3xl md:text-5xl font-semibold text-foreground mb-6 text-balance"
+          className="font-heading text-3xl md:text-5xl font-semibold text-foreground mb-6 text-balance"
           initial={prefersReduced ? false : { opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
