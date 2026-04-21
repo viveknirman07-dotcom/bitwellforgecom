@@ -1,106 +1,91 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { useMemo } from "react";
+import { useReducedMotion } from "framer-motion";
 
 /**
- * Animated isometric gold-line grid + abstract wireframe torus.
- * Pure SVG, GPU-accelerated transforms only.
+ * Hero background: deep navy + diagonal grid + drifting constellation.
+ * Pure CSS + tiny SVG. Scales to any viewport.
  */
 const IsometricGrid = () => {
   const reduced = useReducedMotion();
 
+  // 5 constellation points (in % so they scale on every viewport)
+  const points = useMemo(
+    () => [
+      { x: 18, y: 28 },
+      { x: 34, y: 62 },
+      { x: 52, y: 22 },
+      { x: 68, y: 54 },
+      { x: 82, y: 36 },
+      { x: 46, y: 80 },
+    ],
+    []
+  );
+
+  // Connect adjacent points into a thin web
+  const links: [number, number][] = [
+    [0, 1], [1, 2], [2, 3], [3, 4], [1, 5], [3, 5], [0, 2],
+  ];
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Subtle gold orthogonal grid */}
-      <div className="absolute inset-0 bg-gold-grid opacity-[0.5]" />
+      {/* Diagonal grid */}
+      <div className="absolute inset-0 bg-constellation-grid" />
 
-      {/* Radial glow center-right */}
+      {/* Soft single radial glow */}
       <div
-        className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] rounded-full"
+        className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle, hsl(220 45% 28% / 0.28), transparent 60%)",
+            "radial-gradient(ellipse 60% 50% at 65% 45%, hsl(0 0% 100% / 0.04) 0%, transparent 70%)",
         }}
       />
 
-      {/* Isometric line layer (rotates extremely slowly) */}
-      <motion.svg
-        viewBox="0 0 1200 800"
-        className="absolute inset-0 w-full h-full opacity-[0.35]"
-        animate={reduced ? undefined : { rotate: [0, 1.5, 0] }}
-        transition={{ duration: 60, repeat: Infinity, ease: "easeInOut" }}
-        style={{ willChange: "transform" }}
+      {/* Drifting constellation */}
+      <div
+        className="absolute inset-0"
+        style={{
+          animation: reduced ? undefined : "constellationDrift 12s ease-in-out infinite alternate",
+          willChange: "transform",
+        }}
       >
-        <defs>
-          <linearGradient id="goldFade" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="hsl(38 38% 60%)" stopOpacity="0.0" />
-            <stop offset="50%" stopColor="hsl(38 38% 60%)" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="hsl(38 38% 60%)" stopOpacity="0.0" />
-          </linearGradient>
-        </defs>
-        {/* Diagonal isometric crossing lines */}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <line
-            key={`a-${i}`}
-            x1={-200 + i * 100}
-            y1={0}
-            x2={400 + i * 100}
-            y2={800}
-            stroke="url(#goldFade)"
-            strokeWidth="0.5"
-          />
-        ))}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <line
-            key={`b-${i}`}
-            x1={1400 - i * 100}
-            y1={0}
-            x2={800 - i * 100}
-            y2={800}
-            stroke="url(#goldFade)"
-            strokeWidth="0.5"
-          />
-        ))}
-      </motion.svg>
-
-      {/* Wireframe torus / sphere object */}
-      <motion.div
-        className="absolute right-[-10%] md:right-[-4%] top-1/2 -translate-y-1/2 w-[420px] h-[420px] md:w-[560px] md:h-[560px] lg:w-[640px] lg:h-[640px]"
-        animate={reduced ? undefined : { rotate: 360 }}
-        transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-        style={{ willChange: "transform" }}
-      >
-        <svg viewBox="-100 -100 200 200" className="w-full h-full">
-          <defs>
-            <radialGradient id="ringGold" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="hsl(38 38% 60%)" stopOpacity="0.0" />
-              <stop offset="80%" stopColor="hsl(38 38% 60%)" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="hsl(38 38% 60%)" stopOpacity="0.0" />
-            </radialGradient>
-          </defs>
-          {/* Concentric ellipses at varying tilts to suggest torus */}
-          {Array.from({ length: 14 }).map((_, i) => {
-            const tilt = (i / 14) * 180;
-            return (
-              <ellipse
-                key={i}
-                cx="0"
-                cy="0"
-                rx="78"
-                ry="28"
-                fill="none"
-                stroke="url(#ringGold)"
-                strokeWidth="0.3"
-                transform={`rotate(${tilt})`}
-              />
-            );
-          })}
-          {/* Outer thin ring */}
-          <circle cx="0" cy="0" r="82" fill="none" stroke="hsl(38 38% 60%)" strokeOpacity="0.35" strokeWidth="0.4" />
-          <circle cx="0" cy="0" r="60" fill="none" stroke="hsl(38 38% 60%)" strokeOpacity="0.18" strokeWidth="0.3" />
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full"
+        >
+          {links.map(([a, b], i) => (
+            <line
+              key={i}
+              x1={points[a].x}
+              y1={points[a].y}
+              x2={points[b].x}
+              y2={points[b].y}
+              stroke="hsl(0 0% 100% / 0.06)"
+              strokeWidth="0.08"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+          {points.map((p, i) => (
+            <circle
+              key={i}
+              cx={p.x}
+              cy={p.y}
+              r="0.25"
+              fill="hsl(0 0% 100% / 0.6)"
+              style={{
+                animation: reduced
+                  ? undefined
+                  : `nodePulse 3s ease-in-out ${i * 0.3}s infinite`,
+                transformOrigin: `${p.x}% ${p.y}%`,
+              }}
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
         </svg>
-      </motion.div>
+      </div>
 
-      {/* Noise overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.04] mix-blend-overlay" />
+      {/* Page noise */}
+      <div className="absolute inset-0 bg-noise opacity-[0.035] mix-blend-overlay" />
     </div>
   );
 };
