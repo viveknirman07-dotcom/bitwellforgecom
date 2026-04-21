@@ -57,9 +57,10 @@ export default {
           light: "hsl(var(--navy-light))",
           deepest: "hsl(var(--navy-deepest))",
         },
+        /* "gold" repurposed to off-white per brand refresh */
         gold: {
           DEFAULT: "hsl(var(--gold))",
-          soft: "hsl(var(--gold) / 0.15)",
+          soft: "hsl(var(--gold) / 0.12)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
