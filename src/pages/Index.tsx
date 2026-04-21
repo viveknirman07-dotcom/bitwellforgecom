@@ -154,14 +154,16 @@ const Index = () => {
             >
               <Link
                 to="/contact?service=General+Inquiry"
-                className="group inline-flex items-center justify-center gap-2 bg-gold text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold/90 hover:shadow-[0_12px_40px_hsl(38_38%_60%/0.35)] active:scale-[0.98]"
+                data-hero-primary-cta
+                className="group inline-flex items-center justify-center gap-2 bg-gold text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_40px_hsl(0_0%_100%/0.18)] active:scale-[0.98]"
               >
                 Start Your Engagement
                 <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/case-studies"
-                className="group inline-flex items-center justify-center gap-2 border border-gold/40 text-foreground px-7 py-4 rounded-full text-[13px] font-medium tracking-wide transition-all duration-300 hover:border-gold hover:bg-gold/5 active:scale-[0.98]"
+                data-hero-secondary-cta
+                className="group inline-flex items-center justify-center gap-2 border border-white/35 text-foreground px-7 py-4 rounded-full text-[13px] font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:border-white hover:bg-white/5 active:scale-[0.98]"
               >
                 See Case Studies
                 <ArrowRight size={14} className="opacity-60 transition-transform duration-300 group-hover:translate-x-1" />

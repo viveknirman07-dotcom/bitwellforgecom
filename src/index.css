@@ -74,37 +74,38 @@
     --popover: 220 40% 8%;
     --popover-foreground: 40 22% 88%;
 
-    --primary: 38 38% 60%; /* gold #c9a96e */
+    --primary: 36 30% 92%; /* off-white #f0ece4 */
     --primary-foreground: 218 43% 6%;
 
     --secondary: 220 30% 11%;
     --secondary-foreground: 40 22% 88%;
 
     --muted: 220 30% 11%;
-    --muted-foreground: 38 12% 68%;
+    --muted-foreground: 38 8% 70%;
 
-    --accent: 38 38% 60%; /* gold accent */
+    --accent: 36 30% 92%; /* off-white accent */
     --accent-foreground: 218 43% 6%;
 
     --destructive: 0 62% 35%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 38 25% 55% / 0.18;
+    --border: 0 0% 100% / 0.12;
     --input: 220 30% 14%;
-    --ring: 38 38% 60%;
+    --ring: 36 30% 92%;
 
     --navy: 218 43% 6%;
     --navy-light: 220 35% 10%;
     --navy-deepest: 217 50% 5%; /* footer #060b14 */
-    --gold: 38 38% 60%;
-    --gold-soft: 38 38% 60% / 0.12;
+    /* "Gold" tokens repurposed to off-white per brand update */
+    --gold: 36 30% 92%;        /* #f0ece4 */
+    --gold-soft: 0 0% 100% / 0.10;
     --warm-body: 36 12% 70%;
-    --quote-italic: 36 22% 78%;
+    --quote-italic: 36 22% 82%;
 
     --shadow-sm: 0 1px 3px hsl(217 50% 3% / 0.4);
     --shadow-md: 0 4px 20px hsl(217 50% 3% / 0.5);
     --shadow-lg: 0 8px 40px hsl(217 50% 3% / 0.6);
-    --shadow-gold: 0 0 40px hsl(38 38% 60% / 0.2);
+    --shadow-gold: 0 0 40px hsl(0 0% 100% / 0.12);
   }
 }
 
@@ -258,16 +259,55 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Subtle gold grid (4% opacity) */
+  /* Subtle off-white grid (4% opacity) */
   .bg-gold-grid {
     background-image:
-      linear-gradient(to right, hsl(38 38% 60% / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(38 38% 60% / 0.04) 1px, transparent 1px);
+      linear-gradient(to right, hsl(0 0% 100% / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 100% / 0.04) 1px, transparent 1px);
     background-size: 64px 64px;
   }
 
   .bg-radial-gold {
-    background: radial-gradient(ellipse at center, hsl(220 45% 30% / 0.18), transparent 65%);
+    background: radial-gradient(ellipse 60% 50% at 65% 45%, hsl(0 0% 100% / 0.05), transparent 70%);
+  }
+
+  /* Hero constellation: diagonal grid + drifting nodes */
+  .bg-constellation-grid {
+    background-image:
+      repeating-linear-gradient(45deg, hsl(0 0% 100% / 0.04) 0 0.5px, transparent 0.5px 40px),
+      repeating-linear-gradient(-45deg, hsl(0 0% 100% / 0.04) 0 0.5px, transparent 0.5px 40px);
+  }
+
+  @keyframes constellationDrift {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(8px, -6px, 0); }
+  }
+  @keyframes nodePulse {
+    0%, 100% { transform: scale(1); opacity: 0.65; }
+    50%      { transform: scale(1.04); opacity: 1; }
+  }
+  @keyframes lineFlow {
+    0%   { stroke-dashoffset: 200; opacity: 0.25; }
+    50%  { stroke-dashoffset: 0;   opacity: 0.8; }
+    100% { stroke-dashoffset: -200; opacity: 0.25; }
+  }
+  @keyframes floatDrift {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-7px); }
+  }
+  @keyframes glowBreath {
+    0%, 100% { filter: drop-shadow(0 0 3px hsl(0 0% 100% / 0.15)); }
+    50%      { filter: drop-shadow(0 0 10px hsl(0 0% 100% / 0.4)); }
+  }
+
+  /* Mobile + Tablet: hide the primary "Start Engagement" CTA in hero */
+  @media (max-width: 1023px) {
+    [data-hero-primary-cta] { display: none !important; }
+    [data-hero-secondary-cta] {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
   }
 
   .font-quote {
