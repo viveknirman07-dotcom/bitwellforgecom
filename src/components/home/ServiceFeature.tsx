@@ -1,0 +1,57 @@
+import { ReactNode } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
+
+interface Props {
+  index: number;
+  tag: string;
+  title: string;
+  body: string;
+  visual: ReactNode;
+  reverse?: boolean;
+}
+
+const ServiceFeature = ({ index, tag, title, body, visual, reverse }: Props) => {
+  const num = String(index + 1).padStart(2, "0");
+  return (
+    <ScrollReveal variant="fade" delay={50}>
+      <div className="relative border-t border-gold/15 py-14 md:py-20">
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${
+            reverse ? "lg:[&>*:first-child]:order-2" : ""
+          }`}
+        >
+          <div className="lg:col-span-6">
+            <div className="flex items-center gap-4 mb-5">
+              <span className="font-quote text-gold text-2xl">{num}</span>
+              <span className="h-px w-10 bg-gold/40" />
+              <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">
+                {tag}
+              </span>
+            </div>
+            <h3 className="font-heading text-3xl md:text-[40px] lg:text-[44px] font-semibold text-foreground leading-[1.1] mb-6 tracking-tightest">
+              {title}
+            </h3>
+            <p className="text-muted-foreground text-[15px] leading-[1.85] font-light max-w-xl">
+              {body}
+            </p>
+          </div>
+          <div className="lg:col-span-6">
+            <div className="relative aspect-[4/3] md:aspect-[5/3] border border-gold/15 bg-gradient-to-br from-card/70 to-card/20 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gold-grid opacity-30" />
+              <div className="relative w-full h-full flex items-center justify-center p-8 text-gold/85">
+                {visual}
+              </div>
+              {/* Corners */}
+              <span className="absolute top-0 left-0 w-4 h-4 border-l border-t border-gold/70" />
+              <span className="absolute top-0 right-0 w-4 h-4 border-r border-t border-gold/70" />
+              <span className="absolute bottom-0 left-0 w-4 h-4 border-l border-b border-gold/70" />
+              <span className="absolute bottom-0 right-0 w-4 h-4 border-r border-b border-gold/70" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+  );
+};
+
+export default ServiceFeature;

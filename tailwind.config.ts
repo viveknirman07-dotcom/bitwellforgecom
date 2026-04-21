@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         heading: ['Playfair Display', 'Georgia', 'serif'],
         body: ['DM Sans', 'system-ui', 'sans-serif'],
+        quote: ['Cormorant Garamond', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,6 +55,11 @@ export default {
         navy: {
           DEFAULT: "hsl(var(--navy))",
           light: "hsl(var(--navy-light))",
+          deepest: "hsl(var(--navy-deepest))",
+        },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          soft: "hsl(var(--gold) / 0.15)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
