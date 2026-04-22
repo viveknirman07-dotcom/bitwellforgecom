@@ -111,7 +111,7 @@ const CaseStudyArticle = () => {
                     {section.heading}
                   </h2>
                 </div>
-                <div className="space-y-5 pl-0 md:pl-10 border-l-0 md:border-l border-[hsl(var(--foreground)/0.10)] md:pl-8">
+                <div className="space-y-5 border-l-0 md:border-l border-[hsl(var(--foreground)/0.10)] md:pl-8">
                   {section.body.map((para, i) => (
                     <p
                       key={i}
