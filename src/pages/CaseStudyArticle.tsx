@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTABlock from "@/components/CTABlock";
+import Eyebrow from "@/components/Eyebrow";
 
 const CaseStudyArticle = () => {
   const { id } = useParams<{ id: string }>();
@@ -10,9 +11,14 @@ const CaseStudyArticle = () => {
 
   if (!study) {
     return (
-      <div className="pt-20 section-padding section-y text-center">
-        <h1 className="font-heading text-3xl font-semibold text-foreground mb-4">Case study not found</h1>
-        <Link to="/case-studies" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+      <div className="pt-32 section-padding section-y text-center">
+        <h1 className="font-heading text-3xl font-semibold text-foreground mb-4">
+          Case study not found
+        </h1>
+        <Link
+          to="/case-studies"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
           Back to Case Studies
         </Link>
       </div>
@@ -20,13 +26,14 @@ const CaseStudyArticle = () => {
   }
 
   return (
-    <div className="pt-20">
-      <article className="section-padding section-y">
-        <div className="max-w-[680px] mx-auto">
+    <div className="pt-32 md:pt-40">
+      {/* HERO */}
+      <header className="section-padding pb-12 md:pb-20">
+        <div className="max-w-[820px] mx-auto">
           <ScrollReveal>
             <Link
               to="/case-studies"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 mb-12"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 mb-10"
             >
               <ArrowLeft size={14} />
               Back to Case Studies
@@ -34,64 +41,116 @@ const CaseStudyArticle = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={100}>
-            <div className="mb-10">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-xs font-medium text-accent tracking-widest uppercase">{study.tag}</span>
-              </div>
-              <h1 className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
-                {study.title}
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {study.subtitle}
-              </p>
-            </div>
+            <Eyebrow className="mb-6">{study.category}</Eyebrow>
+            <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-[1.05] mb-6 text-balance">
+              {study.title}
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-[680px]">
+              {study.subtitle}
+            </p>
           </ScrollReveal>
 
+          {/* Metric strip */}
           <ScrollReveal delay={200}>
-            <div className="border-t border-border pt-10 space-y-8">
-              {/* Client Type */}
-              <div>
-                <h2 className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
+            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-[hsl(var(--foreground)/0.10)] rounded-xl overflow-hidden border border-[hsl(var(--foreground)/0.10)]">
+              {study.metrics.map((m) => (
+                <div
+                  key={m.label}
+                  className="bg-background/80 backdrop-blur-xl p-5 md:p-6"
+                >
+                  <div className="font-heading text-2xl md:text-3xl font-semibold text-foreground leading-none mb-2">
+                    {m.value}
+                  </div>
+                  <div className="text-[11px] uppercase tracking-widest text-muted-foreground leading-snug">
+                    {m.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </header>
+
+      {/* SUMMARY BLOCK */}
+      <section className="section-padding pb-16 md:pb-20">
+        <div className="max-w-[820px] mx-auto">
+          <ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-px bg-[hsl(var(--foreground)/0.10)] rounded-xl overflow-hidden border border-[hsl(var(--foreground)/0.10)]">
+              <div className="bg-background/60 p-6 md:p-8">
+                <Eyebrow as="h2" className="mb-3">
                   Client Type
-                </h2>
-                <p className="text-foreground text-[15px] leading-[1.8]">{study.clientType}</p>
+                </Eyebrow>
+                <p className="text-foreground/90 text-[15px] leading-[1.8]">
+                  {study.clientType}
+                </p>
               </div>
-
-              {/* Challenge */}
-              <div>
-                <h2 className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
+              <div className="bg-background/60 p-6 md:p-8">
+                <Eyebrow as="h2" className="mb-3">
                   Challenge
-                </h2>
-                <p className="text-foreground text-[15px] leading-[1.8]">{study.challenge}</p>
-              </div>
-
-              {/* What We Built */}
-              <div>
-                <h2 className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
-                  What We Built
-                </h2>
-                <ul className="space-y-3">
-                  {study.whatWeBuilt.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-[15px] text-foreground leading-[1.8]">
-                      <CheckCircle2 size={15} className="text-accent mt-1 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Result */}
-              <div className="p-6 rounded-xl bg-secondary/60 border border-border/40">
-                <h2 className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
-                  Result
-                </h2>
-                <p className="text-foreground text-[15px] leading-[1.8] font-medium">{study.result}</p>
+                </Eyebrow>
+                <p className="text-foreground/90 text-[15px] leading-[1.8]">
+                  {study.challenge}
+                </p>
               </div>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
 
-          <ScrollReveal delay={300}>
-            <p className="mt-10 text-xs text-muted-foreground italic">{study.label}</p>
+      {/* SEVEN SECTION NARRATIVE */}
+      <article className="section-padding pb-20 md:pb-28">
+        <div className="max-w-[680px] mx-auto space-y-16 md:space-y-20">
+          {study.sections.map((section, idx) => (
+            <ScrollReveal key={section.heading} delay={idx * 40}>
+              <section>
+                <div className="flex items-baseline gap-4 mb-6">
+                  <span className="font-heading text-sm text-[hsl(var(--eyebrow-color))] tracking-widest tabular-nums">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground leading-tight">
+                    {section.heading}
+                  </h2>
+                </div>
+                <div className="space-y-5 pl-0 md:pl-10 border-l-0 md:border-l border-[hsl(var(--foreground)/0.10)] md:pl-8">
+                  {section.body.map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-foreground/85 text-[16px] md:text-[17px] leading-[1.85] font-light"
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </section>
+            </ScrollReveal>
+          ))}
+
+          {/* RESULT CALLOUT */}
+          <ScrollReveal>
+            <aside className="relative overflow-hidden rounded-2xl border border-[hsl(var(--foreground)/0.15)] bg-[hsl(var(--foreground)/0.03)] p-8 md:p-10">
+              <div
+                className="absolute inset-0 pointer-events-none opacity-60"
+                style={{
+                  background:
+                    "radial-gradient(circle at 0% 0%, hsl(var(--eyebrow-color) / 0.10), transparent 60%)",
+                }}
+              />
+              <div className="relative">
+                <Eyebrow className="mb-4">Outcome</Eyebrow>
+                <p
+                  className="text-foreground text-xl md:text-2xl leading-[1.55] font-light italic"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                >
+                  {study.result}
+                </p>
+              </div>
+            </aside>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <p className="text-xs text-muted-foreground italic text-center">
+              {study.label}
+            </p>
           </ScrollReveal>
         </div>
       </article>
