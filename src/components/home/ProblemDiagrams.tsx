@@ -1,74 +1,103 @@
-import { motion, useReducedMotion } from "framer-motion";
+/**
+ * Problem section diagrams. Mode-adaptive via --svg-* CSS vars.
+ * All animations defined as CSS keyframes; no Framer here so they
+ * breathe 24/7 without re-renders.
+ */
 
+/* Diagram 1 — Leaky Pipelines */
 export const LeakyFunnel = () => {
-  const reduced = useReducedMotion();
   return (
-    <svg viewBox="0 0 120 110" className="w-24 h-24">
-      <defs>
-        <linearGradient id="lf" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
-        </linearGradient>
-      </defs>
-      <path d="M10 12 L110 12 L78 60 L78 96 L42 96 L42 60 Z" fill="none" stroke="url(#lf)" strokeWidth="0.8" />
-      {/* hole */}
-      <ellipse cx="60" cy="60" rx="9" ry="2.4" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="0.7" strokeDasharray="2 2" />
-      {/* leaking dots */}
+    <svg viewBox="0 0 120 120" className="anim-float w-full h-full" aria-hidden>
+      {/* Funnel body */}
+      <path
+        d="M14 14 L106 14 L78 62 L78 102 L42 102 L42 62 Z"
+        className="svg-fill"
+        strokeWidth="0.9"
+      />
+      {/* leak holes (dashed) */}
+      <ellipse cx="50" cy="40" rx="2" ry="0.8" className="svg-stroke" strokeDasharray="1 1" strokeWidth="0.6" />
+      <ellipse cx="72" cy="48" rx="2" ry="0.8" className="svg-stroke" strokeDasharray="1 1" strokeWidth="0.6" />
+      <ellipse cx="55" cy="58" rx="2" ry="0.8" className="svg-stroke" strokeDasharray="1 1" strokeWidth="0.6" />
+
+      {/* Inner flow dots — fall through center */}
       {[0, 1, 2].map((i) => (
-        <motion.circle
-          key={i}
+        <circle
+          key={`flow-${i}`}
           cx={60}
-          cy={68}
-          r={1.2}
-          fill="currentColor"
-          initial={{ y: 0, opacity: 0 }}
-          animate={reduced ? undefined : { y: [0, 30], opacity: [0, 1, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.7, ease: "easeIn" }}
+          cy={20}
+          r="1.6"
+          className="svg-highlight anim-leak"
+          style={{ animationDelay: `${i * 0.8}s` }}
         />
       ))}
+
+      {/* Side leak drips — staggered */}
+      <circle cx="50" cy="40" r="1.2" className="svg-highlight anim-leak" style={{ animationDelay: "0s", animationDuration: "3s" }} />
+      <circle cx="72" cy="48" r="1.2" className="svg-highlight anim-leak" style={{ animationDelay: "1.1s", animationDuration: "3s" }} />
+      <circle cx="55" cy="58" r="1.2" className="svg-highlight anim-leak" style={{ animationDelay: "2.0s", animationDuration: "3s" }} />
+
+      {/* Bottom output — sparse */}
+      <circle cx="60" cy="110" r="1" className="svg-highlight anim-node" style={{ animationDelay: "1.2s" }} />
     </svg>
   );
 };
 
+/* Diagram 2 — Channel Dependency */
 export const ChannelWire = () => {
-  const reduced = useReducedMotion();
   return (
-    <svg viewBox="0 0 120 60" className="w-28 h-20">
-      <motion.path
-        d="M5 30 Q40 5 60 30 T115 30"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="0.9"
-        strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        animate={reduced ? { pathLength: 1 } : { pathLength: [0, 1, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+    <svg viewBox="0 0 120 60" className="anim-float w-full h-full" aria-hidden>
+      {/* Single fragile wire */}
+      <g className="anim-cut">
+        <path
+          d="M10 30 Q40 6 60 30 T110 30"
+          className="svg-stroke anim-line"
+          strokeWidth="1"
+          strokeLinecap="round"
+          strokeDasharray="4 6"
+          style={{ animationDuration: "4s" }}
+        />
+      </g>
+
+      {/* Endpoint nodes */}
+      <circle cx="10" cy="30" r="3" className="svg-highlight anim-node" style={{ animationDelay: "0s" }} />
+      <circle cx="110" cy="30" r="3" className="svg-highlight anim-node anim-hub-only" style={{ animationDelay: "0.4s" }} />
+
+      {/* Subtle break indicator */}
+      <line
+        x1="60"
+        y1="20"
+        x2="60"
+        y2="40"
+        className="svg-secondary"
+        strokeDasharray="1.2 2"
+        strokeWidth="0.6"
       />
-      <circle cx="5" cy="30" r="2.8" fill="currentColor" />
-      <circle cx="115" cy="30" r="2.8" fill="currentColor" />
-      {/* break indicator */}
-      <line x1="60" y1="22" x2="60" y2="38" stroke="currentColor" strokeOpacity="0.4" strokeWidth="0.6" strokeDasharray="1.5 2" />
     </svg>
   );
 };
 
+/* Diagram 3 — No Feedback Loop */
 export const FeedbackLoop = () => {
-  const reduced = useReducedMotion();
   return (
-    <svg viewBox="0 0 120 110" className="w-24 h-24">
-      <motion.circle
+    <svg viewBox="0 0 120 120" className="anim-float w-full h-full" aria-hidden>
+      <circle
         cx="60"
-        cy="55"
+        cy="60"
         r="38"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="0.8"
+        className="svg-stroke anim-rotate-slow"
+        strokeWidth="0.9"
         strokeDasharray="3 4"
-        animate={reduced ? undefined : { rotate: 360 }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: "60px 55px" }}
+        fill="none"
       />
-      <text x="60" y="66" textAnchor="middle" fontSize="32" fontFamily="Playfair Display, serif" fill="currentColor" fontStyle="italic">
+      <text
+        x="60"
+        y="72"
+        textAnchor="middle"
+        fontSize="34"
+        fontFamily="Playfair Display, serif"
+        fontStyle="italic"
+        className="svg-text anim-node anim-hub-only"
+      >
         ?
       </text>
     </svg>
