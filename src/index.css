@@ -394,12 +394,33 @@
     50%      { transform: translateY(-7px); }
   }
   @keyframes glowPulse {
-    0%, 100% { filter: drop-shadow(0 0 4px hsl(0 0% 100% / 0.20)); }
-    50%      { filter: drop-shadow(0 0 12px hsl(0 0% 100% / 0.50)); }
+    0%, 100% { filter: drop-shadow(0 0 4px var(--svg-glow)); }
+    50%      { filter: drop-shadow(0 0 14px var(--svg-glow)); }
   }
   @keyframes glowBreath {
-    0%, 100% { filter: drop-shadow(0 0 3px hsl(0 0% 100% / 0.15)); }
-    50%      { filter: drop-shadow(0 0 10px hsl(0 0% 100% / 0.4)); }
+    0%, 100% { filter: drop-shadow(0 0 3px var(--svg-glow)); }
+    50%      { filter: drop-shadow(0 0 10px var(--svg-glow)); }
+  }
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes dotOrbit {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(4px, -4px); }
+    50%  { transform: translate(0, -8px); }
+    75%  { transform: translate(-4px, -4px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes wireCut {
+    0%, 78%, 100% { opacity: 1; }
+    82%, 92%      { opacity: 0; }
+  }
+  @keyframes leakDrip {
+    0%        { transform: translateY(0);  opacity: 0; }
+    20%       { opacity: 1; }
+    80%       { opacity: 0.8; }
+    100%      { transform: translateY(28px); opacity: 0; }
   }
   @keyframes particleRise {
     0%   { transform: translateY(20px); opacity: 0; }
