@@ -84,6 +84,17 @@
        as visible navy/blue elements instead of invisible cream. */
     --gold: 226 51% 8%;
     --gold-soft: 220 79% 48% / 0.10;
+
+    /* === SVG DIAGRAM TOKENS (light mode) === */
+    --svg-stroke:    rgba(15, 20, 40, 0.60);
+    --svg-fill:      rgba(15, 20, 40, 0.06);
+    --svg-text:      #0f1428;
+    --svg-accent:    rgba(15, 20, 40, 0.40);
+    --svg-highlight: rgba(10, 15, 35, 0.80);
+    --svg-secondary: rgba(10, 15, 35, 0.35);
+    --svg-glow:      rgba(10, 15, 35, 0.40);
+    --svg-border:    rgba(10, 15, 35, 0.10);
+    --svg-grid:      rgba(10, 15, 35, 0.04);
   }
 
   .dark {
