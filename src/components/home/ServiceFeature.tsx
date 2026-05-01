@@ -36,11 +36,16 @@ const ServiceFeature = ({ index, tag, title, body, visual, reverse }: Props) => 
             </p>
           </div>
           <div className="lg:col-span-6">
-            <div className="diagram-frame aspect-[4/3] md:aspect-[5/3]" style={{ color: "var(--svg-stroke)" }}>
-              <div className="diagram-grid" />
-              <div className="relative w-full h-full flex items-center justify-center p-6">
+            <div className="relative aspect-[4/3] md:aspect-[5/3] border border-gold/15 bg-gradient-to-br from-card/70 to-card/20 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gold-grid opacity-30" />
+              <div className="relative w-full h-full flex items-center justify-center p-8 text-gold/85">
                 {visual}
               </div>
+              {/* Corners */}
+              <span className="absolute top-0 left-0 w-4 h-4 border-l border-t border-gold/70" />
+              <span className="absolute top-0 right-0 w-4 h-4 border-r border-t border-gold/70" />
+              <span className="absolute bottom-0 left-0 w-4 h-4 border-l border-b border-gold/70" />
+              <span className="absolute bottom-0 right-0 w-4 h-4 border-r border-b border-gold/70" />
             </div>
           </div>
         </div>
