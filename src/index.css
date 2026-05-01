@@ -148,6 +148,17 @@
     /* === EYEBROW === */
     --eyebrow-color: 200 50% 66%;
     --eyebrow-line: 200 50% 66% / 0.5;
+
+    /* === SVG DIAGRAM TOKENS (dark mode) === */
+    --svg-stroke:    rgba(255, 255, 255, 0.70);
+    --svg-fill:      rgba(255, 255, 255, 0.08);
+    --svg-text:      #f0ece4;
+    --svg-accent:    rgba(255, 255, 255, 0.50);
+    --svg-highlight: rgba(255, 255, 255, 0.85);
+    --svg-secondary: rgba(255, 255, 255, 0.40);
+    --svg-glow:      rgba(255, 255, 255, 0.50);
+    --svg-border:    rgba(255, 255, 255, 0.10);
+    --svg-grid:      rgba(255, 255, 255, 0.04);
   }
 }
 
