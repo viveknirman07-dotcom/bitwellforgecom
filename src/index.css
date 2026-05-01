@@ -577,3 +577,130 @@ html:not(.dark) .btn-ghost:hover {
 /* --- Border/text-gold aliases tuned for light --- */
 html:not(.dark) .border-gold { border-color: hsl(var(--border-global)) !important; }
 html:not(.dark) .text-gold { color: hsl(var(--foreground)); }
+
+/* =====================================================================
+   DIAGRAM CONTAINER + SVG GLOBAL DEFAULTS
+   Every SVG inherits stroke/fill from CSS variables. No hardcoded colors.
+   ===================================================================== */
+.diagram-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--svg-border);
+  background: linear-gradient(135deg, hsl(var(--card) / 0.6), hsl(var(--card) / 0.15));
+  overflow: hidden;
+  border-radius: 0;
+}
+.diagram-frame > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: var(--svg-stroke); /* currentColor fallback */
+}
+.diagram-frame .diagram-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--svg-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--svg-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.svg-text {
+  fill: var(--svg-text);
+  font-family: var(--font-body);
+}
+.svg-stroke   { stroke: var(--svg-stroke); fill: none; }
+.svg-fill     { fill: var(--svg-fill); stroke: var(--svg-stroke); }
+.svg-accent   { stroke: var(--svg-accent); fill: none; }
+.svg-secondary{ stroke: var(--svg-secondary); fill: none; }
+.svg-highlight{ fill: var(--svg-highlight); stroke: var(--svg-highlight); }
+
+/* Per-element animation utilities (will-change for GPU) */
+.anim-node     { animation: nodePulse 3s ease-in-out infinite;        will-change: transform, opacity; transform-origin: center; transform-box: fill-box; }
+.anim-line     { animation: lineDraw 4s ease-in-out infinite;         will-change: stroke-dashoffset, opacity; }
+.anim-glow     { animation: glowPulse 2.5s ease-in-out infinite;      will-change: filter; }
+.anim-float    { animation: floatDrift 6s ease-in-out infinite;       will-change: transform; }
+.anim-rotate-slow   { animation: rotateSlow 20s linear infinite;      will-change: transform; transform-origin: center; transform-box: fill-box; }
+.anim-rotate-gear   { animation: rotateSlow 12s linear infinite;      will-change: transform; transform-origin: center; transform-box: fill-box; }
+.anim-rotate-veryslow { animation: rotateSlow 60s linear infinite;    will-change: transform; transform-origin: center; }
+.anim-orbit    { animation: dotOrbit 6s ease-in-out infinite;         will-change: transform; transform-origin: center; transform-box: fill-box; }
+.anim-cut      { animation: wireCut 5s ease-in-out infinite;          will-change: opacity; }
+.anim-leak     { animation: leakDrip 2.4s ease-in infinite;           will-change: transform, opacity; }
+
+/* Reduced-motion: only a single 6s pulse on hub elements */
+@media (prefers-reduced-motion: reduce) {
+  .anim-node, .anim-line, .anim-glow, .anim-float,
+  .anim-rotate-slow, .anim-rotate-gear, .anim-rotate-veryslow,
+  .anim-orbit, .anim-cut, .anim-leak {
+    animation: none !important;
+  }
+  .anim-hub-only {
+    animation: nodePulse 6s ease-in-out infinite !important;
+  }
+}
+
+/* =====================================================================
+   MOBILE LOCK — site renders as a 430px mobile column on every viewport.
+   Applied via html.mobile-lock toggle so it can be disabled if needed.
+   Default: ON.
+   ===================================================================== */
+html.mobile-lock body {
+  max-width: 430px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Keep the fixed header pinned to the same 430px column */
+html.mobile-lock header {
+  left: 50% !important;
+  transform: translateX(-50%);
+  max-width: 430px;
+  width: 100%;
+  right: auto !important;
+}
+
+/* Force mobile typography sitewide */
+html.mobile-lock h1 { font-size: 34px !important; line-height: 1.08 !important; letter-spacing: -0.01em !important; }
+html.mobile-lock h2 { font-size: 28px !important; line-height: 1.15 !important; }
+html.mobile-lock h3 { font-size: 19px !important; line-height: 1.28 !important; }
+html.mobile-lock p,
+html.mobile-lock li { font-size: 15px !important; line-height: 1.75 !important; }
+
+html.mobile-lock .eyebrow,
+html.mobile-lock [class*="eyebrow"] { font-size: 10px !important; letter-spacing: 0.18em !important; }
+
+html.mobile-lock button,
+html.mobile-lock .btn-primary,
+html.mobile-lock .btn-ghost { font-size: 13px !important; letter-spacing: 0.10em !important; }
+
+/* Force single-column on every grid */
+html.mobile-lock [class*="grid-cols"] { grid-template-columns: 1fr !important; }
+html.mobile-lock .lg\:grid-cols-12,
+html.mobile-lock .md\:grid-cols-12 { grid-template-columns: 1fr !important; }
+
+/* Stat grid stays 2-up (mobile spec) */
+html.mobile-lock .stats-grid,
+html.mobile-lock .grid.grid-cols-2 { grid-template-columns: 1fr 1fr !important; }
+
+/* Section padding to mobile */
+html.mobile-lock section { padding-left: 24px !important; padding-right: 24px !important; }
+html.mobile-lock .section-padding { padding-left: 24px !important; padding-right: 24px !important; }
+html.mobile-lock .section-y { padding-top: 64px !important; padding-bottom: 64px !important; }
+
+/* Buttons full-width in mobile lock */
+html.mobile-lock .btn-primary,
+html.mobile-lock .btn-ghost,
+html.mobile-lock [data-hero-primary-cta],
+html.mobile-lock [data-hero-secondary-cta] {
+  width: 100% !important;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Hide desktop nav links, force hamburger visible (Header uses lg: classes) */
+html.mobile-lock .lg\:flex { display: none !important; }
+html.mobile-lock .lg\:hidden { display: flex !important; }
+
+/* Diagram heights locked */
+html.mobile-lock .diagram-frame { height: 220px !important; }
