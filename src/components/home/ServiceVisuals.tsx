@@ -1,78 +1,123 @@
-import { motion, useReducedMotion } from "framer-motion";
+/**
+ * Service section diagrams. Mode-adaptive via --svg-* CSS vars.
+ * Uses CSS keyframes (anim-*) so diagrams breathe permanently.
+ */
 
-/* 1. Demand generation: node-and-edge graph */
+/* 4. Lead Generation Node Graph */
 export const DemandGraph = () => {
-  const reduced = useReducedMotion();
   const nodes = [
-    { id: "li", x: 50, y: 60, label: "LinkedIn" },
-    { id: "em", x: 50, y: 180, label: "Email" },
-    { id: "co", x: 350, y: 60, label: "Content" },
-    { id: "tr", x: 350, y: 180, label: "Triggers" },
+    { id: "li", x: 60, y: 50, label: "LinkedIn" },
+    { id: "em", x: 60, y: 190, label: "Email" },
+    { id: "co", x: 340, y: 50, label: "Content" },
+    { id: "tr", x: 340, y: 190, label: "Triggers" },
   ];
-  const center = { x: 200, y: 120, label: "Pipeline" };
+  const center = { x: 200, y: 120 };
+
   return (
-    <svg viewBox="0 0 400 240" className="w-full h-full">
-      {nodes.map((n) => (
-        <motion.line
-          key={n.id}
+    <svg viewBox="0 0 400 240" className="anim-float w-full h-full" aria-hidden>
+      {/* Connector lines */}
+      {nodes.map((n, i) => (
+        <line
+          key={`l-${n.id}`}
           x1={n.x}
           y1={n.y}
           x2={center.x}
           y2={center.y}
-          stroke="currentColor"
-          strokeWidth="0.6"
-          strokeOpacity="0.55"
-          initial={{ pathLength: 0 }}
-          animate={reduced ? { pathLength: 1 } : { pathLength: [0, 1] }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", delay: Math.random() }}
+          className="svg-accent anim-line"
+          strokeWidth="0.9"
+          strokeDasharray="6 6"
+          style={{ animationDelay: `${i * 0.6}s` }}
         />
       ))}
-      {nodes.map((n) => (
+
+      {/* Outer nodes */}
+      {nodes.map((n, i) => (
         <g key={n.id}>
-          <circle cx={n.x} cy={n.y} r="6" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.8" />
-          <text x={n.x} y={n.y - 12} textAnchor="middle" fontSize="9" fill="currentColor" fontFamily="DM Sans, sans-serif">
+          <circle
+            cx={n.x}
+            cy={n.y}
+            r="7"
+            className="svg-fill anim-node"
+            strokeWidth="1"
+            style={{ animationDelay: `${i * 0.4}s` }}
+          />
+          <text
+            x={n.x}
+            y={n.y - 14}
+            textAnchor="middle"
+            fontSize="10"
+            className="svg-text"
+          >
             {n.label}
           </text>
         </g>
       ))}
-      <circle cx={center.x} cy={center.y} r="14" fill="hsl(var(--gold) / 0.18)" stroke="currentColor" strokeWidth="1" />
-      <text x={center.x} y={center.y + 3} textAnchor="middle" fontSize="9" fill="currentColor" fontFamily="DM Sans, sans-serif">
+
+      {/* Central hub */}
+      <circle
+        cx={center.x}
+        cy={center.y}
+        r="18"
+        className="svg-fill anim-glow anim-hub-only"
+        strokeWidth="1.2"
+      />
+      <circle cx={center.x} cy={center.y} r="6" className="svg-highlight" />
+      <text
+        x={center.x}
+        y={center.y + 36}
+        textAnchor="middle"
+        fontSize="11"
+        className="svg-text"
+        fontStyle="italic"
+        fontFamily="Playfair Display, serif"
+      >
         Pipeline
       </text>
     </svg>
   );
 };
 
-/* 2. Revenue funnel with gold-highlight closed stage */
+/* 5. Revenue Funnel — horizontal bars */
 export const RevenueFunnel = () => {
   const stages = [
     { label: "Awareness", w: 360, pct: "100%" },
-    { label: "Engaged", w: 280, pct: "62%" },
-    { label: "Qualified", w: 200, pct: "34%" },
-    { label: "Proposal", w: 130, pct: "18%" },
-    { label: "Closed", w: 80, pct: "9%", gold: true },
+    { label: "Engaged",   w: 223, pct: "62%" },
+    { label: "Qualified", w: 122, pct: "34%" },
+    { label: "Proposal",  w:  65, pct: "18%" },
+    { label: "Closed",    w:  32, pct: "9%", glow: true },
   ];
   return (
-    <svg viewBox="0 0 400 240" className="w-full h-full">
+    <svg viewBox="0 0 400 260" className="anim-float w-full h-full" aria-hidden>
       {stages.map((s, i) => {
-        const y = 12 + i * 44;
+        const y = 16 + i * 46;
         const x = (400 - s.w) / 2;
         return (
-          <g key={s.label}>
+          <g key={s.label} style={{ transformOrigin: "center" }}>
             <rect
               x={x}
               y={y}
               width={s.w}
               height={28}
-              fill={s.gold ? "hsl(var(--gold) / 0.25)" : "hsl(var(--gold) / 0.05)"}
-              stroke="currentColor"
-              strokeWidth="0.6"
-              strokeOpacity={s.gold ? 1 : 0.5}
+              className={`svg-fill ${s.glow ? "anim-glow anim-hub-only" : "anim-node"}`}
+              style={{ animationDelay: `${i * 0.3}s` }}
+              strokeWidth="0.8"
             />
-            <text x={x + 8} y={y + 18} fontSize="10" fill="currentColor" fontFamily="DM Sans, sans-serif">
+            <text
+              x={x + 8}
+              y={y + 18}
+              fontSize="10.5"
+              className="svg-text"
+            >
               {s.label}
             </text>
-            <text x={x + s.w - 8} y={y + 18} fontSize="10" textAnchor="end" fill="currentColor" fontFamily="Playfair Display, serif" fontStyle="italic">
+            <text
+              x={x + s.w + 8}
+              y={y + 18}
+              fontSize="10.5"
+              className="svg-text"
+              fontStyle="italic"
+              fontFamily="Playfair Display, serif"
+            >
               {s.pct}
             </text>
           </g>
@@ -82,74 +127,121 @@ export const RevenueFunnel = () => {
   );
 };
 
-/* 3. Positioning matrix 2x2 */
+/* 6. Positioning Matrix */
 export const PositioningMatrix = () => {
   return (
-    <svg viewBox="0 0 300 220" className="w-full h-full">
+    <svg viewBox="0 0 320 240" className="anim-float w-full h-full" aria-hidden>
       {/* axes */}
-      <line x1="40" y1="20" x2="40" y2="200" stroke="currentColor" strokeOpacity="0.6" strokeWidth="0.6" />
-      <line x1="40" y1="200" x2="280" y2="200" stroke="currentColor" strokeOpacity="0.6" strokeWidth="0.6" />
-      {/* grid divider */}
-      <line x1="160" y1="20" x2="160" y2="200" stroke="currentColor" strokeOpacity="0.25" strokeWidth="0.4" strokeDasharray="2 3" />
-      <line x1="40" y1="110" x2="280" y2="110" stroke="currentColor" strokeOpacity="0.25" strokeWidth="0.4" strokeDasharray="2 3" />
-      {/* labels */}
-      <text x="20" y="20" fontSize="8" fill="currentColor" fontFamily="DM Sans, sans-serif">High</text>
-      <text x="20" y="200" fontSize="8" fill="currentColor" fontFamily="DM Sans, sans-serif">Low</text>
-      <text x="40" y="215" fontSize="8" fill="currentColor" fontFamily="DM Sans, sans-serif">Generic</text>
-      <text x="280" y="215" fontSize="8" textAnchor="end" fill="currentColor" fontFamily="DM Sans, sans-serif">Specific</text>
-      <text x="160" y="14" fontSize="8" textAnchor="middle" fill="currentColor" fontFamily="Playfair Display, serif" fontStyle="italic">Differentiation</text>
+      <line x1="40" y1="20" x2="40" y2="210" className="svg-accent" strokeWidth="0.7" />
+      <line x1="40" y1="210" x2="300" y2="210" className="svg-accent" strokeWidth="0.7" />
+
+      {/* quadrant dividers */}
+      <line x1="170" y1="20" x2="170" y2="210" className="svg-secondary" strokeDasharray="2 4" strokeWidth="0.5" />
+      <line x1="40" y1="115" x2="300" y2="115" className="svg-secondary" strokeDasharray="2 4" strokeWidth="0.5" />
+
+      {/* axis labels */}
+      <text x="22" y="22" fontSize="9" className="svg-text">High</text>
+      <text x="22" y="212" fontSize="9" className="svg-text">Low</text>
+      <text x="40" y="226" fontSize="9" className="svg-text">Low Price</text>
+      <text x="300" y="226" textAnchor="end" fontSize="9" className="svg-text">High Price</text>
+      <text
+        x="170" y="14"
+        textAnchor="middle"
+        fontSize="10"
+        className="svg-text"
+        fontStyle="italic"
+        fontFamily="Playfair Display, serif"
+      >
+        Differentiation
+      </text>
+
       {/* competitor dots */}
       {[
-        [70, 165], [95, 145], [120, 175], [80, 130], [140, 155],
+        [80, 175], [105, 155], [130, 185], [90, 140], [150, 165],
+        [115, 175], [70, 195],
       ].map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="3" fill="currentColor" fillOpacity="0.35" />
+        <circle key={i} cx={x} cy={y} r="3.2" className="svg-secondary" fill="currentColor" fillOpacity="0.45" />
       ))}
-      {/* you dot */}
-      <circle cx="230" cy="55" r="6" fill="hsl(var(--gold))" />
-      <circle cx="230" cy="55" r="12" fill="none" stroke="currentColor" strokeWidth="0.6" strokeOpacity="0.5" />
-      <text x="240" y="48" fontSize="9" fill="currentColor" fontFamily="DM Sans, sans-serif">You</text>
+
+      {/* "You" — orbiting + glowing in top-right */}
+      <g className="anim-orbit" style={{ transformOrigin: "240px 60px" }}>
+        <circle cx="240" cy="60" r="14" className="svg-fill" strokeWidth="0.8" />
+        <circle cx="240" cy="60" r="6" className="svg-highlight anim-glow anim-hub-only" />
+      </g>
+      <text x="258" y="56" fontSize="10" className="svg-text">You</text>
     </svg>
   );
 };
 
-/* 4. AI workflow - boxes with arrows and gold AI nodes */
+/* 7. AI Workflow */
 export const AutomationFlow = () => {
   return (
-    <svg viewBox="0 0 400 220" className="w-full h-full">
+    <svg viewBox="0 0 420 240" className="anim-float w-full h-full" aria-hidden>
       <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity="0.8" />
+        <marker id="arr-light" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--svg-accent)" />
         </marker>
       </defs>
+
+      {/* Nodes */}
       {[
-        { x: 20, y: 90, label: "Lead", ai: false },
-        { x: 110, y: 90, label: "AI Score", ai: true },
-        { x: 210, y: 40, label: "Nurture", ai: false },
-        { x: 210, y: 140, label: "AI Route", ai: true },
-        { x: 320, y: 90, label: "Close", ai: false },
-      ].map((b) => (
+        { x: 20,  y: 106, w: 70, label: "Lead" },
+        { x: 120, y: 106, w: 80, label: "AI Score", glow: true },
+        { x: 240, y: 50,  w: 70, label: "Nurture" },
+        { x: 240, y: 162, w: 80, label: "AI Route", glow: true },
+        { x: 340, y: 106, w: 70, label: "Close" },
+      ].map((b, i) => (
         <g key={b.label}>
           <rect
             x={b.x}
-            y={b.y - 14}
-            width={70}
+            y={b.y}
+            width={b.w}
             height={28}
-            fill={b.ai ? "hsl(var(--gold) / 0.22)" : "hsl(var(--gold) / 0.04)"}
-            stroke="currentColor"
-            strokeWidth="0.6"
-            strokeOpacity={b.ai ? 1 : 0.5}
+            className={`svg-fill ${b.glow ? "anim-glow anim-hub-only" : "anim-node"}`}
+            style={{ animationDelay: `${i * 0.4}s` }}
+            strokeWidth="0.8"
           />
-          <text x={b.x + 35} y={b.y + 4} fontSize="9" textAnchor="middle" fill="currentColor" fontFamily="DM Sans, sans-serif">
+          <text
+            x={b.x + b.w / 2}
+            y={b.y + 18}
+            fontSize="10"
+            textAnchor="middle"
+            className="svg-text"
+          >
             {b.label}
           </text>
         </g>
       ))}
-      {/* arrows */}
-      <line x1="90" y1="90" x2="110" y2="90" stroke="currentColor" strokeOpacity="0.7" strokeWidth="0.6" markerEnd="url(#arr)" />
-      <line x1="180" y1="90" x2="210" y2="55" stroke="currentColor" strokeOpacity="0.7" strokeWidth="0.6" markerEnd="url(#arr)" />
-      <line x1="180" y1="90" x2="210" y2="135" stroke="currentColor" strokeOpacity="0.7" strokeWidth="0.6" markerEnd="url(#arr)" />
-      <line x1="280" y1="40" x2="320" y2="80" stroke="currentColor" strokeOpacity="0.7" strokeWidth="0.6" markerEnd="url(#arr)" />
-      <line x1="280" y1="140" x2="320" y2="100" stroke="currentColor" strokeOpacity="0.7" strokeWidth="0.6" markerEnd="url(#arr)" />
+
+      {/* Diamond decision split */}
+      <g className="anim-node" style={{ transformOrigin: "215px 120px" }}>
+        <polygon
+          points="215,104 230,120 215,136 200,120"
+          className="svg-fill"
+          strokeWidth="0.8"
+        />
+      </g>
+
+      {/* Connector arrows */}
+      {[
+        { d: "M 90 120 L 118 120",            i: 0 },
+        { d: "M 200 120 L 215 120",           i: 1 },
+        { d: "M 215 104 L 215 80 L 240 64",   i: 2 },
+        { d: "M 215 136 L 215 160 L 240 176", i: 3 },
+        { d: "M 310 64 L 340 110",            i: 4 },
+        { d: "M 320 176 L 340 130",           i: 5 },
+      ].map((c) => (
+        <path
+          key={c.i}
+          d={c.d}
+          className="svg-accent anim-line"
+          strokeWidth="0.9"
+          strokeDasharray="5 5"
+          markerEnd="url(#arr-light)"
+          style={{ animationDelay: `${c.i * 0.6}s` }}
+          fill="none"
+        />
+      ))}
     </svg>
   );
 };
