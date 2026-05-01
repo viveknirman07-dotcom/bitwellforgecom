@@ -427,3 +427,110 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* =====================================================================
+   LIGHT MODE OVERRIDES
+   The site is dark-first; many utilities hardcode white-on-navy values.
+   These rules retune them for the light infographic palette without
+   touching component code. Scope: html:not(.dark) === light mode.
+   ===================================================================== */
+html:not(.dark) { color-scheme: light; }
+
+/* Smooth theme switch */
+html, body, *, *::before, *::after {
+  transition:
+    background-color 0.4s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    fill 0.3s ease,
+    stroke 0.3s ease;
+}
+
+/* --- Background utilities tuned for light mode --- */
+html:not(.dark) .bg-gold-grid {
+  background-image:
+    linear-gradient(to right, hsl(226 60% 10% / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(226 60% 10% / 0.05) 1px, transparent 1px);
+}
+html:not(.dark) .bg-radial-gold {
+  background: radial-gradient(ellipse 60% 50% at 65% 45%, hsl(220 79% 48% / 0.07), transparent 70%);
+}
+html:not(.dark) .bg-accent-glow {
+  background: radial-gradient(ellipse 70% 55% at 50% 50%, hsl(220 79% 48% / 0.10), transparent 70%);
+}
+html:not(.dark) .bg-constellation-grid {
+  background-image:
+    repeating-linear-gradient(45deg, hsl(226 60% 10% / 0.05) 0 0.5px, transparent 0.5px 40px),
+    repeating-linear-gradient(-45deg, hsl(226 60% 10% / 0.05) 0 0.5px, transparent 0.5px 40px);
+}
+html:not(.dark) .bg-noise { opacity: 0.025; }
+
+/* --- Hero / page background base --- */
+html:not(.dark) #hero,
+html:not(.dark) .hero-section {
+  background:
+    radial-gradient(ellipse 70% 50% at 60% 40%, hsl(220 79% 48% / 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, hsl(220 79% 48% / 0.04) 0%, transparent 60%),
+    hsl(var(--background));
+}
+
+/* --- SVG diagram overrides ---
+   Hero/service diagrams hardcode white-tinted strokes/fills like
+   "hsl(0 0% 100% / 0.06)". Retune them to navy/blue for light mode. */
+html:not(.dark) svg line[stroke^="hsl(0 0% 100%"],
+html:not(.dark) svg circle[stroke^="hsl(0 0% 100%"],
+html:not(.dark) svg path[stroke^="hsl(0 0% 100%"] {
+  stroke: hsl(226 60% 10% / 0.30) !important;
+}
+html:not(.dark) svg circle[fill^="hsl(0 0% 100%"],
+html:not(.dark) svg rect[fill^="hsl(0 0% 100%"] {
+  fill: hsl(220 79% 48% / 0.55) !important;
+}
+
+/* Service visuals reference hsl(var(--gold) / X). In light mode --gold
+   is now navy, which is too heavy for soft fills. Re-route to blue. */
+html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.18)"],
+html:not(.dark) svg circle[fill="hsl(var(--gold))"] {
+  fill: hsl(220 79% 48% / 0.85) !important;
+}
+html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.25)"] {
+  fill: hsl(220 79% 48% / 0.40) !important;
+}
+html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.22)"] {
+  fill: hsl(220 79% 48% / 0.30) !important;
+}
+html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.05)"],
+html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.04)"] {
+  fill: hsl(220 79% 48% / 0.06) !important;
+}
+
+/* --- Header / nav background in light mode --- */
+html:not(.dark) header {
+  background: hsl(0 0% 100% / 0.92) !important;
+}
+
+/* --- Footer surface --- */
+html:not(.dark) footer {
+  background: hsl(218 27% 95%);
+  border-top: 1px solid hsl(var(--border-global));
+}
+
+/* --- Glass surfaces --- */
+html:not(.dark) .glass-surface {
+  background: hsl(0 0% 100% / 0.85);
+  border: 1px solid hsl(var(--border-global));
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Ghost button needs a visible border on white --- */
+html:not(.dark) .btn-ghost {
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border-button));
+}
+html:not(.dark) .btn-ghost:hover {
+  background: hsl(226 60% 10% / 0.05);
+}
+
+/* --- Border/text-gold aliases tuned for light --- */
+html:not(.dark) .border-gold { border-color: hsl(var(--border-global)) !important; }
+html:not(.dark) .text-gold { color: hsl(var(--foreground)); }
