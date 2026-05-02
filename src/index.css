@@ -79,6 +79,16 @@
     --eyebrow-color: 220 79% 48%;       /* #1a56db */
     --eyebrow-line: 220 79% 48% / 0.4;
 
+    /* === SVG diagram tokens (LIGHT mode defaults) === */
+    --svg-stroke:    15 20 40 / 0.60;
+    --svg-fill:      15 20 40 / 0.06;
+    --svg-text:      15 20 40 / 1;
+    --svg-accent:    15 20 40 / 0.40;
+    --svg-highlight: 220 79% 48% / 0.85;
+    --svg-secondary: 10 15 35 / 0.35;
+    --svg-glow:      220 79% 48% / 0.55;
+    --svg-border:    10 15 35 / 0.10;
+
     /* "gold" alias — repurposed as the dark navy ink in light mode
        so existing components using bg-gold-soft / text-gold render
        as visible navy/blue elements instead of invisible cream. */
@@ -137,6 +147,16 @@
     /* === EYEBROW === */
     --eyebrow-color: 200 50% 66%;
     --eyebrow-line: 200 50% 66% / 0.5;
+
+    /* === SVG diagram tokens (DARK mode) === */
+    --svg-stroke:    255 255 255 / 0.70;
+    --svg-fill:      255 255 255 / 0.08;
+    --svg-text:      40 22% 88% / 1;
+    --svg-accent:    255 255 255 / 0.50;
+    --svg-highlight: 255 255 255 / 0.90;
+    --svg-secondary: 255 255 255 / 0.40;
+    --svg-glow:      255 255 255 / 0.55;
+    --svg-border:    255 255 255 / 0.10;
   }
 }
 
@@ -354,8 +374,8 @@
     100% { transform: translate3d(8px, -6px, 0); }
   }
   @keyframes nodePulse {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50%      { transform: scale(1.03); opacity: 1; }
+    0%, 100% { transform: scale(1);    opacity: 0.7; }
+    50%      { transform: scale(1.06); opacity: 1; }
   }
   @keyframes lineFlow {
     0%   { stroke-dashoffset: 200; opacity: 0.25; }
@@ -363,26 +383,76 @@
     100% { stroke-dashoffset: -200; opacity: 0.25; }
   }
   @keyframes lineDraw {
-    0%   { stroke-dashoffset: 100%; opacity: 0.3; }
-    50%  { stroke-dashoffset: 0%;   opacity: 0.9; }
-    100% { stroke-dashoffset: -100%; opacity: 0.3; }
+    0%   { stroke-dashoffset: 240; opacity: 0.30; }
+    50%  { stroke-dashoffset: 0;   opacity: 0.95; }
+    100% { stroke-dashoffset: -240; opacity: 0.30; }
   }
   @keyframes floatDrift {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-7px); }
   }
   @keyframes glowPulse {
-    0%, 100% { filter: drop-shadow(0 0 4px hsl(0 0% 100% / 0.20)); }
-    50%      { filter: drop-shadow(0 0 12px hsl(0 0% 100% / 0.50)); }
+    0%, 100% { filter: drop-shadow(0 0 4px  hsl(var(--svg-glow))); }
+    50%      { filter: drop-shadow(0 0 14px hsl(var(--svg-glow))); }
   }
   @keyframes glowBreath {
-    0%, 100% { filter: drop-shadow(0 0 3px hsl(0 0% 100% / 0.15)); }
-    50%      { filter: drop-shadow(0 0 10px hsl(0 0% 100% / 0.4)); }
+    0%, 100% { filter: drop-shadow(0 0 3px  hsl(var(--svg-glow))); }
+    50%      { filter: drop-shadow(0 0 10px hsl(var(--svg-glow))); }
+  }
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes dotOrbit {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(4px, -4px); }
+    50%  { transform: translate(0, -8px); }
+    75%  { transform: translate(-4px, -4px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes leakDot {
+    0%   { transform: translateY(0);  opacity: 0; }
+    25%  { opacity: 1; }
+    100% { transform: translateY(34px); opacity: 0; }
+  }
+  @keyframes wireCut {
+    0%, 84%, 100% { opacity: 1; }
+    88%, 96%      { opacity: 0; }
   }
   @keyframes particleRise {
     0%   { transform: translateY(20px); opacity: 0; }
     20%  { opacity: 0.8; }
     100% { transform: translateY(-100vh); opacity: 0; }
+  }
+
+  /* === DIAGRAM TOKEN UTILITIES === */
+  .diagram-card {
+    border: 1px solid hsl(var(--svg-border));
+  }
+  .svg-stroke    { stroke: hsl(var(--svg-stroke)); }
+  .svg-fill      { fill:   hsl(var(--svg-fill)); }
+  .svg-text-fill { fill:   hsl(var(--svg-text)); }
+  .svg-accent    { stroke: hsl(var(--svg-accent)); }
+  .svg-highlight { fill:   hsl(var(--svg-highlight)); stroke: hsl(var(--svg-highlight)); }
+  .svg-secondary { fill:   hsl(var(--svg-secondary)); stroke: hsl(var(--svg-secondary)); }
+
+  .anim-node-pulse  { animation: nodePulse 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; will-change: transform, opacity; }
+  .anim-line-draw   { stroke-dasharray: 240; animation: lineDraw 4s ease-in-out infinite; will-change: stroke-dashoffset, opacity; }
+  .anim-glow-pulse  { animation: glowPulse 2.5s ease-in-out infinite; will-change: filter; }
+  .anim-float-drift { animation: floatDrift 6s ease-in-out infinite; will-change: transform; }
+  .anim-rotate-slow { animation: rotateSlow 20s linear infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+  .anim-rotate-12   { animation: rotateSlow 12s linear infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+  .anim-rotate-60   { animation: rotateSlow 60s linear infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+  .anim-dot-orbit   { animation: dotOrbit 7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; will-change: transform; }
+  .anim-wire-cut    { animation: wireCut 5s ease-in-out infinite; will-change: opacity; }
+
+  /* Reduced motion: keep only a slow central pulse */
+  @media (prefers-reduced-motion: reduce) {
+    .anim-line-draw, .anim-float-drift, .anim-rotate-slow, .anim-rotate-12,
+    .anim-rotate-60, .anim-dot-orbit, .anim-wire-cut, .anim-glow-pulse {
+      animation: none !important;
+    }
+    .anim-node-pulse { animation: nodePulse 6s ease-in-out infinite !important; }
   }
 
   /* Mobile + Tablet: hide hero primary CTA */

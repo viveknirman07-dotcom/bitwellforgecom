@@ -1,5 +1,6 @@
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
+import { phaseIcons } from "@/components/ProcessIcons";
 
 const steps = [
   {
@@ -54,12 +55,15 @@ const Process = () => {
             <div className="hidden md:block absolute left-[39px] top-0 bottom-0 w-px bg-border" />
 
             <div className="space-y-0">
-              {steps.map((step, i) => (
+              {steps.map((step, i) => {
+                const Icon = phaseIcons[i];
+                return (
                 <ScrollReveal key={step.number} delay={i * 150}>
                   <div className="relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-12 md:py-16 border-t border-border md:border-t-0">
                     <div className="md:col-span-1 flex items-start">
-                      <div className="relative z-10 w-20 h-20 rounded-full bg-secondary/70 backdrop-blur-sm flex items-center justify-center border border-border">
-                        <span className="text-sm font-medium text-foreground">{step.number}</span>
+                      <div className="diagram-card relative z-10 w-20 h-20 rounded-full bg-secondary/70 backdrop-blur-sm flex flex-col items-center justify-center gap-1 text-[hsl(var(--eyebrow-color))]">
+                        {Icon ? <Icon /> : null}
+                        <span className="text-[10px] font-medium text-foreground tracking-widest">{step.number}</span>
                       </div>
                     </div>
                     <div className="md:col-span-4 md:pt-5">
@@ -74,7 +78,8 @@ const Process = () => {
                     </div>
                   </div>
                 </ScrollReveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
