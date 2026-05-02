@@ -78,7 +78,8 @@ const Process = () => {
                     </div>
                   </div>
                 </ScrollReveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
