@@ -5,6 +5,50 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export const articles = [
   {
+    slug: "hire-for-capacity-or-build-a-system",
+    title: "Hire for Capacity or Build a System. Knowing the Difference Matters.",
+    excerpt: "Many founders hire to solve a problem that a system would solve more effectively and at a fraction of the cost.",
+    category: "Growth Operations",
+    date: "May 2026",
+    content: `
+Many founders hire to solve a problem that a system would solve more effectively and at a fraction of the cost.
+
+**The Reflex to Hire**
+
+When a business feels stretched, the instinct is often to add headcount. Someone is needed to handle the outreach. Someone is needed to manage the follow-ups. Someone is needed to produce the content. This instinct is understandable but often premature. Hiring into an unsystematised process does not solve the process problem. It creates a more expensive version of the same problem while adding management overhead that was not previously present.
+
+**What a Systems Problem Looks Like**
+
+A systems problem shows up as inconsistency. The outreach happens when there is time for it rather than on a defined schedule. The follow-up happens when it is remembered rather than when the sequence calls for it. The reporting happens quarterly rather than weekly. These are not capacity problems. They are process problems. Adding a person to a broken process produces a slightly less broken process with a higher payroll. Building the process first produces a scalable foundation that a hire can then maintain and improve.
+
+**The Right Order of Operations**
+
+Systematise first. Define the process clearly enough that it can be documented and repeated without the founder managing each step. Then assess whether the volume that the system can handle is sufficient or whether capacity is the genuine constraint. In most cases, systematising the acquisition process reveals that the business can handle more than it thought without adding headcount. When a hire does become necessary, the documented system means the new person can be productive immediately rather than spending months learning what should have been written down.
+    `,
+  },
+  {
+    slug: "consistency-in-outreach-is-the-strategy-most-businesses-skip",
+    title: "Consistency in Outreach Is the Strategy Most Businesses Skip",
+    excerpt: "A campaign produces a spike. A system produces a pipeline. The difference is consistency over time.",
+    category: "Outbound",
+    date: "May 2026",
+    content: `
+A campaign produces a spike. A system produces a pipeline. The difference is consistency over time.
+
+**Why Sporadic Outreach Fails Even When the Messaging Is Strong**
+
+Many founders run a cold email campaign, get modest results, and conclude that outreach does not work for their business. The conclusion is usually wrong. What did not work was the campaign format, not the channel. A campaign is a concentrated effort over a short period that produces a spike in activity and then stops. The pipeline spike requires either closing everything it generates or running another campaign. Most businesses cannot close everything in a single burst and most do not restart quickly enough to maintain pipeline continuity.
+
+**The Mathematics of Consistent Outreach**
+
+Consider the difference between sending 200 emails in one week versus sending 40 emails every week for five weeks. Both produce the same volume. The second approach produces contacts that enter the pipeline at different points in time, meaning follow-up conversations are spread across the period rather than compressed into one week. It also means the outreach is happening continuously, which means any given week has both new prospects entering and existing prospects being nurtured. The pipeline never empties completely between efforts.
+
+**What a 90-Day Commitment Produces**
+
+Ninety days of consistent outreach at a moderate daily volume, combined with structured follow-up, produces something that a single campaign cannot. It produces a pipeline in motion. Prospects at different stages of the decision process, conversations at different points of maturity, and data on what messaging performs best across different segments. By day 90, the outreach is informed by what the first 60 days taught, which means the final 30 days perform better than the first 30 did. That compounding improvement is only available to the business that commits to consistency rather than campaigns.
+    `,
+  },
+  {
     slug: "the-follow-up-gap-is-where-most-deals-are-lost",
     title: "The Follow-Up Gap Is Where Most Deals Are Lost",
     excerpt: "The first conversation rarely closes the deal. What happens in the silence after it determines whether the revenue is won or lost.",
