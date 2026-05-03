@@ -87,7 +87,7 @@ const Header = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.9, type: "spring", stiffness: 300, damping: 20 }}
             onClick={toggle}
-            className="theme-toggle"
+            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-300"
             aria-label="Toggle theme"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
@@ -98,7 +98,7 @@ const Header = () => {
         <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={toggle}
-            className="theme-toggle"
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Toggle theme"
           >
             {isDark ? <Sun size={18} /> : <Moon size={18} />}

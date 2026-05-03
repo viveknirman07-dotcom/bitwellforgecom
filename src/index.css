@@ -292,116 +292,44 @@
   .border-b-global { border-bottom: 1px solid hsl(var(--border-global)); }
   .border-l-global { border-left: 1px solid hsl(var(--border-global)); }
 
-  /* === CTA BUTTONS — fully visible in both modes === */
+  /* === CTA BUTTONS === */
   .btn-primary {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 16px 28px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 14px 28px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    border-radius: 9999px;
-    border: 1.5px solid;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-primary:hover {
+    background: hsl(var(--primary) / 0.92);
+    transform: translateY(-2px);
   }
   .btn-ghost {
+    border: 1px solid hsl(var(--border-button));
+    color: hsl(var(--foreground));
+    padding: 16px 28px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 14px 28px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    border-radius: 9999px;
-    border: 1.5px solid;
-    background: transparent;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  /* Light-mode button styling */
-  html:not(.dark) .btn-primary {
-    background: #0a0f1e;
-    color: #ffffff;
-    border-color: #0a0f1e;
-  }
-  html:not(.dark) .btn-primary:hover {
-    background: #1a2540;
-    border-color: #1a2540;
+  .btn-ghost:hover {
     transform: translateY(-2px);
+    background: hsl(var(--foreground) / 0.04);
   }
-  html:not(.dark) .btn-ghost {
-    color: #0a0f1e;
-    border-color: rgba(10,15,40,0.50);
-  }
-  html:not(.dark) .btn-ghost:hover {
-    background: rgba(10,15,40,0.05);
-    border-color: rgba(10,15,40,0.70);
-    transform: translateY(-2px);
-  }
-
-  /* Dark-mode button styling */
-  .dark .btn-primary {
-    background: #ffffff;
-    color: #080d18;
-    border-color: #ffffff;
-  }
-  .dark .btn-primary:hover {
-    background: rgba(255,255,255,0.88);
-    border-color: rgba(255,255,255,0.88);
-    transform: translateY(-2px);
-  }
-  .dark .btn-ghost {
-    color: #ffffff;
-    border-color: rgba(255,255,255,0.50);
-  }
-  .dark .btn-ghost:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.70);
-    transform: translateY(-2px);
-  }
-
-  /* === THEME TOGGLE === */
-  .theme-toggle {
-    width: 36px;
-    height: 36px;
-    border-radius: 9999px;
-    border: 1.5px solid;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  }
-  .dark .theme-toggle {
-    color: #ffffff;
-    border-color: rgba(255,255,255,0.35);
-    background: rgba(255,255,255,0.05);
-  }
-  .dark .theme-toggle:hover {
-    border-color: rgba(255,255,255,0.70);
-    background: rgba(255,255,255,0.10);
-  }
-  html:not(.dark) .theme-toggle {
-    color: #0a0f1e;
-    border-color: rgba(10,15,40,0.35);
-    background: rgba(10,15,40,0.04);
-  }
-  html:not(.dark) .theme-toggle:hover {
-    border-color: rgba(10,15,40,0.70);
-    background: rgba(10,15,40,0.08);
-  }
-
-  /* === SMOOTH THEME TRANSITION === */
-  html { transition: background-color 0.45s ease, color 0.35s ease; }
 
   /* === ANIMATION KEYFRAMES === */
   .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
