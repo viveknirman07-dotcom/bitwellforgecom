@@ -18,8 +18,9 @@ const ProblemCard = ({ title, description, diagram, delay = 0 }: Props) => {
         <span className="absolute bottom-0 left-0 w-3 h-3 border-l border-b border-gold/60" />
         <span className="absolute bottom-0 right-0 w-3 h-3 border-r border-b border-gold/60" />
 
-        <div className="h-28 mb-7 flex items-center justify-center text-gold/80">
-          {diagram}
+        <div className="diagram-frame h-32 mb-7" style={{ color: "var(--svg-stroke)" }}>
+          <div className="diagram-grid" />
+          <div className="relative w-full h-full p-3">{diagram}</div>
         </div>
         <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 tracking-tightest">
           {title}

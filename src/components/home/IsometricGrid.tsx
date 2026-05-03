@@ -1,10 +1,14 @@
 import { useMemo } from "react";
+import { useReducedMotion } from "framer-motion";
 
 /**
- * Hero background — token-driven, mode-adaptive.
- * Diagonal grid + drifting constellation + 12 floating particles.
+ * Hero background: deep navy + diagonal grid + drifting constellation.
+ * Pure CSS + tiny SVG. Scales to any viewport.
  */
 const IsometricGrid = () => {
+  const reduced = useReducedMotion();
+
+  // 5 constellation points (in % so they scale on every viewport)
   const points = useMemo(
     () => [
       { x: 18, y: 28 },
@@ -17,36 +21,22 @@ const IsometricGrid = () => {
     []
   );
 
+  // Connect adjacent points into a thin web
   const links: [number, number][] = [
     [0, 1], [1, 2], [2, 3], [3, 4], [1, 5], [3, 5], [0, 2],
   ];
 
-  // 12 floating particles
-  const particles = useMemo(
-    () => Array.from({ length: 12 }, (_, i) => ({
-      cx: 5 + Math.random() * 90,
-      cy: 5 + Math.random() * 90,
-      duration: 5 + Math.random() * 4,
-      delay: Math.random() * 4,
-      opacity: 0.06 + Math.random() * 0.06,
-    })),
-    []
-  );
-
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Diagonal grid — very slow rotation */}
-      <div
-        className="absolute inset-0 bg-constellation-grid anim-rotate-60"
-        style={{ transformOrigin: "center" }}
-      />
+      {/* Diagonal grid */}
+      <div className="absolute inset-0 bg-constellation-grid" />
 
-      {/* Soft radial glow */}
+      {/* Soft single radial glow */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 65% 45%, hsl(var(--svg-glow) / 0.10) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 65% 45%, hsl(0 0% 100% / 0.04) 0%, transparent 70%)",
         }}
       />
 
@@ -54,55 +44,47 @@ const IsometricGrid = () => {
       <div
         className="absolute inset-0"
         style={{
-          animation: "constellationDrift 12s ease-in-out infinite alternate",
+          animation: reduced ? undefined : "constellationDrift 12s ease-in-out infinite alternate",
           willChange: "transform",
         }}
       >
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full"
+        >
           {links.map(([a, b], i) => (
             <line
               key={i}
-              x1={points[a].x} y1={points[a].y}
-              x2={points[b].x} y2={points[b].y}
-              stroke="hsl(var(--svg-stroke))"
-              strokeOpacity="0.35"
+              x1={points[a].x}
+              y1={points[a].y}
+              x2={points[b].x}
+              y2={points[b].y}
+              stroke="hsl(0 0% 100% / 0.06)"
               strokeWidth="0.08"
-              strokeDasharray="240"
               vectorEffect="non-scaling-stroke"
-              className="anim-line-draw"
-              style={{ animationDelay: `${i * 0.5}s` }}
             />
           ))}
           {points.map((p, i) => (
             <circle
               key={i}
-              cx={p.x} cy={p.y} r="0.3"
-              fill="hsl(var(--svg-highlight))"
-              vectorEffect="non-scaling-stroke"
-              className="anim-node-pulse"
-              style={{ animationDelay: `${i * 0.4}s`, transformOrigin: `${p.x}% ${p.y}%` }}
-            />
-          ))}
-
-          {/* 12 floating particles */}
-          {particles.map((p, i) => (
-            <circle
-              key={`p-${i}`}
-              cx={p.cx} cy={p.cy} r="0.18"
-              fill="hsl(var(--svg-highlight))"
-              fillOpacity={p.opacity}
-              vectorEffect="non-scaling-stroke"
+              cx={p.x}
+              cy={p.y}
+              r="0.25"
+              fill="hsl(0 0% 100% / 0.6)"
               style={{
-                animation: `floatDrift ${p.duration}s ease-in-out ${p.delay}s infinite`,
-                transformBox: "fill-box",
-                transformOrigin: "center",
-                willChange: "transform",
+                animation: reduced
+                  ? undefined
+                  : `nodePulse 3s ease-in-out ${i * 0.3}s infinite`,
+                transformOrigin: `${p.x}% ${p.y}%`,
               }}
+              vectorEffect="non-scaling-stroke"
             />
           ))}
         </svg>
       </div>
 
+      {/* Page noise */}
       <div className="absolute inset-0 bg-noise opacity-[0.035] mix-blend-overlay" />
     </div>
   );

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { CaseStudy } from "@/lib/case-studies-data";
 import { useRef, useState, useCallback } from "react";
-import { CategoryIcon } from "@/components/CategoryIcons";
 
 interface CaseStudyCardProps {
   study: CaseStudy;
@@ -42,7 +41,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
     <Link
       ref={cardRef}
       to={`/case-studies/${study.id}`}
-      className="diagram-card group relative block w-full text-left p-7 md:p-9 rounded-2xl bg-[hsl(var(--foreground)/0.02)] backdrop-blur-xl hover:border-[hsl(var(--foreground)/0.18)] active:scale-[0.99] overflow-hidden h-full"
+      className="group relative block w-full text-left p-7 md:p-9 rounded-2xl border border-[hsl(var(--foreground)/0.10)] bg-[hsl(var(--foreground)/0.02)] backdrop-blur-xl hover:border-[hsl(var(--foreground)/0.18)] active:scale-[0.99] overflow-hidden h-full"
       style={{
         transform,
         transition:
@@ -64,12 +63,9 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
       <div className="relative z-10 flex flex-col h-full min-h-[280px]">
         {/* category */}
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2.5 text-[hsl(var(--eyebrow-color))]">
-            <CategoryIcon category={study.category} />
-            <span className="text-[10px] md:text-[11px] font-medium tracking-[0.22em] uppercase">
-              {study.category}
-            </span>
-          </div>
+          <span className="text-[10px] md:text-[11px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--eyebrow-color))]">
+            {study.category}
+          </span>
           <ArrowUpRight
             size={16}
             className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
