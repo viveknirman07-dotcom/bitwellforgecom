@@ -709,3 +709,47 @@ html.mobile-lock .lg\:hidden { display: flex !important; }
 
 /* Diagram heights locked */
 html.mobile-lock .diagram-frame { height: 220px !important; }
+
+/* =====================================================================
+   EYEBROW UNIFICATION — every uppercase kicker uses --eyebrow-color.
+   Targets common patterns used throughout the codebase so no class
+   is left rendering text-gold or text-muted-foreground in light mode.
+   ===================================================================== */
+.uppercase.tracking-widest,
+.uppercase[class*="tracking-["],
+[class*="tracking-["].uppercase,
+.eyebrow,
+[class*="eyebrow"] {
+  color: hsl(var(--eyebrow-color)) !important;
+}
+
+/* =====================================================================
+   MOBILE SCALE REDUCTION (~11%) — buttons, spacing, icons.
+   Scope: <= 768px only. Tablet/desktop untouched.
+   ===================================================================== */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-ghost {
+    padding: 14px 22px !important;
+    font-size: 12px !important;
+    min-height: 44px;
+  }
+  .section-y {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+  .section-padding {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  /* Slightly tighten icon sizing inside buttons / chips */
+  button svg, a svg { transform: scale(0.92); transform-origin: center; }
+  /* Eyebrow tighter on mobile */
+  .uppercase.tracking-widest,
+  .uppercase[class*="tracking-["],
+  [class*="tracking-["].uppercase,
+  .eyebrow {
+    font-size: 10px !important;
+    letter-spacing: 0.2em !important;
+  }
+}
