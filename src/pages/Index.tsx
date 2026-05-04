@@ -110,8 +110,7 @@ const Index = () => {
       <div className="pointer-events-none fixed inset-0 z-0 bg-noise opacity-[0.035] mix-blend-overlay" aria-hidden />
 
       {/* HERO */}
-      <section className="relative min-h-[100svh] flex items-center section-padding overflow-hidden">
-        <IsometricGrid />
+      <section className="relative min-h-[100svh] flex items-center section-padding overflow-hidden bg-background">
         <div className="relative z-10 max-w-[1400px] mx-auto w-full pt-24 md:pt-28 pb-16">
           <div className="max-w-3xl">
             <motion.p
