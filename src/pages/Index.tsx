@@ -6,8 +6,6 @@ import SectionDivider from "@/components/SectionDivider";
 import CTABlock from "@/components/CTABlock";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
-import IsometricGrid from "@/components/home/IsometricGrid";
-import SocialProofMarquee from "@/components/home/SocialProofMarquee";
 import ProblemCard from "@/components/home/ProblemCard";
 import { LeakyFunnel, ChannelWire, FeedbackLoop } from "@/components/home/ProblemDiagrams";
 import ServiceFeature from "@/components/home/ServiceFeature";
