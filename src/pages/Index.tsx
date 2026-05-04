@@ -169,12 +169,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* bottom edge fade */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background" />
       </section>
-
-      {/* SOCIAL PROOF */}
-      <SocialProofMarquee />
 
       {/* PROBLEM */}
       <section className="relative section-padding py-24 md:py-32">
