@@ -42,9 +42,9 @@ const CaseStudiesSection = ({ showLink = false }: CaseStudiesSectionProps) => {
             <div className="mt-10 text-center">
               <Link
                 to="/case-studies"
-                className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium tracking-wide border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors duration-300"
               >
-                View all case studies
+                See all case studies
                 <ArrowRight size={14} />
               </Link>
             </div>
