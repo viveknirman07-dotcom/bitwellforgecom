@@ -18,24 +18,18 @@ const Eyebrow = ({
   children,
   className,
   as = "p",
-  withLine = false,
+  withLine: _withLine = false,
 }: EyebrowProps) => {
   return createElement(
     as,
     {
       className: cn(
-        "inline-flex items-center gap-3 text-[11px] md:text-xs font-medium tracking-[0.22em] uppercase",
+        "text-[11px] md:text-xs font-medium tracking-[0.22em] uppercase",
         "text-[hsl(var(--eyebrow-color))]",
         className,
       ),
     },
-    withLine ? (
-      <span
-        aria-hidden="true"
-        className="block h-px w-8 bg-[hsl(var(--eyebrow-line))]"
-      />
-    ) : null,
-    <span>{children}</span>,
+    children,
   );
 };
 

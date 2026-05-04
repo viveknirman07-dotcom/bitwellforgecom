@@ -6,8 +6,6 @@ import SectionDivider from "@/components/SectionDivider";
 import CTABlock from "@/components/CTABlock";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
-import IsometricGrid from "@/components/home/IsometricGrid";
-import SocialProofMarquee from "@/components/home/SocialProofMarquee";
 import ProblemCard from "@/components/home/ProblemCard";
 import { LeakyFunnel, ChannelWire, FeedbackLoop } from "@/components/home/ProblemDiagrams";
 import ServiceFeature from "@/components/home/ServiceFeature";
@@ -112,17 +110,15 @@ const Index = () => {
       <div className="pointer-events-none fixed inset-0 z-0 bg-noise opacity-[0.035] mix-blend-overlay" aria-hidden />
 
       {/* HERO */}
-      <section className="relative min-h-[100svh] flex items-center section-padding overflow-hidden">
-        <IsometricGrid />
+      <section className="relative min-h-[100svh] flex items-center section-padding overflow-hidden bg-background">
         <div className="relative z-10 max-w-[1400px] mx-auto w-full pt-24 md:pt-28 pb-16">
           <div className="max-w-3xl">
             <motion.p
-              className="text-[10px] md:text-[11px] tracking-[0.28em] uppercase text-gold mb-6 md:mb-8 flex items-center gap-3"
+              className="text-[10px] md:text-[11px] tracking-[0.28em] uppercase text-gold mb-6 md:mb-8"
               initial={reduced ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="h-px w-8 bg-gold/60" />
               Revenue Infrastructure · Built to Compound
             </motion.p>
 
@@ -163,21 +159,16 @@ const Index = () => {
               <Link
                 to="/case-studies"
                 data-hero-secondary-cta
-                className="group inline-flex items-center justify-center gap-2 border border-white/35 text-foreground px-7 py-4 rounded-full text-[13px] font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:border-white hover:bg-white/5 active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-2 border border-foreground text-foreground px-7 py-4 rounded-full text-[13px] font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:bg-foreground hover:text-background active:scale-[0.98]"
               >
                 See Case Studies
-                <ArrowRight size={14} className="opacity-60 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </motion.div>
           </div>
         </div>
 
-        {/* bottom edge fade */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background" />
       </section>
-
-      {/* SOCIAL PROOF */}
-      <SocialProofMarquee />
 
       {/* PROBLEM */}
       <section className="relative section-padding py-24 md:py-32">
@@ -185,8 +176,7 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-16 md:mb-20">
             <div className="lg:col-span-7">
               <ScrollReveal>
-                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 flex items-center gap-3">
-                  <span className="h-px w-8 bg-gold/60" />
+                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
                   What's Actually Broken
                 </p>
               </ScrollReveal>
@@ -221,10 +211,8 @@ const Index = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
             <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 inline-flex items-center gap-3">
-                <span className="h-px w-8 bg-gold/60" />
+              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
                 What We Engineer
-                <span className="h-px w-8 bg-gold/60" />
               </p>
             </ScrollReveal>
             <ScrollReveal delay={100}>

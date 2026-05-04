@@ -15,8 +15,7 @@ const QuoteCard = ({ quote, author, role, delay = 0 }: Props) => {
         <blockquote className="font-quote text-[19px] md:text-[21px] leading-[1.55] text-foreground/90 italic mb-8 relative z-10">
           {quote}
         </blockquote>
-        <figcaption className="flex items-center gap-3 mt-auto">
-          <span className="h-px w-8 bg-gold/60" />
+        <figcaption className="mt-auto">
           <div className="text-[12px] tracking-wide">
             <div className="text-foreground font-medium">{author}</div>
             <div className="text-muted-foreground/80 mt-0.5">{role}</div>

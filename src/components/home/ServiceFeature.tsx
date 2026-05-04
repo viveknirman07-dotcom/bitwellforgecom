@@ -23,7 +23,6 @@ const ServiceFeature = ({ index, tag, title, body, visual, reverse }: Props) => 
           <div className="lg:col-span-6">
             <div className="flex items-center gap-4 mb-5">
               <span className="font-quote text-gold text-2xl">{num}</span>
-              <span className="h-px w-10 bg-gold/40" />
               <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">
                 {tag}
               </span>
