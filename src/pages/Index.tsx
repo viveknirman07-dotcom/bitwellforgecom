@@ -311,7 +311,7 @@ const Index = () => {
             <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-gold/15">
-                  <AccordionTrigger className="text-left font-heading text-[17px] md:text-xl font-medium text-foreground hover:no-underline hover:text-gold py-6 transition-colors">
+                  <AccordionTrigger className="text-left font-heading text-[16px] md:text-xl font-medium text-foreground hover:no-underline hover:text-gold py-5 md:py-6 transition-colors">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-[14.5px] leading-[1.8] font-light pb-6">
