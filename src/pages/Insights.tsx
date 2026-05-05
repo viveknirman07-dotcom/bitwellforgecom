@@ -339,37 +339,57 @@ const Insights = () => {
     <div className="pt-20">
       <section className="section-padding section-y">
         <div className="max-w-[1400px] mx-auto">
-          <div className="max-w-3xl mb-20">
+          <div className="max-w-3xl mb-16 md:mb-20">
             <ScrollReveal>
-              <p className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-6">Insights</p>
+              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 eyebrow">
+                Insights
+              </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-tight mb-8 text-balance">
-                Thinking on growth, systems, and strategic clarity.
+              <h1 className="font-heading text-[34px] md:text-[56px] lg:text-[64px] font-semibold text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
+                Thinking on growth, systems, and{" "}
+                <span className="font-quote italic text-gold/95">strategic clarity.</span>
               </h1>
+            </ScrollReveal>
+            <ScrollReveal delay={300}>
+              <p className="text-muted-foreground text-[15px] md:text-lg leading-[1.8] font-light max-w-2xl">
+                Field notes from the work of building revenue infrastructure that compounds.
+              </p>
             </ScrollReveal>
           </div>
 
           <div className="space-y-0">
             {articles.map((article, i) => (
-              <ScrollReveal key={i} direction="right" delay={i * 100}>
-                <Link to={`/insights/${article.slug}`}>
-                  <article className="group border-t border-border py-10 md:py-14 cursor-pointer hover:-translate-y-1 transition-all duration-500" style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}>
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-start">
+              <ScrollReveal key={i} direction="right" delay={i * 80}>
+                <Link to={`/insights/${article.slug}`} className="block">
+                  <article
+                    className="group border-t border-border py-8 md:py-12 transition-all duration-500 hover:-translate-y-0.5"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 items-start">
                       <div className="md:col-span-2">
-                        <span className="text-xs font-medium text-muted-foreground tracking-wide uppercase">{article.category}</span>
-                        <p className="text-xs text-muted-foreground mt-1">{article.date}</p>
+                        <span className="text-[10px] tracking-[0.22em] uppercase text-gold/90 eyebrow">
+                          {article.category}
+                        </span>
+                        <p className="text-[11px] text-muted-foreground/80 mt-1.5 tracking-wide">
+                          {article.date}
+                        </p>
                       </div>
                       <div className="md:col-span-7">
-                        <h2 className="font-heading text-xl md:text-2xl font-semibold text-foreground group-hover:text-accent transition-colors duration-300 mb-3">
+                        <h2 className="font-heading text-[20px] md:text-[26px] font-semibold text-foreground leading-[1.25] tracking-tight group-hover:text-gold transition-colors duration-300 mb-3">
                           {article.title}
                         </h2>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
+                        <p className="text-[14px] md:text-[14.5px] text-muted-foreground leading-[1.75] font-light">
+                          {article.excerpt}
+                        </p>
                       </div>
-                      <div className="md:col-span-3 md:text-right">
-                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                          Read
-                          <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                      <div className="md:col-span-3 md:text-right md:pt-2">
+                        <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium tracking-wide text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                          Read article
+                          <ArrowRight
+                            size={14}
+                            className="transition-transform duration-300 group-hover:translate-x-1"
+                          />
                         </span>
                       </div>
                     </div>
@@ -384,10 +404,11 @@ const Insights = () => {
       <CTABlock
         heading="Have a growth challenge?"
         subtext="Let's explore whether a structured approach could help."
-        buttonLabel="Start a Conversation"
+        buttonLabel="Start the Conversation"
       />
     </div>
   );
 };
 
 export default Insights;
+
