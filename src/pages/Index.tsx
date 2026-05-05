@@ -151,7 +151,7 @@ const Index = () => {
               <Link
                 to="/contact?service=General+Inquiry"
                 data-hero-primary-cta
-                className="group inline-flex items-center justify-center gap-2 bg-gold text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_40px_hsl(0_0%_100%/0.18)] active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/90 dark:hover:bg-white dark:hover:text-navy hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] dark:hover:shadow-[0_12px_40px_hsl(0_0%_100%/0.18)] active:scale-[0.98]"
               >
                 Start Your Engagement
                 <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
