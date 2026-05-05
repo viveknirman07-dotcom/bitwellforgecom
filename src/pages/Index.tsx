@@ -143,7 +143,7 @@ const Index = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               initial={reduced ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
@@ -311,7 +311,7 @@ const Index = () => {
             <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-gold/15">
-                  <AccordionTrigger className="text-left font-heading text-[17px] md:text-xl font-medium text-foreground hover:no-underline hover:text-gold py-6 transition-colors">
+                  <AccordionTrigger className="text-left font-heading text-[16px] md:text-xl font-medium text-foreground hover:no-underline hover:text-gold py-5 md:py-6 transition-colors">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-[14.5px] leading-[1.8] font-light pb-6">
