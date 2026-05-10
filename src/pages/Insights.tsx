@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useSEO } from "@/hooks/use-seo";
 
 export const articles = [
   {
@@ -335,6 +336,12 @@ After 12 to 18 months, the system produces more demand than any paid channel, at
 ];
 
 const Insights = () => {
+  useSEO({
+    title: "Insights | BitwellForge",
+    description:
+      "Field notes on growth, systems, and strategic clarity from the work of building revenue infrastructure that compounds.",
+    canonicalPath: "/insights",
+  });
   return (
     <div className="pt-20">
       <section className="section-padding section-y">

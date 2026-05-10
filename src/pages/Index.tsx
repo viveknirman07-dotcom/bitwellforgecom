@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useSEO } from "@/hooks/use-seo";
 import SectionDivider from "@/components/SectionDivider";
 import CTABlock from "@/components/CTABlock";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -103,6 +104,12 @@ const faqItems = [
 
 const Index = () => {
   const reduced = useReducedMotion();
+  useSEO({
+    title: "BitwellForge | Revenue Infrastructure Built to Compound",
+    description:
+      "BitwellForge engineers demand infrastructure for B2B businesses. Lead generation, revenue systems, growth strategy, and AI automation built to compound.",
+    canonicalPath: "/",
+  });
 
   return (
     <div className="relative">
