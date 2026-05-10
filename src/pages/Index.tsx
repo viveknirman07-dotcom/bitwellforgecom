@@ -104,6 +104,12 @@ const faqItems = [
 
 const Index = () => {
   const reduced = useReducedMotion();
+  useSEO({
+    title: "BitwellForge | Revenue Infrastructure Built to Compound",
+    description:
+      "BitwellForge engineers demand infrastructure for B2B businesses. Lead generation, revenue systems, growth strategy, and AI automation built to compound.",
+    canonicalPath: "/",
+  });
 
   return (
     <div className="relative">
