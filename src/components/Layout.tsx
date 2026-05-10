@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
+import MovingCursor from "@/components/MovingCursor";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 const Layout = () => {
@@ -11,6 +12,7 @@ const Layout = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-body">
+      <MovingCursor />
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait">
