@@ -36,6 +36,12 @@ const steps = [
 ];
 
 const Process = () => {
+  useSEO({
+    title: "Process | BitwellForge",
+    description:
+      "Five deliberate phases. Clarity mapping, system architecture, acquisition engineering, integration, and continuous optimisation.",
+    canonicalPath: "/process",
+  });
   return (
     <div className="pt-20">
       <section className="section-padding section-y">
