@@ -78,21 +78,20 @@ const MovingCursor = () => {
       <div
         ref={ringRef}
         aria-hidden
-        className="cursor-ring pointer-events-none fixed left-0 top-0 z-[100] h-8 w-8 rounded-full border border-foreground/40 mix-blend-difference transition-[width,height,border-color,opacity] duration-200 ease-out will-change-transform"
+        className="cursor-ring pointer-events-none fixed left-0 top-0 z-[100] h-8 w-8 rounded-full border border-white mix-blend-difference transition-[width,height,border-color,opacity] duration-200 ease-out will-change-transform"
       />
       <div
         ref={dotRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[101] h-1.5 w-1.5 rounded-full bg-foreground mix-blend-difference will-change-transform"
+        className="pointer-events-none fixed left-0 top-0 z-[101] h-1.5 w-1.5 rounded-full bg-white mix-blend-difference will-change-transform"
       />
       <style>{`
         @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-          html, body, a, button { cursor: none !important; }
+          html, body, a, button, [role="button"], input, textarea, select, label { cursor: none !important; }
         }
         .cursor-ring--hover {
           width: 3rem !important;
           height: 3rem !important;
-          border-color: hsl(var(--eyebrow-color)) !important;
         }
       `}</style>
     </>
