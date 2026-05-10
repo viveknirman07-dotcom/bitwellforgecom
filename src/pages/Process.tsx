@@ -1,5 +1,6 @@
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useSEO } from "@/hooks/use-seo";
 
 const steps = [
   {
