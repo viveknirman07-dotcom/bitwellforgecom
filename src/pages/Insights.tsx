@@ -411,7 +411,7 @@ const Insights = () => {
       <CTABlock
         heading="Have a growth challenge?"
         subtext="Let's explore whether a structured approach could help."
-        buttonLabel="Start the Conversation"
+        buttonLabel="Book Infrastructure Audit"
       />
     </div>
   );

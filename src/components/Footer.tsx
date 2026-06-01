@@ -76,7 +76,7 @@ const Footer = () => {
               to="/contact?service=General+Inquiry"
               className="group inline-flex items-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-6 py-3.5 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/90 dark:hover:bg-gold/90 hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] dark:hover:shadow-[0_12px_40px_hsl(38_38%_60%/0.35)]"
             >
-              Start the Conversation
+              Book Infrastructure Audit
               <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <a

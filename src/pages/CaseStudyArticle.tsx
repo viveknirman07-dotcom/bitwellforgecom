@@ -159,7 +159,7 @@ const CaseStudyArticle = () => {
         <CTABlock
           heading="Ready to build your growth system?"
           subtext="Let's talk about applying these frameworks to your business."
-          buttonLabel="Start the Conversation"
+          buttonLabel="Book Infrastructure Audit"
         />
       </ScrollReveal>
     </div>

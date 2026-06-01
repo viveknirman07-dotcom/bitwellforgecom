@@ -168,7 +168,7 @@ const Contact = () => {
                   className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.015] active:scale-[0.98] transition-all duration-300 mt-4"
                   style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
-                  Start the Conversation
+                  Book Infrastructure Audit
                   <ArrowRight size={16} />
                 </button>
               </form>
