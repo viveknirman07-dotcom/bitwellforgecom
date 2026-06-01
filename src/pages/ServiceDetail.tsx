@@ -304,8 +304,13 @@ const ServiceDetail = () => {
               </ul>
             </div>
           </ScrollReveal>
+
+          <ImplementationProof type={(slug as ProofType)} />
+
+          <IdealFor items={idealForOverrides[slug ?? ""] ?? defaultIdealFor} />
         </div>
       </section>
+
 
       <ScrollReveal>
         <CTABlock service={service.contactService} />
