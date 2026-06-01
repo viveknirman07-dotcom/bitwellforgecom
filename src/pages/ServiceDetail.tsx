@@ -2,6 +2,38 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTABlock from "@/components/CTABlock";
+import IdealFor from "@/components/services/IdealFor";
+import ImplementationProof, { type ProofType } from "@/components/services/ImplementationProof";
+
+const defaultIdealFor = [
+  "Agencies",
+  "Consultants",
+  "Advisory Firms",
+  "Executive-Led Brands",
+  "B2B Service Businesses",
+  "High-Ticket Operators",
+];
+
+const idealForOverrides: Record<string, string[]> = {
+  "linkedin": [
+    "Founders",
+    "Consultants",
+    "Executive Teams",
+    "Thought Leadership Brands",
+  ],
+  "digital-products": [
+    "Course Creators",
+    "Independent Operators",
+    "Productised Consultants",
+    "Advisory Firms Launching IP",
+  ],
+  "seo": [
+    "Advisory Firms",
+    "B2B Service Businesses",
+    "Consultancies",
+    "Executive-Led Brands",
+  ],
+};
 
 interface ServiceContent {
   title: string;
