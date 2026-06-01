@@ -13,6 +13,8 @@ import ServiceFeature from "@/components/home/ServiceFeature";
 import { DemandGraph, RevenueFunnel, PositioningMatrix, AutomationFlow } from "@/components/home/ServiceVisuals";
 import StatCounter from "@/components/home/StatCounter";
 import QuoteCard from "@/components/home/QuoteCard";
+import HowEngagementsWork from "@/components/home/HowEngagementsWork";
+import EngagementFormats from "@/components/home/EngagementFormats";
 
 const problems = [
   {
@@ -300,6 +302,14 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <SectionDivider />
+
+      {/* HOW ENGAGEMENTS WORK */}
+      <HowEngagementsWork />
+
+      {/* ENGAGEMENT FORMATS */}
+      <EngagementFormats />
 
       <SectionDivider />
 
