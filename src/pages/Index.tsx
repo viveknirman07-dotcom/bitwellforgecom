@@ -13,6 +13,8 @@ import ServiceFeature from "@/components/home/ServiceFeature";
 import { DemandGraph, RevenueFunnel, PositioningMatrix, AutomationFlow } from "@/components/home/ServiceVisuals";
 import StatCounter from "@/components/home/StatCounter";
 import QuoteCard from "@/components/home/QuoteCard";
+import HowEngagementsWork from "@/components/home/HowEngagementsWork";
+import EngagementFormats from "@/components/home/EngagementFormats";
 
 const problems = [
   {
@@ -160,7 +162,7 @@ const Index = () => {
                 data-hero-primary-cta
                 className="group inline-flex items-center justify-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/90 dark:hover:bg-white dark:hover:text-navy hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] dark:hover:shadow-[0_12px_40px_hsl(0_0%_100%/0.18)] active:scale-[0.98]"
               >
-                Start Your Engagement
+                Book Infrastructure Audit
                 <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
@@ -300,6 +302,14 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <SectionDivider />
+
+      {/* HOW ENGAGEMENTS WORK */}
+      <HowEngagementsWork />
+
+      {/* ENGAGEMENT FORMATS */}
+      <EngagementFormats />
 
       <SectionDivider />
 

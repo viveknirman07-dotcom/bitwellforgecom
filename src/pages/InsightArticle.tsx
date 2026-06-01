@@ -99,7 +99,7 @@ const InsightArticle = () => {
         <CTABlock
           heading="Ready to explore this further?"
           subtext="Let's talk about applying these ideas to your business."
-          buttonLabel="Start the Conversation"
+          buttonLabel="Book Infrastructure Audit"
         />
       </ScrollReveal>
     </div>
