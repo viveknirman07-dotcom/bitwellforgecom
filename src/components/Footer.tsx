@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
@@ -47,9 +46,9 @@ const Footer = () => {
           </motion.div>
 
           {/* Nav */}
-          <motion.div className="md:col-span-3" {...fade(0.12)}>
-            <h4 className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Navigate</h4>
-            <ul className="space-y-3">
+          <motion.div className="md:col-span-7 md:text-right" {...fade(0.12)}>
+            <h4 className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 md:pr-0">Navigate</h4>
+            <ul className="space-y-3 md:ml-auto md:inline-block md:text-left">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
@@ -62,29 +61,6 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div className="md:col-span-4" {...fade(0.24)}>
-            <h4 className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
-              Build Your Growth System
-            </h4>
-            <p className="text-muted-foreground text-[13.5px] leading-[1.75] font-light mb-6">
-              Ready to engineer the infrastructure behind predictable, compounding revenue?
-            </p>
-            <Link
-              to="/contact?service=General+Inquiry"
-              className="group inline-flex items-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-6 py-3.5 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/90 dark:hover:bg-gold/90 hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] dark:hover:shadow-[0_12px_40px_hsl(38_38%_60%/0.35)]"
-            >
-              Book Infrastructure Audit
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <a
-              href="mailto:v@bitwellforge.com"
-              className="block mt-5 text-[12.5px] text-muted-foreground hover:text-gold transition-colors"
-            >
-              v@bitwellforge.com
-            </a>
           </motion.div>
         </div>
 
