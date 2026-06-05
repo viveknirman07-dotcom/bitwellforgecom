@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionDivider from "@/components/SectionDivider";
 import { useSEO } from "@/hooks/use-seo";
@@ -208,7 +207,6 @@ const About = () => {
         </div>
       </section>
 
-      <CTABlock />
     </div>
   );
 };
