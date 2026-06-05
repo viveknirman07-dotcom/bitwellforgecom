@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
