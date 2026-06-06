@@ -176,7 +176,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Scalable operations without proportional headcount increases",
       "Freed team capacity for high-value strategic work",
     ],
-    contactService: "AI Automation and Systems",
+    contactService: "AI Automation & Systems",
   },
   "seo": {
     title: "SEO & Digital Visibility",
