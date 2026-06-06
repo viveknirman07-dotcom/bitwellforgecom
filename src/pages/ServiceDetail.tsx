@@ -4,6 +4,13 @@ import ScrollReveal from "@/components/ScrollReveal";
 import CTABlock from "@/components/CTABlock";
 import IdealFor from "@/components/services/IdealFor";
 import ImplementationProof, { type ProofType } from "@/components/services/ImplementationProof";
+import {
+  ServiceHero,
+  ProblemSystemFailure,
+  StrategyTransformation,
+  SystemApproachDiagram,
+  OutcomeArchitecture,
+} from "@/components/services/ServiceVisuals";
 
 const defaultIdealFor = [
   "Agencies",
