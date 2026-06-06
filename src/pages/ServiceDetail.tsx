@@ -220,7 +220,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Post-launch data systems for continuous improvement",
       "Scalable digital revenue streams independent of services",
     ],
-    contactService: "General Inquiry",
+    contactService: "Digital Product Systems",
   },
 };
 
