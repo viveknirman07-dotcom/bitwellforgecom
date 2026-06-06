@@ -198,7 +198,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Compounding organic traffic as authority accumulates",
       "Reduced dependency on paid channels for demand generation",
     ],
-    contactService: "General Inquiry",
+    contactService: "SEO & Digital Visibility",
   },
   "digital-products": {
     title: "Digital Product Systems",
