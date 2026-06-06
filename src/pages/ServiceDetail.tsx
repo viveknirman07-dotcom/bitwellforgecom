@@ -88,7 +88,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Reliable pipeline forecasting based on system-level data",
       "Scalable sales operations that grow with your team",
     ],
-    contactService: "High Ticket Sales System",
+    contactService: "High Ticket Sales Systems",
   },
   "performance-marketing": {
     title: "Performance Marketing Infrastructure",
