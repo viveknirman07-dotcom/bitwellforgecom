@@ -6,15 +6,16 @@ import SocialLinks from "@/components/SocialLinks";
 
 const serviceOptions = [
   "General Inquiry",
+  "Diagnose My Growth System",
+  "Book Infrastructure Audit",
   "Growth Strategy",
   "B2B Lead Generation",
-  "High Ticket Sales System",
+  "High Ticket Sales Systems",
   "LinkedIn Positioning",
-  "AI Automation and Systems",
+  "AI Automation & Systems",
   "Performance Marketing",
-  "Foundation Engagement",
-  "Growth System Engagement",
-  "Enterprise Engagement",
+  "SEO & Digital Visibility",
+  "Digital Product Systems",
 ];
 
 const Contact = () => {

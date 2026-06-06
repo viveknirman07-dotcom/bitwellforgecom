@@ -4,6 +4,13 @@ import ScrollReveal from "@/components/ScrollReveal";
 import CTABlock from "@/components/CTABlock";
 import IdealFor from "@/components/services/IdealFor";
 import ImplementationProof, { type ProofType } from "@/components/services/ImplementationProof";
+import {
+  ServiceHero,
+  ProblemSystemFailure,
+  StrategyTransformation,
+  SystemApproachDiagram,
+  OutcomeArchitecture,
+} from "@/components/services/ServiceVisuals";
 
 const defaultIdealFor = [
   "Agencies",
@@ -88,7 +95,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Reliable pipeline forecasting based on system-level data",
       "Scalable sales operations that grow with your team",
     ],
-    contactService: "High Ticket Sales System",
+    contactService: "High Ticket Sales Systems",
   },
   "performance-marketing": {
     title: "Performance Marketing Infrastructure",
@@ -176,7 +183,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Scalable operations without proportional headcount increases",
       "Freed team capacity for high-value strategic work",
     ],
-    contactService: "AI Automation and Systems",
+    contactService: "AI Automation & Systems",
   },
   "seo": {
     title: "SEO & Digital Visibility",
@@ -198,7 +205,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Compounding organic traffic as authority accumulates",
       "Reduced dependency on paid channels for demand generation",
     ],
-    contactService: "General Inquiry",
+    contactService: "SEO & Digital Visibility",
   },
   "digital-products": {
     title: "Digital Product Systems",
@@ -220,7 +227,7 @@ const serviceData: Record<string, ServiceContent> = {
       "Post-launch data systems for continuous improvement",
       "Scalable digital revenue streams independent of services",
     ],
-    contactService: "General Inquiry",
+    contactService: "Digital Product Systems",
   },
 };
 
@@ -263,45 +270,45 @@ const ServiceDetail = () => {
             </p>
           </ScrollReveal>
 
+          <ScrollReveal delay={250}>
+            <div className="mb-16">
+              <ServiceHero slug={slug!} />
+            </div>
+          </ScrollReveal>
+
           <ScrollReveal delay={300}>
             <div className="mb-14">
               <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">The Problem</h2>
-              <p className="text-muted-foreground leading-relaxed">{service.problem}</p>
+              <p className="text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
+              <ProblemSystemFailure />
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
               <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">The Strategy</h2>
-              <p className="text-muted-foreground leading-relaxed">{service.strategy}</p>
+              <p className="text-muted-foreground leading-relaxed mb-6">{service.strategy}</p>
+              <StrategyTransformation />
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
               <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">System Approach</h2>
-              <ul className="space-y-3">
-                {service.approach.map((item, i) => (
-                  <li key={i} className="flex gap-3 items-start text-muted-foreground leading-relaxed">
-                    <span className="text-xs text-muted-foreground/60 font-medium mt-1.5 shrink-0">0{i + 1}</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-muted-foreground leading-relaxed mb-6 text-[14.5px]">
+                Each module connects into the next. Together they operate as one architecture, not a list of services.
+              </p>
+              <SystemApproachDiagram items={service.approach} />
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="mb-14">
               <h2 className="font-heading text-2xl font-semibold text-foreground mb-4">Expected Outcomes</h2>
-              <ul className="space-y-3">
-                {service.outcomes.map((item, i) => (
-                  <li key={i} className="flex gap-3 items-start text-muted-foreground leading-relaxed">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-muted-foreground leading-relaxed mb-6 text-[14.5px]">
+                Engineered results, not projected aspirations. Each outcome is a measurable property of the system.
+              </p>
+              <OutcomeArchitecture items={service.outcomes} />
             </div>
           </ScrollReveal>
 
