@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import CTABlock from "@/components/CTABlock";
@@ -344,12 +345,24 @@ const Insights = () => {
       "Field notes on growth, systems, and strategic clarity from the work of building revenue infrastructure that compounds.",
     canonicalPath: "/insights",
   });
-  // Group articles by date (year) to give the archive an editorial spine.
-  const grouped = articles.reduce<Record<string, typeof articles>>((acc, a) => {
-    const year = a.date.split(" ").pop() ?? "Archive";
-    (acc[year] ||= []).push(a);
-    return acc;
-  }, {});
+  const [query, setQuery] = useState("");
+
+  const filteredArticles = query.trim()
+    ? articles.filter((a) =>
+        [a.title, a.category, a.excerpt].some((field) =>
+          field.toLowerCase().includes(query.toLowerCase()),
+        ),
+      )
+    : articles;
+
+  const grouped = filteredArticles.reduce<Record<string, typeof articles>>(
+    (acc, a) => {
+      const year = a.date.split(" ").pop() ?? "Archive";
+      (acc[year] ||= []).push(a);
+      return acc;
+    },
+    {},
+  );
   const years = Object.keys(grouped);
 
   return (
@@ -373,11 +386,21 @@ const Insights = () => {
             </ScrollReveal>
             <ScrollReveal delay={400}>
               <div className="mt-10 md:mt-12 flex items-center gap-6 text-[11px] tracking-[0.22em] uppercase text-muted-foreground/80">
-                <span>{articles.length} Briefings</span>
+                <span>{filteredArticles.length} Briefings</span>
                 <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-muted-foreground/40" />
                 <span>Updated {articles[0]?.date}</span>
               </div>
             </ScrollReveal>
+          </div>
+
+          <div className="max-w-xl mb-12 md:mb-16">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search briefings..."
+              className="w-full bg-transparent border-b border-border/70 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-[hsl(var(--eyebrow-color))] transition-colors duration-300"
+            />
           </div>
 
           <div className="space-y-20 md:space-y-24">
@@ -441,6 +464,11 @@ const Insights = () => {
               </div>
             ))}
           </div>
+          {filteredArticles.length === 0 && (
+            <p className="mt-16 text-muted-foreground text-[15px] font-light">
+              No briefings match your search.
+            </p>
+          )}
         </div>
       </section>
 
