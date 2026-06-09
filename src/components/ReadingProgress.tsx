@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 /**
- * Subtle top-of-page reading progress indicator.
- * Uses scroll position over the document height. GPU-friendly (transform/opacity only).
+ * Subtle text-based reading progress indicator.
+ * Displays scroll percentage in the top-right corner.
  */
 const ReadingProgress = () => {
   const [progress, setProgress] = useState(0);
@@ -12,7 +12,9 @@ const ReadingProgress = () => {
       const h = document.documentElement;
       const scrolled = h.scrollTop || document.body.scrollTop;
       const height = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
-      setProgress(height > 0 ? Math.min(1, Math.max(0, scrolled / height)) : 0);
+      setProgress(
+        height > 0 ? Math.min(100, Math.max(0, Math.round((scrolled / height) * 100))) : 0,
+      );
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -26,12 +28,11 @@ const ReadingProgress = () => {
   return (
     <div
       aria-hidden
-      className="fixed left-0 right-0 top-0 z-[60] h-[2px] bg-transparent pointer-events-none"
+      className="fixed top-6 right-6 md:top-8 md:right-8 z-[60] pointer-events-none"
     >
-      <div
-        className="h-full origin-left bg-[hsl(var(--eyebrow-color))]/80 transition-[transform] duration-150 ease-out"
-        style={{ transform: `scaleX(${progress})` }}
-      />
+      <span className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground/50 tabular-nums">
+        {progress}%
+      </span>
     </div>
   );
 };
