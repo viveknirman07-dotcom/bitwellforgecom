@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
+import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
+import { readingTime } from "@/lib/insights";
 
 export const articles = [
   {
@@ -342,67 +344,101 @@ const Insights = () => {
       "Field notes on growth, systems, and strategic clarity from the work of building revenue infrastructure that compounds.",
     canonicalPath: "/insights",
   });
+  // Group articles by date (year) to give the archive an editorial spine.
+  const grouped = articles.reduce<Record<string, typeof articles>>((acc, a) => {
+    const year = a.date.split(" ").pop() ?? "Archive";
+    (acc[year] ||= []).push(a);
+    return acc;
+  }, {});
+  const years = Object.keys(grouped);
+
   return (
     <div className="pt-20">
-      <section className="section-padding section-y">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="max-w-3xl mb-16 md:mb-20">
+      <section className="section-padding pt-16 md:pt-24 pb-10 md:pb-14">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="max-w-3xl mb-16 md:mb-24">
             <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 eyebrow">
-                Insights
-              </p>
+              <Eyebrow>The Archive</Eyebrow>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-[34px] md:text-[56px] lg:text-[64px] font-semibold text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
-                Thinking on growth, systems, and{" "}
-                <span className="font-quote italic text-gold/95">strategic clarity.</span>
+              <h1 className="mt-5 font-heading text-[34px] md:text-[56px] lg:text-[64px] font-semibold text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
+                Strategic Intelligence on growth, systems, and{" "}
+                <span className="font-quote italic text-gold/95">revenue architecture.</span>
               </h1>
             </ScrollReveal>
             <ScrollReveal delay={300}>
               <p className="text-muted-foreground text-[15px] md:text-lg leading-[1.8] font-light max-w-2xl">
-                Field notes from the work of building revenue infrastructure that compounds.
+                A working library of executive briefings drawn from the practice of engineering revenue infrastructure.
               </p>
+            </ScrollReveal>
+            <ScrollReveal delay={400}>
+              <div className="mt-10 md:mt-12 flex items-center gap-6 text-[11px] tracking-[0.22em] uppercase text-muted-foreground/80">
+                <span>{articles.length} Briefings</span>
+                <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-muted-foreground/40" />
+                <span>Updated {articles[0]?.date}</span>
+              </div>
             </ScrollReveal>
           </div>
 
-          <div className="space-y-0">
-            {articles.map((article, i) => (
-              <ScrollReveal key={i} direction="right" delay={i * 80}>
-                <Link to={`/insights/${article.slug}`} className="block">
-                  <article
-                    className="group border-t border-border py-8 md:py-12 transition-all duration-500 hover:-translate-y-0.5"
-                    style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 items-start">
-                      <div className="md:col-span-2">
-                        <span className="text-[10px] tracking-[0.22em] uppercase text-gold/90 eyebrow">
-                          {article.category}
-                        </span>
-                        <p className="text-[11px] text-muted-foreground/80 mt-1.5 tracking-wide">
-                          {article.date}
-                        </p>
-                      </div>
-                      <div className="md:col-span-7">
-                        <h2 className="font-heading text-[20px] md:text-[26px] font-semibold text-foreground leading-[1.25] tracking-tight group-hover:text-gold transition-colors duration-300 mb-3">
-                          {article.title}
-                        </h2>
-                        <p className="text-[14px] md:text-[14.5px] text-muted-foreground leading-[1.75] font-light">
-                          {article.excerpt}
-                        </p>
-                      </div>
-                      <div className="md:col-span-3 md:text-right md:pt-2">
-                        <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium tracking-wide text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                          Read article
-                          <ArrowRight
-                            size={14}
-                            className="transition-transform duration-300 group-hover:translate-x-1"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                </Link>
-              </ScrollReveal>
+          <div className="space-y-20 md:space-y-24">
+            {years.map((year) => (
+              <div key={year}>
+                <ScrollReveal>
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 mb-8 md:mb-10 pb-5 border-b border-border">
+                    <p className="md:col-span-2 font-heading text-[20px] md:text-[22px] font-semibold text-foreground/90 tabular-nums tracking-tight">
+                      {year}
+                    </p>
+                    <p className="md:col-span-10 text-[11px] tracking-[0.22em] uppercase text-muted-foreground/80 md:pt-2">
+                      {grouped[year].length} {grouped[year].length === 1 ? "Briefing" : "Briefings"}
+                    </p>
+                  </div>
+                </ScrollReveal>
+
+                <ol className="space-y-0">
+                  {grouped[year].map((article, i) => {
+                    const minutes = readingTime(article.content);
+                    return (
+                      <ScrollReveal key={article.slug} delay={i * 60}>
+                        <li>
+                          <Link to={`/insights/${article.slug}`} className="block">
+                            <article
+                              className="group border-t border-border/70 last:border-b py-8 md:py-10 transition-colors duration-500"
+                            >
+                              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 items-start">
+                                <div className="md:col-span-3">
+                                  <span className="text-[10px] tracking-[0.22em] uppercase text-[hsl(var(--eyebrow-color))]">
+                                    {article.category}
+                                  </span>
+                                  <p className="mt-3 text-[11px] tracking-[0.18em] uppercase text-muted-foreground/80">
+                                    {article.date} · {minutes} min read
+                                  </p>
+                                </div>
+                                <div className="md:col-span-7">
+                                  <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-foreground leading-[1.2] tracking-tight group-hover:text-[hsl(var(--eyebrow-color))] transition-colors duration-300 mb-4 text-balance">
+                                    {article.title}
+                                  </h2>
+                                  <p className="text-[14.5px] md:text-[15px] text-muted-foreground leading-[1.8] font-light max-w-[58ch]">
+                                    {article.excerpt}
+                                  </p>
+                                </div>
+                                <div className="md:col-span-2 md:text-right md:pt-3">
+                                  <span className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.2em] uppercase text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                                    Read
+                                    <ArrowRight
+                                      size={13}
+                                      className="transition-transform duration-300 group-hover:translate-x-1"
+                                    />
+                                  </span>
+                                </div>
+                              </div>
+                            </article>
+                          </Link>
+                        </li>
+                      </ScrollReveal>
+                    );
+                  })}
+                </ol>
+              </div>
             ))}
           </div>
         </div>
