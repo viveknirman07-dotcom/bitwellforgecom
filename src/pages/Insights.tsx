@@ -9,6 +9,148 @@ import { readingTime } from "@/lib/insights";
 
 export const articles = [
   {
+    slug: "the-offer-design-framework-building-clarity-before-you-sell",
+    title: "The Offer Design Framework: Building Clarity Before You Sell",
+    excerpt:
+      "Most service businesses describe what they do. The strongest ones describe what changes for the buyer when they buy it. The difference between these two approaches is everything.",
+    category: "Offer Clarity",
+    date: "Jul 2026",
+    content: `
+Most service businesses describe what they do. The strongest ones describe what changes for the buyer when they buy it. The difference between these two approaches is everything.
+
+**The Clarity Gap**
+
+When a prospect evaluates two similar offers, they are not comparing deliverables. They are comparing clarity. One offer describes what will be done. The other describes what will change. The one that describes change wins because the buyer can see themselves in the outcome.
+
+Most service businesses build their offer backwards. They start with what they deliver and expect the buyer to calculate why that matters. The buyer almost never does that calculation successfully. They move on to someone who did it for them.
+
+The offer design framework reverses this. It starts with the buyer's situation and builds forward to the deliverables that solve it.
+
+**The Four Step Framework**
+
+The framework has four distinct steps, and they must happen in order. Skip any step and the offer that follows will feel incomplete to both you and the buyer.
+
+**Step One: Diagnosis**
+
+What specific situation does your service address? Not broadly. Specifically. Not "we help agencies grow" but "we help agencies that are referral dependent and stuck at inconsistent revenue." The specificity is where clarity begins. You cannot design an offer until you know exactly who it is for and what problem they have that keeps them awake.
+
+The diagnosis step answers three questions: Who specifically? What problem exactly? What has already been tried? The answers become the foundation for everything that follows.
+
+**Step Two: The Shift**
+
+What changes when the problem is solved? This is not deliverables. Deliverables are what you do. The shift is what the buyer experiences.
+
+If the problem is "full calendar but no consistent revenue," the shift is "predictable pipeline that converts at a known rate." The shift describes the before and after from the buyer's perspective, not the seller's activity list.
+
+The shift is concrete. Not "improved outcomes" but "revenue that is predictable ninety days out." Not "better processes" but "outreach that happens on schedule without the founder chasing it." The buyer should be able to point to what will be different in their business.
+
+**Step Three: Proof**
+
+What evidence supports that this shift is possible? This is where your case studies, your methodologies, your experience live. Not as a resume. As a demonstration that you have done this exact thing for people in this exact situation.
+
+Vague proof is noise. "We have helped 50 clients" tells the buyer nothing. Specific proof tells them everything. "We took an agency from zero outbound to eleven qualified calls in six weeks" demonstrates that you have solved this specific problem in a timeframe the buyer cares about.
+
+The proof should be so specific that the buyer sees themselves in it. The situation matches. The timeline is realistic. The outcome is measurable.
+
+**Step Four: The Offer Structure**
+
+Now that diagnosis, shift, and proof are clear, you can design the packaging. What phases does the work have? How long does it take? What are the assumptions? What is the price?
+
+The offer structure should be built backwards from the shift, not forwards from your delivery capacity. If achieving the shift requires sixty days, the offer should be structured around sixty days. Not around what you can deliver in thirty. Not around what feels like a standard engagement. Around what it actually takes.
+
+The pricing follows the structure. Not the other way around. Too many service businesses price based on hours or arbitrary tiers. The strongest pricing is built from the cost to deliver plus the value of the shift. If the shift moves a business from zero pipeline to predictable revenue, the shift is worth significantly more than the hours it takes.
+
+**What Gets Built**
+
+When all four steps are complete, the offer reads differently. The buyer understands why it exists. They understand what changes when they buy it. They understand why you are the right person to deliver it. And they understand why it costs what it costs.
+
+The offer is no longer a service description. It is a clear path from their current situation to their desired future.
+
+**The Reflection**
+
+The offer is not your service. It is the buyer's clarity about what will change and why it matters. Design for that clarity first. The pricing, the timeline, and the deliverables follow naturally when the first three steps are strong.
+
+Businesses with the strongest conversion rates are almost always the ones with the clearest offer architecture. Not because the service is better. Because the buyer never has to guess whether it solves their problem. The offer itself answers that question before a single conversation begins.
+    `,
+  },
+  {
+    slug: "early-qualification-the-filter-that-changes-pipeline-quality",
+    title: "Early Qualification: The Filter That Changes Pipeline Quality",
+    excerpt:
+      "A full pipeline with the wrong people in it produces the same result as an empty one. It just takes longer to get there. Early qualification filters before the conversation, not during it.",
+    category: "Lead Generation",
+    date: "Jul 2026",
+    content: `
+A full pipeline with the wrong people in it produces the same result as an empty one. It just takes longer to get there. Early qualification filters before the conversation, not during it.
+
+**When Qualification Happens Matters**
+
+Most businesses think of qualification as something that happens during the sales conversation. A prospect books a call, and during that call, the seller determines if they are the right fit. By then, time has been invested. By then, expectation has been set. By then, a no is more costly than it would have been earlier.
+
+Early qualification is a different approach. It filters before the conversation, not during it. It answers a simple question at the point of outreach: Is this person even potentially the right fit?
+
+If the answer is no, the conversation never happens. If the answer is yes, the conversation happens with someone who has already self identified as potentially qualified. This reversal changes everything about the pipeline.
+
+A pipeline of twenty conversations with qualified prospects produces better outcomes than a pipeline of sixty conversations with mixed prospects. The smaller pipeline closes faster and at a higher rate. But only if qualification happened before the calendar filled up.
+
+**The Three Components of Early Qualification**
+
+The framework has three components, and they work together to filter prospects before they consume time.
+
+**Component One: List Precision**
+
+Not a broad list of "anyone in this industry" but a specific list of "people in this industry who have these characteristics."
+
+A consultant reaching solo practitioners is more qualified than a consultant reaching all consultants. An agency targeting e commerce brands with between five and fifty employees is more qualified than an agency targeting all e commerce brands. A coach specializing in agencies stuck at revenue plateaus is more qualified than a coach reaching all agency owners.
+
+The specificity at the list stage removes unqualified prospects before outreach even begins. You are not starting with five hundred names and filtering down to ten qualified ones. You are starting with fifty names that already match your criteria.
+
+This requires knowing your buyer in detail. Not industry. Situation. Not title. Stage of business. Not company size. Specific pain point they are likely experiencing right now.
+
+**Component Two: Message Relevance**
+
+The outreach message should reference something specific about the prospect's situation that suggests they have the problem you solve. Not a compliment about their company. An observation about their situation.
+
+"I noticed your agency is positioned as a generalist and you have twelve people on the team" suggests they might be experiencing the positioning problem that creates confused positioning. That observation qualifies or disqualifies before the call is booked.
+
+A message that is relevant to a specific person will get no response from someone outside your target market. That is not a failure. That is the mechanism working. The message is designed to separate the right fit from the wrong fit at the first touchpoint.
+
+Messages that get broad responses are messages written for everyone. Messages that get responses only from qualified prospects are messages written for someone specific.
+
+**Component Three: Pre Call Screening**
+
+Before the discovery call, ask the prospect three to five questions that determine fit. Current situation. What has been tried. What success looks like. Timeline. Budget context if relevant.
+
+A prospect who answers these honestly is showing they are serious. A prospect who does not answer them is showing they are not. Neither outcome is bad. Both are informative. A no to the screening is more valuable than a yes that comes in with the wrong expectations.
+
+The screening also serves another purpose. A prospect who takes time to answer questions before a call is someone who is invested in the process. They are not just casually exploring. They are qualifying themselves as seriously interested.
+
+**The Outcome**
+
+When these three filters are in place, the conversations that happen are with people who have already demonstrated they might be a fit. The close rate is higher not because the offer is stronger but because the prospects are more aligned with what you solve.
+
+Most service businesses run the opposite process. They cast a wide net, book many conversations, and then spend time determining fit in the call. Early qualification reverses this. It makes the filtering mechanism work before the call, which means the calls that happen are with prospects who have already qualified themselves.
+
+The founder works fewer hours on discovery calls and closes a higher percentage of them. The prospect experience is better because they are talking to someone who actually solves their problem. The pipeline is smaller but moves faster and converts bigger.
+
+**The Math**
+
+A business that books twenty calls per month with a forty percent close rate closes eight deals. A business that books forty calls per month with a twenty percent close rate closes eight deals. The first business works half as hard for the same result.
+
+But the real difference appears over time. The first business is getting better at identifying the right fit. They are refining their message based on who responds. They are learning what their actual buyer looks like. The second business is getting better at volume, not at targeting. They are filling their calendar but not learning who actually buys.
+
+Early qualification is not about being more exclusive. It is about being more efficient.
+
+**The Reflection**
+
+A pipeline full of wrong fit prospects is not really a pipeline. It is a list of people you have not yet told no to.
+
+The pattern across practices that maintain high close rates is consistent: they have fewer conversations but they are conversations with more qualified prospects. The businesses that struggle are the ones with full calendars and low conversion rates. The difference is almost always qualification timing, not conversation quality.
+
+Qualification earlier means fewer calls. Fewer calls with more qualified prospects converts at a higher rate than more calls with mixed prospects. The pipeline is smaller but moves faster and closes bigger. And the founder spends their time with people who actually need what they build.
+    `,
+  },
+  {
     slug: "hire-for-capacity-or-build-a-system",
     title: "Hire for Capacity or Build a System. Knowing the Difference Matters.",
     excerpt: "Many founders hire to solve a problem that a system would solve more effectively and at a fraction of the cost.",
