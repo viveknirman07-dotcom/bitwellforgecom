@@ -1,4 +1,4 @@
-/* Foundry type system loaded via @fontsource in src/main.tsx */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,167 +6,159 @@
 
 @layer base {
   :root {
-    /* === LIGHT MODE — Foundry palette, inverted surfaces === */
-    --background: 210 11% 96%;          /* soft ash */
-    --foreground: 220 18% 9%;           /* Tempered Steel */
+    /* === LIGHT MODE — matches BitwellForge infographic palette === */
+    /* Backgrounds */
+    --background: 0 0% 100%;            /* #ffffff */
+    --foreground: 226 51% 8%;           /* #0a0f1e */
 
-    --card: 210 11% 94%;                /* Ash White */
-    --card-foreground: 220 18% 9%;
+    --card: 218 27% 95%;                /* #eef1f6 */
+    --card-foreground: 226 51% 8%;
 
-    --popover: 210 11% 96%;
-    --popover-foreground: 220 18% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 51% 8%;
 
-    --primary: 19 89% 59%;              /* Ember Amber CTA */
-    --primary-foreground: 220 18% 9%;   /* Tempered Steel text on amber */
+    --primary: 226 51% 8%;              /* dark navy buttons */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 11% 90%;
-    --secondary-foreground: 220 18% 9%;
+    --secondary: 216 27% 96%;           /* #f4f6f9 */
+    --secondary-foreground: 226 51% 8%;
 
-    --muted: 210 11% 92%;
-    --muted-foreground: 220 10% 40%;    /* darker Slate for AA on light */
+    --muted: 218 27% 95%;
+    --muted-foreground: 220 14% 41%;    /* #5a6478 */
 
-    --accent: 19 89% 59%;               /* Ember Amber */
-    --accent-foreground: 220 18% 9%;
+    --accent: 220 79% 48%;              /* #1a56db blue */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 55%;
-    --destructive-foreground: 210 11% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 220 18% 9% / 0.14;
-    --input: 220 10% 84%;
-    --ring: 189 60% 45%;                /* Blueprint Cyan focus */
+    --border: 226 60% 10% / 0.15;
+    --input: 218 20% 90%;
+    --ring: 220 79% 48%;
 
-    --radius: 0.5rem;                   /* machined 6-8px feel */
+    --radius: 0.75rem;
 
-    --sidebar-background: 210 11% 96%;
-    --sidebar-foreground: 220 18% 9%;
-    --sidebar-primary: 19 89% 59%;
-    --sidebar-primary-foreground: 220 18% 9%;
-    --sidebar-accent: 210 11% 92%;
-    --sidebar-accent-foreground: 220 18% 9%;
-    --sidebar-border: 220 10% 84%;
-    --sidebar-ring: 189 60% 45%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 226 25% 24%;
+    --sidebar-primary: 226 51% 8%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 218 27% 95%;
+    --sidebar-accent-foreground: 226 51% 8%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 220 79% 48%;
 
     /* Custom tokens */
-    --navy: 220 18% 9%;
-    --navy-light: 218 15% 13%;          /* Forge Graphite */
-    --navy-deepest: 220 20% 6%;
-    --warm-white: 210 11% 96%;
-    --warm-gray: 220 10% 40%;
-    --subtle-border: 220 18% 9% / 0.08;
-    --glass: 210 11% 96% / 0.96;
+    --navy: 226 51% 8%;
+    --navy-light: 226 30% 22%;          /* #2d3a52 */
+    --navy-deepest: 226 60% 5%;
+    --warm-white: 0 0% 100%;
+    --warm-gray: 220 14% 41%;
+    --subtle-border: 226 60% 10% / 0.10;
+    --glass: 0 0% 100% / 0.96;
 
-    /* Foundry accents */
-    --ember: 19 89% 59%;
-    --ember-soft: 19 89% 59% / 0.12;
-    --cyan: 189 60% 45%;
-    --cyan-soft: 189 60% 45% / 0.14;
-    --accent-blue: 189 60% 45%;
-    --accent-blue-2: 189 60% 55%;
-    --accent-blue-bg: 189 60% 45% / 0.08;
+    /* Light-mode accent blues */
+    --accent-blue: 220 79% 48%;         /* #1a56db */
+    --accent-blue-2: 220 84% 59%;       /* #3b76f0 */
+    --accent-blue-bg: 220 79% 48% / 0.08;
 
     /* Typography */
-    --font-heading: 'Space Grotesk', system-ui, sans-serif;
-    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
 
     /* Shadows */
-    --shadow-sm: 0 1px 3px hsl(220 18% 9% / 0.06);
-    --shadow-md: 0 4px 20px hsl(220 18% 9% / 0.08);
-    --shadow-lg: 0 8px 40px hsl(220 18% 9% / 0.12);
+    --shadow-sm: 0 1px 3px hsl(226 30% 12% / 0.05);
+    --shadow-md: 0 4px 20px hsl(226 30% 12% / 0.07);
+    --shadow-lg: 0 8px 40px hsl(226 30% 12% / 0.10);
 
-    /* Border opacity system */
-    --border-visual: 220 18% 9% / 0.10;
-    --border-global: 220 18% 9% / 0.15;
-    --border-button: 220 18% 9% / 0.40;
+    /* Border opacity system (light mode) */
+    --border-visual: 226 60% 10% / 0.10;
+    --border-global: 226 60% 10% / 0.15;
+    --border-button: 226 60% 10% / 0.40;
 
-    /* Eyebrow — ember accent */
-    --eyebrow-color: 19 89% 45%;
-    --eyebrow-line: 19 89% 45% / 0.5;
+    /* Eyebrow — blue accent in light mode */
+    --eyebrow-color: 220 79% 48%;       /* #1a56db */
+    --eyebrow-line: 220 79% 48% / 0.4;
 
-    /* "gold" alias remapped to Ember Amber so sitewide accent usage
-       (text-gold, bg-gold-soft, border-gold) reads as the new hot accent. */
-    --gold: 19 89% 45%;
-    --gold-soft: 19 89% 59% / 0.10;
+    /* "gold" alias — repurposed as the dark navy ink in light mode
+       so existing components using bg-gold-soft / text-gold render
+       as visible navy/blue elements instead of invisible cream. */
+    --gold: 226 51% 8%;
+    --gold-soft: 220 79% 48% / 0.10;
 
-    /* === SVG DIAGRAM TOKENS (light) === */
-    --svg-stroke:    rgba(20, 24, 34, 0.60);
-    --svg-fill:      rgba(20, 24, 34, 0.06);
-    --svg-text:      #13161C;
-    --svg-accent:    rgba(244, 121, 58, 0.85);
-    --svg-highlight: rgba(87, 196, 217, 0.90);
-    --svg-secondary: rgba(20, 24, 34, 0.35);
-    --svg-glow:      rgba(244, 121, 58, 0.55);
-    --svg-border:    rgba(20, 24, 34, 0.10);
-    --svg-grid:      rgba(20, 24, 34, 0.04);
+    /* === SVG DIAGRAM TOKENS (light mode) === */
+    --svg-stroke:    rgba(15, 20, 40, 0.60);
+    --svg-fill:      rgba(15, 20, 40, 0.06);
+    --svg-text:      #0f1428;
+    --svg-accent:    rgba(15, 20, 40, 0.40);
+    --svg-highlight: rgba(10, 15, 35, 0.80);
+    --svg-secondary: rgba(10, 15, 35, 0.35);
+    --svg-glow:      rgba(10, 15, 35, 0.40);
+    --svg-border:    rgba(10, 15, 35, 0.10);
+    --svg-grid:      rgba(10, 15, 35, 0.04);
   }
 
   .dark {
-    /* === DARK MODE — Foundry canonical === */
-    --background: 220 18% 9%;           /* Tempered Steel */
-    --foreground: 210 11% 94%;          /* Ash White */
+    /* Deep navy #080d18 */
+    --background: 218 43% 6%;
+    --foreground: 40 22% 88%;
 
-    --card: 218 15% 13%;                /* Forge Graphite */
-    --card-foreground: 210 11% 94%;
+    --card: 220 40% 8%;
+    --card-foreground: 40 22% 88%;
 
-    --popover: 218 15% 13%;
-    --popover-foreground: 210 11% 94%;
+    --popover: 220 40% 8%;
+    --popover-foreground: 40 22% 88%;
 
-    --primary: 19 89% 59%;              /* Ember Amber */
-    --primary-foreground: 220 18% 9%;
+    --primary: 36 30% 92%; /* off-white #f0ece4 */
+    --primary-foreground: 218 43% 6%;
 
-    --secondary: 218 15% 15%;
-    --secondary-foreground: 210 11% 94%;
+    --secondary: 220 30% 11%;
+    --secondary-foreground: 40 22% 88%;
 
-    --muted: 218 15% 15%;
-    --muted-foreground: 220 10% 62%;    /* Slate Smoke, lifted for AA */
+    --muted: 220 30% 11%;
+    --muted-foreground: 38 8% 70%;
 
-    --accent: 19 89% 59%;
-    --accent-foreground: 220 18% 9%;
+    --accent: 36 30% 92%;
+    --accent-foreground: 218 43% 6%;
 
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 210 11% 94%;
+    --destructive: 0 62% 35%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 210 11% 94% / 0.10;
-    --input: 218 15% 16%;
-    --ring: 189 60% 60%;                /* Blueprint Cyan focus */
+    --border: 0 0% 100% / 0.15;
+    --input: 220 30% 14%;
+    --ring: 36 30% 92%;
 
-    --navy: 220 18% 9%;
-    --navy-light: 218 15% 13%;
-    --navy-deepest: 220 20% 6%;
+    --navy: 218 43% 6%;
+    --navy-light: 220 35% 10%;
+    --navy-deepest: 217 50% 5%;
+    --gold: 36 30% 92%;
+    --gold-soft: 0 0% 100% / 0.10;
+    --warm-body: 36 12% 70%;
+    --quote-italic: 36 22% 82%;
 
-    --ember: 19 89% 59%;
-    --ember-soft: 19 89% 59% / 0.14;
-    --cyan: 189 60% 60%;
-    --cyan-soft: 189 60% 60% / 0.14;
+    --shadow-sm: 0 1px 3px hsl(217 50% 3% / 0.4);
+    --shadow-md: 0 4px 20px hsl(217 50% 3% / 0.5);
+    --shadow-lg: 0 8px 40px hsl(217 50% 3% / 0.6);
+    --shadow-gold: 0 0 40px hsl(0 0% 100% / 0.12);
 
-    --gold: 19 89% 60%;                 /* Ember Amber accent alias */
-    --gold-soft: 19 89% 59% / 0.14;
+    /* === BORDER OPACITY SYSTEM (dark mode) === */
+    --border-visual: 255 255 255 / 0.10;
+    --border-global: 255 255 255 / 0.15;
+    --border-button: 255 255 255 / 0.40;
 
-    --warm-body: 220 10% 62%;
-    --quote-italic: 210 11% 88%;
+    /* === EYEBROW === */
+    --eyebrow-color: 200 50% 66%;
+    --eyebrow-line: 200 50% 66% / 0.5;
 
-    --shadow-sm: 0 1px 3px hsl(220 20% 3% / 0.5);
-    --shadow-md: 0 4px 20px hsl(220 20% 3% / 0.6);
-    --shadow-lg: 0 8px 40px hsl(220 20% 3% / 0.7);
-    --shadow-gold: 0 0 40px hsl(19 89% 59% / 0.22);
-
-    --border-visual: 210 11% 94% / 0.08;
-    --border-global: 210 11% 94% / 0.12;
-    --border-button: 210 11% 94% / 0.35;
-
-    --eyebrow-color: 189 60% 65%;       /* Blueprint Cyan eyebrow */
-    --eyebrow-line: 189 60% 65% / 0.5;
-
-    /* === SVG DIAGRAM TOKENS (dark) === */
-    --svg-stroke:    rgba(238, 240, 242, 0.70);
-    --svg-fill:      rgba(238, 240, 242, 0.06);
-    --svg-text:      #EEF0F2;
-    --svg-accent:    rgba(244, 121, 58, 0.90);
-    --svg-highlight: rgba(87, 196, 217, 0.90);
-    --svg-secondary: rgba(238, 240, 242, 0.40);
-    --svg-glow:      rgba(244, 121, 58, 0.55);
-    --svg-border:    rgba(238, 240, 242, 0.10);
-    --svg-grid:      rgba(238, 240, 242, 0.04);
+    /* === SVG DIAGRAM TOKENS (dark mode) === */
+    --svg-stroke:    rgba(255, 255, 255, 0.70);
+    --svg-fill:      rgba(255, 255, 255, 0.08);
+    --svg-text:      #f0ece4;
+    --svg-accent:    rgba(255, 255, 255, 0.50);
+    --svg-highlight: rgba(255, 255, 255, 0.85);
+    --svg-secondary: rgba(255, 255, 255, 0.40);
+    --svg-glow:      rgba(255, 255, 255, 0.50);
+    --svg-border:    rgba(255, 255, 255, 0.10);
+    --svg-grid:      rgba(255, 255, 255, 0.04);
   }
 }
 
@@ -194,15 +186,13 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
-    font-weight: 400;
+    font-weight: 300;
     font-size: 15px;
-    line-height: 1.7;
-    font-feature-settings: "ss01", "ss02", "cv01";
+    line-height: 1.75;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 600;
     letter-spacing: -0.02em;
   }
 
@@ -454,7 +444,7 @@
   }
 
   .font-quote {
-    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
     font-weight: 400;
     letter-spacing: 0.005em;
