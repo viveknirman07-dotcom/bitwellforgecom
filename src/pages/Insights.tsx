@@ -505,7 +505,16 @@ const Insights = () => {
     },
     {},
   );
-  const years = Object.keys(grouped);
+  const years = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
+  const monthIndex = (m: string) =>
+    ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].indexOf(m);
+  years.forEach((y) => {
+    grouped[y].sort((a, b) => {
+      const [ma] = a.date.split(" ");
+      const [mb] = b.date.split(" ");
+      return monthIndex(mb) - monthIndex(ma);
+    });
+  });
 
   return (
     <div className="pt-20">
