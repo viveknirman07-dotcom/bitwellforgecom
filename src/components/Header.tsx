@@ -143,13 +143,19 @@ const Header = () => {
                 >
                   <Link
                     to={item.href}
-                    className={`text-base font-medium transition-colors ${
+                    className={`text-base font-medium transition-colors inline-flex items-center gap-2 ${
                       location.pathname === item.href
                         ? "text-foreground"
                         : "text-muted-foreground"
                     }`}
                   >
                     {item.label}
+                    {item.hiring && hasActiveOpenings() && (
+                      <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.22em] uppercase text-muted-foreground">
+                        <span className="h-1.5 w-1.5 rounded-full bg-foreground/70" />
+                        Hiring
+                      </span>
+                    )}
                   </Link>
                 </motion.div>
               ))}
