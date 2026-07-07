@@ -72,7 +72,16 @@ const Header = () => {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {item.label}
+                <span className="inline-flex items-center gap-1.5">
+                  {item.label}
+                  {item.hiring && hasActiveOpenings() && (
+                    <span
+                      className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/70"
+                      aria-label="Hiring"
+                      title="We're hiring"
+                    />
+                  )}
+                </span>
                 <span
                   className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-600 ${
                     location.pathname === item.href
