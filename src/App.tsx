@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import ServiceDetail from "./pages/ServiceDetail";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyArticle from "./pages/CaseStudyArticle";
+import Careers from "./pages/Careers";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/process" element={<Process />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:slug" element={<InsightArticle />} />
+            <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
           <Route path="*" element={<NotFound />} />
