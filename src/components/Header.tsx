@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
+import { hasActiveOpenings } from "@/data/jobs";
 
 const navItems = [
   { label: "About", href: "/about" },
@@ -10,6 +11,7 @@ const navItems = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Process", href: "/process" },
   { label: "Insights", href: "/insights" },
+  { label: "Careers", href: "/careers", hiring: true },
   { label: "Contact", href: "/contact" },
 ];
 
