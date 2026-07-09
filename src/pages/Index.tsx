@@ -39,31 +39,31 @@ const problems = [
 
 const services = [
   {
-    tag: "B2B Lead Generation",
+    tag: "Client Acquisition Architecture",
     title: "From Invisible to In-Demand",
     body:
       "We design and deploy outbound and inbound systems that generate qualified conversations without paid dependency. ICP identification, message sequencing, channel architecture, and trigger-based nurture, all mapped to your specific sales cycle. The goal is not impressions. It is pipeline density.",
     visual: <DemandGraph />,
   },
   {
-    tag: "Revenue Systems",
-    title: "Offers That Close. Processes That Scale.",
+    tag: "High-Ticket Revenue Systems",
+    title: "Offers That Close. Systems That Scale.",
     body:
-      "A great product pitched poorly dies. We audit your offer architecture, reposition for market clarity, and build the sales infrastructure (scripts, sequences, objection handling, CRM logic) that converts conversations into revenue predictably. Not once. Every time.",
+      "A great offer pitched poorly dies. We audit your revenue architecture, reposition for market clarity, and build the sales infrastructure (scripts, sequences, objection handling, CRM logic) that converts conversations into revenue predictably. Not once. Every time.",
     visual: <RevenueFunnel />,
   },
   {
-    tag: "Growth Strategy",
+    tag: "Commercial Growth Strategy",
     title: "Clarity Before Campaigns",
     body:
       "Before any execution, we run a structured diagnostic. Who you are for, why you win, what makes you categorically different. These are infrastructure decisions that determine which channels you use, how you price, and who you attract. Strategy without execution is theory. Execution without strategy is expensive guessing.",
     visual: <PositioningMatrix />,
   },
   {
-    tag: "AI Automation",
+    tag: "AI-Powered Revenue Operations",
     title: "Your Team Should Work on Humans, Not Tasks",
     body:
-      "We audit your operations and identify every workflow that can be systematized. CRM updates, lead scoring, follow-up triggers, reporting pipelines, onboarding sequences. Then we build automation infrastructure using best-in-class tools so your team stops doing repeatable work and starts doing irreplaceable work.",
+      "We audit your operations and identify every workflow that can be systematized. CRM updates, lead scoring, follow-up triggers, reporting pipelines, onboarding sequences. Then we build intelligent automation using best-in-class tools so your team stops doing repeatable work and starts doing irreplaceable work.",
     visual: <AutomationFlow />,
   },
 ];
