@@ -141,7 +141,7 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     idealFor: defaultIdealFor,
-    contactService: "Growth Strategy",
+    contactService: "Commercial Growth Strategy",
   },
 
   /* ─────────────────────────────────────────── */
