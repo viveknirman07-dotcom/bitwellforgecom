@@ -338,9 +338,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "lead-generation": {
-    title: "B2B Lead Generation",
+    title: "Client Acquisition Architecture",
     subtitle:
-      "Systematic engines for enterprise-grade demand generation combining outbound precision with inbound magnetism.",
+      "Engineered acquisition infrastructure that converts market opportunity into a continuous, qualified pipeline through outbound systems, inbound engines, and disciplined qualification.",
     briefing: [
       "B2B lead generation is the demand layer of the revenue system. Its job is to deliver a continuous, qualified pipeline that the sales system can convert, at a cost and velocity the business can plan against.",
       "When this layer is engineered, pipeline coverage becomes a function of architecture rather than effort. When it is not, the business oscillates between feast and famine, and every quarter feels like it starts from zero.",
