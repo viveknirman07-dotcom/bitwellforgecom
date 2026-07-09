@@ -242,9 +242,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "performance-marketing": {
-    title: "Performance Marketing Infrastructure",
+    title: "Performance Growth",
     subtitle:
-      "Precision campaigns designed for compounding returns, not vanity metrics.",
+      "Paid acquisition operated as measurement infrastructure — attribution, creative testing, and budget architecture engineered for defensible unit economics and scalable growth.",
     briefing: [
       "Performance marketing is the most measurable layer of the acquisition system, which is also why it is the most frequently mis-operated. The discipline rewards businesses that have built the measurement, creative, and decision infrastructure underneath it, and quietly drains the ones that have not.",
       "The difference between a profitable paid programme and an expensive one is rarely the channel, the platform, or the creative. It is whether the business can attribute the spend correctly, decide against the attribution accurately, and improve the system continuously.",
