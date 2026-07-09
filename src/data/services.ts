@@ -633,7 +633,7 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     idealFor: defaultIdealFor,
-    contactService: "AI Automation & Systems",
+    contactService: "AI-Powered Revenue Operations",
   },
 
   /* ─────────────────────────────────────────── */
