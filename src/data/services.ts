@@ -50,9 +50,9 @@ const defaultIdealFor = [
 export const serviceData: Record<ServiceSlug, ServiceContent> = {
   /* ─────────────────────────────────────────── */
   "growth-strategy": {
-    title: "Growth Strategy",
+    title: "Commercial Growth Strategy",
     subtitle:
-      "A structural blueprint that aligns every channel, message, and system toward predictable, qualified demand.",
+      "A structural blueprint for commercial expansion — positioning, market entry, and growth architecture engineered to compound across every subsequent investment.",
     briefing: [
       "Growth strategy is the operating layer that determines whether every other investment compounds or dissipates. It defines what the business is acquiring, from whom, through which channels, at what economics, and against which competitive position. Without it, marketing spend, sales hires, and tooling decisions all default to instinct.",
       "Most businesses do not have a growth strategy. They have a collection of tactics inherited from previous quarters, previous agencies, and previous priorities. The result is a portfolio of activities that cannot be evaluated against a coherent thesis.",
@@ -141,14 +141,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     idealFor: defaultIdealFor,
-    contactService: "Growth Strategy",
+    contactService: "Commercial Growth Strategy",
   },
 
   /* ─────────────────────────────────────────── */
   "sales-systems": {
-    title: "High-Ticket Sales Systems",
+    title: "High-Ticket Revenue Systems",
     subtitle:
-      "Structured pipelines engineered for complex, high-value client acquisition without relying on personality or pressure.",
+      "Revenue engineering for complex, high-value deals — pipeline structure, discovery, proposal architecture, and closing systems built to scale beyond the founder.",
     briefing: [
       "High-ticket sales is the closing infrastructure of a service business. It is the system that converts strategic positioning and qualified demand into signed engagements at the prices the business actually wants to operate at.",
       "When this layer is engineered, deal economics, sales velocity, and forecasting all become structural properties of the business rather than functions of individual talent. When it is not, the business is permanently exposed to the people who happen to be selling well that quarter.",
@@ -237,14 +237,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     idealFor: defaultIdealFor,
-    contactService: "High Ticket Sales Systems",
+    contactService: "High-Ticket Revenue Systems",
   },
 
   /* ─────────────────────────────────────────── */
   "performance-marketing": {
-    title: "Performance Marketing Infrastructure",
+    title: "Performance Growth",
     subtitle:
-      "Precision campaigns designed for compounding returns, not vanity metrics.",
+      "Paid acquisition operated as measurement infrastructure — attribution, creative testing, and budget architecture engineered for defensible unit economics and scalable growth.",
     briefing: [
       "Performance marketing is the most measurable layer of the acquisition system, which is also why it is the most frequently mis-operated. The discipline rewards businesses that have built the measurement, creative, and decision infrastructure underneath it, and quietly drains the ones that have not.",
       "The difference between a profitable paid programme and an expensive one is rarely the channel, the platform, or the creative. It is whether the business can attribute the spend correctly, decide against the attribution accurately, and improve the system continuously.",
@@ -333,14 +333,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     idealFor: defaultIdealFor,
-    contactService: "Performance Marketing",
+    contactService: "Performance Growth",
   },
 
   /* ─────────────────────────────────────────── */
   "lead-generation": {
-    title: "B2B Lead Generation",
+    title: "Client Acquisition Architecture",
     subtitle:
-      "Systematic engines for enterprise-grade demand generation combining outbound precision with inbound magnetism.",
+      "Engineered acquisition infrastructure that converts market opportunity into a continuous, qualified pipeline through outbound systems, inbound engines, and disciplined qualification.",
     briefing: [
       "B2B lead generation is the demand layer of the revenue system. Its job is to deliver a continuous, qualified pipeline that the sales system can convert, at a cost and velocity the business can plan against.",
       "When this layer is engineered, pipeline coverage becomes a function of architecture rather than effort. When it is not, the business oscillates between feast and famine, and every quarter feels like it starts from zero.",
@@ -435,14 +435,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "High-Ticket Operators",
       "B2B Service Businesses",
     ],
-    contactService: "B2B Lead Generation",
+    contactService: "Client Acquisition Architecture",
   },
 
   /* ─────────────────────────────────────────── */
   "linkedin": {
-    title: "LinkedIn Positioning",
+    title: "Market Authority Positioning",
     subtitle:
-      "Authority-building frameworks for founders and executive teams that generate inbound opportunities through thought leadership.",
+      "Executive positioning that establishes commercial authority, moves buyers before the first conversation, and compounds credibility as a durable balance-sheet asset.",
     briefing: [
       "LinkedIn positioning is the most underused asset on the balance sheet of most B2B businesses. The founder, the senior partners, and the executive team carry credibility that the company brand cannot replicate, and that credibility converts at rates no paid channel approaches.",
       "What is missing in most cases is not insight, presence, or willingness. It is the operating system that converts the credibility into consistent, compounding distribution. Without it, the asset depreciates quietly while the business spends elsewhere to produce the same outcomes less efficiently.",
@@ -537,14 +537,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "Thought Leaders",
       "Advisory Firms",
     ],
-    contactService: "LinkedIn Positioning",
+    contactService: "Market Authority Positioning",
   },
 
   /* ─────────────────────────────────────────── */
   "ai-automation": {
-    title: "AI & Automation Systems",
+    title: "AI-Powered Revenue Operations",
     subtitle:
-      "Intelligent workflows that eliminate operational friction and multiply output without multiplying headcount.",
+      "Intelligent workflows and automated operations that remove operational drag and multiply team output without proportional headcount.",
     briefing: [
       "Automation is the operational leverage layer of the business. It determines how much the organisation can produce, how fast it can respond, and how consistently it can deliver, without proportional growth in headcount.",
       "Most operations are not under-automated for lack of tools. They are under-automated because the workflows themselves were never designed for automation. Tools applied to broken processes produce automated chaos at higher speed than manual chaos.",
@@ -633,14 +633,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       },
     ],
     idealFor: defaultIdealFor,
-    contactService: "AI Automation & Systems",
+    contactService: "AI-Powered Revenue Operations",
   },
 
   /* ─────────────────────────────────────────── */
   "seo": {
-    title: "SEO & Digital Visibility",
+    title: "Search & Digital Visibility",
     subtitle:
-      "Organic growth systems built on structural authority that compound visibility over time.",
+      "Structural search visibility engineered for semantic authority, long-term discoverability, and organic pipeline the business owns rather than rents.",
     briefing: [
       "SEO is the only acquisition channel that produces an appreciating asset. Every other channel rents attention. Organic visibility, built correctly, accumulates as a structural advantage the business owns.",
       "The discipline has been damaged by years of tactical noise. Most operators understand SEO as a checklist of technical fixes, keyword targets, and content production schedules. That framing is why most SEO programmes do not produce the compounding return the channel is capable of.",
@@ -734,14 +734,14 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "Consultancies",
       "Executive-Led Brands",
     ],
-    contactService: "SEO & Digital Visibility",
+    contactService: "Search & Digital Visibility",
   },
 
   /* ─────────────────────────────────────────── */
   "digital-products": {
-    title: "Digital Product Systems",
+    title: "Digital Product Commercialization",
     subtitle:
-      "End-to-end systems for launching and scaling digital products from concept to consistent revenue.",
+      "End-to-end commercialization systems that take a digital product from validation to scale — positioning, launch infrastructure, and monetization architecture engineered for recurring revenue.",
     briefing: [
       "Digital products are the leverage layer of an expertise business. They convert what the founders and senior operators already know into revenue that is not bound by their time. Built correctly, they expand the surface area of the business without diluting its positioning.",
       "Most attempts fail not because the product was wrong but because the system around the product was absent. Launches happen without validation infrastructure, pricing is set without architecture, and post-launch optimisation is improvised. The product is judged on the result, but the system was always the variable.",
@@ -835,6 +835,6 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "Productised Consultants",
       "Advisory Firms Launching IP",
     ],
-    contactService: "Digital Product Systems",
+    contactService: "Digital Product Commercialization",
   },
 };

@@ -17,90 +17,90 @@ interface ServiceModule {
 const services: ServiceModule[] = [
   {
     id: "growth-strategy",
-    title: "Growth Strategy",
-    layer: "Strategic Layer",
+    title: "Commercial Growth Strategy",
+    layer: "Strategy Layer",
     solves:
-      "Market confusion, weak positioning, and channel misalignment that quietly compound across every acquisition effort.",
+      "Fragmented positioning, unclear market focus, and growth decisions made without an underlying commercial thesis.",
     builds:
-      "Growth architecture, positioning systems, and a coherent go-to-market framework aligned to the business model.",
-    creates: "Predictable demand from a defined market segment.",
-    idealFor: "Consultants. Agencies. B2B service firms.",
+      "Business positioning, go-to-market architecture, market expansion planning, and a strategic decision framework the business operates against.",
+    creates: "A commercial thesis every subsequent investment compounds against.",
+    idealFor: "Founders. Executives. B2B service firms scaling past inflection.",
   },
   {
     id: "lead-generation",
-    title: "B2B Lead Generation",
+    title: "Client Acquisition Architecture",
     layer: "Acquisition Layer",
     solves:
-      "Pipelines that depend on referrals, paid channels, or single platforms. Demand that arrives in unpredictable waves.",
+      "Pipelines dependent on referrals, single channels, or personal networks. Demand that arrives unpredictably.",
     builds:
-      "Outbound systems, inbound sequencing, ICP architecture, and channel orchestration mapped to a defined sales cycle.",
-    creates: "Qualified conversations on a forecastable cadence.",
-    idealFor: "Advisory firms. Boutique agencies. Executive-led brands.",
+      "Outbound systems, inbound engines, qualification frameworks, appointment infrastructure, and channel orchestration mapped to the sales cycle.",
+    creates: "Predictable qualified conversations, engineered as infrastructure.",
+    idealFor: "Advisory firms. Boutique agencies. Executive-led B2B brands.",
   },
   {
     id: "sales-systems",
-    title: "High-Ticket Sales Systems",
-    layer: "Conversion Layer",
+    title: "High-Ticket Revenue Systems",
+    layer: "Revenue Layer",
     solves:
-      "Inconsistent close rates, pricing erosion, and proposals that rely on the founder's presence to convert.",
+      "Inconsistent close rates, price erosion, and revenue outcomes that depend on individual talent rather than shared infrastructure.",
     builds:
-      "Qualification frameworks, discovery architecture, objection systems, proposal logic, and CRM stage mechanics.",
-    creates: "Conversion that is repeatable across operators.",
-    idealFor: "Consulting practices. Coaches. B2B specialists.",
+      "Revenue engine design, discovery architecture, proposal logic, CRM workflows, and closing systems that operate independently of any single seller.",
+    creates: "Repeatable conversion at the price point the business intends to hold.",
+    idealFor: "Consulting practices. Advisors. High-ticket B2B specialists.",
   },
   {
     id: "linkedin",
-    title: "LinkedIn Positioning",
+    title: "Market Authority Positioning",
     layer: "Authority Layer",
     solves:
-      "Anonymous presence in a market where buyers research before they reply. Posts without a positioning thesis.",
+      "Anonymous presence in categories where buyers evaluate credibility long before they respond.",
     builds:
-      "Content architecture, engagement systems, and an authority flywheel tuned for the buyer the practice actually wants.",
-    creates: "Inbound opportunities from senior decision makers.",
+      "Executive positioning, founder branding, thought leadership architecture, and content systems engineered to convert perception into pipeline.",
+    creates: "Inbound demand from senior buyers who already trust the brand.",
     idealFor: "Founders. Executives. Independent advisors.",
   },
   {
     id: "ai-automation",
-    title: "AI & Automation Systems",
-    layer: "Operational Layer",
+    title: "AI-Powered Revenue Operations",
+    layer: "Operations Layer",
     solves:
       "Manual repetition, fragmented data, and operational drag that scales linearly with revenue.",
     builds:
-      "Workflow engines, lead scoring logic, CRM automations, reporting pipelines, and AI-assisted qualification.",
-    creates: "Operational leverage that multiplies team output.",
+      "Automation workflows, AI-assisted lead routing, CRM automation, reporting systems, and intelligent operational processes.",
+    creates: "Operational leverage that multiplies team capacity without adding headcount.",
     idealFor: "Service businesses. Operations-heavy practices.",
   },
   {
     id: "seo",
-    title: "SEO & Digital Visibility",
+    title: "Search & Digital Visibility",
     layer: "Visibility Layer",
     solves:
-      "Invisible practices in search. Content that ranks for nothing the buyer is actually looking for.",
+      "Invisibility in the searches buyers actually run. Content that ranks for nothing commercially relevant.",
     builds:
-      "Technical foundations, semantic content architecture, and authority frameworks engineered to compound.",
-    creates: "Visibility that grows in value the longer it runs.",
+      "Technical SEO, semantic content architecture, topical authority, and long-horizon search infrastructure the business owns.",
+    creates: "Organic visibility that appreciates as an asset the business owns.",
     idealFor: "Knowledge businesses. Long-cycle advisory practices.",
   },
   {
     id: "performance-marketing",
-    title: "Performance Marketing Infrastructure",
+    title: "Performance Growth",
     layer: "Performance Layer",
     solves:
-      "Ad spend that produces clicks but not pipeline. Vanity metrics that obscure the underlying economics.",
+      "Paid spend that produces clicks without pipeline, and vanity metrics that obscure the underlying unit economics.",
     builds:
-      "Measurement frameworks, creative systems, attribution logic, and optimization protocols built into the funnel.",
-    creates: "Ad spend that behaves like infrastructure, not expense.",
+      "Attribution frameworks, creative testing systems, conversion optimization, and budget architecture engineered around measurable growth.",
+    creates: "Paid acquisition that behaves like infrastructure, not expense.",
     idealFor: "Scaled service firms. Brands with established offer-market fit.",
   },
   {
     id: "digital-products",
-    title: "Digital Product Systems",
+    title: "Digital Product Commercialization",
     layer: "Product Layer",
     solves:
-      "Launches that depend on energy. Products that surge and then stall once attention moves elsewhere.",
+      "Launches driven by energy that stall the moment attention shifts elsewhere.",
     builds:
-      "Validation systems, launch infrastructure, conversion architecture, and post-launch retention loops.",
-    creates: "Recurring revenue from productized offers.",
+      "Digital product strategy, validation systems, launch infrastructure, monetization architecture, and post-launch scaling loops.",
+    creates: "Recurring revenue from productized expertise, engineered to scale.",
     idealFor: "Experts productizing expertise. Founders scaling beyond services.",
   },
 ];
@@ -154,7 +154,10 @@ const Services = () => {
                         </span>
                       </div>
                       <h2 className="font-heading text-2xl md:text-[28px] font-semibold text-foreground tracking-tightest leading-[1.15] group-hover:text-gold/95 transition-colors duration-400">
-                        {s.title}
+                        {s.title.split(" ").slice(0, -1).join(" ")}{" "}
+                        <span className="font-quote italic text-gold/95 font-normal">
+                          {s.title.split(" ").slice(-1)[0]}
+                        </span>
                       </h2>
                     </div>
                     <ArrowRight

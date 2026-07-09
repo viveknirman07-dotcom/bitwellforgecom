@@ -24,16 +24,39 @@ const Grid = ({ w = 240, h = 160, opacity = 0.16 }: { w?: number; h?: number; op
 );
 
 const PanelFrame = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="relative w-full rounded-xl border border-gold/15 bg-card/40 backdrop-blur-sm overflow-hidden">
-    <div className="flex items-center justify-between px-5 py-3 border-b border-gold/10">
-      <div className="flex items-center gap-2.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
-        <span className="text-[10px] tracking-[0.28em] uppercase text-gold/70 font-medium">{label}</span>
+  <div className="relative w-full">
+    {/* Header row: eyebrow + framework marker */}
+    <div className="flex items-baseline justify-between mb-5">
+      <div className="flex items-center gap-3">
+        <span className="w-4 h-px bg-gold/60" />
+        <span className="text-[10px] tracking-[0.32em] uppercase text-gold/75 font-medium">
+          {label}
+        </span>
       </div>
-      <span className="text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 font-mono">LIVE</span>
+      <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/50 font-mono">
+        Framework · v2
+      </span>
     </div>
-    <div className="aspect-[3/2] w-full text-foreground/75">
+
+    {/* Diagram surface — completely borderless */}
+    <div className="aspect-[3/2] w-full text-foreground/80">
       {children}
+    </div>
+
+    {/* Footer meta ribbon */}
+    <div className="mt-5 flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+          Node Topology
+        </span>
+        <span className="h-px w-10 bg-gold/20" />
+        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+          Flow Architecture
+        </span>
+      </div>
+      <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+        Continuous Signal
+      </span>
     </div>
   </div>
 );
@@ -538,15 +561,19 @@ export const StrategyTransformation = () => {
 
 export const SystemApproachDiagram = ({ items }: { items: string[] }) => {
   return (
-    <div className="relative rounded-xl border border-gold/15 bg-card/40 backdrop-blur-sm overflow-hidden">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-gold/10">
-        <div className="flex items-center gap-2.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
-          <span className="text-[10px] tracking-[0.28em] uppercase text-gold/70 font-medium">System Architecture</span>
+    <div className="relative w-full">
+      <div className="flex items-baseline justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <span className="w-4 h-px bg-gold/60" />
+          <span className="text-[10px] tracking-[0.32em] uppercase text-gold/75 font-medium">
+            System Architecture
+          </span>
         </div>
-        <span className="text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 font-mono">{items.length} MODULES · INTERCONNECTED</span>
+        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/50 font-mono">
+          {items.length} Modules · Interconnected
+        </span>
       </div>
-      <div className="relative px-6 py-8 md:px-10 md:py-12">
+      <div className="relative px-1 py-2 md:px-2 md:py-3">
         {/* connecting spine */}
         <div className="absolute left-[34px] md:left-[46px] top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent" aria-hidden />
         <ul className="space-y-5 md:space-y-6">

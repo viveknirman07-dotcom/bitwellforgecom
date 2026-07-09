@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTABlock from "@/components/CTABlock";
 import IdealFor from "@/components/services/IdealFor";
-import ImplementationProof, { type ProofType } from "@/components/services/ImplementationProof";
 import { ServiceHero } from "@/components/services/ServiceVisuals";
 import { serviceData, type ServiceSlug } from "@/data/services";
 
@@ -203,13 +202,12 @@ const ServiceDetail = () => {
 
           <Divider />
 
-          {/* ── Implementation Snapshot (single retained diagram) */}
-          <ImplementationProof type={slug as ProofType} />
-
           {/* ── Ideal For */}
           <IdealFor items={service.idealFor} />
         </div>
       </section>
+
+
 
       <ScrollReveal>
         <CTABlock service={service.contactService} />

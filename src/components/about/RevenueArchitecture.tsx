@@ -6,12 +6,12 @@ import { useState } from "react";
  * Hover a node to highlight the connection back to the core.
  */
 const nodes = [
-  { id: "growth", label: "Growth Strategy", angle: -90 },
-  { id: "lead", label: "Lead Generation", angle: -30 },
-  { id: "sales", label: "Sales Infrastructure", angle: 30 },
-  { id: "linkedin", label: "LinkedIn Positioning", angle: 90 },
-  { id: "automation", label: "Automation", angle: 150 },
-  { id: "seo", label: "SEO", angle: 210 },
+  { id: "growth", label: "Commercial Growth Strategy", angle: -90 },
+  { id: "lead", label: "Client Acquisition Architecture", angle: -30 },
+  { id: "sales", label: "High-Ticket Revenue Systems", angle: 30 },
+  { id: "linkedin", label: "Market Authority Positioning", angle: 90 },
+  { id: "automation", label: "AI-Powered Revenue Operations", angle: 150 },
+  { id: "seo", label: "Search & Digital Visibility", angle: 210 },
 ];
 
 const RADIUS = 165;
