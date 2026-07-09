@@ -440,9 +440,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "linkedin": {
-    title: "LinkedIn Positioning",
+    title: "Market Authority Positioning",
     subtitle:
-      "Authority-building frameworks for founders and executive teams that generate inbound opportunities through thought leadership.",
+      "Executive positioning that establishes commercial authority, moves buyers before the first conversation, and compounds credibility as a durable balance-sheet asset.",
     briefing: [
       "LinkedIn positioning is the most underused asset on the balance sheet of most B2B businesses. The founder, the senior partners, and the executive team carry credibility that the company brand cannot replicate, and that credibility converts at rates no paid channel approaches.",
       "What is missing in most cases is not insight, presence, or willingness. It is the operating system that converts the credibility into consistent, compounding distribution. Without it, the asset depreciates quietly while the business spends elsewhere to produce the same outcomes less efficiently.",
