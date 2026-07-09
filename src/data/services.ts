@@ -835,6 +835,6 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "Productised Consultants",
       "Advisory Firms Launching IP",
     ],
-    contactService: "Digital Product Systems",
+    contactService: "Digital Product Commercialization",
   },
 };
