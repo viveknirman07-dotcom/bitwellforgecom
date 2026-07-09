@@ -146,9 +146,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "sales-systems": {
-    title: "High-Ticket Sales Systems",
+    title: "High-Ticket Revenue Systems",
     subtitle:
-      "Structured pipelines engineered for complex, high-value client acquisition without relying on personality or pressure.",
+      "Revenue engineering for complex, high-value deals — pipeline structure, discovery, proposal architecture, and closing systems built to scale beyond the founder.",
     briefing: [
       "High-ticket sales is the closing infrastructure of a service business. It is the system that converts strategic positioning and qualified demand into signed engagements at the prices the business actually wants to operate at.",
       "When this layer is engineered, deal economics, sales velocity, and forecasting all become structural properties of the business rather than functions of individual talent. When it is not, the business is permanently exposed to the people who happen to be selling well that quarter.",
