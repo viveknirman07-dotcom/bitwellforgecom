@@ -739,9 +739,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "digital-products": {
-    title: "Digital Product Systems",
+    title: "Digital Product Commercialization",
     subtitle:
-      "End-to-end systems for launching and scaling digital products from concept to consistent revenue.",
+      "End-to-end commercialization systems that take a digital product from validation to scale — positioning, launch infrastructure, and monetization architecture engineered for recurring revenue.",
     briefing: [
       "Digital products are the leverage layer of an expertise business. They convert what the founders and senior operators already know into revenue that is not bound by their time. Built correctly, they expand the surface area of the business without diluting its positioning.",
       "Most attempts fail not because the product was wrong but because the system around the product was absent. Launches happen without validation infrastructure, pricing is set without architecture, and post-launch optimisation is improvised. The product is judged on the result, but the system was always the variable.",
