@@ -50,9 +50,9 @@ const defaultIdealFor = [
 export const serviceData: Record<ServiceSlug, ServiceContent> = {
   /* ─────────────────────────────────────────── */
   "growth-strategy": {
-    title: "Growth Strategy",
+    title: "Commercial Growth Strategy",
     subtitle:
-      "A structural blueprint that aligns every channel, message, and system toward predictable, qualified demand.",
+      "A structural blueprint for commercial expansion — positioning, market entry, and growth architecture engineered to compound across every subsequent investment.",
     briefing: [
       "Growth strategy is the operating layer that determines whether every other investment compounds or dissipates. It defines what the business is acquiring, from whom, through which channels, at what economics, and against which competitive position. Without it, marketing spend, sales hires, and tooling decisions all default to instinct.",
       "Most businesses do not have a growth strategy. They have a collection of tactics inherited from previous quarters, previous agencies, and previous priorities. The result is a portfolio of activities that cannot be evaluated against a coherent thesis.",
