@@ -8,14 +8,14 @@ const serviceOptions = [
   "General Inquiry",
   "Diagnose My Growth System",
   "Book Infrastructure Audit",
-  "Growth Strategy",
-  "B2B Lead Generation",
-  "High Ticket Sales Systems",
-  "LinkedIn Positioning",
-  "AI Automation & Systems",
-  "Performance Marketing",
-  "SEO & Digital Visibility",
-  "Digital Product Systems",
+  "Commercial Growth Strategy",
+  "Client Acquisition Architecture",
+  "High-Ticket Revenue Systems",
+  "Market Authority Positioning",
+  "AI-Powered Revenue Operations",
+  "Search & Digital Visibility",
+  "Performance Growth",
+  "Digital Product Commercialization",
 ];
 
 const Contact = () => {
