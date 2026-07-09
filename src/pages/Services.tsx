@@ -154,7 +154,10 @@ const Services = () => {
                         </span>
                       </div>
                       <h2 className="font-heading text-2xl md:text-[28px] font-semibold text-foreground tracking-tightest leading-[1.15] group-hover:text-gold/95 transition-colors duration-400">
-                        {s.title}
+                        {s.title.split(" ").slice(0, -1).join(" ")}{" "}
+                        <span className="font-quote italic text-gold/95 font-normal">
+                          {s.title.split(" ").slice(-1)[0]}
+                        </span>
                       </h2>
                     </div>
                     <ArrowRight
