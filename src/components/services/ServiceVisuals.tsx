@@ -24,16 +24,39 @@ const Grid = ({ w = 240, h = 160, opacity = 0.16 }: { w?: number; h?: number; op
 );
 
 const PanelFrame = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="relative w-full rounded-xl border border-gold/15 bg-card/40 backdrop-blur-sm overflow-hidden">
-    <div className="flex items-center justify-between px-5 py-3 border-b border-gold/10">
-      <div className="flex items-center gap-2.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
-        <span className="text-[10px] tracking-[0.28em] uppercase text-gold/70 font-medium">{label}</span>
+  <div className="relative w-full">
+    {/* Header row: eyebrow + framework marker */}
+    <div className="flex items-baseline justify-between mb-5">
+      <div className="flex items-center gap-3">
+        <span className="w-4 h-px bg-gold/60" />
+        <span className="text-[10px] tracking-[0.32em] uppercase text-gold/75 font-medium">
+          {label}
+        </span>
       </div>
-      <span className="text-[9px] tracking-[0.25em] uppercase text-muted-foreground/50 font-mono">LIVE</span>
+      <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/50 font-mono">
+        Framework · v2
+      </span>
     </div>
-    <div className="aspect-[3/2] w-full text-foreground/75">
+
+    {/* Diagram surface — completely borderless */}
+    <div className="aspect-[3/2] w-full text-foreground/80">
       {children}
+    </div>
+
+    {/* Footer meta ribbon */}
+    <div className="mt-5 flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+          Node Topology
+        </span>
+        <span className="h-px w-10 bg-gold/20" />
+        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+          Flow Architecture
+        </span>
+      </div>
+      <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+        Continuous Signal
+      </span>
     </div>
   </div>
 );
