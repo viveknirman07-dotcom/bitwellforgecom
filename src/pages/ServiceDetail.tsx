@@ -202,13 +202,12 @@ const ServiceDetail = () => {
 
           <Divider />
 
-          {/* ── Implementation Snapshot (single retained diagram) */}
-          <ImplementationProof type={slug as ProofType} />
-
           {/* ── Ideal For */}
           <IdealFor items={service.idealFor} />
         </div>
       </section>
+
+
 
       <ScrollReveal>
         <CTABlock service={service.contactService} />
