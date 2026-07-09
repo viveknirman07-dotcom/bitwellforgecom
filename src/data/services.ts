@@ -537,7 +537,7 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "Thought Leaders",
       "Advisory Firms",
     ],
-    contactService: "LinkedIn Positioning",
+    contactService: "Market Authority Positioning",
   },
 
   /* ─────────────────────────────────────────── */
