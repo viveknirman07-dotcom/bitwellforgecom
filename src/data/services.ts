@@ -435,7 +435,7 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
       "High-Ticket Operators",
       "B2B Service Businesses",
     ],
-    contactService: "B2B Lead Generation",
+    contactService: "Client Acquisition Architecture",
   },
 
   /* ─────────────────────────────────────────── */
