@@ -638,9 +638,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "seo": {
-    title: "SEO & Digital Visibility",
+    title: "Search & Digital Visibility",
     subtitle:
-      "Organic growth systems built on structural authority that compound visibility over time.",
+      "Structural search visibility engineered for semantic authority, long-term discoverability, and organic pipeline the business owns rather than rents.",
     briefing: [
       "SEO is the only acquisition channel that produces an appreciating asset. Every other channel rents attention. Organic visibility, built correctly, accumulates as a structural advantage the business owns.",
       "The discipline has been damaged by years of tactical noise. Most operators understand SEO as a checklist of technical fixes, keyword targets, and content production schedules. That framing is why most SEO programmes do not produce the compounding return the channel is capable of.",
