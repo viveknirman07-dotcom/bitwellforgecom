@@ -542,9 +542,9 @@ export const serviceData: Record<ServiceSlug, ServiceContent> = {
 
   /* ─────────────────────────────────────────── */
   "ai-automation": {
-    title: "AI & Automation Systems",
+    title: "AI-Powered Revenue Operations",
     subtitle:
-      "Intelligent workflows that eliminate operational friction and multiply output without multiplying headcount.",
+      "Intelligent workflows and automated operations that remove operational drag and multiply team output without proportional headcount.",
     briefing: [
       "Automation is the operational leverage layer of the business. It determines how much the organisation can produce, how fast it can respond, and how consistently it can deliver, without proportional growth in headcount.",
       "Most operations are not under-automated for lack of tools. They are under-automated because the workflows themselves were never designed for automation. Tools applied to broken processes produce automated chaos at higher speed than manual chaos.",
