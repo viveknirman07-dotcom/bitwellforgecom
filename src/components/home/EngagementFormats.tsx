@@ -3,15 +3,15 @@ import ScrollReveal from "@/components/ScrollReveal";
 const formats = [
   {
     title: "Strategic Advisory",
-    body: "Systems architecture, positioning clarity, and operational growth strategy.",
+    body: "Positioning clarity, commercial architecture, and growth strategy shaped alongside your leadership.",
   },
   {
-    title: "Infrastructure Implementation",
-    body: "Done-for-you deployment of acquisition, automation, revenue, and operational systems.",
+    title: "Architecture Implementation",
+    body: "Done-with-you deployment of acquisition, sales, automation, and reporting layers, engineered end to end.",
   },
   {
     title: "Ongoing Optimization",
-    body: "Continuous refinement, reporting, scaling, and systems management.",
+    body: "Continuous refinement, measurement, and scaling. The architecture matures as the business grows.",
   },
 ];
 
