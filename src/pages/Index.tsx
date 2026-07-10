@@ -18,21 +18,21 @@ import EngagementFormats from "@/components/home/EngagementFormats";
 
 const problems = [
   {
-    title: "Leaky Pipelines",
+    title: "Leaking Pipelines",
     description:
-      "Leads enter but rarely progress. No structured follow-up, no system qualification. Revenue is lost in silence.",
+      "Qualified interest enters the top of the funnel and quietly disappears before it becomes revenue. Without structured qualification, the highest-value conversations are the ones that never happen.",
     diagram: <LeakyFunnel />,
   },
   {
-    title: "Channel Dependency",
+    title: "Single-Channel Dependency",
     description:
-      "Growth tied to one platform, one person, or one campaign. When it stops, everything stops.",
+      "Commercial growth tied to one platform, one operator, or one campaign. When the channel wavers, so does the business. Durable revenue never sits on a single wire.",
     diagram: <ChannelWire />,
   },
   {
-    title: "No Feedback Loop",
+    title: "Absent Feedback Intelligence",
     description:
-      "Money goes out, some results come back, but no one knows what actually worked or why.",
+      "Effort goes out, outcomes come back, and the connection between the two remains invisible. Growth without measurement is a rehearsal that never becomes a performance.",
     diagram: <FeedbackLoop />,
   },
 ];
@@ -42,74 +42,74 @@ const services = [
     tag: "Client Acquisition Architecture",
     title: "From Invisible to In-Demand",
     body:
-      "We design and deploy outbound and inbound systems that generate qualified conversations without paid dependency. ICP identification, message sequencing, channel architecture, and trigger-based nurture, all mapped to your specific sales cycle. The goal is not impressions. It is pipeline density.",
+      "Outbound sequencing, inbound demand capture, and trigger-based nurture designed against your specific sales cycle. ICP definition, channel selection, and message architecture engineered for pipeline density rather than surface reach.",
     visual: <DemandGraph />,
   },
   {
     tag: "High-Ticket Revenue Systems",
-    title: "Offers That Close. Systems That Scale.",
+    title: "Offers That Close. Sales Motions That Compound.",
     body:
-      "A great offer pitched poorly dies. We audit your revenue architecture, reposition for market clarity, and build the sales infrastructure (scripts, sequences, objection handling, CRM logic) that converts conversations into revenue predictably. Not once. Every time.",
+      "A precise commercial offer, a repeatable discovery motion, and the conversion architecture behind it. Scripts, sequencing, objection handling, and CRM logic tuned so revenue behaves predictably instead of episodically.",
     visual: <RevenueFunnel />,
   },
   {
     tag: "Commercial Growth Strategy",
     title: "Clarity Before Campaigns",
     body:
-      "Before any execution, we run a structured diagnostic. Who you are for, why you win, what makes you categorically different. These are infrastructure decisions that determine which channels you use, how you price, and who you attract. Strategy without execution is theory. Execution without strategy is expensive guessing.",
+      "A structured diagnostic that resolves positioning, pricing, and category before any execution begins. Strategy grounds every downstream decision in commercial logic rather than in preference.",
     visual: <PositioningMatrix />,
   },
   {
     tag: "AI-Powered Revenue Operations",
-    title: "Your Team Should Work on Humans, Not Tasks",
+    title: "Human Attention on Human Work",
     body:
-      "We audit your operations and identify every workflow that can be systematized. CRM updates, lead scoring, follow-up triggers, reporting pipelines, onboarding sequences. Then we build intelligent automation using best-in-class tools so your team stops doing repeatable work and starts doing irreplaceable work.",
+      "An operations audit that identifies every workflow suitable for automation, then intelligent execution across scoring, routing, nurture, and reporting. Your team stops touching repeatable tasks and starts owning irreplaceable ones.",
     visual: <AutomationFlow />,
   },
 ];
 
 const stats = [
-  { value: 11, suffix: "", label: "Qualified calls in 6 weeks", sub: "from zero outbound" },
-  { value: 4800, prefix: "$", label: "Closed in 30 days", sub: "with zero ad spend" },
-  { value: 3, suffix: "×", label: "Pipeline growth", sub: "in 90 days" },
+  { value: 11, suffix: "", label: "Qualified calls in 6 weeks", sub: "from a standing start" },
+  { value: 4800, prefix: "$", label: "Closed in 30 days", sub: "with zero paid spend" },
+  { value: 3, suffix: "×", label: "Pipeline density", sub: "within 90 days" },
   { value: 14, suffix: " hrs", label: "Reclaimed weekly", sub: "through automation" },
 ];
 
 const testimonials = [
   {
     quote:
-      "Before BitwellForge, I was posting, cold emailing, and hoping. Six weeks into our engagement, I had 11 qualified calls booked from a structured outreach sequence I didn't have to touch daily. That is not luck. That is infrastructure.",
+      "Before BitwellForge, I was posting, cold emailing, and hoping. Six weeks into our engagement I had eleven qualified calls on the calendar from an outreach motion I no longer had to run daily. That is not luck. That is architecture.",
     author: "Marcus T.",
     role: "B2B Consulting Firm Founder",
   },
   {
     quote:
-      "I'd been sitting on a high-ticket offer for three months, unsure how to sell it. They repositioned it, wrote the DM sequence, and coached me through the pitch. I closed $4,800 in the first 30 days using nothing but organic conversations.",
+      "I had been sitting on a high-ticket offer for three months, unsure how to sell it. They rebuilt the positioning, wrote the conversation sequence, and coached me through the pitch. I closed $4,800 in the first thirty days on organic conversations alone.",
     author: "Danielle R.",
     role: "Executive Coach",
   },
   {
     quote:
-      "I was spending 20+ hours a week on tasks a system should handle. After the automation audit, that number dropped to under six. I'm doing the same client volume with a fraction of the operational drag.",
+      "I was spending twenty hours a week on operational work that should never have touched me. After the automation build, that number dropped below six. Same client volume, a fraction of the operational drag.",
     author: "James O.",
     role: "Independent Consultant",
   },
 ];
 
 const faqItems = [
-  { question: "Do I need a large team or big budget to work with BitwellForge", answer: "No. Most of our clients start as solo operators or small teams. We build systems that work with the resources you already have and scale as your business grows." },
-  { question: "How is this different from hiring a marketing agency", answer: "A typical agency runs campaigns for you. We build the infrastructure that makes all your acquisition efforts compound over time. You own the system. It runs whether or not we are actively involved." },
-  { question: "How long before I start seeing results", answer: "Most clients see pipeline movement within the first 30 to 45 days. Full system compounding typically becomes visible between 60 and 90 days depending on the engagement." },
-  { question: "Do you work with businesses outside India", answer: "Yes. We work with clients across multiple countries. Our systems are built for remote collaboration and are not limited by geography." },
-  { question: "What does the process look like after I reach out", answer: "We start with a discovery call to understand your business, goals, and current acquisition situation. From there we map out a system tailored to your specific needs before any engagement begins." },
+  { question: "Do I need a large team or a large budget to work with BitwellForge", answer: "No. Most of our clients begin as solo operators or small teams. We build against the resources you already have and scale the architecture as commercial capacity grows." },
+  { question: "How is this different from hiring a marketing agency", answer: "An agency runs campaigns on your behalf. We build the commercial architecture that makes every acquisition effort compound. You own the operating layer and it continues to work whether or not we are actively involved." },
+  { question: "How long before results become visible", answer: "Most engagements show pipeline movement within thirty to forty-five days. Full compounding across acquisition, sales, and operations typically becomes visible between sixty and ninety days depending on scope." },
+  { question: "Do you work with businesses outside India", answer: "Yes. We operate across multiple markets. Our engagements are built for remote collaboration and are not constrained by geography." },
+  { question: "What happens after I reach out", answer: "We open with a discovery conversation to understand your business, your commercial context, and your current acquisition posture. From there we map the architecture we would build before any engagement begins." },
 ];
 
 const Index = () => {
   const reduced = useReducedMotion();
   useSEO({
-    title: "BitwellForge | Revenue Infrastructure Built to Compound",
+    title: "BitwellForge | Commercial Growth Consultancy for B2B Businesses",
     description:
-      "BitwellForge engineers demand infrastructure for B2B businesses. Lead generation, revenue systems, growth strategy, and AI automation built to compound.",
+      "BitwellForge builds commercial growth architecture for agencies, consultants, and B2B service businesses. Client acquisition, revenue systems, positioning, and AI-powered operations engineered to compound.",
     canonicalPath: "/",
   });
 
@@ -128,7 +128,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              Revenue Infrastructure · Built to Compound
+              Commercial Growth Consultancy · Engineered to Compound
             </motion.p>
 
             <motion.h1
@@ -137,9 +137,9 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              We Don't Run Campaigns.
+              Growth is not a campaign.
               <br />
-              <span className="font-quote italic text-foreground/95">We Build Systems.</span>
+              <span className="font-quote italic text-foreground/95">It is an architecture.</span>
             </motion.h1>
 
             <motion.p
@@ -148,7 +148,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
             >
-              BitwellForge engineers the demand infrastructure that moves businesses from inconsistent revenue to predictable, compounding growth without burning budget on tactics that don't connect.
+              BitwellForge is a commercial growth consultancy for agencies, consultants, and B2B service businesses. We build the acquisition, sales, positioning, and operational architecture that moves companies from inconsistent revenue to durable, compounding growth.
             </motion.p>
 
             <motion.div
@@ -186,20 +186,20 @@ const Index = () => {
             <div className="lg:col-span-7">
               <ScrollReveal>
                 <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
-                  What's Actually Broken
+                  What Is Actually Broken
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={100}>
                 <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
-                  Most businesses don't have a growth problem. They have a{" "}
-                  <span className="font-quote italic text-gold/95">systems</span> problem.
+                  Most businesses do not have a growth problem. They have an{" "}
+                  <span className="font-quote italic text-gold/95">architecture</span> problem.
                 </h2>
               </ScrollReveal>
             </div>
             <div className="lg:col-span-5">
               <ScrollReveal delay={200}>
                 <p className="text-muted-foreground text-[14.5px] md:text-[15.5px] leading-[1.85] font-light">
-                  You're generating leads but they don't convert consistently. You've tried outbound but it burned out your team. You've spent on ads but the pipeline dried up the moment the budget paused. The issue isn't effort. The issue is that your revenue engine was never engineered. It was assembled.
+                  Leads arrive but do not convert. Outbound gets started and quietly exhausts the team. Paid spend produces movement, then dries up the moment budget pauses. The issue is rarely effort. It is that the commercial engine was assembled from tactics rather than engineered as a whole.
                 </p>
               </ScrollReveal>
             </div>
@@ -221,18 +221,18 @@ const Index = () => {
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
             <ScrollReveal>
               <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
-                What We Engineer
+                What We Build
               </p>
             </ScrollReveal>
             <ScrollReveal delay={100}>
               <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance mb-6">
-                Four integrated systems. One{" "}
+                Four commercial disciplines. One{" "}
                 <span className="font-quote italic text-gold/95">compounding</span> growth engine.
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={180}>
               <p className="text-muted-foreground text-[15px] leading-[1.8] font-light">
-                We don't offer standalone tactics. Every engagement builds interlocking infrastructure designed to grow in value the longer it operates.
+                Acquisition, revenue, positioning, and operations engineered as interlocking layers. Every layer strengthens the next, and value accrues the longer the architecture operates.
               </p>
             </ScrollReveal>
           </div>
@@ -256,7 +256,7 @@ const Index = () => {
             </ScrollReveal>
             <ScrollReveal delay={100}>
               <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
-                The numbers speak to the system,{" "}
+                The numbers speak to the architecture,{" "}
                 <span className="font-quote italic text-gold/95">not the effort.</span>
               </h2>
             </ScrollReveal>
@@ -291,7 +291,7 @@ const Index = () => {
             </ScrollReveal>
             <ScrollReveal delay={100}>
               <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance font-quote italic">
-                What changes when the system works
+                What changes when the architecture holds
               </h2>
             </ScrollReveal>
           </div>

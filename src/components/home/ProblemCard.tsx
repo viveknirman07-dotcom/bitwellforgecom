@@ -11,14 +11,17 @@ interface Props {
 const ProblemCard = ({ title, description, diagram, delay = 0 }: Props) => {
   return (
     <ScrollReveal delay={delay} variant="fade">
-      <div className="group relative h-full p-7 md:p-8 border border-gold/20 bg-card/40 backdrop-blur-sm transition-all duration-700 hover:border-gold/45 hover:-translate-y-1 hover:bg-card/60 flex flex-col">
-        {/* Corner accents */}
-        <span className="absolute top-0 left-0 w-3 h-3 border-l border-t border-gold/60" />
-        <span className="absolute top-0 right-0 w-3 h-3 border-r border-t border-gold/60" />
-        <span className="absolute bottom-0 left-0 w-3 h-3 border-l border-b border-gold/60" />
-        <span className="absolute bottom-0 right-0 w-3 h-3 border-r border-b border-gold/60" />
+      <div className="group relative h-full pt-7 md:pt-8 border-t border-gold/25 transition-all duration-500 hover:border-gold/60 flex flex-col">
+        {/* Blueprint meta ribbon */}
+        <div className="flex items-center justify-between mb-5">
+          <span className="text-[9px] tracking-[0.32em] uppercase text-gold/70 font-medium">
+            Diagnostic
+          </span>
+          <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
+            Continuous Signal
+          </span>
+        </div>
 
-        {/* Text first */}
         <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 tracking-tightest">
           {title}
         </h3>
@@ -26,13 +29,12 @@ const ProblemCard = ({ title, description, diagram, delay = 0 }: Props) => {
           {description}
         </p>
 
-        {/* Diagram below — matches ServiceFeature sizing exactly */}
+        {/* Borderless diagram surface */}
         <div
-          className="diagram-frame aspect-[4/3] md:aspect-[5/3] mt-auto"
+          className="diagram-frame aspect-[4/3] md:aspect-[5/3] mt-auto transition-opacity duration-500 group-hover:opacity-100 opacity-90"
           style={{ color: "var(--svg-stroke)" }}
         >
-          <div className="diagram-grid" />
-          <div className="relative w-full h-full flex items-center justify-center p-6">
+          <div className="relative w-full h-full flex items-center justify-center p-3">
             {diagram}
           </div>
         </div>

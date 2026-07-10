@@ -3,28 +3,28 @@ import ScrollReveal from "@/components/ScrollReveal";
 const steps = [
   {
     n: "01",
-    title: "Infrastructure Audit",
-    body: "Identify gaps across acquisition, conversion, and operational systems. Map the bottlenecks holding revenue back.",
+    title: "Commercial Audit",
+    body: "A structured diagnostic across acquisition, conversion, positioning, and operations. We map where revenue is created and where it quietly leaks.",
   },
   {
     n: "02",
-    title: "System Diagnosis",
-    body: "Strategic review of positioning, channel architecture, and growth infrastructure against the business model.",
+    title: "Strategic Diagnosis",
+    body: "Positioning, offer, channel mix, and category logic reviewed against your commercial model. Growth decisions get grounded in evidence, not preference.",
   },
   {
     n: "03",
-    title: "Infrastructure Design",
-    body: "Construct a deliberate roadmap. A system blueprint covering acquisition, sales, automation, and reporting layers.",
+    title: "Architecture Design",
+    body: "A deliberate blueprint covering demand generation, sales motion, automation, and reporting. Every layer designed to reinforce the next.",
   },
   {
     n: "04",
-    title: "Implementation",
-    body: "Build the systems. Integrate the technology. Deploy the workflows. Engineering, not theory.",
+    title: "Execution",
+    body: "The architecture gets built. Sequences, workflows, and operating layers deployed with engineering precision rather than theory.",
   },
   {
     n: "05",
     title: "Optimization",
-    body: "Measure. Refine. Compound. The system becomes more effective the longer it operates.",
+    body: "Measure, refine, compound. The architecture becomes more efficient the longer it runs, because signal now feeds decision.",
   },
 ];
 
@@ -41,7 +41,7 @@ const HowEngagementsWork = () => {
             </ScrollReveal>
             <ScrollReveal delay={100}>
               <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
-                How infrastructure{" "}
+                How the architecture{" "}
                 <span className="font-quote italic text-gold/95">gets built.</span>
               </h2>
             </ScrollReveal>
@@ -49,7 +49,7 @@ const HowEngagementsWork = () => {
           <div className="lg:col-span-5">
             <ScrollReveal delay={200}>
               <p className="text-muted-foreground text-[14.5px] md:text-[15.5px] leading-[1.85] font-light">
-                Five deliberate phases. Each engagement moves from diagnosis to design, to implementation, to compounding optimization.
+                Five deliberate phases. Every engagement moves from diagnostic to architecture, then into execution and compounding optimization.
               </p>
             </ScrollReveal>
           </div>
