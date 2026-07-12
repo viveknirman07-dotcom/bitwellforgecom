@@ -530,18 +530,8 @@ export const StrategyTransformation = () => {
 export const SystemApproachDiagram = ({ items }: { items: string[] }) => {
   return (
     <div className="relative w-full">
-      <div className="flex items-baseline justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <span className="w-4 h-px bg-gold/60" />
-          <span className="text-[10px] tracking-[0.32em] uppercase text-gold/75 font-medium">
-            System Architecture
-          </span>
-        </div>
-        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/50 font-mono">
-          {items.length} Modules · Interconnected
-        </span>
-      </div>
       <div className="relative px-1 py-2 md:px-2 md:py-3">
+
         {/* connecting spine */}
         <div className="absolute left-[34px] md:left-[46px] top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent" aria-hidden />
         <ul className="space-y-5 md:space-y-6">
