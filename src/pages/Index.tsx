@@ -128,7 +128,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              Commercial Growth Consultancy · Engineered to Compound
+              A Growth Practice
             </motion.p>
 
             <motion.h1
@@ -137,9 +137,9 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              Growth is not a campaign.
+              What's assembled breaks down.
               <br />
-              <span className="font-quote italic text-foreground/95">It is an architecture.</span>
+              <span className="font-quote italic text-foreground/95">What's engineered compounds.</span>
             </motion.h1>
 
             <motion.p
@@ -148,7 +148,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
             >
-              BitwellForge is a commercial growth consultancy for agencies, consultants, and B2B service businesses. We build the acquisition, sales, positioning, and operational architecture that moves companies from inconsistent revenue to durable, compounding growth.
+              BitwellForge works alongside founders and operators building service-based businesses, designing the commercial infrastructure that sustains growth beyond any single campaign.
             </motion.p>
 
             <motion.div
