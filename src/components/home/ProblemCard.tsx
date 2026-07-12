@@ -11,20 +11,11 @@ interface Props {
 const ProblemCard = ({ title, description, diagram, delay = 0 }: Props) => {
   return (
     <ScrollReveal delay={delay} variant="fade">
-      <div className="group relative h-full pt-7 md:pt-8 border-t border-gold/25 transition-all duration-500 hover:border-gold/60 flex flex-col">
-        {/* Blueprint meta ribbon */}
-        <div className="flex items-center justify-between mb-5">
-          <span className="text-[9px] tracking-[0.32em] uppercase text-gold/70 font-medium">
-            Diagnostic
-          </span>
-          <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
-            Continuous Signal
-          </span>
-        </div>
-
+      <div className="group relative h-full pt-8 md:pt-10 border-t border-gold/25 transition-all duration-500 hover:border-gold/60 flex flex-col">
         <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 tracking-tightest">
           {title}
         </h3>
+
         <p className="text-[13.5px] md:text-sm text-muted-foreground leading-[1.75] font-light mb-7">
           {description}
         </p>

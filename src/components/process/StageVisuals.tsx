@@ -19,107 +19,176 @@ const Grid = ({ w = 240, h = 160 }: { w?: number; h?: number }) => (
   </g>
 );
 
-/* ─────────── 01 Diagnose ─────────── */
-export const DiagnoseVisual = () => (
-  <svg viewBox={VB} className={frame} aria-hidden>
-    <Grid />
-    {/* scan beam */}
-    <line x1="20" y1="20" x2="20" y2="140" stroke="currentColor" strokeWidth="0.8" opacity="0.65">
-      <animate attributeName="x1" values="20;220;20" dur="6s" repeatCount="indefinite" />
-      <animate attributeName="x2" values="20;220;20" dur="6s" repeatCount="indefinite" />
-    </line>
-    {/* discovered hotspots */}
-    {[[80, 55], [155, 95], [195, 50], [110, 110]].map(([x, y], i) => (
-      <g key={i}>
-        <circle cx={x} cy={y} r="3" fill="currentColor">
-          <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
-        </circle>
-        <circle cx={x} cy={y} r="6" fill="none" stroke="currentColor" strokeWidth="0.4">
-          <animate attributeName="r" values="3;10;3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
-        </circle>
-      </g>
-    ))}
-  </svg>
-);
+/* ─────────── 01 Diagnose — scan surface, discovered anomalies, annotation lines ─────────── */
+export const DiagnoseVisual = () => {
+  const anomalies = [
+    { x: 62, y: 48, label: "ACQUISITION" },
+    { x: 138, y: 92, label: "CONVERSION" },
+    { x: 190, y: 42, label: "RETENTION" },
+    { x: 96, y: 118, label: "OPERATIONS" },
+  ];
+  return (
+    <svg viewBox={VB} className={frame} aria-hidden>
+      <Grid />
+      {/* domain surface frame */}
+      <rect x="22" y="22" width="196" height="116" fill="none" stroke="currentColor" strokeWidth="0.35" opacity="0.35" />
+      {/* horizontal scan sweep */}
+      <line x1="22" y1="22" x2="22" y2="138" stroke="currentColor" strokeWidth="0.9" opacity="0.55">
+        <animate attributeName="x1" values="22;218;22" dur="7s" repeatCount="indefinite" />
+        <animate attributeName="x2" values="22;218;22" dur="7s" repeatCount="indefinite" />
+      </line>
+      {/* discovered anomalies */}
+      {anomalies.map((a, i) => (
+        <g key={i}>
+          {/* crosshair */}
+          <line x1={a.x - 8} y1={a.y} x2={a.x + 8} y2={a.y} stroke="currentColor" strokeWidth="0.3" opacity="0.5" />
+          <line x1={a.x} y1={a.y - 8} x2={a.x} y2={a.y + 8} stroke="currentColor" strokeWidth="0.3" opacity="0.5" />
+          {/* core */}
+          <circle cx={a.x} cy={a.y} r="2.4" fill="currentColor">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+          </circle>
+          {/* pulse */}
+          <circle cx={a.x} cy={a.y} r="3" fill="none" stroke="currentColor" strokeWidth="0.4">
+            <animate attributeName="r" values="3;12;3" dur="3s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+          </circle>
+          {/* annotation */}
+          <line
+            x1={a.x}
+            y1={a.y}
+            x2={a.x + (a.x > 120 ? 22 : -22)}
+            y2={a.y < 80 ? 18 : 148}
+            stroke="currentColor"
+            strokeWidth="0.3"
+            strokeDasharray="1.5 2"
+            opacity="0.45"
+          />
+          <text
+            x={a.x + (a.x > 120 ? 24 : -24)}
+            y={a.y < 80 ? 16 : 152}
+            textAnchor={a.x > 120 ? "start" : "end"}
+            fontSize="4"
+            fontFamily="DM Sans, sans-serif"
+            fill="currentColor"
+            opacity="0.65"
+            letterSpacing="0.7"
+          >
+            {a.label}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+};
 
-/* ─────────── 02 Architect ─────────── */
-export const ArchitectVisual = () => (
-  <svg viewBox={VB} className={frame} aria-hidden>
-    <Grid />
-    <rect x="30" y="25" width="180" height="110" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
-    {[
-      "M30 80 L100 80 L100 45 L210 45",
-      "M60 135 L60 105 L150 105 L150 80",
-      "M30 50 L75 50 L75 70 L180 70 L180 120",
-    ].map((d, i) => (
-      <path key={i} d={d} fill="none" stroke="currentColor" strokeWidth="0.7" strokeDasharray="260" strokeDashoffset="260" opacity="0.8">
-        <animate attributeName="stroke-dashoffset" values="260;0;0;260" keyTimes="0;0.4;0.85;1" dur="7s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
-      </path>
-    ))}
-    {[[100, 45], [150, 80], [60, 105], [180, 120], [75, 70]].map(([x, y], i) => (
-      <rect key={i} x={x - 3} y={y - 3} width="6" height="6" fill="currentColor" opacity="0.85">
-        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.3;0.85;1" dur="7s" begin={`${i * 0.4 + 0.5}s`} repeatCount="indefinite" />
-      </rect>
-    ))}
-  </svg>
-);
+/* ─────────── 02 Architect — blueprint being drawn, sequenced modules connecting ─────────── */
+export const ArchitectVisual = () => {
+  const modules = [
+    { x: 60, y: 50, label: "ACQUIRE" },
+    { x: 150, y: 50, label: "QUALIFY" },
+    { x: 60, y: 110, label: "CONVERT" },
+    { x: 150, y: 110, label: "RETAIN" },
+  ];
+  const paths = [
+    "M 60 50 L 150 50",
+    "M 150 50 L 150 110",
+    "M 150 110 L 60 110",
+    "M 60 110 L 60 50",
+    "M 60 50 L 150 110",
+  ];
+  return (
+    <svg viewBox={VB} className={frame} aria-hidden>
+      <Grid />
+      {/* outer frame */}
+      <rect x="30" y="25" width="180" height="110" fill="none" stroke="currentColor" strokeWidth="0.4" opacity="0.4" />
+      {/* corner ticks */}
+      {[[30, 25], [210, 25], [30, 135], [210, 135]].map(([x, y], i) => (
+        <g key={i} opacity="0.55">
+          <line x1={x - 3} y1={y} x2={x + 3} y2={y} stroke="currentColor" strokeWidth="0.5" />
+          <line x1={x} y1={y - 3} x2={x} y2={y + 3} stroke="currentColor" strokeWidth="0.5" />
+        </g>
+      ))}
+      {/* drawing paths in sequence */}
+      {paths.map((d, i) => (
+        <path key={i} d={d} fill="none" stroke="currentColor" strokeWidth="0.55" strokeDasharray="220" strokeDashoffset="220" opacity="0.75">
+          <animate attributeName="stroke-dashoffset" values="220;0;0;220" keyTimes="0;0.45;0.9;1" dur="8s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+        </path>
+      ))}
+      {/* modules resolving into place */}
+      {modules.map((m, i) => (
+        <g key={i}>
+          <rect x={m.x - 10} y={m.y - 8} width="20" height="16" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.55" opacity="0.85">
+            <animate attributeName="opacity" values="0;0.9;0.9" keyTimes="0;0.5;1" dur="8s" begin={`${1 + i * 0.4}s`} repeatCount="indefinite" />
+          </rect>
+          <circle cx={m.x} cy={m.y - 2} r="1.3" fill="currentColor" />
+          <text x={m.x} y={m.y + 4} textAnchor="middle" fontSize="3.6" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.65" letterSpacing="0.6">{m.label}</text>
+        </g>
+      ))}
+      {/* dimension lines */}
+      <line x1="30" y1="18" x2="210" y2="18" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
+      <line x1="30" y1="16" x2="30" y2="20" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
+      <line x1="210" y1="16" x2="210" y2="20" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
+      {/* traveling architect signal */}
+      <circle r="1.5" fill="currentColor">
+        <animateMotion dur="6s" repeatCount="indefinite" begin="3s" path="M 60 50 L 150 50 L 150 110 L 60 110 Z" />
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="3s" />
+      </circle>
+    </svg>
+  );
+};
 
-/* ─────────── 03 Engineer — 4-layer revenue infrastructure ─────────── */
+/* ─────────── 03 Engineer — modules assembling into a live 4-layer system ─────────── */
 export const EngineerVisual = () => {
-  // 4 horizontal layers; each layer has 3-4 nodes; vertical pipes connect them
   const layers = [
-    { y: 28, label: "LEAD INTELLIGENCE", nodes: [50, 100, 150, 200] },
-    { y: 64, label: "ACQUISITION", nodes: [70, 120, 180] },
-    { y: 100, label: "SALES", nodes: [60, 110, 160, 200] },
-    { y: 136, label: "DATA & REPORTING", nodes: [80, 140, 190] },
+    { y: 34, label: "INTELLIGENCE", nodes: [55, 105, 155, 205] },
+    { y: 72, label: "ACQUISITION", nodes: [75, 130, 190] },
+    { y: 110, label: "REVENUE", nodes: [60, 115, 165, 210] },
+    { y: 148, label: "REPORTING", nodes: [85, 145, 195] },
+  ];
+  const bridges: [number, number, number, number][] = [
+    [55, 34, 75, 72], [105, 34, 130, 72], [155, 34, 130, 72], [205, 34, 190, 72],
+    [75, 72, 60, 110], [130, 72, 115, 110], [190, 72, 165, 110], [190, 72, 210, 110],
+    [60, 110, 85, 148], [115, 110, 145, 148], [165, 110, 145, 148], [210, 110, 195, 148],
   ];
   return (
     <svg viewBox={VB} className={frame} aria-hidden>
       <Grid />
       {layers.map((L, li) => (
         <g key={li}>
-          {/* layer rail */}
           <line x1="22" y1={L.y} x2="218" y2={L.y} stroke="currentColor" strokeWidth="0.35" opacity="0.4" />
-          <text x="22" y={L.y - 5} fontSize="4.2" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.55" letterSpacing="0.8">
+          <text x="22" y={L.y - 5} fontSize="4" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.6" letterSpacing="0.8">
             {L.label}
           </text>
-          {/* nodes */}
           {L.nodes.map((x, ni) => (
             <g key={ni}>
-              <rect x={x - 4} y={L.y - 4} width="8" height="8" fill="none" stroke="currentColor" strokeWidth="0.45" opacity="0.75">
-                <animate attributeName="opacity" values="0;0.85;0.85" keyTimes="0;0.4;1" dur="8s" begin={`${li * 0.6 + ni * 0.15}s`} repeatCount="indefinite" />
+              <rect x={x - 4} y={L.y - 4} width="8" height="8" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.5" opacity="0.85">
+                <animate attributeName="opacity" values="0;0.9;0.9" keyTimes="0;0.4;1" dur="9s" begin={`${li * 0.7 + ni * 0.18}s`} repeatCount="indefinite" />
               </rect>
               <circle cx={x} cy={L.y} r="1.2" fill="currentColor" opacity="0.9" />
             </g>
           ))}
         </g>
       ))}
-      {/* vertical inter-layer connections, drawn in sequence */}
-      {[
-        [50, 28, 70, 64], [100, 28, 120, 64], [150, 28, 180, 64], [200, 28, 180, 64],
-        [70, 64, 60, 100], [120, 64, 110, 100], [180, 64, 160, 100], [180, 64, 200, 100],
-        [60, 100, 80, 136], [110, 100, 140, 136], [160, 100, 140, 136], [200, 100, 190, 136],
-      ].map(([x1, y1, x2, y2], i) => (
-        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" strokeWidth="0.4" strokeDasharray="60" strokeDashoffset="60" opacity="0.7">
-          <animate attributeName="stroke-dashoffset" values="60;0;0" keyTimes="0;0.5;1" dur="8s" begin={`${1.5 + i * 0.12}s`} repeatCount="indefinite" />
+      {bridges.map(([x1, y1, x2, y2], i) => (
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" strokeWidth="0.4" strokeDasharray="70" strokeDashoffset="70" opacity="0.7">
+          <animate attributeName="stroke-dashoffset" values="70;0;0" keyTimes="0;0.5;1" dur="9s" begin={`${1.5 + i * 0.15}s`} repeatCount="indefinite" />
         </line>
       ))}
-      {/* live signals traveling between layers */}
       {[
-        "M 100 28 L 120 64 L 110 100 L 140 136",
-        "M 50 28 L 70 64 L 60 100 L 80 136",
-        "M 150 28 L 180 64 L 160 100 L 140 136",
-        "M 200 28 L 180 64 L 200 100 L 190 136",
+        "M 105 34 L 130 72 L 115 110 L 145 148",
+        "M 55 34 L 75 72 L 60 110 L 85 148",
+        "M 155 34 L 190 72 L 165 110 L 145 148",
+        "M 205 34 L 190 72 L 210 110 L 195 148",
       ].map((path, i) => (
-        <circle key={i} r="1.5" fill="currentColor">
-          <animateMotion dur="6s" repeatCount="indefinite" begin={`${3 + i * 0.8}s`} path={path} />
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin={`${3 + i * 0.8}s`} />
+        <circle key={i} r="1.6" fill="currentColor">
+          <animateMotion dur="6s" repeatCount="indefinite" begin={`${3 + i * 0.9}s`} path={path} />
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin={`${3 + i * 0.9}s`} />
         </circle>
       ))}
     </svg>
   );
 };
+
 
 /* ─────────── 04 Activate — live acquisition engine ─────────── */
 export const ActivateVisual = () => {

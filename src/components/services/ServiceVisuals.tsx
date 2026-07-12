@@ -23,43 +23,14 @@ const Grid = ({ w = 240, h = 160, opacity = 0.16 }: { w?: number; h?: number; op
   </g>
 );
 
-const PanelFrame = ({ label, children }: { label: string; children: React.ReactNode }) => (
+const PanelFrame = ({ children }: { label?: string; children: React.ReactNode }) => (
   <div className="relative w-full">
-    {/* Header row: eyebrow + framework marker */}
-    <div className="flex items-baseline justify-between mb-5">
-      <div className="flex items-center gap-3">
-        <span className="w-4 h-px bg-gold/60" />
-        <span className="text-[10px] tracking-[0.32em] uppercase text-gold/75 font-medium">
-          {label}
-        </span>
-      </div>
-      <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/50 font-mono">
-        Framework · v2
-      </span>
-    </div>
-
-    {/* Diagram surface — completely borderless */}
     <div className="aspect-[3/2] w-full text-foreground/80">
       {children}
     </div>
-
-    {/* Footer meta ribbon */}
-    <div className="mt-5 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
-          Node Topology
-        </span>
-        <span className="h-px w-10 bg-gold/20" />
-        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
-          Flow Architecture
-        </span>
-      </div>
-      <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/45 font-mono">
-        Continuous Signal
-      </span>
-    </div>
   </div>
 );
+
 
 /* ════════════════════════════════════════════════════════════
    HERO VISUALS — one per service
@@ -446,20 +417,22 @@ const heroMap: Record<string, { label: string; Vis: React.FC }> = {
 export const ServiceHero = ({ slug }: { slug: string }) => {
   const entry = heroMap[slug];
   if (!entry) return null;
-  const { label, Vis } = entry;
+  const { Vis } = entry;
   return (
-    <PanelFrame label={label}>
+    <PanelFrame>
       <Vis />
     </PanelFrame>
   );
 };
+
 
 /* ════════════════════════════════════════════════════════════
    PROBLEM — system failure visualization
    ════════════════════════════════════════════════════════════ */
 
 export const ProblemSystemFailure = () => (
-  <PanelFrame label="System Without Architecture">
+  <PanelFrame>
+
     <svg viewBox={VB} className={frame} aria-hidden>
       <Grid opacity={0.12} />
       {/* three broken pathways */}
@@ -478,22 +451,17 @@ export const ProblemSystemFailure = () => (
             <line x1="3" y1="-3" x2="-3" y2="3" stroke="currentColor" strokeWidth="0.6" opacity="0.7" />
           </g>
           {row.resumeD && <path d={row.resumeD} fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.4" strokeDasharray="2 2" />}
-          {row.deadEnd && !row.resumeD && (
-            <text x={row.breakX + 8} y={row.y + 1.5} fontSize="3.4" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.5" letterSpacing="0.5">DEAD END</text>
-          )}
           {/* signal that drops at break */}
           <circle r="1.4" fill="currentColor">
             <animateMotion dur="5s" repeatCount="indefinite" begin={`${i * 0.7}s`} path={row.d} />
             <animate attributeName="opacity" values="0;1;1;0.4;0" keyTimes="0;0.1;0.7;0.85;1" dur="5s" repeatCount="indefinite" begin={`${i * 0.7}s`} />
           </circle>
-          {/* leak marker */}
-          <text x={row.breakX} y={row.y - 6} textAnchor="middle" fontSize="3" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.45" letterSpacing="0.5">LEAK</text>
+
         </g>
       ))}
-      {/* sidebar labels */}
-      <text x="215" y="20" textAnchor="end" fontSize="3.6" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.5" letterSpacing="0.6">FRAGMENTED FLOW</text>
     </svg>
   </PanelFrame>
+
 );
 
 /* ════════════════════════════════════════════════════════════
@@ -508,7 +476,7 @@ export const StrategyTransformation = () => {
     [165, 35], [195, 55], [165, 80], [195, 105], [165, 130],
   ];
   return (
-    <PanelFrame label="From Disorder to Architecture">
+    <PanelFrame>
       <svg viewBox={VB} className={frame} aria-hidden>
         <Grid opacity={0.12} />
         {/* divider */}
@@ -562,18 +530,8 @@ export const StrategyTransformation = () => {
 export const SystemApproachDiagram = ({ items }: { items: string[] }) => {
   return (
     <div className="relative w-full">
-      <div className="flex items-baseline justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <span className="w-4 h-px bg-gold/60" />
-          <span className="text-[10px] tracking-[0.32em] uppercase text-gold/75 font-medium">
-            System Architecture
-          </span>
-        </div>
-        <span className="text-[9px] tracking-[0.28em] uppercase text-muted-foreground/50 font-mono">
-          {items.length} Modules · Interconnected
-        </span>
-      </div>
       <div className="relative px-1 py-2 md:px-2 md:py-3">
+
         {/* connecting spine */}
         <div className="absolute left-[34px] md:left-[46px] top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent" aria-hidden />
         <ul className="space-y-5 md:space-y-6">
@@ -589,23 +547,17 @@ export const SystemApproachDiagram = ({ items }: { items: string[] }) => {
               </div>
               {/* module body */}
               <div className="border-l border-gold/10 pl-5 md:pl-6 py-1.5 transition-colors duration-500 group-hover:border-gold/30">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[9px] tracking-[0.28em] uppercase text-gold/55 font-medium">MODULE</span>
-                  <span className="h-px flex-1 bg-gold/10" />
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground/40 font-mono">ACTIVE</span>
-                </div>
                 <p className="text-foreground/85 text-[14px] md:text-[14.5px] leading-[1.7] font-light">
                   {item}
                 </p>
-                {/* lateral connectors to next module */}
                 {i < items.length - 1 && (
                   <div className="mt-3 flex items-center gap-1.5 opacity-50">
-                    <span className="h-px w-6 bg-gold/30" />
+                    <span className="h-px w-8 bg-gold/25" />
                     <span className="w-1 h-1 rounded-full bg-gold/40" />
-                    <span className="text-[9px] tracking-[0.22em] uppercase text-muted-foreground/40 font-mono">feeds into 0{i + 2}</span>
                   </div>
                 )}
               </div>
+
             </li>
           ))}
         </ul>
@@ -703,10 +655,10 @@ export const OutcomeArchitecture = ({ items }: { items: string[] }) => (
           key={i}
           className="group relative rounded-xl border border-gold/15 bg-card/40 backdrop-blur-sm p-5 md:p-6 hover:border-gold/30 transition-colors duration-500 overflow-hidden"
         >
-          <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="mb-4">
             <span className="text-[10px] tracking-[0.28em] uppercase text-gold/65 font-medium">Outcome 0{i + 1}</span>
-            <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground/45 font-mono">ENGINEERED</span>
           </div>
+
           <div className="h-14 md:h-16 mb-5 text-foreground/70">
             <Vis />
           </div>
