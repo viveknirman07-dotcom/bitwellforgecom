@@ -451,16 +451,12 @@ export const ProblemSystemFailure = () => (
             <line x1="3" y1="-3" x2="-3" y2="3" stroke="currentColor" strokeWidth="0.6" opacity="0.7" />
           </g>
           {row.resumeD && <path d={row.resumeD} fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.4" strokeDasharray="2 2" />}
-          {row.deadEnd && !row.resumeD && (
-            <text x={row.breakX + 8} y={row.y + 1.5} fontSize="3.4" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.5" letterSpacing="0.5">DEAD END</text>
-          )}
           {/* signal that drops at break */}
           <circle r="1.4" fill="currentColor">
             <animateMotion dur="5s" repeatCount="indefinite" begin={`${i * 0.7}s`} path={row.d} />
             <animate attributeName="opacity" values="0;1;1;0.4;0" keyTimes="0;0.1;0.7;0.85;1" dur="5s" repeatCount="indefinite" begin={`${i * 0.7}s`} />
           </circle>
-          {/* leak marker */}
-          <text x={row.breakX} y={row.y - 6} textAnchor="middle" fontSize="3" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.45" letterSpacing="0.5">LEAK</text>
+
         </g>
       ))}
     </svg>
