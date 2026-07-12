@@ -462,10 +462,9 @@ export const ProblemSystemFailure = () => (
           <text x={row.breakX} y={row.y - 6} textAnchor="middle" fontSize="3" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.45" letterSpacing="0.5">LEAK</text>
         </g>
       ))}
-      {/* sidebar labels */}
-      <text x="215" y="20" textAnchor="end" fontSize="3.6" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.5" letterSpacing="0.6">FRAGMENTED FLOW</text>
     </svg>
   </PanelFrame>
+
 );
 
 /* ════════════════════════════════════════════════════════════
