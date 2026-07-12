@@ -431,7 +431,8 @@ export const ServiceHero = ({ slug }: { slug: string }) => {
    ════════════════════════════════════════════════════════════ */
 
 export const ProblemSystemFailure = () => (
-  <PanelFrame label="System Without Architecture">
+  <PanelFrame>
+
     <svg viewBox={VB} className={frame} aria-hidden>
       <Grid opacity={0.12} />
       {/* three broken pathways */}
