@@ -417,13 +417,14 @@ const heroMap: Record<string, { label: string; Vis: React.FC }> = {
 export const ServiceHero = ({ slug }: { slug: string }) => {
   const entry = heroMap[slug];
   if (!entry) return null;
-  const { label, Vis } = entry;
+  const { Vis } = entry;
   return (
-    <PanelFrame label={label}>
+    <PanelFrame>
       <Vis />
     </PanelFrame>
   );
 };
+
 
 /* ════════════════════════════════════════════════════════════
    PROBLEM — system failure visualization
