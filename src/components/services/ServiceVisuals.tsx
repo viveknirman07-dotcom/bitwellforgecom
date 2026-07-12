@@ -547,23 +547,17 @@ export const SystemApproachDiagram = ({ items }: { items: string[] }) => {
               </div>
               {/* module body */}
               <div className="border-l border-gold/10 pl-5 md:pl-6 py-1.5 transition-colors duration-500 group-hover:border-gold/30">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[9px] tracking-[0.28em] uppercase text-gold/55 font-medium">MODULE</span>
-                  <span className="h-px flex-1 bg-gold/10" />
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground/40 font-mono">ACTIVE</span>
-                </div>
                 <p className="text-foreground/85 text-[14px] md:text-[14.5px] leading-[1.7] font-light">
                   {item}
                 </p>
-                {/* lateral connectors to next module */}
                 {i < items.length - 1 && (
                   <div className="mt-3 flex items-center gap-1.5 opacity-50">
-                    <span className="h-px w-6 bg-gold/30" />
+                    <span className="h-px w-8 bg-gold/25" />
                     <span className="w-1 h-1 rounded-full bg-gold/40" />
-                    <span className="text-[9px] tracking-[0.22em] uppercase text-muted-foreground/40 font-mono">feeds into 0{i + 2}</span>
                   </div>
                 )}
               </div>
+
             </li>
           ))}
         </ul>
