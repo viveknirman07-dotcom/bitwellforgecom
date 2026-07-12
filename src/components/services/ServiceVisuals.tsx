@@ -655,10 +655,10 @@ export const OutcomeArchitecture = ({ items }: { items: string[] }) => (
           key={i}
           className="group relative rounded-xl border border-gold/15 bg-card/40 backdrop-blur-sm p-5 md:p-6 hover:border-gold/30 transition-colors duration-500 overflow-hidden"
         >
-          <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="mb-4">
             <span className="text-[10px] tracking-[0.28em] uppercase text-gold/65 font-medium">Outcome 0{i + 1}</span>
-            <span className="text-[9px] tracking-[0.2em] uppercase text-muted-foreground/45 font-mono">ENGINEERED</span>
           </div>
+
           <div className="h-14 md:h-16 mb-5 text-foreground/70">
             <Vis />
           </div>
