@@ -476,7 +476,7 @@ export const StrategyTransformation = () => {
     [165, 35], [195, 55], [165, 80], [195, 105], [165, 130],
   ];
   return (
-    <PanelFrame label="From Disorder to Architecture">
+    <PanelFrame>
       <svg viewBox={VB} className={frame} aria-hidden>
         <Grid opacity={0.12} />
         {/* divider */}
