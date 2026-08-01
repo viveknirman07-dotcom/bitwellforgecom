@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
-import SectionDivider from "@/components/SectionDivider";
+import CTABlock from "@/components/CTABlock";
 import CTABlock from "@/components/CTABlock";
 import GridField from "@/components/GridField";
 import CinematicPlayer from "@/components/media/CinematicPlayer";
