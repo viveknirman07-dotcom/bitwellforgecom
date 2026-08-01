@@ -26,8 +26,8 @@ const CTABlock = ({
     : href;
 
   return (
-    <section ref={ref} className="section-padding pb-[200px] pt-24 md:pt-32">
-      <div className="sheet-inner text-center">
+    <section ref={ref} className="section-padding section-y">
+      <div className="max-w-[1400px] mx-auto text-center">
         <motion.h2
           className="font-heading text-3xl md:text-5xl font-semibold text-foreground mb-6 text-balance"
           initial={prefersReduced ? false : { opacity: 0, y: 30 }}
@@ -51,7 +51,8 @@ const CTABlock = ({
         >
           <Link
             to={contactHref}
-            className="glow-cta group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-black px-8 py-4 text-sm font-medium tracking-wide text-white dark:bg-gold dark:text-navy"
+            className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wide overflow-hidden hover:scale-[1.06] active:scale-[0.97] transition-transform duration-300"
+            style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
           >
             <span className="relative z-10 flex items-center gap-2">
               {buttonLabel}

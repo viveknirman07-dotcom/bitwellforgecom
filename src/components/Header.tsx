@@ -38,13 +38,13 @@ const Header = () => {
       transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/70 backdrop-blur-2xl border-b border-foreground/10"
-          : "bg-background/30 backdrop-blur-lg"
+          ? "bg-background/70 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
+          : "bg-background/20 backdrop-blur-lg"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
-      <nav className="section-padding flex items-center justify-between h-16 md:h-[72px] max-w-[1440px] mx-auto">
-        <Link to="/" className="shrink-0 pr-6 font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+      <nav className="section-padding flex items-center justify-between h-16 md:h-20 max-w-[1400px] mx-auto">
+        <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
           <motion.span
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
@@ -56,7 +56,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-9">
+        <div className="hidden lg:flex items-center gap-10">
           {navItems.map((item, i) => (
             <motion.div
               key={item.href}
@@ -66,7 +66,7 @@ const Header = () => {
             >
               <Link
                 to={item.href}
-                className={`relative whitespace-nowrap text-[13px] font-medium tracking-wide transition-colors duration-300 group ${
+                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
                   location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -83,7 +83,7 @@ const Header = () => {
                   )}
                 </span>
                 <span
-                  className={`absolute -bottom-1.5 left-0 h-[2px] w-full bg-foreground transition-transform duration-500 ${
+                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-600 ${
                     location.pathname === item.href
                       ? "scale-x-100 origin-left"
                       : "scale-x-0 origin-left group-hover:scale-x-100 group-hover:origin-left"
@@ -103,22 +103,7 @@ const Header = () => {
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </motion.button>
-          <motion.div
-            className="hidden xl:block"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.95, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Link
-              to="/contact?service=General+Inquiry"
-              className="glow-cta inline-flex items-center whitespace-nowrap rounded-full bg-black px-5 py-2.5 text-[12px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
-            >
-              Book Infrastructure Audit
-            </Link>
-          </motion.div>
-
         </div>
-
 
         {/* Mobile + Tablet */}
         <div className="flex lg:hidden items-center gap-2">
@@ -174,14 +159,7 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
-              <Link
-                to="/contact?service=General+Inquiry"
-                className="mt-2 inline-flex items-center justify-center rounded-full bg-black px-6 py-3.5 text-[13px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
-              >
-                Book Infrastructure Audit
-              </Link>
             </div>
-
           </motion.div>
         )}
       </AnimatePresence>
