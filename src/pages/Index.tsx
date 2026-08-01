@@ -317,29 +317,31 @@ const Index = () => {
       {/* TESTIMONIALS */}
       <section className="section-space relative section-padding">
         <div className="sheet-inner">
-          <div className="header-gap max-w-3xl">
-            <ScrollReveal>
-              <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">Voices</p>
-            </ScrollReveal>
-            <ScrollReveal delay={80}>
-              <h2 className="font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[48px] lg:text-[56px]">
-                What changes when the architecture holds
-              </h2>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:col-span-9 lg:gap-8">
-              {testimonials.map((t, i) => (
-                <QuoteCard key={t.author} {...t} delay={i * 110} />
-              ))}
+          <div className="header-gap grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-8">
+              <ScrollReveal>
+                <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">Voices</p>
+              </ScrollReveal>
+              <ScrollReveal delay={80}>
+                <h2 className="font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[48px] lg:text-[56px]">
+                  What changes when the architecture holds
+                </h2>
+              </ScrollReveal>
             </div>
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-4">
               <ScrollReveal delay={200}>
-                <CinematicPlayer ratio="9/16" label="15s" className="mx-auto max-w-[300px] lg:max-w-none" />
+                <CinematicPlayer ratio="9/16" label="15s" className="mx-auto max-w-[240px] lg:ml-auto lg:mr-0" />
               </ScrollReveal>
             </div>
           </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+            {testimonials.map((t, i) => (
+              <QuoteCard key={t.author} {...t} delay={i * 110} />
+            ))}
+          </div>
+        </div>
+
         </div>
       </section>
 
