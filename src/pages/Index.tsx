@@ -116,163 +116,194 @@ const Index = () => {
   return (
     <div className="relative">
       {/* Page-level noise */}
-      <div className="pointer-events-none fixed inset-0 z-0 bg-noise opacity-[0.035] mix-blend-overlay" aria-hidden />
+      <div className="pointer-events-none fixed inset-0 z-0 bg-noise opacity-[0.03] mix-blend-overlay" aria-hidden />
 
       {/* HERO */}
-      <section className="relative min-h-[100svh] flex items-center section-padding overflow-hidden bg-background">
-        <div className="relative z-10 max-w-[1400px] mx-auto w-full pt-24 md:pt-28 pb-16">
-          <div className="max-w-3xl">
-            <motion.p
-              className="text-[10px] md:text-[11px] tracking-[0.28em] uppercase text-gold mb-6 md:mb-8"
-              initial={reduced ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              A Growth Practice
-            </motion.p>
+      <section className="relative flex min-h-[92svh] items-center overflow-hidden section-padding">
+        <GridField className="z-0" intensity={0.9} />
+        <div className="sheet-inner relative z-10 w-full pb-24 pt-32 md:pt-40">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <motion.p
+                className="mb-8 text-[10px] uppercase tracking-[0.28em] text-gold md:text-[11px]"
+                initial={reduced ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              >
+                A Growth Practice
+              </motion.p>
 
-            <motion.h1
-              className="font-heading font-semibold text-foreground tracking-tightest leading-[1.02] text-balance text-[40px] xs:text-[44px] sm:text-5xl md:text-6xl lg:text-[78px] xl:text-[86px] mb-7 md:mb-10"
-              initial={reduced ? false : { opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              What's assembled breaks down.
-              <br />
-              <span className="font-quote italic text-foreground/95">What's engineered compounds.</span>
-            </motion.h1>
+              <motion.h1
+                className="mb-9 font-heading text-[40px] font-semibold leading-[1.02] tracking-tightest text-foreground text-balance xs:text-[44px] sm:text-5xl md:text-6xl lg:text-[72px] xl:text-[80px]"
+                initial={reduced ? false : { opacity: 0, y: 26 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                What's assembled breaks down.
+                <br />
+                <span className="font-quote italic text-foreground/95">What's engineered compounds.</span>
+              </motion.h1>
 
-            <motion.p
-              className="text-muted-foreground text-[15px] md:text-lg leading-[1.8] font-light max-w-2xl mb-10 md:mb-12"
+              <motion.p
+                className="mb-12 max-w-[52ch] text-[15px] font-light leading-[1.75] text-muted-foreground md:text-[16px]"
+                initial={reduced ? false : { opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              >
+                BitwellForge works alongside founders and operators building service-based businesses, designing the commercial infrastructure that sustains growth beyond any single campaign.
+              </motion.p>
+
+              <motion.div
+                className="flex flex-col gap-3 sm:flex-row sm:gap-4"
+                initial={reduced ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Link
+                  to="/contact?service=General+Inquiry"
+                  data-hero-primary-cta
+                  className="glow-cta group inline-flex items-center justify-center gap-2 rounded-full bg-black px-8 py-4 text-[13px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
+                >
+                  Book Infrastructure Audit
+                  <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  to="/case-studies"
+                  data-hero-secondary-cta
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-foreground/30 px-8 py-4 text-[13px] font-medium uppercase tracking-[0.1em] text-foreground transition-all duration-300 hover:border-foreground hover:bg-foreground hover:text-background active:scale-[0.98]"
+                >
+                  See Case Studies
+                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Right rail: hairline stat ticks */}
+            <motion.div
+              className="lg:col-span-4 lg:col-start-9 lg:self-end"
               initial={reduced ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              BitwellForge works alongside founders and operators building service-based businesses, designing the commercial infrastructure that sustains growth beyond any single campaign.
-            </motion.p>
-
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
-              initial={reduced ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Link
-                to="/contact?service=General+Inquiry"
-                data-hero-primary-cta
-                className="group inline-flex items-center justify-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/90 dark:hover:bg-white dark:hover:text-navy hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] dark:hover:shadow-[0_12px_40px_hsl(0_0%_100%/0.18)] active:scale-[0.98]"
-              >
-                Book Infrastructure Audit
-                <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to="/case-studies"
-                data-hero-secondary-cta
-                className="group inline-flex items-center justify-center gap-2 border border-foreground text-foreground px-7 py-4 rounded-full text-[13px] font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:bg-foreground hover:text-background active:scale-[0.98]"
-              >
-                See Case Studies
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              {stats.map((s) => (
+                <div key={s.label} className="hairline-t py-5">
+                  <div className="tnum font-heading text-[26px] font-semibold leading-none tracking-tightest text-foreground">
+                    {s.prefix ?? ""}
+                    {s.value.toLocaleString()}
+                    {s.suffix ?? ""}
+                  </div>
+                  <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>
+      </section>
 
+      {/* CINEMATIC PLATE */}
+      <section className="relative section-padding pb-24 md:pb-32">
+        <div className="sheet-inner">
+          <ScrollReveal>
+            <CinematicPlayer ratio="16/9" label="BitwellForge" />
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* PROBLEM */}
-      <section className="relative section-padding py-24 md:py-32">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-16 md:mb-20">
+      <section className="section-space relative section-padding">
+        <div className="sheet-inner">
+          <div className="header-gap grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <ScrollReveal>
-                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
+                <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">
                   What Is Actually Broken
                 </p>
               </ScrollReveal>
-              <ScrollReveal delay={100}>
-                <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
+              <ScrollReveal delay={80}>
+                <h2 className="font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[48px] lg:text-[56px]">
                   Most businesses do not have a growth problem. They have an{" "}
                   <span className="font-quote italic text-gold/95">architecture</span> problem.
                 </h2>
               </ScrollReveal>
             </div>
             <div className="lg:col-span-5">
-              <ScrollReveal delay={200}>
-                <p className="text-muted-foreground text-[14.5px] md:text-[15.5px] leading-[1.85] font-light">
+              <ScrollReveal delay={160}>
+                <p className="text-[15px] font-light leading-[1.75] text-muted-foreground">
                   Leads arrive but do not convert. Outbound gets started and quietly exhausts the team. Paid spend produces movement, then dries up the moment budget pauses. The issue is rarely effort. It is that the commercial engine was assembled from tactics rather than engineered as a whole.
                 </p>
               </ScrollReveal>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+          <div className="grid grid-cols-1 gap-px bg-foreground/10 md:grid-cols-3">
             {problems.map((p, i) => (
-              <ProblemCard key={p.title} {...p} delay={i * 120} />
+              <div key={p.title} className="bg-background py-10 md:py-0">
+                <ProblemCard {...p} index={i} delay={i * 100} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* WHAT WE BUILD */}
-      <section className="relative section-padding py-24 md:py-32">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+      <section className="section-space relative section-padding">
+        <div className="sheet-inner">
+          <div className="header-gap max-w-3xl">
             <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
+              <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">
                 What We Build
               </p>
             </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance mb-6">
+            <ScrollReveal delay={80}>
+              <h2 className="mb-6 font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[48px] lg:text-[56px]">
                 Four commercial disciplines. One{" "}
                 <span className="font-quote italic text-gold/95">compounding</span> growth engine.
               </h2>
             </ScrollReveal>
-            <ScrollReveal delay={180}>
-              <p className="text-muted-foreground text-[15px] leading-[1.8] font-light">
+            <ScrollReveal delay={140}>
+              <p className="text-[15px] font-light leading-[1.75] text-muted-foreground">
                 Acquisition, revenue, positioning, and operations engineered as interlocking layers. Every layer strengthens the next, and value accrues the longer the architecture operates.
               </p>
             </ScrollReveal>
           </div>
 
-          <div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             {services.map((s, i) => (
-              <ServiceFeature key={s.tag} index={i} reverse={i % 2 === 1} {...s} />
+              <ServiceFeature key={s.tag} index={i} {...s} />
             ))}
           </div>
         </div>
       </section>
 
       {/* RESULTS / NUMBERS */}
-      <section className="relative section-padding py-24 md:py-32 overflow-hidden border-y border-gold/15">
-        <div className="absolute inset-0 bg-radial-gold pointer-events-none" />
-        <div className="absolute inset-0 bg-gold-grid opacity-40 pointer-events-none" />
-        <div className="relative max-w-[1400px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+      <section className="section-space relative overflow-hidden section-padding">
+        <GridField className="z-0" intensity={0.35} />
+        <div className="sheet-inner relative z-10">
+          <div className="header-gap max-w-3xl">
             <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Outcomes</p>
+              <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">Outcomes</p>
             </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
+            <ScrollReveal delay={80}>
+              <h2 className="font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[48px] lg:text-[56px]">
                 The numbers speak to the architecture,{" "}
                 <span className="font-quote italic text-gold/95">not the effort.</span>
               </h2>
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-x-10">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4 lg:gap-x-10">
             {stats.map((s, i) => (
-              <ScrollReveal key={s.label} delay={i * 120}>
-                <div className="text-center">
-                  <div className="font-heading font-semibold text-gold leading-none text-[44px] md:text-[64px] lg:text-[76px] mb-4 tracking-tightest">
+              <ScrollReveal key={s.label} delay={i * 90}>
+                <div className="hairline-t pt-8">
+                  <div className="mb-6 font-heading text-[46px] font-semibold leading-none tracking-tightest text-foreground md:text-[68px] lg:text-[88px]">
                     <StatCounter value={s.value} prefix={s.prefix} suffix={s.suffix} />
                   </div>
-                  <div className="text-foreground text-[13px] md:text-sm font-medium mb-1">
+                  <div className="text-[11px] font-medium uppercase tracking-[0.18em] text-foreground">
                     {s.label}
                   </div>
-                  <div className="text-muted-foreground/70 text-[11px] md:text-xs font-light">
+                  <div className="mt-1.5 text-[11px] font-light text-muted-foreground/70">
                     {s.sub}
                   </div>
                 </div>
@@ -283,27 +314,33 @@ const Index = () => {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="relative section-padding py-24 md:py-32">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-14 md:mb-20">
+      <section className="section-space relative section-padding">
+        <div className="sheet-inner">
+          <div className="header-gap max-w-3xl">
             <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Voices</p>
+              <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">Voices</p>
             </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance font-quote italic">
+            <ScrollReveal delay={80}>
+              <h2 className="font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[48px] lg:text-[56px]">
                 What changes when the architecture holds
               </h2>
             </ScrollReveal>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
-            {testimonials.map((t, i) => (
-              <QuoteCard key={t.author} {...t} delay={i * 140} />
-            ))}
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:col-span-9 lg:gap-8">
+              {testimonials.map((t, i) => (
+                <QuoteCard key={t.author} {...t} delay={i * 110} />
+              ))}
+            </div>
+            <div className="lg:col-span-3">
+              <ScrollReveal delay={200}>
+                <CinematicPlayer ratio="9/16" label="15s" className="mx-auto max-w-[300px] lg:max-w-none" />
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
-
-      <SectionDivider />
 
       {/* HOW ENGAGEMENTS WORK */}
       <HowEngagementsWork />
@@ -311,33 +348,35 @@ const Index = () => {
       {/* ENGAGEMENT FORMATS */}
       <EngagementFormats />
 
-      <SectionDivider />
-
       {/* FAQ */}
-      <section className="relative section-padding py-24 md:py-32">
-        <div className="max-w-[1100px] mx-auto">
-          <ScrollReveal>
-            <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Common Questions</p>
-          </ScrollReveal>
-          <ScrollReveal delay={100}>
-            <h2 className="font-heading text-3xl md:text-[40px] lg:text-[48px] font-semibold text-foreground leading-[1.1] tracking-tightest mb-12 text-balance">
-              Answers before you ask.
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={180}>
-            <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border-gold/15">
-                  <AccordionTrigger className="text-left font-heading text-[16px] md:text-xl font-medium text-foreground hover:no-underline hover:text-gold py-5 md:py-6 transition-colors">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-[14.5px] leading-[1.8] font-light pb-6">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </ScrollReveal>
+      <section className="section-space relative section-padding">
+        <div className="sheet-inner grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <ScrollReveal>
+              <p className="mb-6 text-[10px] uppercase tracking-[0.28em] text-gold">Common Questions</p>
+            </ScrollReveal>
+            <ScrollReveal delay={80}>
+              <h2 className="font-heading text-[34px] font-semibold leading-[1.06] tracking-tightest text-foreground text-balance md:text-[44px]">
+                Answers before you ask.
+              </h2>
+            </ScrollReveal>
+          </div>
+          <div className="lg:col-span-7">
+            <ScrollReveal delay={140}>
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map((item, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-foreground/10">
+                    <AccordionTrigger className="py-6 text-left font-heading text-[16px] font-medium text-foreground transition-colors hover:text-gold hover:no-underline md:text-[19px]">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-7 text-[14.5px] font-light leading-[1.8] text-muted-foreground">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
@@ -348,3 +387,4 @@ const Index = () => {
 };
 
 export default Index;
+
