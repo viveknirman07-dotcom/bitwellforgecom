@@ -66,7 +66,7 @@ const Header = () => {
             >
               <Link
                 to={item.href}
-                className={`relative text-[13px] font-medium tracking-wide transition-colors duration-300 group ${
+                className={`relative whitespace-nowrap text-[13px] font-medium tracking-wide transition-colors duration-300 group ${
                   location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
