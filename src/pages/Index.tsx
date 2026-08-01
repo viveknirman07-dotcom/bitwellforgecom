@@ -341,8 +341,6 @@ const Index = () => {
             ))}
           </div>
         </div>
-
-        </div>
       </section>
 
       {/* HOW ENGAGEMENTS WORK */}
