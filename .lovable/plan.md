@@ -1,220 +1,72 @@
-- BitwellForge — Design Evolution Plan
+# BitwellForge 3.0 — Enterprise Futurism Redesign
 
-A refinement pass (not a redesign) that elevates the site into a unified, engineered, executive-consulting experience. Preserves brand identity, palette, typography, motion register, and layout philosophy already established.
+Copy, headings, metrics, service names, and the five-phase model stay byte-identical. Logo and the existing token palette stay locked. Everything changes at the level of structure, space, type scale, surface treatment, and motion.
 
----
+## Design language
 
-## 1. Master Visual Language (Anchor)
+**Space.** Section rhythm moves to a strict vertical scale: 160px desktop / 96px mobile between sections, 64px between a section header and its body. Content locks to a 1280px measure inside a 1440px frame with a visible 1px hairline gutter on each side, so the page reads as an engineered sheet rather than a stack of blocks.
 
-Adopt Process **Stage 04 (Activate)** and **Stage 05 (Optimize)** as the canonical illustration standard. Reverse-engineer their language into a shared primitive layer so every remaining diagram inherits it without copying it.
+**Type.** Headlines shift from serif display to the existing sans at heavier weight and tighter tracking (-0.03em), sizes 72/56/40/28. Body drops to 15px at 1.75 line height, muted foreground. Eyebrows stay 10px / 0.28em uppercase in the locked accent. Serif italic is retained only as the single accent word per headline, unchanged in wording.
 
-**Shared primitives to formalise** (new file `src/components/diagrams/primitives.tsx`):
+**Surface.** Three depths only:
+1. Page ground (background token)
+2. Panel: `background/60` + `backdrop-blur-xl` + 1px `border/40` hairline — the glassmorphic card
+3. Emphasis: panel + a 1px inner top highlight and a 40px accent glow at 8% opacity
 
-- `BlueprintFrame` — borderless container, internal 12px grid backdrop (opacity 0.14–0.18), corner tick marks, meta ribbon slot (small caps label + framework tag)
-- `Node`, `HubNode`, `TerminalNode` — consistent radii (r=6/8/12), 0.6–0.8 stroke, subtle inner highlight
-- `Rail`, `Bus`, `SignalPath` — 0.5–0.7 stroke weights, dash cadence `5 5` for latent, solid for live
-- `TravellingSignal` — reusable animated dot along any path (SMIL animateMotion), staggered
-- `Pulse`, `Breath` — perpetual r/opacity oscillation
-- `MicroLabel` — 5–5.5px DM Sans, letter-spacing 0.5, opacity 0.55–0.65
+**Accent glow.** A reusable `--glow-accent` shadow token built from the locked accent hue, applied to the primary CTA, active nav state, live diagram nodes, and counter digits on reveal.
 
-All colours drawn from existing `--svg-stroke / --svg-accent / --svg-highlight / --svg-secondary / --svg-fill / --svg-text` tokens so light + dark mode remain honest with zero new palette.
+**Grid field.** A single global background component: a 64px hairline grid with a slow radial mask that follows scroll, plus 6 abstract network nodes with travelling signal paths. GPU-only (transform/opacity), disabled under reduced motion. It sits behind the hero and re-emerges at low opacity behind the Process track.
 
-**Global rules baked into primitives:**
+## Layout architecture
 
-- No decorative outlines. Only structural blueprint lines.
-- Illustration container is borderless — no card frame, no drop shadow.
-- Everything animates perpetually, slowly (3–9s cycles), GPU-only (transform/opacity).
-- Respect `prefers-reduced-motion` (already global).
-- All illustrations scaled ~+1%, internal labels ~+0.6% (fontSize 5→5.03 rounded to 5, so we bump to 5.5 where text is <6 and 6.5 where <7 for the visibility lift).
+```text
+HEADER   [logo] ................................ nav · nav · nav  [ CTA glow ]
+HERO     eyebrow
+         massive headline (2 lines, left)
+         description (max 52ch)          |  right rail: 4 hairline stat ticks
+         CTAs
+         ── full-bleed cinematic media plate (16:9, 45-60s brand film) ──
+PROBLEM  section header left · 3-up hairline grid, no card borders
+SOLUTION 4-part modular grid, glass panels, hover reveals detail layer
+OUTCOMES 4 large digital counters on a hairline rail
+VOICES   3 executive quotes + 15s vertical/square film block (9:16) inline
+PROCESS  01–05 horizontal engineering track (vertical on mobile)
+FORMATS  3 columns, hairline separated
+FAQ      two-column: title left, accordion right
+CTA      centred, maximum negative space
+FOOTER   4-column sitemap, hairline top rule, silent
+```
 
----
+## Section specifics
 
-## 2. Illustration Redesigns
+**Header.** Height 72px, `background/70` + blur, hairline bottom border only after scroll. Nav items get a 2px accent underline that wipes in from left. The "Book Infrastructure Audit" CTA becomes a pill with the accent glow and a hover glow ramp.
 
-Each diagram gets a unique geometry expressing its section's meaning. All share the primitives above.
+**Hero.** Left-weighted, 60/40 split. The headline occupies its own line box with no decoration. A right-hand rail shows four hairline-separated micro stats (existing values only). Below the fold, a full-bleed cinematic plate: 16:9, hairline frame, custom minimal controls (play glyph, scrub hairline, mute, fullscreen) that fade out after 2s of inactivity. Poster-first, lazy loaded, no third-party chrome.
 
-**Homepage — Problem Diagrams** (`src/components/home/ProblemDiagrams.tsx`)
+**Problem.** Three columns divided by 1px vertical hairlines rather than cards. Each: minimal abstract glyph, title, body, existing diagram below at reduced visual weight so the type leads.
 
-- `LeakyFunnel` → pipeline attrition with staged gates and downward drop signals *(keep concept, rebuild on primitives, remove residual card look)*
-- `ChannelWire` → single dominant rail with starved satellites + fracture pulse
-- `FeedbackLoop` → forward path lit, return path broken with X marker + fading return particles
+**Solution.** 2×2 modular grid of glass panels. Default state shows tag, title, body. On hover/focus the panel lifts 4px, the accent glow ramps, and a detail layer (existing channel/detail text and the existing diagram) cross-fades in. Keyboard focus triggers the same state.
 
-**Homepage — Service Visuals** (`src/components/home/ServiceVisuals.tsx`)
+**Outcomes.** Counters rendered at 88px, tabular numerals, counting on scroll into view with an accent glow that decays after the count settles. Labels stay 11px uppercase beneath a hairline.
 
-- `DemandGraph` → 4 outer channel nodes → central pipeline hub with orbiting qualified-lead ring
-- `RevenueFunnel` → horizontal stage bars with conversion percent floats
-- `PositioningMatrix` → 2×2 differentiation matrix with orbiting "You" node in top-right quadrant
-- `AutomationFlow` → lead → AI-score → decision diamond → nurture/route → close, with travelling packets
+**Voices.** Quotes in large light type on a glass panel with a premium avatar treatment (circular, hairline ring, accent glow on hover). Beside them, the 15s promotional film in a 9:16 block with the same minimal control set.
 
-**Services page** (`src/components/services/ServiceVisuals.tsx`) — 8 service diagrams, one per module, each with distinct topology (radial, layered, matrix, mesh, spine, orbital, dendritic, lattice). Same primitives, no reuse of geometry.
+**Process.** A horizontal track with 01–05 nodes on a hairline spine. The spine draws in on scroll; each node pulses once as it activates, then holds a slow breathing glow. Content stays exactly as written. Mobile reflows to a vertical spine with the same behaviour.
 
-**About — Revenue Architecture** (`src/components/about/RevenueArchitecture.tsx`) — refined to inherit BlueprintFrame; remove any residual card border.
+**Footer.** Four columns, hairline top rule, no gradients, no decorative marks. Final CTA sits above it with 200px of clearance.
 
-**Process — Stages 01–03** — restyle to match 04/05 (04 & 05 remain untouched as the master).
+## Motion
 
-**Case Studies cards** — audit for stray borders and align diagram framing.
+- Reveal: 24px rise + opacity, 700ms, cubic-bezier(0.22, 1, 0.36, 1), 80ms stagger
+- Hover: 200ms transform/opacity only
+- Diagram signals: continuous 8–14s loops, opacity/transform only
+- Everything gated behind `prefers-reduced-motion`
 
----
+## Technical notes
 
-## 3. Border & Container Audit
-
-Sweep the whole site for accidental container borders around illustrations:
-
-- `diagram-frame` in `src/index.css` — strip any border/ring, keep only grid backdrop utility
-- `PanelFrame`, `ProblemCard`, `ServiceFeature`, service detail visuals
-Only intentional blueprint lines survive.
-
----
-
-## 4. Homepage Copy Rewrite
-
-Rewrite hero, section eyebrows, section headlines, sub-headings, body, microcopy, and CTAs in `src/pages/Index.tsx` and any homepage subcomponents that carry copy (`EngagementFormats`, `HowEngagementsWork`, hero components).
-
-**Tone:** premium consulting, confident, restrained. No sales language.
-
-**Language shift:** reduce repetition of *system / systems / infrastructure*. Broaden to: Commercial Growth, Client Acquisition, Growth Strategy, Revenue Growth, Market Positioning, Demand Generation, Outbound, Business Development, Authority Building, Performance Marketing, Digital Visibility, Automation, Execution, Commercial Excellence.
-
-**Preserve site-wide rules from memory:**
-
-- No dashes, no bullet points in prose
-- Serif headings, sans-serif body
-- "Book Infrastructure Audit" remains the primary CTA (per Core memory)
-
-Hero headline reframes BitwellForge as a commercial growth consultancy delivering multiple specialised services, not a single systems shop.
-
----
-
-## 5. Design System Consistency Pass
-
-Standardise across all pages:
-
-- Section vertical rhythm: `py-24 md:py-32` for major sections, `py-16 md:py-20` for sub-sections
-- Eyebrows: `text-[10px] tracking-[0.28em] uppercase text-gold`
-- Section headlines: `font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold tracking-tightest`
-- Card radius: unify to `rounded-none` for blueprint surfaces, `rounded-sm` where cards persist
-- Line weights on borders: `border-gold/15` structural, `border-gold/30` accent
-- Hover: `transition-all duration-300 ease-out` baseline
-- Buttons: verify Primary/Ghost variants render identically across pages
-
----
-
-## 6. Micro-interactions
-
-- Nav links: refined underline sweep (already `story-link`), verify on all headers
-- Buttons: subtle magnetic scale on hover (max 1.02), 200ms
-- Cards: `translateY(-2px)` + border highlight on hover
-- Scroll reveals: unify timing to 700ms ease-out, 60px offset
-- Page transitions: keep existing PageTransition, verify no jank
-
----
-
-## 7. QA Checklist (before shipping)
-
-- Every illustration animates perpetually, no static states
-- No stray borders on diagram containers
-- Light + dark mode contrast verified on every diagram
-- Mobile: no clipping, illustrations scale to container, labels legible
-- No dashes / bullets introduced in new copy
-- All CTAs route correctly, all links clickable
-- Build passes, no console errors
-
----
-
-## Technical Section
-
-**New files**
-
-- `src/components/diagrams/primitives.tsx` — shared SVG primitives, animation helpers, BlueprintFrame
-
-**Edited files**
-
-- `src/components/home/ProblemDiagrams.tsx` — rebuild on primitives
-- `src/components/home/ServiceVisuals.tsx` — rebuild on primitives
-- `src/components/services/ServiceVisuals.tsx` — 8 unique diagrams on primitives
-- `src/components/about/RevenueArchitecture.tsx` — reframe on primitives
-- `src/components/process/StageVisuals.tsx` — restyle Stages 01–03 only
-- `src/components/home/ServiceFeature.tsx` — strip diagram frame border
-- `src/index.css` — clean `diagram-frame` utility, unified transitions
-- `src/pages/Index.tsx` + homepage copy components — full copy rewrite
-- `src/components/home/EngagementFormats.tsx`, `HowEngagementsWork.tsx` — copy refresh
-
-**Preserved untouched**
-
-- Process Stage 04 & 05 visuals (master reference)
-- Palette, tokens, fonts, routing, business logic, Careers, Insights content, Services data model, contact flow   
-  
-Before implementing, incorporate the following additional non-negotiable design requirements into the execution plan.
-  ==================================================
-  1. VISUALS MUST TELL A STORY
-  Every illustration should communicate the section's meaning instantly.
-  A visitor should understand approximately 70–80% of the concept by looking at the visual alone, even before reading the copy.
-  Illustrations must not feel decorative.
-  They must function as explanatory commercial diagrams.
-  ==================================================
-  2. ABSOLUTELY NO AI-GENERATED LOOK
-  Do not generate visuals that resemble common AI website illustrations.
-  Avoid:
-  generic nodes
-  random connecting lines
-  meaningless geometry
-  repetitive layouts
-  stock-looking diagrams
-  Everything must feel handcrafted by a senior product designer.
-  ==================================================
-  3. EVERY VISUAL MUST BE UNIQUE
-  No two illustrations should share the same structure.
-  Every section should have its own geometry, flow direction, rhythm, hierarchy and storytelling.
-  Even if they share the same design language, they must never feel duplicated.
-  ==================================================
-  4. MOTION MUST HAVE PURPOSE
-  Every animation should communicate something.
-  Signal movement.
-  Decision flow.
-  Optimization.
-  Feedback.
-  Growth.
-  Routing.
-  Qualification.
-  Authority.
-  Never animate purely for decoration.
-  ==================================================
-  5. HIGHEST VISUAL QUALITY
-  Every SVG should look like it belongs inside Figma's best enterprise product showcases.
-  Extremely crisp.
-  Perfect alignment.
-  Pixel-perfect geometry.
-  Perfect stroke consistency.
-  Perfect spacing.
-  No rough edges.
-  ==================================================
-  6. POLISH PASS
-  After implementation, perform one final polishing pass.
-  Refine every visual until there are no obvious imperfections.
-  Adjust alignment.
-  Adjust animation timing.
-  Adjust spacing.
-  Adjust hierarchy.
-  Adjust contrast.
-  Adjust typography.
-  Adjust SVG balance.
-  Do not stop after the first implementation.
-  Keep refining until the entire experience feels intentional and production-ready.
-  ==================================================
-  7. DO NOT SACRIFICE QUALITY FOR SPEED
-  Take the time necessary to achieve the highest possible quality.
-  Prioritize craftsmanship over implementation speed.  
-    
-  Every illustration should react subtly to user interaction.
-  On hover:
-  • nodes softly respond
-  • travelling signals accelerate slightly
-  • highlighted routes become brighter
-  • blueprint grids gain subtle depth
-  On scroll:
-  • diagrams reveal progressively
-  • signals continue travelling naturally
-  The illustrations should feel interactive without becoming distracting.
-
----
-
-Approve and I'll execute in one pass.
+- New tokens in `src/index.css`: `--glow-accent`, `--panel`, `--hairline`, `--space-section`, plus a `.glass-panel`, `.hairline-x/y`, and `.glow-cta` utility layer. No new colours — all derived from locked hue variables.
+- `tailwind.config.ts`: extend `boxShadow.glow`, `backdropBlur`, and the type scale. Heading font stack switches to the existing body sans; the serif stays registered for accent words.
+- New components: `src/components/media/CinematicPlayer.tsx` (16:9 + 9:16 variants, custom controls, poster, lazy), `src/components/GridField.tsx` (global background), `src/components/ui/GlassPanel.tsx`.
+- Rewritten for layout only: `Index.tsx`, `Header.tsx`, `Footer.tsx`, `ProblemCard.tsx`, `ServiceFeature.tsx`, `HowEngagementsWork.tsx`, `EngagementFormats.tsx`, `StatCounter.tsx`, `QuoteCard.tsx`.
+- Video sources: the players ship with poster placeholders and accept a `src` prop, so the brand film and the 15s promo drop in without further layout work.
+- Verified in both light and dark mode, at 375 / 768 / 1440, with a typecheck pass.
