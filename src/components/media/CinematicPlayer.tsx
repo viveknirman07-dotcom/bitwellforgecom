@@ -90,7 +90,7 @@ const CinematicPlayer = ({
 
   return (
     <div
-      className={`group relative w-full overflow-hidden border border-foreground/10 bg-background/40 ${ratioClass[ratio]} ${className}`}
+      className={`group relative w-full overflow-hidden border border-foreground/15 bg-background/40 ${ratioClass[ratio]} ${className}`}
       onMouseMove={bumpControls}
       onFocus={bumpControls}
     >
