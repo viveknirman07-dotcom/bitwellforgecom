@@ -26,8 +26,8 @@ const CTABlock = ({
     : href;
 
   return (
-    <section ref={ref} className="section-padding section-y">
-      <div className="max-w-[1400px] mx-auto text-center">
+    <section ref={ref} className="section-padding pb-[200px] pt-24 md:pt-32">
+      <div className="sheet-inner text-center">
         <motion.h2
           className="font-heading text-3xl md:text-5xl font-semibold text-foreground mb-6 text-balance"
           initial={prefersReduced ? false : { opacity: 0, y: 30 }}
