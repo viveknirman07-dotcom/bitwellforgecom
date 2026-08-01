@@ -172,7 +172,14 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
+              <Link
+                to="/contact?service=General+Inquiry"
+                className="mt-2 inline-flex items-center justify-center rounded-full bg-black px-6 py-3.5 text-[13px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
+              >
+                Book Infrastructure Audit
+              </Link>
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
