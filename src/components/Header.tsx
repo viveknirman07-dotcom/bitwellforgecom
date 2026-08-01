@@ -38,12 +38,12 @@ const Header = () => {
       transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/70 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
-          : "bg-background/20 backdrop-blur-lg"
+          ? "bg-background/70 backdrop-blur-2xl border-b border-foreground/10"
+          : "bg-background/30 backdrop-blur-lg"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
-      <nav className="section-padding flex items-center justify-between h-16 md:h-20 max-w-[1400px] mx-auto">
+      <nav className="section-padding flex items-center justify-between h-16 md:h-[72px] max-w-[1440px] mx-auto">
         <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
           <motion.span
             initial={{ opacity: 0, x: -15 }}
