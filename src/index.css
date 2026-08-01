@@ -631,13 +631,20 @@ html:not(.dark) .hero-section {
    "hsl(0 0% 100% / 0.06)". Retune them to navy/blue for light mode. */
 html:not(.dark) svg line[stroke^="hsl(0 0% 100%"],
 html:not(.dark) svg circle[stroke^="hsl(0 0% 100%"],
+html:not(.dark) svg rect[stroke^="hsl(0 0% 100%"],
 html:not(.dark) svg path[stroke^="hsl(0 0% 100%"] {
-  stroke: hsl(226 60% 10% / 0.30) !important;
+  stroke: hsl(226 60% 10% / 0.42) !important;
 }
 html:not(.dark) svg circle[fill^="hsl(0 0% 100%"],
-html:not(.dark) svg rect[fill^="hsl(0 0% 100%"] {
+html:not(.dark) svg rect[fill^="hsl(0 0% 100%"],
+html:not(.dark) svg path[fill^="hsl(0 0% 100%"] {
   fill: hsl(220 79% 48% / 0.55) !important;
 }
+html:not(.dark) svg text[fill^="hsl(0 0% 100%"],
+html:not(.dark) svg text[fill^="hsl(var(--gold)"] {
+  fill: hsl(226 60% 10% / 0.75) !important;
+}
+
 
 /* Service visuals reference hsl(var(--gold) / X). In light mode --gold
    is now navy, which is too heavy for soft fills. Re-route to blue. */
