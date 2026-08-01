@@ -56,7 +56,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-9">
           {navItems.map((item, i) => (
             <motion.div
               key={item.href}
@@ -66,7 +66,7 @@ const Header = () => {
             >
               <Link
                 to={item.href}
-                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
+                className={`relative text-[13px] font-medium tracking-wide transition-colors duration-300 group ${
                   location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -83,7 +83,7 @@ const Header = () => {
                   )}
                 </span>
                 <span
-                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-600 ${
+                  className={`absolute -bottom-1.5 left-0 h-[2px] w-full bg-foreground transition-transform duration-500 ${
                     location.pathname === item.href
                       ? "scale-x-100 origin-left"
                       : "scale-x-0 origin-left group-hover:scale-x-100 group-hover:origin-left"
@@ -103,7 +103,20 @@ const Header = () => {
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </motion.button>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Link
+              to="/contact?service=General+Inquiry"
+              className="glow-cta inline-flex items-center rounded-full bg-black px-5 py-2.5 text-[12px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
+            >
+              Book Infrastructure Audit
+            </Link>
+          </motion.div>
         </div>
+
 
         {/* Mobile + Tablet */}
         <div className="flex lg:hidden items-center gap-2">
