@@ -116,7 +116,18 @@ const CinematicPlayer = ({
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="absolute inset-0 grid-field opacity-70" />
+            <>
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, hsl(var(--foreground) / 0.09) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--foreground) / 0.09) 1px, transparent 1px)",
+                  backgroundSize: "48px 48px",
+                }}
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_45%,hsl(var(--foreground)/0.07),transparent_72%)]" />
+            </>
+
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
         </div>
