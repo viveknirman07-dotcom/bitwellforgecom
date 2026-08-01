@@ -10,34 +10,39 @@ interface Props {
   reverse?: boolean;
 }
 
-const ServiceFeature = ({ index, tag, title, body, visual }: Props) => {
+const ServiceFeature = ({ index, tag, title, body, visual, reverse }: Props) => {
   const num = String(index + 1).padStart(2, "0");
   return (
-    <ScrollReveal variant="fade" delay={index * 80}>
-      <article className="glass-panel group h-full p-8 md:p-10 lg:p-12">
-        <div className="mb-6 flex items-baseline gap-4">
-          <span className="tnum text-[11px] tracking-[0.28em] text-muted-foreground/60">{num}</span>
-          <span className="text-[10px] uppercase tracking-[0.26em] text-gold/85">{tag}</span>
-        </div>
-
-        <h3 className="mb-5 font-heading text-[26px] font-semibold leading-[1.12] tracking-tightest text-foreground md:text-[32px]">
-          {title}
-        </h3>
-
-        <p className="max-w-xl text-[15px] font-light leading-[1.75] text-muted-foreground">
-          {body}
-        </p>
-
-        {/* Detail layer: cross-fades in on hover / focus */}
+    <ScrollReveal variant="fade" delay={50}>
+      <div className="relative border-t border-gold/15 py-14 md:py-20">
         <div
-          className="mt-8 aspect-[5/3] opacity-40 transition-all duration-700 group-hover:opacity-100 group-focus-within:opacity-100"
-          style={{ color: "var(--svg-stroke)" }}
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${
+            reverse ? "lg:[&>*:first-child]:order-2" : ""
+          }`}
         >
-          <div className="relative flex h-full w-full items-center justify-center">
-            {visual}
+          <div className="lg:col-span-6">
+            <div className="flex items-center gap-4 mb-5">
+              <span className="font-quote text-gold text-2xl">{num}</span>
+              <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">
+                {tag}
+              </span>
+            </div>
+            <h3 className="font-heading text-3xl md:text-[40px] lg:text-[44px] font-semibold text-foreground leading-[1.1] mb-6 tracking-tightest">
+              {title}
+            </h3>
+            <p className="text-muted-foreground text-[15px] leading-[1.85] font-light max-w-xl">
+              {body}
+            </p>
+          </div>
+          <div className="lg:col-span-6">
+            <div className="diagram-frame aspect-[4/3] md:aspect-[5/3]" style={{ color: "var(--svg-stroke)" }}>
+              <div className="relative w-full h-full flex items-center justify-center p-4 md:p-6">
+                {visual}
+              </div>
+            </div>
           </div>
         </div>
-      </article>
+      </div>
     </ScrollReveal>
   );
 };

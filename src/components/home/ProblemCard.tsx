@@ -6,30 +6,26 @@ interface Props {
   description: string;
   diagram: ReactNode;
   delay?: number;
-  index?: number;
 }
 
-const ProblemCard = ({ title, description, diagram, delay = 0, index = 0 }: Props) => {
+const ProblemCard = ({ title, description, diagram, delay = 0 }: Props) => {
   return (
     <ScrollReveal delay={delay} variant="fade">
-      <div className="group relative flex h-full flex-col md:px-8 lg:px-10">
-        <span className="mb-6 block text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground/60 tnum">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-
-        <h3 className="mb-4 font-heading text-[26px] font-semibold leading-[1.12] tracking-tightest text-foreground md:text-[28px]">
+      <div className="group relative h-full pt-8 md:pt-10 border-t border-gold/25 transition-all duration-500 hover:border-gold/60 flex flex-col">
+        <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 tracking-tightest">
           {title}
         </h3>
 
-        <p className="mb-10 text-[15px] font-light leading-[1.75] text-muted-foreground">
+        <p className="text-[13.5px] md:text-sm text-muted-foreground leading-[1.75] font-light mb-7">
           {description}
         </p>
 
+        {/* Borderless diagram surface */}
         <div
-          className="mt-auto aspect-[5/3] opacity-70 transition-opacity duration-500 group-hover:opacity-100"
+          className="diagram-frame aspect-[4/3] md:aspect-[5/3] mt-auto transition-opacity duration-500 group-hover:opacity-100 opacity-90"
           style={{ color: "var(--svg-stroke)" }}
         >
-          <div className="relative flex h-full w-full items-center justify-center">
+          <div className="relative w-full h-full flex items-center justify-center p-3">
             {diagram}
           </div>
         </div>

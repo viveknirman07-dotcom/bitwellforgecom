@@ -10,7 +10,6 @@ interface Props {
 
 const StatCounter = ({ value, prefix = "", suffix = "", duration = 1800, decimals = 0 }: Props) => {
   const [display, setDisplay] = useState(0);
-  const [settled, setSettled] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
@@ -27,7 +26,6 @@ const StatCounter = ({ value, prefix = "", suffix = "", duration = 1800, decimal
             const eased = 1 - Math.pow(1 - t, 3);
             setDisplay(value * eased);
             if (t < 1) requestAnimationFrame(tick);
-            else setSettled(true);
           };
           requestAnimationFrame(tick);
         }
@@ -41,7 +39,7 @@ const StatCounter = ({ value, prefix = "", suffix = "", duration = 1800, decimal
   const formatted = decimals > 0 ? display.toFixed(decimals) : Math.round(display).toLocaleString();
 
   return (
-    <span ref={ref} className={`tnum ${settled ? "counter-settle" : ""}`}>
+    <span ref={ref}>
       {prefix}
       {formatted}
       {suffix}

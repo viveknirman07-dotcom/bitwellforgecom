@@ -7,29 +7,19 @@ interface Props {
   delay?: number;
 }
 
-const initials = (name: string) =>
-  name
-    .split(" ")
-    .map((p) => p[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
 const QuoteCard = ({ quote, author, role, delay = 0 }: Props) => {
   return (
     <ScrollReveal delay={delay} variant="fade">
-      <figure className="glass-panel group flex h-full flex-col p-8 md:p-10">
-        <blockquote className="mb-10 text-[17px] font-light leading-[1.7] text-foreground/90 md:text-[18px]">
+      <figure className="group h-full relative bg-card/50 backdrop-blur-sm border border-gold/15 border-l-2 border-l-gold/70 p-8 md:p-10 transition-all duration-700 hover:bg-card/70 hover:border-l-gold hover:-translate-y-1 hover:shadow-[0_18px_50px_hsl(217_50%_3%/0.5)]">
+        <span aria-hidden className="absolute top-4 right-6 font-quote text-5xl text-gold/30 leading-none select-none">"</span>
+        <blockquote className="font-quote text-[19px] md:text-[21px] leading-[1.55] text-foreground/90 italic mb-8 relative z-10">
           {quote}
         </blockquote>
-        <figcaption className="mt-auto flex items-center gap-4">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-foreground/20 text-[11px] tracking-[0.14em] text-foreground/70 transition-shadow duration-500 group-hover:shadow-[var(--glow-accent-strong)]">
-            {initials(author)}
-          </span>
-          <span className="text-[12px] tracking-wide">
-            <span className="block font-medium text-foreground">{author}</span>
-            <span className="mt-0.5 block text-muted-foreground/80">{role}</span>
-          </span>
+        <figcaption className="mt-auto">
+          <div className="text-[12px] tracking-wide">
+            <div className="text-foreground font-medium">{author}</div>
+            <div className="text-muted-foreground/80 mt-0.5">{role}</div>
+          </div>
         </figcaption>
       </figure>
     </ScrollReveal>
