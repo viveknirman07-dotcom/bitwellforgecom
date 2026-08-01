@@ -104,17 +104,19 @@ const Header = () => {
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </motion.button>
           <motion.div
+            className="hidden xl:block"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.95, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <Link
               to="/contact?service=General+Inquiry"
-              className="glow-cta inline-flex items-center rounded-full bg-black px-5 py-2.5 text-[12px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
+              className="glow-cta inline-flex items-center whitespace-nowrap rounded-full bg-black px-5 py-2.5 text-[12px] font-semibold tracking-wide text-white dark:bg-gold dark:text-navy"
             >
               Book Infrastructure Audit
             </Link>
           </motion.div>
+
         </div>
 
 
