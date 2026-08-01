@@ -56,7 +56,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden lg:flex items-center gap-9">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-9">
           {navItems.map((item, i) => (
             <motion.div
               key={item.href}
