@@ -44,7 +44,7 @@ const Header = () => {
       style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <nav className="section-padding flex items-center justify-between h-16 md:h-[72px] max-w-[1440px] mx-auto">
-        <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+        <Link to="/" className="shrink-0 pr-6 font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
           <motion.span
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
