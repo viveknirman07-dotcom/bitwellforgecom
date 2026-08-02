@@ -1,217 +1,63 @@
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import SectionDivider from "@/components/SectionDivider";
 import { useSEO } from "@/hooks/use-seo";
-import ProblemCard from "@/components/home/ProblemCard";
-import { LeakyFunnel, ChannelWire, FeedbackLoop } from "@/components/home/ProblemDiagrams";
 import RevenueArchitecture from "@/components/about/RevenueArchitecture";
-
-const failures = [
-  {
-    title: "Leaky Pipelines",
-    description:
-      "Leads enter a pipeline and very few progress. Revenue disappears silently between stages because qualification, follow-up, and ownership were never engineered.",
-    diagram: <LeakyFunnel />,
-  },
-  {
-    title: "Channel Dependency",
-    description:
-      "Revenue attached to a single source. When that source breaks, the entire system weakens. Growth becomes a function of luck rather than design.",
-    diagram: <ChannelWire />,
-  },
-  {
-    title: "No Feedback Loop",
-    description:
-      "Money goes in. Activity happens. No insight returns. Decisions get made on instinct because the system was never built to learn from itself.",
-    diagram: <FeedbackLoop />,
-  },
-];
 
 const About = () => {
   useSEO({
     title: "About | BitwellForge",
     description:
-      "BitwellForge engineers revenue infrastructure for B2B businesses. Systems, architecture, and compounding growth.",
+      "BitwellForge engineers revenue infrastructure for ambitious B2B businesses, turning unpredictable effort into compounding growth.",
     canonicalPath: "/about",
   });
 
   return (
     <div className="pt-20">
-      {/* HERO */}
-      <section className="section-padding section-y">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="max-w-3xl">
-            <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-6 eyebrow">About</p>
-            </ScrollReveal>
-            <ScrollReveal delay={150}>
-              <h1 className="font-heading text-[36px] md:text-[60px] lg:text-[72px] font-semibold text-foreground leading-[1.04] tracking-tightest mb-8 text-balance">
-                Revenue problems rarely start{" "}
-                <span className="font-quote italic text-gold/95">where you think.</span>
-              </h1>
-            </ScrollReveal>
-            <ScrollReveal delay={300}>
-              <p className="text-muted-foreground text-[15px] md:text-lg leading-[1.85] font-light max-w-2xl">
-                BitwellForge does not run marketing campaigns. We engineer the underlying systems that produce predictable, compounding revenue for B2B businesses, consulting firms, and executive-led brands.
-              </p>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* STAGE 1 — System failures */}
-      <section className="relative section-padding py-24 md:py-32">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-14 md:mb-20">
-            <div className="lg:col-span-7">
-              <ScrollReveal>
-                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
-                  Stage One — The Visible Symptoms
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={100}>
-                <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
-                  What looks like a growth problem is almost always a{" "}
-                  <span className="font-quote italic text-gold/95">structural one.</span>
-                </h2>
-              </ScrollReveal>
-            </div>
-            <div className="lg:col-span-5">
-              <ScrollReveal delay={200}>
-                <p className="text-muted-foreground text-[14.5px] md:text-[15.5px] leading-[1.85] font-light">
-                  Three failure patterns appear in nearly every business that has plateaued. None of them are about effort. All of them are about architecture.
-                </p>
-              </ScrollReveal>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
-            {failures.map((f, i) => (
-              <ProblemCard key={f.title} {...f} delay={i * 120} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SectionDivider />
-
-      {/* STAGE 2 — Diagnosis */}
-      <section className="relative section-padding py-28 md:py-40">
-        <div className="max-w-[1100px] mx-auto text-center">
+      {/* SECTION 1 — Introduction */}
+      <section className="section-padding pt-24 md:pt-40 pb-20 md:pb-32">
+        <div className="max-w-[1100px] mx-auto">
           <ScrollReveal>
-            <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-6">
-              Stage Two — The Diagnosis
-            </p>
+            <h1 className="font-heading text-[44px] md:text-[84px] lg:text-[104px] font-semibold text-foreground leading-[1.02] tracking-tightest">
+              Who We <span className="font-quote italic text-gold/95">Are</span>
+            </h1>
           </ScrollReveal>
-          <ScrollReveal delay={150}>
-            <h2 className="font-heading text-3xl md:text-[48px] lg:text-[60px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance mb-8">
-              Most businesses don't have a growth problem.
-              <br />
-              <span className="font-quote italic text-gold/95">They have a systems problem.</span>
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={300}>
-            <p className="text-muted-foreground text-[15px] md:text-[16px] leading-[1.9] font-light max-w-2xl mx-auto">
-              Channels, campaigns, and tools were stacked on top of each other without a unifying structure. The result is motion without compounding. Effort without leverage. Activity without architecture.
+          <ScrollReveal delay={200}>
+            <p className="mt-10 md:mt-16 max-w-2xl text-foreground/85 text-[17px] md:text-[22px] leading-[1.75] font-light">
+              We partner with ambitious B2B businesses to engineer their revenue infrastructure. By aligning your commercial and operational systems, we turn unpredictable effort into compounding, sustainable growth.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* STAGE 3 — Architecture diagram */}
-      <section className="relative section-padding py-24 md:py-32">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-            <div className="lg:col-span-7">
-              <ScrollReveal>
-                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
-                  Stage Three — The Architecture
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={100}>
-                <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance mb-8">
-                  This is what we{" "}
-                  <span className="font-quote italic text-gold/95">engineer.</span>
-                </h2>
-              </ScrollReveal>
-              <ScrollReveal delay={200}>
-                <p className="text-muted-foreground text-[15px] md:text-[16px] leading-[1.9] font-light mb-6">
-                  BitwellForge is a Revenue Infrastructure consulting firm that partners with agencies, consultants, coaches, and B2B service businesses to strengthen the commercial, operational, and digital systems that support sustainable growth.
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={280}>
-                <p className="text-muted-foreground text-[15px] leading-[1.9] font-light mb-6">
-                  We partner with knowledge driven businesses and independent advisors to improve strategic clarity, commercial execution, and organisational capability across the revenue lifecycle.
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={360}>
-                <p className="text-muted-foreground text-[15px] leading-[1.9] font-light">
-                  Our work integrates strategy, commercial systems, operations, automation, and execution into a cohesive framework aligned with each client's growth objectives.
-                </p>
-              </ScrollReveal>
-            </div>
-            <div className="lg:col-span-5">
-              <ScrollReveal delay={200}>
-                <RevenueArchitecture />
-              </ScrollReveal>
-            </div>
-          </div>
+      {/* SECTION 2 — Core architecture diagram */}
+      <section className="section-padding py-24 md:py-44">
+        <div className="max-w-[900px] mx-auto">
+          <ScrollReveal delay={100}>
+            <RevenueArchitecture />
+          </ScrollReveal>
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* BELIEF */}
-      <section className="section-padding py-24 md:py-32">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+      {/* SECTION 3 — Belief & Vision */}
+      <section className="section-padding pt-24 md:pt-40 pb-32 md:pb-52">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
           <ScrollReveal>
             <div>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">The Belief</p>
-              <h3 className="font-heading text-2xl md:text-[32px] font-semibold text-foreground mb-6 tracking-tightest leading-[1.15]">
+              <p className="text-[10px] tracking-[0.32em] uppercase text-gold mb-6 eyebrow">The Belief</p>
+              <h2 className="font-heading text-[26px] md:text-[38px] font-semibold text-foreground leading-[1.15] tracking-tightest text-balance">
                 Growth is not a tactic. It is infrastructure.
-              </h3>
-              <p className="text-muted-foreground text-[15px] leading-[1.9] font-light">
-                When acquisition, conversion, and retention are designed as interconnected systems, results compound naturally. The infrastructure is built with precision, patience, and partnership.
-              </p>
+              </h2>
             </div>
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <div>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">The Vision</p>
-              <h3 className="font-heading text-2xl md:text-[32px] font-semibold text-foreground mb-6 tracking-tightest leading-[1.15]">
+              <p className="text-[10px] tracking-[0.32em] uppercase text-gold mb-6 eyebrow">The Vision</p>
+              <h2 className="font-heading text-[26px] md:text-[38px] font-semibold text-foreground leading-[1.15] tracking-tightest text-balance">
                 Businesses that grow through design, not desperation.
-              </h3>
-              <p className="text-muted-foreground text-[15px] leading-[1.9] font-light">
-                Every system is built for longevity. Not optimized for quick wins, but engineered for enduring impact. Success measured in years, not quarters.
-              </p>
+              </h2>
             </div>
           </ScrollReveal>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="section-padding py-24 md:py-32 border-t border-gold/15">
-        <div className="max-w-[1100px] mx-auto text-center">
-          <ScrollReveal>
-            <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.1] tracking-tightest text-balance mb-10">
-              Diagnose the system before you scale the effort.
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={150}>
-            <Link
-              to="/contact?service=Infrastructure+Audit"
-              className="group inline-flex items-center justify-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Diagnose My Growth System
-              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </ScrollReveal>
-        </div>
-      </section>
-
     </div>
   );
 };
