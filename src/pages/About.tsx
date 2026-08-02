@@ -125,7 +125,7 @@ const About = () => {
       <section className="relative section-padding py-24 md:py-32">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-7">
               <ScrollReveal>
                 <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
                   Stage Three — The Architecture
@@ -138,17 +138,22 @@ const About = () => {
                 </h2>
               </ScrollReveal>
               <ScrollReveal delay={200}>
-                <p className="text-muted-foreground text-[15px] leading-[1.9] font-light mb-8">
-                  Every system connects back to a single revenue engine. Growth strategy, lead generation, sales infrastructure, LinkedIn positioning, automation, and SEO operate as interconnected layers of the same architecture.
+                <p className="text-muted-foreground text-[15px] md:text-[16px] leading-[1.9] font-light mb-6">
+                  BitwellForge is a Revenue Infrastructure consulting firm that partners with agencies, consultants, coaches, and B2B service businesses to strengthen the commercial, operational, and digital systems that support sustainable growth.
                 </p>
               </ScrollReveal>
-              <ScrollReveal delay={300}>
-                <p className="text-muted-foreground text-[14px] leading-[1.85] font-light">
-                  The components are familiar. The structural integration is what makes the system compound.
+              <ScrollReveal delay={280}>
+                <p className="text-muted-foreground text-[15px] leading-[1.9] font-light mb-6">
+                  We partner with knowledge driven businesses and independent advisors to improve strategic clarity, commercial execution, and organisational capability across the revenue lifecycle.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={360}>
+                <p className="text-muted-foreground text-[15px] leading-[1.9] font-light">
+                  Our work integrates strategy, commercial systems, operations, automation, and execution into a cohesive framework aligned with each client's growth objectives.
                 </p>
               </ScrollReveal>
             </div>
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-5">
               <ScrollReveal delay={200}>
                 <RevenueArchitecture />
               </ScrollReveal>
