@@ -17,8 +17,8 @@ type Pillar = {
   icon: (x: number, y: number) => JSX.Element;
 };
 
-const W = 170;
-const H = 56;
+const W = 168;
+const H = 54;
 
 const icons = {
   target: (x: number, y: number) => (
@@ -69,9 +69,9 @@ const pillars: Pillar[] = [
     id: "commercial",
     title: "Commercial Systems",
     sub: "Pipeline & conversion",
-    cx: 412,
+    cx: 404,
     cy: 250,
-    ex: 327,
+    ex: 320,
     ey: 250,
     icon: icons.gears,
   },
@@ -89,9 +89,9 @@ const pillars: Pillar[] = [
     id: "execution",
     title: "Execution",
     sub: "Delivery cadence",
-    cx: 88,
+    cx: 96,
     cy: 250,
-    ex: 173,
+    ex: 180,
     ey: 250,
     icon: icons.arrow,
   },
@@ -99,7 +99,7 @@ const pillars: Pillar[] = [
 
 const CX = 250;
 const CY = 250;
-const CORE_R = 84;
+const CORE_R = 70;
 
 /** point on the core circle nearest to the pillar edge point */
 const corePoint = (ex: number, ey: number) => {
@@ -162,7 +162,7 @@ const RevenueArchitecture = () => {
           <circle
             cx={CX}
             cy={CY}
-            r={CORE_R + 16}
+            r={CORE_R + 14}
             fill="none"
             stroke="currentColor"
             strokeWidth="0.4"
@@ -185,7 +185,7 @@ const RevenueArchitecture = () => {
           />
           <text
             x={CX}
-            y={CY - 18}
+            y={CY - 16}
             textAnchor="middle"
             fontSize="9"
             letterSpacing="2.4"
@@ -199,7 +199,7 @@ const RevenueArchitecture = () => {
             x={CX}
             y={CY + 4}
             textAnchor="middle"
-            fontSize="15"
+            fontSize="13.5"
             fontFamily="Playfair Display, serif"
             fontStyle="italic"
             fill="hsl(var(--foreground))"
@@ -208,7 +208,7 @@ const RevenueArchitecture = () => {
           </text>
           <text
             x={CX}
-            y={CY + 24}
+            y={CY + 22}
             textAnchor="middle"
             fontSize="10.5"
             fontFamily="DM Sans, sans-serif"
@@ -242,11 +242,11 @@ const RevenueArchitecture = () => {
                 opacity={isActive ? 1 : 0.75}
                 style={{ transition: "all 0.45s cubic-bezier(0.22,1,0.36,1)" }}
               />
-              {p.icon(x + 22, p.cy)}
+              {p.icon(x + 20, p.cy)}
               <text
-                x={x + 40}
+                x={x + 36}
                 y={p.cy - 3}
-                fontSize="11.5"
+                fontSize="10.5"
                 fontFamily="DM Sans, sans-serif"
                 fill="hsl(var(--foreground))"
                 opacity={isActive ? 1 : 0.85}
@@ -254,9 +254,9 @@ const RevenueArchitecture = () => {
                 {p.title}
               </text>
               <text
-                x={x + 40}
-                y={p.cy + 12}
-                fontSize="9"
+                x={x + 36}
+                y={p.cy + 11}
+                fontSize="8.5"
                 fontFamily="DM Sans, sans-serif"
                 fill="hsl(var(--muted-foreground))"
                 opacity={isActive ? 0.95 : 0.6}
