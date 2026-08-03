@@ -21,10 +21,19 @@ const About = () => {
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={200}>
-            <p className="mt-10 md:mt-16 max-w-2xl text-foreground/85 text-[17px] md:text-[22px] leading-[1.75] font-light">
-              We partner with ambitious B2B businesses to engineer their revenue infrastructure. By aligning your commercial and operational systems, we turn unpredictable effort into compounding, sustainable growth.
-            </p>
+            <div className="mt-10 md:mt-16 max-w-2xl space-y-8 md:space-y-10">
+              <p className="font-body text-foreground/85 text-[17px] md:text-[22px] leading-[1.8] font-light">
+                BitwellForge is a Revenue Infrastructure consulting firm that partners with agencies, consultants, coaches, and B2B service businesses to strengthen the commercial, operational, and digital systems that support sustainable growth.
+              </p>
+              <p className="font-body text-foreground/70 text-[16px] md:text-[19px] leading-[1.85] font-light">
+                We partner with knowledge driven businesses and independent advisors to improve strategic clarity, commercial execution, and organisational capability across the revenue lifecycle.
+              </p>
+              <p className="font-body text-foreground/70 text-[16px] md:text-[19px] leading-[1.85] font-light">
+                Our work integrates strategy, commercial systems, operations, automation, and execution into a cohesive framework aligned with each client's growth objectives.
+              </p>
+            </div>
           </ScrollReveal>
+
         </div>
       </section>
 
