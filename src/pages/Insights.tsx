@@ -9,6 +9,50 @@ import { readingTime } from "@/lib/insights";
 
 export const articles = [
   {
+    slug: "pipeline-capacity-is-a-design-decision-not-a-headcount-problem",
+    title: "Pipeline Capacity Is a Design Decision, Not a Headcount Problem",
+    excerpt:
+      "When pipeline stalls, most businesses add people. The stronger move is to examine how much throughput the current architecture was ever designed to carry.",
+    category: "Growth Operations",
+    date: "Aug 2026",
+    content: `
+When pipeline stalls, most businesses reach for the same lever. They add people. Another closer, another appointment setter, another operator to absorb the overflow. The assumption underneath that decision is that capacity is a function of headcount. In practice it rarely is. Capacity is a function of design, and headcount only amplifies whatever the design already produces.
+
+**Where Capacity Actually Lives**
+
+Every commercial operation has a ceiling that was set long before the current team arrived. It sits in the number of qualified conversations the acquisition motion can generate in a month, the conversion rate those conversations hold, and the time between first contact and signed agreement. Those three variables define throughput. Everything else is execution against them.
+
+When a business adds people without changing those three variables, the additional effort distributes across the same constrained path. Output moves modestly. Cost moves immediately. The gap between the two is the quiet margin erosion that most founders notice only in hindsight.
+
+**The Diagnostic Question**
+
+Before any hiring decision, one question separates a capacity problem from a design problem. If the current team worked at perfect efficiency, would the target number be reachable?
+
+If the answer is yes, the constraint is execution and people may genuinely help. If the answer is no, the constraint is architectural, and hiring converts a structural problem into a more expensive structural problem. Most businesses never ask the question because the symptom looks identical in both cases. The calendar is full, the team feels stretched, and revenue is flat.
+
+**What Redesign Looks Like**
+
+Redesign is not dramatic. It usually means moving one constraint at a time and measuring what the system does in response.
+
+Raising qualification standards at the top of the funnel reduces volume and raises conversion. Compressing the time between the first conversation and the proposal shortens the cycle without adding a single person. Standardising the follow up sequence recovers the deals that quietly expire between touchpoints. Each of these changes throughput without changing payroll.
+
+The businesses that scale cleanly tend to exhaust the design levers before they touch the headcount lever. The businesses that struggle do the reverse, and then discover that a larger team pushing against the same ceiling produces the same number at a worse margin.
+
+**When Hiring Is Right**
+
+There is a point where design work is complete and the constraint really is human hours. It is recognisable. The conversion rate is stable and known. The cycle time is predictable. The acquisition motion produces more qualified conversations than the current team can hold. At that point a hire is an investment against a measured shortfall rather than a hope that more effort will produce more outcome.
+
+That is the difference between hiring into a system and hiring instead of one. The first compounds. The second consumes.
+
+**The Reflection**
+
+Capacity problems are usually design problems wearing a staffing costume. Before the next hire, map the throughput of the existing architecture and find the constraint that is actually binding. If the ceiling is structural, no amount of additional effort will lift it. If it is genuinely human, the hire will pay for itself within a cycle because the system around that person already works.
+
+Growth that arrives through design is repeatable. Growth that arrives through headcount alone has to be purchased again every time the target moves.
+    `,
+  },
+  {
+
     slug: "the-offer-design-framework-building-clarity-before-you-sell",
     title: "The Offer Design Framework: Building Clarity Before You Sell",
     excerpt:
