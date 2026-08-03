@@ -6,6 +6,10 @@ interface SEOOptions {
   canonicalPath?: string;
   ogType?: "website" | "article";
   ogImage?: string;
+  /** Optional JSON-LD structured data injected into <head>. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Unique id for the JSON-LD script tag. */
+  jsonLdId?: string;
 }
 
 const SITE_URL = "https://bitwellforgecom.lovable.app";
