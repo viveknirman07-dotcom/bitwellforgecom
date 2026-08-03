@@ -6,6 +6,10 @@ interface SEOOptions {
   canonicalPath?: string;
   ogType?: "website" | "article";
   ogImage?: string;
+  /** Optional JSON-LD structured data injected into <head>. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Unique id for the JSON-LD script tag. */
+  jsonLdId?: string;
 }
 
 const SITE_URL = "https://bitwellforgecom.lovable.app";
@@ -38,6 +42,8 @@ export const useSEO = ({
   canonicalPath,
   ogType = "website",
   ogImage = DEFAULT_OG_IMAGE,
+  jsonLd,
+  jsonLdId = "page-jsonld",
 }: SEOOptions) => {
   useEffect(() => {
     document.title = title;
@@ -56,5 +62,18 @@ export const useSEO = ({
     setMeta('meta[name="twitter:image"]', "name", "twitter:image", ogImage);
     setMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
     setCanonical(url);
-  }, [title, description, canonicalPath, ogType, ogImage]);
+
+    if (!jsonLd) return;
+    let script = document.head.querySelector<HTMLScriptElement>(`script#${jsonLdId}`);
+    if (!script) {
+      script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = jsonLdId;
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(jsonLd);
+    return () => {
+      script?.remove();
+    };
+  }, [title, description, canonicalPath, ogType, ogImage, jsonLd, jsonLdId]);
 };

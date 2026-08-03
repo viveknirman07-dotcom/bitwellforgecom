@@ -2,12 +2,48 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
 import RevenueArchitecture from "@/components/about/RevenueArchitecture";
 
+const ABOUT_DESCRIPTION =
+  "BitwellForge is a Revenue Infrastructure consulting firm strengthening the commercial, operational, and digital systems behind sustainable B2B growth.";
+
+const aboutJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About BitwellForge",
+    url: "https://bitwellforgecom.lovable.app/about",
+    description: ABOUT_DESCRIPTION,
+    mainEntity: {
+      "@type": "Organization",
+      name: "BitwellForge",
+      url: "https://bitwellforgecom.lovable.app",
+      description: ABOUT_DESCRIPTION,
+      slogan: "Growth is not a tactic. It is infrastructure.",
+      knowsAbout: [
+        "Revenue Infrastructure",
+        "Strategic Clarity",
+        "Commercial Systems",
+        "Operations & Automation",
+        "Execution",
+      ],
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://bitwellforgecom.lovable.app/" },
+      { "@type": "ListItem", position: 2, name: "About", item: "https://bitwellforgecom.lovable.app/about" },
+    ],
+  },
+];
+
 const About = () => {
   useSEO({
-    title: "About | BitwellForge",
-    description:
-      "BitwellForge engineers revenue infrastructure for ambitious B2B businesses, turning unpredictable effort into compounding growth.",
+    title: "About BitwellForge | Revenue Infrastructure Consulting",
+    description: ABOUT_DESCRIPTION,
     canonicalPath: "/about",
+    jsonLd: aboutJsonLd,
+    jsonLdId: "about-jsonld",
   });
 
   return (
