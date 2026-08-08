@@ -13,6 +13,7 @@ const BodySchema = z.object({
   full_name: z.string().trim().min(1).max(120).optional(),
   provider: z.enum(['paypal', 'nowpayments']),
   pay_currency: z.string().trim().min(2).max(20).optional(),
+  ref: z.string().trim().min(3).max(24).optional(),
 })
 
 // PayPal only settles in this set. Anything else falls back to USD.
