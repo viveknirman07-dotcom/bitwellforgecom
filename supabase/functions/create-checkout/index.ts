@@ -3,6 +3,7 @@ import { z } from 'npm:zod@3.23.8'
 import { admin, clientIp, logActivity, rateLimit } from '../_shared/db.ts'
 import { COUNTRY_CURRENCY, convertFromInr, resolveCountry } from '../_shared/money.ts'
 import { paypalConfigured, paypalFetch } from '../_shared/paypal.ts'
+import { resolveAffiliateByCode } from '../_shared/affiliate.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 const NOWPAYMENTS_API_KEY = Deno.env.get('NOWPAYMENTS_API_KEY') ?? ''
@@ -13,6 +14,7 @@ const BodySchema = z.object({
   full_name: z.string().trim().min(1).max(120).optional(),
   provider: z.enum(['paypal', 'nowpayments']),
   pay_currency: z.string().trim().min(2).max(20).optional(),
+  ref: z.string().trim().min(3).max(24).optional(),
 })
 
 // PayPal only settles in this set. Anything else falls back to USD.
@@ -48,7 +50,11 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { email, full_name, provider, pay_currency } = parsed.data
+    const { email, full_name, provider, pay_currency, ref } = parsed.data
+
+    // Referral attribution resolved server-side; the client only supplies a code.
+    const affiliate = ref ? await resolveAffiliateByCode(ref) : null
+    const attributed = affiliate && affiliate.status === 'active' ? affiliate : null
 
     const { data: product } = await db
       .from('products')
@@ -86,6 +92,8 @@ Deno.serve(async (req) => {
         provider,
         status: 'pending',
         country_code: country,
+        affiliate_id: attributed?.id ?? null,
+        referral_code: attributed?.code ?? null,
         metadata: {
           local_currency: localCurrency,
           local_amount: display.amount,

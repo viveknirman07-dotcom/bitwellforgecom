@@ -41,6 +41,211 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_resource_access: {
+        Row: {
+          access_type: string
+          affiliate_id: string
+          created_at: string
+          id: string
+          ip_hash: string | null
+          resource_id: string
+          resource_version: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          access_type?: string
+          affiliate_id: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          resource_id: string
+          resource_version?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          access_type?: string
+          affiliate_id?: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          resource_id?: string
+          resource_version?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_resource_access_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "affiliate_resource_access_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "affiliate_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      affiliate_resources: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          file_path: string
+          id: string
+          resource_type: string
+          slug: string
+          status: string
+          subtitle: string | null
+          title: string
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          file_path: string
+          id?: string
+          resource_type?: string
+          slug: string
+          status?: string
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+          version?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          file_path?: string
+          id?: string
+          resource_type?: string
+          slug?: string
+          status?: string
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+          version?: string
+        }
+        Relationships: []
+      }
+      affiliates: {
+        Row: {
+          code: string
+          country_code: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          payout_country: string | null
+          payout_recipient_name: string | null
+          paypal_email: string | null
+          status: string
+          terms_accepted_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          code: string
+          country_code?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id?: string
+          payout_country?: string | null
+          payout_recipient_name?: string | null
+          paypal_email?: string | null
+          status?: string
+          terms_accepted_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          code?: string
+          country_code?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          payout_country?: string | null
+          payout_recipient_name?: string | null
+          paypal_email?: string | null
+          status?: string
+          terms_accepted_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      commissions: {
+        Row: {
+          affiliate_id: string
+          amount_usd: number
+          created_at: string
+          currency: string
+          id: string
+          order_id: string
+          payout_record_id: string | null
+          period_month: string
+          status: string
+          updated_at: string
+          void_reason: string | null
+        }
+        Insert: {
+          affiliate_id: string
+          amount_usd?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          order_id: string
+          payout_record_id?: string | null
+          period_month?: string
+          status?: string
+          updated_at?: string
+          void_reason?: string | null
+        }
+        Update: {
+          affiliate_id?: string
+          amount_usd?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          order_id?: string
+          payout_record_id?: string | null
+          period_month?: string
+          status?: string
+          updated_at?: string
+          void_reason?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commissions_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "commissions_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: true
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "commissions_payout_record_id_fkey"
+            columns: ["payout_record_id"]
+            isOneToOne: false
+            referencedRelation: "payout_records"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       document_sections: {
         Row: {
           created_at: string
@@ -209,6 +414,7 @@ export type Database = {
       }
       orders: {
         Row: {
+          affiliate_id: string | null
           amount_inr: number
           country_code: string | null
           created_at: string
@@ -223,11 +429,13 @@ export type Database = {
           product_id: string
           provider: Database["public"]["Enums"]["payment_provider"]
           provider_order_id: string | null
+          referral_code: string | null
           status: Database["public"]["Enums"]["order_status"]
           updated_at: string
           user_id: string | null
         }
         Insert: {
+          affiliate_id?: string | null
           amount_inr: number
           country_code?: string | null
           created_at?: string
@@ -242,11 +450,13 @@ export type Database = {
           product_id: string
           provider: Database["public"]["Enums"]["payment_provider"]
           provider_order_id?: string | null
+          referral_code?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           updated_at?: string
           user_id?: string | null
         }
         Update: {
+          affiliate_id?: string | null
           amount_inr?: number
           country_code?: string | null
           created_at?: string
@@ -261,11 +471,19 @@ export type Database = {
           product_id?: string
           provider?: Database["public"]["Enums"]["payment_provider"]
           provider_order_id?: string | null
+          referral_code?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           updated_at?: string
           user_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "orders_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "orders_product_id_fkey"
             columns: ["product_id"]
@@ -321,6 +539,111 @@ export type Database = {
             columns: ["order_id"]
             isOneToOne: false
             referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payout_batches: {
+        Row: {
+          affiliate_count: number
+          created_at: string
+          id: string
+          notes: string | null
+          period_month: string
+          processed_at: string | null
+          status: string
+          total_amount_usd: number
+          updated_at: string
+        }
+        Insert: {
+          affiliate_count?: number
+          created_at?: string
+          id?: string
+          notes?: string | null
+          period_month: string
+          processed_at?: string | null
+          status?: string
+          total_amount_usd?: number
+          updated_at?: string
+        }
+        Update: {
+          affiliate_count?: number
+          created_at?: string
+          id?: string
+          notes?: string | null
+          period_month?: string
+          processed_at?: string | null
+          status?: string
+          total_amount_usd?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      payout_records: {
+        Row: {
+          affiliate_id: string
+          amount_usd: number
+          batch_id: string
+          created_at: string
+          failure_reason: string | null
+          id: string
+          notes: string | null
+          paid_at: string | null
+          payout_country: string | null
+          paypal_email: string | null
+          period_month: string
+          recipient_name: string | null
+          sales_count: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          amount_usd?: number
+          batch_id: string
+          created_at?: string
+          failure_reason?: string | null
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          payout_country?: string | null
+          paypal_email?: string | null
+          period_month: string
+          recipient_name?: string | null
+          sales_count?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          amount_usd?: number
+          batch_id?: string
+          created_at?: string
+          failure_reason?: string | null
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          payout_country?: string | null
+          paypal_email?: string | null
+          period_month?: string
+          recipient_name?: string | null
+          sales_count?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payout_records_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payout_records_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "payout_batches"
             referencedColumns: ["id"]
           },
         ]
@@ -512,6 +835,47 @@ export type Database = {
         }
         Relationships: []
       }
+      referral_clicks: {
+        Row: {
+          affiliate_id: string | null
+          code: string
+          created_at: string
+          id: string
+          ip_hash: string | null
+          landing_path: string | null
+          referer: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          affiliate_id?: string | null
+          code: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          landing_path?: string | null
+          referer?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          affiliate_id?: string | null
+          code?: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          landing_path?: string | null
+          referer?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referral_clicks_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -575,11 +939,51 @@ export type Database = {
         }
         Relationships: []
       }
+      webhook_logs: {
+        Row: {
+          error_message: string | null
+          event_id: string
+          event_type: string | null
+          id: string
+          payload_hash: string | null
+          processed_at: string | null
+          processing_status: string
+          provider: string
+          received_at: string
+          signature_status: string
+        }
+        Insert: {
+          error_message?: string | null
+          event_id: string
+          event_type?: string | null
+          id?: string
+          payload_hash?: string | null
+          processed_at?: string | null
+          processing_status?: string
+          provider: string
+          received_at?: string
+          signature_status?: string
+        }
+        Update: {
+          error_message?: string | null
+          event_id?: string
+          event_type?: string | null
+          id?: string
+          payload_hash?: string | null
+          processed_at?: string | null
+          processing_status?: string
+          provider?: string
+          received_at?: string
+          signature_status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      current_affiliate_id: { Args: never; Returns: string }
       has_entitlement: {
         Args: { _product_id: string; _user_id: string }
         Returns: boolean

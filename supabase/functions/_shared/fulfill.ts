@@ -1,4 +1,5 @@
 import { admin, logActivity } from './db.ts'
+import { recordCommission } from './affiliate.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 
@@ -130,7 +131,15 @@ export async function fulfillOrder(orderId: string) {
     })
   }
 
+  // Affiliate attribution. Unique on order_id, so retries never double-pay.
+  try {
+    await recordCommission(order.id)
+  } catch (e) {
+    console.error('commission', e)
+  }
+
   await logActivity('order.fulfilled', { order_id: order.id }, userId)
+
   return { userId, orderId: order.id }
 }
 
