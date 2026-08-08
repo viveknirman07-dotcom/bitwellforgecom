@@ -91,6 +91,8 @@ Deno.serve(async (req) => {
         provider,
         status: 'pending',
         country_code: country,
+        affiliate_id: attributed?.id ?? null,
+        referral_code: attributed?.code ?? null,
         metadata: {
           local_currency: localCurrency,
           local_amount: display.amount,
