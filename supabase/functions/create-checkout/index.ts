@@ -3,6 +3,7 @@ import { z } from 'npm:zod@3.23.8'
 import { admin, clientIp, logActivity, rateLimit } from '../_shared/db.ts'
 import { COUNTRY_CURRENCY, convertFromInr, resolveCountry } from '../_shared/money.ts'
 import { paypalConfigured, paypalFetch } from '../_shared/paypal.ts'
+import { resolveAffiliateByCode } from '../_shared/affiliate.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 const NOWPAYMENTS_API_KEY = Deno.env.get('NOWPAYMENTS_API_KEY') ?? ''
