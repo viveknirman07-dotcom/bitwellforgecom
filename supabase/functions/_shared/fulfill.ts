@@ -1,4 +1,5 @@
 import { admin, logActivity } from './db.ts'
+import { recordCommission } from './affiliate.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 
