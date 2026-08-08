@@ -2,6 +2,7 @@ import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { admin } from '../_shared/db.ts'
 import { paypalFetch, verifyPaypalWebhook } from '../_shared/paypal.ts'
 import { fulfillOrder } from '../_shared/fulfill.ts'
+import { voidCommission } from '../_shared/affiliate.ts'
 
 const RELEVANT = new Set([
   'PAYMENT.CAPTURE.COMPLETED',
@@ -80,6 +81,7 @@ Deno.serve(async (req) => {
           .update({ revoked_at: new Date().toISOString() })
           .eq('order_id', orderId)
       }
+      await voidCommission(orderId, `paypal:${eventType.toLowerCase()}`)
     } else if (RELEVANT.has(eventType) && orderId) {
       const { data: order } = await db
         .from('orders')

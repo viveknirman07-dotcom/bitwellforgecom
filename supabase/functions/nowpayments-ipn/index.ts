@@ -2,6 +2,7 @@ import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { createHmac } from 'node:crypto'
 import { admin } from '../_shared/db.ts'
 import { fulfillOrder } from '../_shared/fulfill.ts'
+import { voidCommission } from '../_shared/affiliate.ts'
 
 const IPN_SECRET = Deno.env.get('NOWPAYMENTS_IPN_SECRET') ?? ''
 const API_KEY = Deno.env.get('NOWPAYMENTS_API_KEY') ?? ''
@@ -137,6 +138,7 @@ Deno.serve(async (req) => {
             .update({ revoked_at: new Date().toISOString() })
             .eq('order_id', order.id)
         }
+        await voidCommission(order.id, `nowpayments:${status}`)
       } else if (order.status === 'pending') {
         await db.from('orders').update({ status: 'awaiting_payment' }).eq('id', order.id)
       }
