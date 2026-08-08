@@ -49,7 +49,11 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { email, full_name, provider, pay_currency } = parsed.data
+    const { email, full_name, provider, pay_currency, ref } = parsed.data
+
+    // Referral attribution resolved server-side; the client only supplies a code.
+    const affiliate = ref ? await resolveAffiliateByCode(ref) : null
+    const attributed = affiliate && affiliate.status === 'active' ? affiliate : null
 
     const { data: product } = await db
       .from('products')
