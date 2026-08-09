@@ -185,7 +185,7 @@ Deno.serve(async (req) => {
 
     await db
       .from('orders')
-      .update({ provider_order_id: String(invoice.id), status: 'awaiting_payment' })
+      .update({ provider_order_id: String(invoice.id), status: 'processing' })
       .eq('id', order.id)
     await logActivity('checkout.created', { order_id: order.id, provider }, null, ip)
 

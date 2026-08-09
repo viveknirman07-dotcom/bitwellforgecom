@@ -140,7 +140,7 @@ Deno.serve(async (req) => {
         }
         await voidCommission(order.id, `nowpayments:${status}`)
       } else if (order.status === 'pending') {
-        await db.from('orders').update({ status: 'awaiting_payment' }).eq('id', order.id)
+        await db.from('orders').update({ status: 'processing' }).eq('id', order.id)
       }
     }
 
