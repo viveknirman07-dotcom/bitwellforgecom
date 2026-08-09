@@ -1,14 +1,35 @@
 import { createClient, SupabaseClient } from 'npm:@supabase/supabase-js@2'
 
-const url = Deno.env.get('MY_SUPABASE_URL') ?? Deno.env.get('SUPABASE_URL')!
+const url = Deno.env.get('SUPABASE_URL') ?? Deno.env.get('MY_SUPABASE_URL')!
 const serviceKey =
-  Deno.env.get('MY_SUPABASE_SECRET_KEY') ?? Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? Deno.env.get('MY_SUPABASE_SECRET_KEY')!
 const anonKey =
-  Deno.env.get('MY_SUPABASE_PUBLISHABLE_KEY') ?? Deno.env.get('SUPABASE_ANON_KEY')!
+  Deno.env.get('SUPABASE_ANON_KEY') ?? Deno.env.get('MY_SUPABASE_PUBLISHABLE_KEY')!
+
+/**
+ * Opaque `sb_secret_`/`sb_publishable_` keys are NOT bearer JWTs. supabase-js
+ * still sets `Authorization: Bearer <key>`, which PostgREST rejects, so the
+ * header is stripped and only `apikey` is sent.
+ */
+const opaqueFetch = (key: string): typeof fetch => {
+  if (!key.startsWith('sb_')) return fetch
+  return (input, init) => {
+    const headers = new Headers(
+      input instanceof Request ? input.headers : undefined,
+    )
+    if (init?.headers) new Headers(init.headers).forEach((v, k) => headers.set(k, v))
+    if (headers.get('Authorization') === `Bearer ${key}`) headers.delete('Authorization')
+    headers.set('apikey', key)
+    return fetch(input, { ...init, headers })
+  }
+}
 
 /** Server-only client. Bypasses RLS. Never expose to the browser. */
 export const admin = (): SupabaseClient =>
-  createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } })
+  createClient(url, serviceKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: opaqueFetch(serviceKey) },
+  })
 
 /** Request-scoped client used only to resolve the caller's identity. */
 export const asUser = (authHeader: string): SupabaseClient =>
