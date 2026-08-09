@@ -13,6 +13,7 @@ const navItems = [
   { label: "Insights", href: "/insights" },
   { label: "Careers", href: "/careers", hiring: true },
   { label: "Contact", href: "/contact" },
+  { label: "Vault", href: "/vault" },
 ];
 
 const Header = () => {
