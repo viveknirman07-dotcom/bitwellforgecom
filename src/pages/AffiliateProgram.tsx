@@ -14,7 +14,7 @@ const AffiliateProgram = () => {
     title: "Affiliate Program — BitwellForge",
     description:
       "Earn fifty US dollars per verified sale of the BitwellForge Commercial Growth System. Sixty day attribution, automatic commission tracking, monthly payouts.",
-    canonical: "/affiliate",
+    canonicalPath: "/affiliate",
   });
 
   useEffect(() => {
