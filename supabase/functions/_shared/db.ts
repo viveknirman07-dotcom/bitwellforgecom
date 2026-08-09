@@ -1,10 +1,10 @@
 import { createClient, SupabaseClient } from 'npm:@supabase/supabase-js@2'
 
-const url = Deno.env.get('MY_SUPABASE_URL') ?? Deno.env.get('SUPABASE_URL')!
+const url = Deno.env.get('SUPABASE_URL') ?? Deno.env.get('MY_SUPABASE_URL')!
 const serviceKey =
-  Deno.env.get('MY_SUPABASE_SECRET_KEY') ?? Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? Deno.env.get('MY_SUPABASE_SECRET_KEY')!
 const anonKey =
-  Deno.env.get('MY_SUPABASE_PUBLISHABLE_KEY') ?? Deno.env.get('SUPABASE_ANON_KEY')!
+  Deno.env.get('SUPABASE_ANON_KEY') ?? Deno.env.get('MY_SUPABASE_PUBLISHABLE_KEY')!
 
 /**
  * Opaque `sb_secret_`/`sb_publishable_` keys are NOT bearer JWTs. supabase-js
