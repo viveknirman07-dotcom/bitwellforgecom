@@ -119,11 +119,21 @@ const Checkout = () => {
             <p className="font-heading text-4xl tracking-tight">
               {pricing ? pricing.display.formatted : "\u2014"}
             </p>
-            {pricing && pricing.display.currency !== "INR" && (
+            {pricing?.conversion_unavailable && (
+              <p role="status" className="mt-3 text-[12px] portal-muted">
+                Live conversion is temporarily unavailable, so the base price is shown.
+              </p>
+            )}
+            {pricing && !pricing.conversion_unavailable && pricing.display.currency !== "INR" && (
               <p className="mt-3 text-[12px] portal-muted">
                 Billed as the local equivalent of ₹{pricing.base.amount.toLocaleString("en-IN")} at live rates.
               </p>
             )}
+
+            <div className="mt-8">
+              <CurrencySelect value={currency} options={options} onChange={chooseCurrency} />
+            </div>
+
             <p className="mt-8 text-[12px] leading-relaxed portal-muted">
               Lifetime access to the Forge Vault. Account access is delivered to your email the moment payment
               is verified.
