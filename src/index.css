@@ -787,11 +787,13 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
   --border: 40 20% 80%;
   --input: 40 20% 80%;
   --ring: var(--portal-gold);
+  --eyebrow-color: var(--portal-gold);
 
   background-color: hsl(var(--portal-ink));
   color: hsl(var(--portal-text));
   min-height: 100vh;
 }
+.portal .bg-navy-deepest { background-color: hsl(var(--portal-surface)); }
 .portal .border-border,
 .portal .border-t,
 .portal .border-b { border-color: hsl(var(--portal-line)); }
