@@ -68,16 +68,56 @@ Deno.serve(async (req) => {
     const country = await resolveCountry(req, ip)
     const localCurrency = COUNTRY_CURRENCY[country] ?? 'USD'
 
-    // Settlement currency depends on what the provider can actually charge.
-    const settleCurrency =
-      provider === 'paypal'
-        ? PAYPAL_CURRENCIES.has(localCurrency)
-          ? localCurrency
-          : 'USD'
-        : 'USD'
+    /*
+     * The customer chooses the currency; the client never sends an amount.
+     * The charge is always recomputed here from the ₹14,500 source of truth,
+     * so a tampered client cannot influence what is billed.
+     */
+    const settleCurrency = (currency ?? 'USD').toUpperCase()
+    if (!/^[A-Z]{3}$/.test(settleCurrency)) {
+      return json({ error: 'Unrecognised currency', code: 'currency_invalid' }, 400)
+    }
 
-    const settle = await convertFromInr(amountInr, settleCurrency)
-    const display = await convertFromInr(amountInr, localCurrency)
+    // Never silently substitute a currency the customer did not choose.
+    if (provider === 'paypal' && !PAYPAL_CURRENCIES.has(settleCurrency)) {
+      return json(
+        {
+          code: 'currency_unsupported',
+          error: `PayPal cannot settle in ${settleCurrency}.`,
+          provider: 'paypal',
+          supported: [...PAYPAL_CURRENCIES].sort(),
+        },
+        400,
+      )
+    }
+    if (provider === 'nowpayments' && settleCurrency !== 'USD') {
+      return json(
+        {
+          code: 'currency_unsupported',
+          error: `Crypto payment is priced in USD and cannot settle in ${settleCurrency}.`,
+          provider: 'nowpayments',
+          supported: ['USD'],
+        },
+        400,
+      )
+    }
+
+    let settle: { amount: number; rate: number; currency?: string }
+    try {
+      settle = await convertFromInr(amountInr, settleCurrency)
+    } catch (_) {
+      return json(
+        { code: 'rates_unavailable', error: 'Currency conversion is temporarily unavailable. Please try again shortly.' },
+        503,
+      )
+    }
+    if ((settle.currency ?? settleCurrency) !== settleCurrency) {
+      return json(
+        { code: 'currency_unsupported', error: `No live rate is available for ${settleCurrency}.` },
+        400,
+      )
+    }
+    const display = settle
 
     const { data: order, error: orderErr } = await db
       .from('orders')
