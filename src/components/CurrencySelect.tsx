@@ -13,7 +13,7 @@ interface Props {
 }
 
 /**
- * Searchable currency picker. Deliberately plain: text, a field and a list,
+ * Searchable currency picker. Deliberately plain: a label, a field and a list,
  * matching the rest of the BitwellForge interface language.
  */
 const CurrencySelect = ({ value, options, onChange, label = "Currency" }: Props) => {
@@ -47,9 +47,12 @@ const CurrencySelect = ({ value, options, onChange, label = "Currency" }: Props)
     };
   }, [open]);
 
+  const field =
+    "w-full bg-transparent border border-border text-foreground text-sm px-4 py-3 min-h-[48px] transition-colors focus:outline-none focus:border-foreground/50";
+
   return (
     <div ref={wrapRef} className="relative w-full max-w-[320px]">
-      <p className="text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">{label}</p>
+      <p className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-2">{label}</p>
       <button
         type="button"
         aria-haspopup="listbox"
@@ -59,27 +62,27 @@ const CurrencySelect = ({ value, options, onChange, label = "Currency" }: Props)
           setQuery("");
           setOpen((o) => !o);
         }}
-        className="portal-input w-full text-left flex items-center justify-between gap-4 min-h-[48px] disabled:opacity-50"
+        className={`${field} text-left flex items-center justify-between gap-4 disabled:opacity-50`}
       >
-        <span className="text-sm">
-          {selected ? `${selected.code} — ${selected.name}` : value}
+        <span>{selected ? `${selected.code} — ${selected.name}` : value}</span>
+        <span aria-hidden className="text-muted-foreground text-[11px]">
+          {open ? "\u2013" : "+"}
         </span>
-        <span aria-hidden className="portal-muted text-[11px]">{open ? "\u2013" : "+"}</span>
       </button>
 
       {open && (
-        <div className="absolute z-30 mt-2 w-full border portal-line bg-[hsl(var(--portal-bg,0_0%_4%))] backdrop-blur-md">
+        <div className="absolute z-40 mt-2 w-full border border-border bg-background shadow-lg">
           <input
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search currency"
             aria-label="Search currency"
-            className="portal-input w-full border-0 border-b portal-line min-h-[48px]"
+            className="w-full bg-transparent border-0 border-b border-border text-foreground text-sm px-4 py-3 min-h-[48px] focus:outline-none"
           />
           <ul role="listbox" className="max-h-[260px] overflow-y-auto">
             {filtered.length === 0 && (
-              <li className="px-4 py-4 text-sm portal-muted">No matching currency</li>
+              <li className="px-4 py-4 text-sm text-muted-foreground">No matching currency</li>
             )}
             {filtered.map((o) => (
               <li key={o.code}>
@@ -91,8 +94,8 @@ const CurrencySelect = ({ value, options, onChange, label = "Currency" }: Props)
                     onChange(o.code);
                     setOpen(false);
                   }}
-                  className={`w-full text-left px-4 py-3 min-h-[44px] text-sm transition-colors hover:bg-white/5 ${
-                    o.code === value ? "portal-gold" : "portal-muted"
+                  className={`w-full text-left px-4 py-3 min-h-[44px] text-sm transition-colors hover:bg-foreground/5 ${
+                    o.code === value ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
                   {o.code} — {o.name}
