@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Eyebrow from "@/components/Eyebrow";
@@ -7,6 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const requestedNext = params.get("next");
+  const next = requestedNext === "/affiliate/dashboard" ? requestedNext : "/vault";
   const [ready, setReady] = useState(false);
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -33,7 +36,7 @@ const ResetPassword = () => {
     setBusy(false);
     if (error) return setError(error.message);
     setDone(true);
-    setTimeout(() => navigate("/vault", { replace: true }), 1400);
+    setTimeout(() => navigate(next, { replace: true }), 1400);
   };
 
   return (
@@ -50,7 +53,9 @@ const ResetPassword = () => {
               This link is invalid or has expired. Request a new reset email from the account page.
             </p>
           ) : done ? (
-            <p className="mt-10 text-sm text-foreground/80">Password updated. Redirecting to Forge Vault.</p>
+             <p className="mt-10 text-sm text-foreground/80">
+               Password updated. Redirecting to your account.
+             </p>
           ) : (
             <form onSubmit={submit} className="mt-10 space-y-5">
               <div>
