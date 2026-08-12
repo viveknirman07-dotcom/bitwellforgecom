@@ -1,5 +1,8 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Eyebrow from "@/components/Eyebrow";
 import { supabase } from "@/integrations/supabase/client";
 
 const ResetPassword = () => {
@@ -31,34 +34,46 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="portal font-body flex flex-col">
-      <header className="border-b portal-line">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center">
-          <Link to="/" className="font-heading text-lg md:text-xl tracking-tight">BitwellForge</Link>
-        </div>
-      </header>
-      <main className="flex-1 flex items-center justify-center px-6 py-20">
-        <div className="w-full max-w-md">
-          <p className="text-[11px] tracking-[0.28em] uppercase portal-gold mb-5">Security</p>
-          <h1 className="font-heading text-3xl tracking-tight portal-metal inline-block">Set a new password</h1>
+    <div className="portal font-body min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 section-padding pt-28 pb-24 md:pt-40 md:pb-32">
+        <div className="max-w-[440px] mx-auto">
+          <Eyebrow>Member access</Eyebrow>
+          <h1 className="mt-6 font-heading text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+            Set a new password
+          </h1>
           {!ready ? (
-            <p className="mt-10 text-sm portal-muted">
+            <p className="mt-10 text-sm leading-relaxed text-muted-foreground">
               This link is invalid or has expired. Request a new reset email from the account page.
             </p>
           ) : done ? (
-            <p className="mt-10 text-sm portal-gold">Password updated. Redirecting to Forge Vault.</p>
+            <p className="mt-10 text-sm text-foreground/80">Password updated. Redirecting to Forge Vault.</p>
           ) : (
-            <form onSubmit={submit} className="mt-12 space-y-5">
+            <form onSubmit={submit} className="mt-10 space-y-5">
               <div>
-                <label htmlFor="np" className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">New password</label>
-                <input id="np" type="password" className="portal-input" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
+                <label htmlFor="np" className="block text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-2">New password</label>
+                <input
+                  id="np"
+                  type="password"
+                  className="w-full bg-transparent border border-border text-foreground text-sm px-4 py-3 min-h-[48px] transition-colors focus:outline-none focus:border-foreground/50"
+                  minLength={8}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
-              <button className="portal-btn portal-btn--solid w-full" disabled={busy}>{busy ? "Saving" : "Update password"}</button>
+              <button
+                className="w-full inline-flex items-center justify-center bg-primary text-primary-foreground px-8 py-4 text-sm font-medium tracking-wide rounded-full transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] min-h-[48px] disabled:opacity-50"
+                disabled={busy}
+              >
+                {busy ? "Saving" : "Update password"}
+              </button>
             </form>
           )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
