@@ -1,0 +1,29 @@
+# BitwellForge
+
+> BitwellForge builds commercial growth architecture for agencies, consultants, and B2B service businesses: client acquisition, revenue systems, positioning, and AI-powered operations engineered to compound.
+
+BitwellForge is a revenue infrastructure consultancy. Engagements begin with an infrastructure audit, then move through diagnosis, system design, build, activation, and optimisation.
+
+## Pages
+
+- [Home](/): Commercial growth architecture, engagement formats, and results overview.
+- [About](/about): Firm philosophy, core architecture, and the belief behind the work.
+- [Services](/services): Revenue infrastructure modules across strategy, acquisition, conversion, authority, automation, and product.
+- [Process](/process): How infrastructure gets built, stage by stage.
+- [Case Studies](/case-studies): Concept studies showing system design and projected outcomes.
+- [Insights](/insights): Strategic intelligence library on growth systems, pipeline design, and positioning.
+- [Careers](/careers): Open roles and the application process.
+- [Forge Vault](/forge-vault): The Commercial Growth System product.
+- [Affiliate Program](/affiliate): Partner and referral program overview.
+- [Contact](/contact): Book an infrastructure audit or open a discovery conversation.
+
+## Services
+
+- [Commercial Growth Strategy](/services/growth-strategy): Strategic clarity and commercial direction.
+- [High-Ticket Revenue Systems](/services/sales-systems): Sales architecture and conversion systems.
+- [Performance Growth](/services/performance-marketing): Paid acquisition built as infrastructure.
+- [Client Acquisition Architecture](/services/lead-generation): Predictable pipeline generation.
+- [Market Authority Positioning](/services/linkedin): Authority and positioning systems.
+- [AI-Powered Revenue Operations](/services/ai-automation): Automation across the revenue stack.
+- [Search & Digital Visibility](/services/seo): Organic visibility infrastructure.
+- [Digital Product Commercialization](/services/digital-products): Productised offers and monetisation.
