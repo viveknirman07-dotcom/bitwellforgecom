@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
-import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
+import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 
@@ -11,6 +11,7 @@ interface PricingResponse {
   base: { currency: string; amount: number };
   display: { currency: string; amount: number; formatted: string; rate: number };
   currencies?: CurrencyOption[];
+  suggested_currency?: string;
   conversion_unavailable?: boolean;
   requested_currency_unsupported?: string | null;
 }
@@ -68,7 +69,18 @@ const ForgeVault = () => {
         if (error || !data || data.error) {
           setFailed(true);
         } else {
-          setPricing(data as PricingResponse);
+          const res = data as PricingResponse;
+          // Country detection only supplies the initial default. A manual
+          // selection is never overridden.
+          if (
+            !hasExplicitCurrency() &&
+            res.suggested_currency &&
+            res.suggested_currency !== currency
+          ) {
+            setCurrencyState(res.suggested_currency);
+            return;
+          }
+          setPricing(res);
         }
       })
       .catch(() => !cancelled && setFailed(true))
