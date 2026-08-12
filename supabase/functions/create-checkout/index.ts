@@ -9,15 +9,23 @@ const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.ap
 const NOWPAYMENTS_API_KEY = Deno.env.get('NOWPAYMENTS_API_KEY') ?? ''
 const FUNCTIONS_BASE = `${Deno.env.get('MY_SUPABASE_URL') ?? Deno.env.get('SUPABASE_URL')}/functions/v1`
 
+const json = (payload: unknown, status = 200) =>
+  new Response(JSON.stringify(payload), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  })
+
 const BodySchema = z.object({
   email: z.string().trim().email().max(255),
   full_name: z.string().trim().min(1).max(120).optional(),
   provider: z.enum(['paypal', 'nowpayments']),
+  /** The currency the customer chose to be billed in. Amount is never client-supplied. */
+  currency: z.string().trim().length(3).optional(),
   pay_currency: z.string().trim().min(2).max(20).optional(),
   ref: z.string().trim().min(3).max(24).optional(),
 })
 
-// PayPal only settles in this set. Anything else falls back to USD.
+// The complete set of currencies PayPal is able to settle in.
 const PAYPAL_CURRENCIES = new Set([
   'AUD', 'BRL', 'CAD', 'CNY', 'CZK', 'DKK', 'EUR', 'HKD', 'HUF', 'ILS', 'JPY', 'MYR', 'MXN',
   'TWD', 'NZD', 'NOK', 'PHP', 'PLN', 'GBP', 'SGD', 'SEK', 'CHF', 'THB', 'USD',
