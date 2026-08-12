@@ -2,6 +2,16 @@ const KEY = "bwf_currency";
 
 export const DEFAULT_CURRENCY = "USD";
 
+/** True once the customer has manually picked a currency. Geo never overrides it. */
+export const hasExplicitCurrency = (): boolean => {
+  try {
+    const v = localStorage.getItem(KEY);
+    return Boolean(v && /^[A-Z]{3}$/.test(v));
+  } catch {
+    return false;
+  }
+};
+
 /** The customer's chosen billing currency. Presentation only — the server always reprices. */
 export const getCurrency = (): string => {
   try {
