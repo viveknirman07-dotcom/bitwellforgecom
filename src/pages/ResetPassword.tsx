@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Eyebrow from "@/components/Eyebrow";
@@ -7,6 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const requestedNext = params.get("next");
+  const next = requestedNext === "/affiliate/dashboard" ? requestedNext : "/vault";
   const [ready, setReady] = useState(false);
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -15,10 +18,13 @@ const ResetPassword = () => {
 
   useEffect(() => {
     document.title = "Reset password — BitwellForge";
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) setReady(true);
+    const isRecoveryLink = new URLSearchParams(window.location.hash.slice(1)).get("type") === "recovery";
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY" && session) setReady(true);
     });
-    supabase.auth.getSession().then(({ data }) => setReady(Boolean(data.session)));
+    if (isRecoveryLink) {
+      supabase.auth.getSession().then(({ data }) => setReady(Boolean(data.session)));
+    }
     return () => sub.subscription.unsubscribe();
   }, []);
 
@@ -30,7 +36,7 @@ const ResetPassword = () => {
     setBusy(false);
     if (error) return setError(error.message);
     setDone(true);
-    setTimeout(() => navigate("/vault", { replace: true }), 1400);
+    setTimeout(() => navigate(next, { replace: true }), 1400);
   };
 
   return (
@@ -47,7 +53,9 @@ const ResetPassword = () => {
               This link is invalid or has expired. Request a new reset email from the account page.
             </p>
           ) : done ? (
-            <p className="mt-10 text-sm text-foreground/80">Password updated. Redirecting to Forge Vault.</p>
+             <p className="mt-10 text-sm text-foreground/80">
+               Password updated. Redirecting to your account.
+             </p>
           ) : (
             <form onSubmit={submit} className="mt-10 space-y-5">
               <div>

@@ -11,7 +11,10 @@ type Mode = "login" | "signup" | "forgot";
 
 const Account = () => {
   const [params] = useSearchParams();
-  const next = params.get("next") || "/vault";
+  const requestedNext = params.get("next");
+  const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//")
+    ? requestedNext
+    : "/vault";
   const isAffiliate = params.get("type") === "affiliate" || next.startsWith("/affiliate");
   const navigate = useNavigate();
   const { user, loading } = useAuth();
@@ -59,7 +62,7 @@ const Account = () => {
         else setMessage("Check your inbox to confirm your email address, then sign in.");
       } else {
         const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
-          redirectTo: `${window.location.origin}/reset-password`,
+          redirectTo: `${window.location.origin}/reset-password?next=${encodeURIComponent(next)}`,
         });
         if (error) throw error;
         setMessage("If an account exists for that address, a reset link is on its way.");
