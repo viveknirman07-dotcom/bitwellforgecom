@@ -11,7 +11,10 @@ type Mode = "login" | "signup" | "forgot";
 
 const Account = () => {
   const [params] = useSearchParams();
-  const next = params.get("next") || "/vault";
+  const requestedNext = params.get("next");
+  const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//")
+    ? requestedNext
+    : "/vault";
   const isAffiliate = params.get("type") === "affiliate" || next.startsWith("/affiliate");
   const navigate = useNavigate();
   const { user, loading } = useAuth();

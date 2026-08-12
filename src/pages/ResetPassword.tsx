@@ -15,10 +15,13 @@ const ResetPassword = () => {
 
   useEffect(() => {
     document.title = "Reset password — BitwellForge";
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) setReady(true);
+    const isRecoveryLink = new URLSearchParams(window.location.hash.slice(1)).get("type") === "recovery";
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY" && session) setReady(true);
     });
-    supabase.auth.getSession().then(({ data }) => setReady(Boolean(data.session)));
+    if (isRecoveryLink) {
+      supabase.auth.getSession().then(({ data }) => setReady(Boolean(data.session)));
+    }
     return () => sub.subscription.unsubscribe();
   }, []);
 
