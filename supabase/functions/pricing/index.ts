@@ -1,6 +1,13 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { admin, clientIp } from '../_shared/db.ts'
-import { COUNTRY_CURRENCY, convertFromInr, resolveCountry } from '../_shared/money.ts'
+import {
+  COUNTRY_CURRENCY,
+  CURRENCY_NAMES,
+  convertFromInr,
+  formatMoney,
+  getRates,
+  resolveCountry,
+} from '../_shared/money.ts'
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
@@ -20,20 +27,54 @@ Deno.serve(async (req) => {
     if (error || !product) throw new Error('Product unavailable')
 
     const country = await resolveCountry(req, ip)
+
+    // USD is the documented default. Geo only supplies a hint the client may use.
     const currency =
-      forced && /^[A-Z]{3}$/.test(forced) ? forced : (COUNTRY_CURRENCY[country] ?? 'USD')
+      forced && /^[A-Z]{3}$/.test(forced) ? forced : 'USD'
 
     const amountInr = Number(product.price_inr)
-    const converted = await convertFromInr(amountInr, currency)
-    const resolvedCurrency = (converted as { currency?: string }).currency ?? currency
 
-    const formatted = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: resolvedCurrency,
-      maximumFractionDigits: ['JPY', 'KRW', 'VND', 'CLP', 'IDR', 'HUF'].includes(resolvedCurrency)
-        ? 0
-        : 2,
-    }).format(converted.amount)
+    let converted: { amount: number; rate: number; currency?: string }
+    try {
+      converted = await convertFromInr(amountInr, currency)
+    } catch (_) {
+      // Never show a possibly-wrong converted price. Fall back to the base currency.
+      return new Response(
+        JSON.stringify({
+          product: {
+            slug: product.slug,
+            name: product.name,
+            tagline: product.tagline,
+            description: product.description,
+          },
+          country,
+          suggested_currency: COUNTRY_CURRENCY[country] ?? 'USD',
+          base: { currency: 'INR', amount: amountInr },
+          display: {
+            currency: 'INR',
+            amount: amountInr,
+            formatted: formatMoney('INR', amountInr),
+            rate: 1,
+          },
+          conversion_unavailable: true,
+        }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      )
+    }
+
+    const resolvedCurrency = converted.currency ?? currency
+    const unsupported = resolvedCurrency !== currency
+
+    let currencies: Array<{ code: string; name: string }> = []
+    try {
+      const { rates } = await getRates()
+      currencies = Object.keys(rates)
+        .filter((c) => CURRENCY_NAMES[c])
+        .sort()
+        .map((c) => ({ code: c, name: CURRENCY_NAMES[c] }))
+    } catch (_) {
+      currencies = []
+    }
 
     return new Response(
       JSON.stringify({
@@ -44,13 +85,16 @@ Deno.serve(async (req) => {
           description: product.description,
         },
         country,
+        suggested_currency: COUNTRY_CURRENCY[country] ?? 'USD',
         base: { currency: 'INR', amount: amountInr },
         display: {
           currency: resolvedCurrency,
           amount: converted.amount,
-          formatted,
+          formatted: formatMoney(resolvedCurrency, converted.amount),
           rate: converted.rate,
         },
+        requested_currency_unsupported: unsupported ? currency : null,
+        currencies,
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     )

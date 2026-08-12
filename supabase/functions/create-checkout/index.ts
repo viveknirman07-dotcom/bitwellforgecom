@@ -9,15 +9,23 @@ const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.ap
 const NOWPAYMENTS_API_KEY = Deno.env.get('NOWPAYMENTS_API_KEY') ?? ''
 const FUNCTIONS_BASE = `${Deno.env.get('MY_SUPABASE_URL') ?? Deno.env.get('SUPABASE_URL')}/functions/v1`
 
+const json = (payload: unknown, status = 200) =>
+  new Response(JSON.stringify(payload), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  })
+
 const BodySchema = z.object({
   email: z.string().trim().email().max(255),
   full_name: z.string().trim().min(1).max(120).optional(),
   provider: z.enum(['paypal', 'nowpayments']),
+  /** The currency the customer chose to be billed in. Amount is never client-supplied. */
+  currency: z.string().trim().length(3).optional(),
   pay_currency: z.string().trim().min(2).max(20).optional(),
   ref: z.string().trim().min(3).max(24).optional(),
 })
 
-// PayPal only settles in this set. Anything else falls back to USD.
+// The complete set of currencies PayPal is able to settle in.
 const PAYPAL_CURRENCIES = new Set([
   'AUD', 'BRL', 'CAD', 'CNY', 'CZK', 'DKK', 'EUR', 'HKD', 'HUF', 'ILS', 'JPY', 'MYR', 'MXN',
   'TWD', 'NZD', 'NOK', 'PHP', 'PLN', 'GBP', 'SGD', 'SEK', 'CHF', 'THB', 'USD',
@@ -50,7 +58,7 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { email, full_name, provider, pay_currency, ref } = parsed.data
+    const { email, full_name, provider, currency, pay_currency, ref } = parsed.data
 
     // Referral attribution resolved server-side; the client only supplies a code.
     const affiliate = ref ? await resolveAffiliateByCode(ref) : null
@@ -68,16 +76,56 @@ Deno.serve(async (req) => {
     const country = await resolveCountry(req, ip)
     const localCurrency = COUNTRY_CURRENCY[country] ?? 'USD'
 
-    // Settlement currency depends on what the provider can actually charge.
-    const settleCurrency =
-      provider === 'paypal'
-        ? PAYPAL_CURRENCIES.has(localCurrency)
-          ? localCurrency
-          : 'USD'
-        : 'USD'
+    /*
+     * The customer chooses the currency; the client never sends an amount.
+     * The charge is always recomputed here from the ₹14,500 source of truth,
+     * so a tampered client cannot influence what is billed.
+     */
+    const settleCurrency = (currency ?? 'USD').toUpperCase()
+    if (!/^[A-Z]{3}$/.test(settleCurrency)) {
+      return json({ error: 'Unrecognised currency', code: 'currency_invalid' }, 400)
+    }
 
-    const settle = await convertFromInr(amountInr, settleCurrency)
-    const display = await convertFromInr(amountInr, localCurrency)
+    // Never silently substitute a currency the customer did not choose.
+    if (provider === 'paypal' && !PAYPAL_CURRENCIES.has(settleCurrency)) {
+      return json(
+        {
+          code: 'currency_unsupported',
+          error: `PayPal cannot settle in ${settleCurrency}.`,
+          provider: 'paypal',
+          supported: [...PAYPAL_CURRENCIES].sort(),
+        },
+        400,
+      )
+    }
+    if (provider === 'nowpayments' && settleCurrency !== 'USD') {
+      return json(
+        {
+          code: 'currency_unsupported',
+          error: `Crypto payment is priced in USD and cannot settle in ${settleCurrency}.`,
+          provider: 'nowpayments',
+          supported: ['USD'],
+        },
+        400,
+      )
+    }
+
+    let settle: { amount: number; rate: number; currency?: string }
+    try {
+      settle = await convertFromInr(amountInr, settleCurrency)
+    } catch (_) {
+      return json(
+        { code: 'rates_unavailable', error: 'Currency conversion is temporarily unavailable. Please try again shortly.' },
+        503,
+      )
+    }
+    if ((settle.currency ?? settleCurrency) !== settleCurrency) {
+      return json(
+        { code: 'currency_unsupported', error: `No live rate is available for ${settleCurrency}.` },
+        400,
+      )
+    }
+    const display = settle
 
     const { data: order, error: orderErr } = await db
       .from('orders')
@@ -95,9 +143,10 @@ Deno.serve(async (req) => {
         affiliate_id: attributed?.id ?? null,
         referral_code: attributed?.code ?? null,
         metadata: {
-          local_currency: localCurrency,
-          local_amount: display.amount,
-          local_rate: display.rate,
+          selected_currency: settleCurrency,
+          selected_amount: display.amount,
+          geo_currency: localCurrency,
+          fx_rate: settle.rate,
           ip,
         },
       })

@@ -1,18 +1,24 @@
 import { useEffect, useState, FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { getReferral } from "@/lib/referral";
+import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
+import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
 
 interface Pricing {
   product: { name: string; tagline?: string; description?: string };
   display: { currency: string; amount: number; formatted: string };
   base: { currency: string; amount: number };
+  currencies?: CurrencyOption[];
+  conversion_unavailable?: boolean;
 }
 
 const Checkout = () => {
   const [params] = useSearchParams();
   const cancelled = params.get("cancelled") === "1";
 
+  const [currency, setCurrencyState] = useState(getCurrency);
   const [pricing, setPricing] = useState<Pricing | null>(null);
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -22,11 +28,29 @@ const Checkout = () => {
 
   useEffect(() => {
     document.title = "Checkout — BitwellForge";
-    supabase.functions
-      .invoke("pricing", { method: "GET" })
-      .then(({ data }) => setPricing(data ?? null))
-      .catch(() => setPricing(null));
   }, []);
+
+  useEffect(() => {
+    let cancelledReq = false;
+    supabase.functions
+      .invoke(`pricing?currency=${encodeURIComponent(currency)}`, { method: "GET" })
+      .then(({ data }) => !cancelledReq && setPricing(data ?? null))
+      .catch(() => !cancelledReq && setPricing(null));
+    return () => {
+      cancelledReq = true;
+    };
+  }, [currency]);
+
+  const chooseCurrency = (code: string) => {
+    setCurrency(code);
+    setCurrencyState(code);
+    setError(null);
+  };
+
+  const options: CurrencyOption[] =
+    pricing?.currencies && pricing.currencies.length > 0
+      ? pricing.currencies
+      : [{ code: DEFAULT_CURRENCY, name: "US Dollar" }];
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -38,10 +62,31 @@ const Checkout = () => {
           email: email.trim().toLowerCase(),
           full_name: fullName.trim() || undefined,
           provider,
+          currency,
           ref: getReferral() ?? undefined,
         },
       });
-      if (fnError) throw fnError;
+
+      if (fnError) {
+        // The real reason lives in the response body, not the generic wrapper.
+        let detail: Record<string, unknown> | null = null;
+        if (fnError instanceof FunctionsHttpError) {
+          detail = await fnError.context.json().catch(() => null);
+        }
+        if (detail?.code === "currency_unsupported") {
+          const supported = Array.isArray(detail.supported) ? (detail.supported as string[]) : [];
+          throw new Error(
+            `${detail.error} Choose a different payment method, or select one of: ${supported.join(", ")}.`,
+          );
+        }
+        if (detail?.code === "rates_unavailable") {
+          throw new Error(String(detail.error));
+        }
+        throw new Error(
+          typeof detail?.error === "string" ? detail.error : "Checkout could not be started.",
+        );
+      }
+
       if (data?.error) throw new Error(typeof data.error === "string" ? data.error : "Checkout failed");
       if (!data?.approve_url) throw new Error("Payment session could not be started");
       window.location.href = data.approve_url;
@@ -74,11 +119,21 @@ const Checkout = () => {
             <p className="font-heading text-4xl tracking-tight">
               {pricing ? pricing.display.formatted : "\u2014"}
             </p>
-            {pricing && pricing.display.currency !== "INR" && (
+            {pricing?.conversion_unavailable && (
+              <p role="status" className="mt-3 text-[12px] portal-muted">
+                Live conversion is temporarily unavailable, so the base price is shown.
+              </p>
+            )}
+            {pricing && !pricing.conversion_unavailable && pricing.display.currency !== "INR" && (
               <p className="mt-3 text-[12px] portal-muted">
                 Billed as the local equivalent of ₹{pricing.base.amount.toLocaleString("en-IN")} at live rates.
               </p>
             )}
+
+            <div className="mt-8">
+              <CurrencySelect value={currency} options={options} onChange={chooseCurrency} />
+            </div>
+
             <p className="mt-8 text-[12px] leading-relaxed portal-muted">
               Lifetime access to the Forge Vault. Account access is delivered to your email the moment payment
               is verified.

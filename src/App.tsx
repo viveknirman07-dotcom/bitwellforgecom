@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +19,7 @@ import Careers from "./pages/Careers";
 import AffiliateProgram from "./pages/AffiliateProgram";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
 import Vault from "./pages/Vault";
+import ForgeVault from "./pages/ForgeVault";
 import Checkout from "./pages/Checkout";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import Account from "./pages/Account";
@@ -27,15 +27,11 @@ import ResetPassword from "./pages/ResetPassword";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "@/hooks/use-auth";
 import RequireAuth from "@/portal/RequireAuth";
-import { captureReferral } from "@/lib/referral";
+import ReferralGate from "@/components/ReferralGate";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  useEffect(() => {
-    captureReferral();
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -44,6 +40,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <ReferralGate />
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<Index />} />
@@ -56,6 +53,7 @@ const App = () => {
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/insights/:slug" element={<InsightArticle />} />
                 <Route path="/careers" element={<Careers />} />
+                <Route path="/forge-vault" element={<ForgeVault />} />
                 <Route path="/affiliate" element={<AffiliateProgram />} />
                 <Route path="/contact" element={<Contact />} />
               </Route>

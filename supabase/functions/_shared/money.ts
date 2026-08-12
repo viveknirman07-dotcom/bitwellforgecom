@@ -63,6 +63,40 @@ export async function getRates(): Promise<Rates> {
   throw new Error(`Exchange rate lookup failed: ${lastError}`)
 }
 
+/** Display names for the currencies we are willing to quote in. */
+export const CURRENCY_NAMES: Record<string, string> = {
+  USD: 'US Dollar', EUR: 'Euro', GBP: 'British Pound', INR: 'Indian Rupee',
+  CAD: 'Canadian Dollar', AUD: 'Australian Dollar', NZD: 'New Zealand Dollar',
+  SGD: 'Singapore Dollar', AED: 'UAE Dirham', SAR: 'Saudi Riyal', QAR: 'Qatari Riyal',
+  KWD: 'Kuwaiti Dinar', BHD: 'Bahraini Dinar', OMR: 'Omani Rial',
+  JPY: 'Japanese Yen', CNY: 'Chinese Yuan', HKD: 'Hong Kong Dollar', TWD: 'Taiwan Dollar',
+  KRW: 'South Korean Won', CHF: 'Swiss Franc', SEK: 'Swedish Krona', NOK: 'Norwegian Krone',
+  DKK: 'Danish Krone', PLN: 'Polish Zloty', CZK: 'Czech Koruna', HUF: 'Hungarian Forint',
+  RON: 'Romanian Leu', BGN: 'Bulgarian Lev', TRY: 'Turkish Lira',
+  BRL: 'Brazilian Real', MXN: 'Mexican Peso', ARS: 'Argentine Peso', CLP: 'Chilean Peso',
+  COP: 'Colombian Peso', PEN: 'Peruvian Sol', UYU: 'Uruguayan Peso',
+  ZAR: 'South African Rand', NGN: 'Nigerian Naira', KES: 'Kenyan Shilling',
+  GHS: 'Ghanaian Cedi', EGP: 'Egyptian Pound', MAD: 'Moroccan Dirham',
+  ILS: 'Israeli New Shekel', THB: 'Thai Baht', MYR: 'Malaysian Ringgit',
+  IDR: 'Indonesian Rupiah', PHP: 'Philippine Peso', VND: 'Vietnamese Dong',
+  PKR: 'Pakistani Rupee', BDT: 'Bangladeshi Taka', LKR: 'Sri Lankan Rupee',
+  NPR: 'Nepalese Rupee',
+}
+
+/** Currency-correct presentation. Zero-decimal currencies never show cents. */
+export function formatMoney(currency: string, amount: number): string {
+  try {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: ZERO_DECIMAL.has(currency) ? 0 : 2,
+      maximumFractionDigits: ZERO_DECIMAL.has(currency) ? 0 : 2,
+    }).format(amount)
+  } catch (_) {
+    return `${currency} ${amount.toFixed(ZERO_DECIMAL.has(currency) ? 0 : 2)}`
+  }
+}
+
 export function roundFor(currency: string, value: number): number {
   if (ZERO_DECIMAL.has(currency)) return Math.round(value)
   return Math.round(value * 100) / 100
