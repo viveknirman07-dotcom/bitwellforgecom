@@ -54,7 +54,7 @@ const ForgeVault = () => {
     title: "Forge Vault — Commercial Growth System™ | BitwellForge",
     description:
       "Lifetime access to the Commercial Growth System™: the BitwellForge Blueprint, Operating System and Commercial Toolkit, inside the private Forge Vault.",
-    canonical: "/forge-vault",
+    canonicalPath: "/forge-vault",
   });
 
   useEffect(() => {
