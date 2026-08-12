@@ -143,9 +143,10 @@ Deno.serve(async (req) => {
         affiliate_id: attributed?.id ?? null,
         referral_code: attributed?.code ?? null,
         metadata: {
-          local_currency: localCurrency,
-          local_amount: display.amount,
-          local_rate: display.rate,
+          selected_currency: settleCurrency,
+          selected_amount: display.amount,
+          geo_currency: localCurrency,
+          fx_rate: settle.rate,
           ip,
         },
       })
