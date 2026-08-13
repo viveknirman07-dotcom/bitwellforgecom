@@ -5,10 +5,18 @@ import CTABlock from "@/components/CTABlock";
 import Eyebrow from "@/components/Eyebrow";
 import { caseStudies, caseStudyCategories } from "@/lib/case-studies-data";
 import { cn } from "@/lib/utils";
+import { useSEO } from "@/hooks/use-seo";
 
 type Filter = "All" | (typeof caseStudyCategories)[number];
 
 const CaseStudies = () => {
+  useSEO({
+    title: "Case Studies | BitwellForge Revenue Infrastructure",
+    description:
+      "Concept studies showing how BitwellForge designs lead generation, revenue systems, growth strategy, and AI automation architecture for B2B businesses.",
+    canonicalPath: "/case-studies",
+  });
+
   const [filter, setFilter] = useState<Filter>("All");
 
   const filtered =

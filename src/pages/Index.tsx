@@ -111,6 +111,16 @@ const Index = () => {
     description:
       "BitwellForge builds commercial growth architecture for agencies, consultants, and B2B service businesses. Client acquisition, revenue systems, positioning, and AI-powered operations engineered to compound.",
     canonicalPath: "/",
+    jsonLdId: "home-jsonld",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
   });
 
   return (

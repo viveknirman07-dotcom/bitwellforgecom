@@ -12,6 +12,14 @@ const MetaDot = () => (
   <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-muted-foreground/40" />
 );
 
+/** Convert a "Mon YYYY" label into an ISO date for structured data. */
+const toIsoDate = (label: string) => {
+  const parsed = new Date(`1 ${label}`);
+  return Number.isNaN(parsed.getTime())
+    ? undefined
+    : parsed.toISOString().slice(0, 10);
+};
+
 const InsightArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = articles.find((a) => a.slug === slug);
@@ -21,6 +29,24 @@ const InsightArticle = () => {
     description: article?.excerpt ?? "Insight from BitwellForge on growth, systems, and strategic clarity.",
     canonicalPath: `/insights/${slug ?? ""}`,
     ogType: "article",
+    jsonLdId: "article-jsonld",
+    jsonLd: article
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: article.title,
+          description: article.excerpt,
+          datePublished: toIsoDate(article.date),
+          articleSection: article.category,
+          author: { "@type": "Organization", name: "BitwellForge" },
+          publisher: {
+            "@type": "Organization",
+            name: "BitwellForge",
+            url: "https://www.bitwellforge.com",
+          },
+          mainEntityOfPage: `https://www.bitwellforge.com/insights/${slug ?? ""}`,
+        }
+      : undefined,
   });
 
   if (!article) {

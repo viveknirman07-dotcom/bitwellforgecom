@@ -12,7 +12,7 @@ interface SEOOptions {
   jsonLdId?: string;
 }
 
-const SITE_URL = "https://bitwellforgecom.lovable.app";
+const SITE_URL = "https://www.bitwellforge.com";
 const DEFAULT_OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/nhvvmPareMZp5Areto5BYur31l62/social-images/social-1771953048264-JPEG_image-477F-B949-86-0.webp";
 
