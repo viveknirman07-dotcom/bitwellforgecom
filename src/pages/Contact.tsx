@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SocialLinks from "@/components/SocialLinks";
+import { useSEO } from "@/hooks/use-seo";
 
 const serviceOptions = [
   "General Inquiry",
@@ -19,6 +20,13 @@ const serviceOptions = [
 ];
 
 const Contact = () => {
+  useSEO({
+    title: "Contact BitwellForge | Book an Infrastructure Audit",
+    description:
+      "Start a discovery conversation with BitwellForge. Book an infrastructure audit and map the commercial architecture your business needs before scaling.",
+    canonicalPath: "/contact",
+  });
+
   const [searchParams] = useSearchParams();
   const [form, setForm] = useState({
     name: "",

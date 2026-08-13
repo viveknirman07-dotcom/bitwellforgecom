@@ -17,6 +17,7 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 import { activeJobs, getJobBySlug, type Job } from "@/data/jobs";
 import { getStatus, recordAttempt, formatUntil } from "@/lib/applicationGuard";
+import { useSEO } from "@/hooks/use-seo";
 
 type Stage =
   | "listing"
@@ -30,6 +31,13 @@ type Stage =
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const Careers = () => {
+  useSEO({
+    title: "Careers at BitwellForge | Open Roles",
+    description:
+      "Join BitwellForge. We hire operators who build commercial growth infrastructure. See open roles, the screening process, and how to apply.",
+    canonicalPath: "/careers",
+  });
+
   const [searchParams, setSearchParams] = useSearchParams();
   const slug = searchParams.get("job");
   const stageParam = searchParams.get("stage") as Stage | null;
