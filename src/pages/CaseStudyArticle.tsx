@@ -4,10 +4,20 @@ import { caseStudies } from "@/lib/case-studies-data";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTABlock from "@/components/CTABlock";
 import Eyebrow from "@/components/Eyebrow";
+import { useSEO } from "@/hooks/use-seo";
 
 const CaseStudyArticle = () => {
   const { id } = useParams<{ id: string }>();
   const study = caseStudies.find((s) => s.id === id);
+
+  useSEO({
+    title: study ? `${study.title} | BitwellForge Case Study` : "Case study not found | BitwellForge",
+    description:
+      study?.subtitle ??
+      "A BitwellForge concept study on designing revenue infrastructure for B2B service businesses.",
+    canonicalPath: `/case-studies/${id ?? ""}`,
+    ogType: "article",
+  });
 
   if (!study) {
     return (

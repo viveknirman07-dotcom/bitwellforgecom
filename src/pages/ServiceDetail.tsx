@@ -5,6 +5,7 @@ import CTABlock from "@/components/CTABlock";
 import IdealFor from "@/components/services/IdealFor";
 import { ServiceHero } from "@/components/services/ServiceVisuals";
 import { serviceData, type ServiceSlug } from "@/data/services";
+import { useSEO } from "@/hooks/use-seo";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-[10px] tracking-[0.28em] uppercase text-[hsl(var(--eyebrow-color))] font-medium mb-3">
@@ -35,6 +36,31 @@ const Divider = () => (
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const service = slug && slug in serviceData ? serviceData[slug as ServiceSlug] : null;
+
+  useSEO({
+    title: service ? `${service.title} | BitwellForge` : "Service not found | BitwellForge",
+    description:
+      service?.subtitle ??
+      "Revenue infrastructure modules engineered by BitwellForge for B2B service businesses.",
+    canonicalPath: `/services/${slug ?? ""}`,
+    jsonLdId: "service-jsonld",
+    jsonLd: service
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.title,
+          description: service.subtitle,
+          serviceType: service.title,
+          provider: {
+            "@type": "Organization",
+            name: "BitwellForge",
+            url: "https://www.bitwellforge.com",
+          },
+          areaServed: "Worldwide",
+          url: `https://www.bitwellforge.com/services/${slug ?? ""}`,
+        }
+      : undefined,
+  });
 
   if (!service) {
     return (
