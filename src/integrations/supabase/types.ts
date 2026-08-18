@@ -186,8 +186,10 @@ export type Database = {
         Row: {
           affiliate_id: string
           amount_usd: number
+          commissionable_amount_usd: number | null
           created_at: string
           currency: string
+          discount_usd: number
           id: string
           order_id: string
           payout_record_id: string | null
@@ -199,8 +201,10 @@ export type Database = {
         Insert: {
           affiliate_id: string
           amount_usd?: number
+          commissionable_amount_usd?: number | null
           created_at?: string
           currency?: string
+          discount_usd?: number
           id?: string
           order_id: string
           payout_record_id?: string | null
@@ -212,8 +216,10 @@ export type Database = {
         Update: {
           affiliate_id?: string
           amount_usd?: number
+          commissionable_amount_usd?: number | null
           created_at?: string
           currency?: string
+          discount_usd?: number
           id?: string
           order_id?: string
           payout_record_id?: string | null
@@ -414,10 +420,14 @@ export type Database = {
       }
       orders: {
         Row: {
+          affiliate_discount_usd: number
           affiliate_id: string | null
           amount_inr: number
+          attribution_status: string
+          commissionable_amount_usd: number | null
           country_code: string | null
           created_at: string
+          discount_display_amount: number
           display_amount: number | null
           display_currency: string
           email: string
@@ -425,20 +435,26 @@ export type Database = {
           fx_rate: number | null
           id: string
           metadata: Json
+          original_display_amount: number | null
           paid_at: string | null
           product_id: string
           provider: Database["public"]["Enums"]["payment_provider"]
           provider_order_id: string | null
           referral_code: string | null
+          referral_source: string | null
           status: Database["public"]["Enums"]["order_status"]
           updated_at: string
           user_id: string | null
         }
         Insert: {
+          affiliate_discount_usd?: number
           affiliate_id?: string | null
           amount_inr: number
+          attribution_status?: string
+          commissionable_amount_usd?: number | null
           country_code?: string | null
           created_at?: string
+          discount_display_amount?: number
           display_amount?: number | null
           display_currency?: string
           email: string
@@ -446,20 +462,26 @@ export type Database = {
           fx_rate?: number | null
           id?: string
           metadata?: Json
+          original_display_amount?: number | null
           paid_at?: string | null
           product_id: string
           provider: Database["public"]["Enums"]["payment_provider"]
           provider_order_id?: string | null
           referral_code?: string | null
+          referral_source?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           updated_at?: string
           user_id?: string | null
         }
         Update: {
+          affiliate_discount_usd?: number
           affiliate_id?: string | null
           amount_inr?: number
+          attribution_status?: string
+          commissionable_amount_usd?: number | null
           country_code?: string | null
           created_at?: string
+          discount_display_amount?: number
           display_amount?: number | null
           display_currency?: string
           email?: string
@@ -467,11 +489,13 @@ export type Database = {
           fx_rate?: number | null
           id?: string
           metadata?: Json
+          original_display_amount?: number | null
           paid_at?: string | null
           product_id?: string
           provider?: Database["public"]["Enums"]["payment_provider"]
           provider_order_id?: string | null
           referral_code?: string | null
+          referral_source?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           updated_at?: string
           user_id?: string | null
@@ -840,6 +864,7 @@ export type Database = {
           affiliate_id: string | null
           code: string
           created_at: string
+          event: string
           id: string
           ip_hash: string | null
           landing_path: string | null
@@ -850,6 +875,7 @@ export type Database = {
           affiliate_id?: string | null
           code: string
           created_at?: string
+          event?: string
           id?: string
           ip_hash?: string | null
           landing_path?: string | null
@@ -860,6 +886,7 @@ export type Database = {
           affiliate_id?: string | null
           code?: string
           created_at?: string
+          event?: string
           id?: string
           ip_hash?: string | null
           landing_path?: string | null
