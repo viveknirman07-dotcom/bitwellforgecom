@@ -20,6 +20,85 @@ export async function resolveAffiliateByCode(code: string) {
 export const COMMISSION_USD = 50
 
 /**
+ * Buyer benefit granted when a referred visitor validates the matching
+ * affiliate code. $10 is an absolute ceiling enforced server-side; every
+ * discount in the system passes through capDiscountUsd().
+ */
+export const AFFILIATE_DISCOUNT_USD = 10
+export const MAX_AFFILIATE_DISCOUNT_USD = 10
+
+export function capDiscountUsd(value: number): number {
+  const n = Number(value)
+  if (!Number.isFinite(n) || n <= 0) return 0
+  return Math.min(MAX_AFFILIATE_DISCOUNT_USD, Math.round(n * 100) / 100)
+}
+
+export interface AttributionResult {
+  ok: boolean
+  code?: 'referral_inactive' | 'code_required' | 'code_invalid' | 'code_mismatch' | 'self_referral'
+  message?: string
+  affiliate?: { id: string; code: string; email: string | null; user_id: string }
+  discount_usd?: number
+}
+
+/**
+ * The single authority on affiliate attribution.
+ *
+ * Both the referral code carried by the link AND the code typed at checkout are
+ * resolved independently against the database and must point at the same active
+ * affiliate row before any benefit or commission eligibility exists.
+ */
+export async function verifyAttribution(
+  refCode: string | null | undefined,
+  enteredCode: string | null | undefined,
+  buyerEmail?: string | null,
+): Promise<AttributionResult> {
+  const ref = (refCode ?? '').trim()
+  if (!ref) return { ok: true, discount_usd: 0 }
+
+  const referred = await resolveAffiliateByCode(ref)
+  // A stale or unknown referral never blocks a purchase: it degrades to a
+  // plain direct sale with no benefit and no attribution.
+  if (!referred || referred.status !== 'active') {
+    return { ok: false, code: 'referral_inactive', message: 'This referral link is no longer active.' }
+  }
+
+  const entered = (enteredCode ?? '').trim()
+  if (!entered) {
+    return { ok: false, code: 'code_required', message: 'An affiliate code is required to complete this purchase.' }
+  }
+
+  const typed = await resolveAffiliateByCode(entered)
+  if (!typed || typed.status !== 'active') {
+    return { ok: false, code: 'code_invalid', message: 'That affiliate code is not valid.' }
+  }
+  if (typed.id !== referred.id) {
+    return {
+      ok: false,
+      code: 'code_mismatch',
+      message: 'This affiliate code does not match the referral link used to access this offer.',
+    }
+  }
+
+  const email = String(buyerEmail ?? '').toLowerCase()
+  if (email && String(referred.email ?? '').toLowerCase() === email) {
+    return { ok: false, code: 'self_referral', message: 'An affiliate cannot use their own referral code.' }
+  }
+
+  return {
+    ok: true,
+    affiliate: {
+      id: referred.id,
+      code: referred.code,
+      email: referred.email,
+      user_id: referred.user_id,
+    },
+    discount_usd: capDiscountUsd(AFFILIATE_DISCOUNT_USD),
+  }
+}
+
+
+/**
  * Creates the single commission owed for a verified, attributed order.
  * Idempotent: the unique constraint on commissions.order_id makes webhook
  * retries and duplicate provider events impossible to double-pay.
