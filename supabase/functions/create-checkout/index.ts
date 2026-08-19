@@ -139,6 +139,36 @@ Deno.serve(async (req) => {
         400,
       )
     }
+    const originalAmount = settle.amount
+
+    /*
+     * Buyer benefit. Computed from the server-capped USD discount, converted
+     * into the settlement currency, and never allowed to exceed the price.
+     */
+    let discountDisplay = 0
+    let effectiveDiscountUsd = 0
+    if (discountUsd > 0) {
+      try {
+        const converted = await convertUsd(discountUsd, settleCurrency)
+        discountDisplay = Math.min(converted.amount, roundFor(settleCurrency, originalAmount * 0.5))
+        effectiveDiscountUsd = discountUsd
+      } catch (_) {
+        return json(
+          { code: 'rates_unavailable', error: 'Currency conversion is temporarily unavailable. Please try again shortly.' },
+          503,
+        )
+      }
+    }
+    const chargeAmount = roundFor(settleCurrency, originalAmount - discountDisplay)
+    settle.amount = chargeAmount
+
+    let commissionableUsd: number | null = null
+    try {
+      commissionableUsd = await toUsd(chargeAmount, settleCurrency)
+    } catch (_) {
+      commissionableUsd = null
+    }
+
     const display = settle
 
     const { data: order, error: orderErr } = await db
@@ -149,7 +179,13 @@ Deno.serve(async (req) => {
         product_id: product.id,
         amount_inr: amountInr,
         display_currency: settleCurrency,
-        display_amount: settle.amount,
+        display_amount: chargeAmount,
+        original_display_amount: originalAmount,
+        discount_display_amount: discountDisplay,
+        affiliate_discount_usd: effectiveDiscountUsd,
+        commissionable_amount_usd: commissionableUsd,
+        referral_source: attributed ? 'affiliate_link' : 'direct',
+        attribution_status: attributed ? 'verified' : 'none',
         fx_rate: settle.rate,
         provider,
         status: 'pending',
@@ -167,6 +203,7 @@ Deno.serve(async (req) => {
       .select('id')
       .single()
     if (orderErr || !order) throw new Error(`Could not create order: ${orderErr?.message}`)
+
 
     if (provider === 'paypal') {
       if (!paypalConfigured()) throw new Error('PayPal is not configured')
