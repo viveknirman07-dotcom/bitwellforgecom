@@ -1,9 +1,10 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { z } from 'npm:zod@3.23.8'
 import { admin, clientIp, logActivity, rateLimit } from '../_shared/db.ts'
-import { COUNTRY_CURRENCY, convertFromInr, resolveCountry } from '../_shared/money.ts'
+import { COUNTRY_CURRENCY, convertFromInr, convertUsd, resolveCountry, roundFor, toUsd } from '../_shared/money.ts'
 import { paypalConfigured, paypalFetch } from '../_shared/paypal.ts'
-import { resolveAffiliateByCode } from '../_shared/affiliate.ts'
+import { capDiscountUsd, verifyAttribution } from '../_shared/affiliate.ts'
+
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 const NOWPAYMENTS_API_KEY = Deno.env.get('NOWPAYMENTS_API_KEY') ?? ''
@@ -22,8 +23,12 @@ const BodySchema = z.object({
   /** The currency the customer chose to be billed in. Amount is never client-supplied. */
   currency: z.string().trim().length(3).optional(),
   pay_currency: z.string().trim().min(2).max(20).optional(),
+  /** Referral code carried by the affiliate link. */
   ref: z.string().trim().min(3).max(24).optional(),
+  /** Affiliate code typed by the buyer at checkout. */
+  affiliate_code: z.string().trim().min(1).max(24).optional(),
 })
+
 
 // The complete set of currencies PayPal is able to settle in.
 const PAYPAL_CURRENCIES = new Set([
@@ -58,11 +63,21 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
-    const { email, full_name, provider, currency, pay_currency, ref } = parsed.data
+    const { email, full_name, provider, currency, pay_currency, ref, affiliate_code } = parsed.data
 
-    // Referral attribution resolved server-side; the client only supplies a code.
-    const affiliate = ref ? await resolveAffiliateByCode(ref) : null
-    const attributed = affiliate && affiliate.status === 'active' ? affiliate : null
+    /*
+     * Attribution authority. When a referral code is present the buyer MUST
+     * supply the matching affiliate code; the server resolves both sides
+     * independently. Any failure blocks the checkout entirely.
+     */
+    const attribution = await verifyAttribution(ref, affiliate_code, email)
+    if (!attribution.ok) {
+      return json({ code: attribution.code, error: attribution.message }, 400)
+    }
+    const attributed = attribution.affiliate ?? null
+    // Cap is applied again here: the client can never influence the value.
+    const discountUsd = attributed ? capDiscountUsd(attribution.discount_usd ?? 0) : 0
+
 
     const { data: product } = await db
       .from('products')
@@ -125,6 +140,36 @@ Deno.serve(async (req) => {
         400,
       )
     }
+    const originalAmount = settle.amount
+
+    /*
+     * Buyer benefit. Computed from the server-capped USD discount, converted
+     * into the settlement currency, and never allowed to exceed the price.
+     */
+    let discountDisplay = 0
+    let effectiveDiscountUsd = 0
+    if (discountUsd > 0) {
+      try {
+        const converted = await convertUsd(discountUsd, settleCurrency)
+        discountDisplay = Math.min(converted.amount, roundFor(settleCurrency, originalAmount * 0.5))
+        effectiveDiscountUsd = discountUsd
+      } catch (_) {
+        return json(
+          { code: 'rates_unavailable', error: 'Currency conversion is temporarily unavailable. Please try again shortly.' },
+          503,
+        )
+      }
+    }
+    const chargeAmount = roundFor(settleCurrency, originalAmount - discountDisplay)
+    settle.amount = chargeAmount
+
+    let commissionableUsd: number | null = null
+    try {
+      commissionableUsd = await toUsd(chargeAmount, settleCurrency)
+    } catch (_) {
+      commissionableUsd = null
+    }
+
     const display = settle
 
     const { data: order, error: orderErr } = await db
@@ -135,7 +180,13 @@ Deno.serve(async (req) => {
         product_id: product.id,
         amount_inr: amountInr,
         display_currency: settleCurrency,
-        display_amount: settle.amount,
+        display_amount: chargeAmount,
+        original_display_amount: originalAmount,
+        discount_display_amount: discountDisplay,
+        affiliate_discount_usd: effectiveDiscountUsd,
+        commissionable_amount_usd: commissionableUsd,
+        referral_source: attributed ? 'affiliate_link' : 'direct',
+        attribution_status: attributed ? 'verified' : 'none',
         fx_rate: settle.rate,
         provider,
         status: 'pending',
@@ -153,6 +204,7 @@ Deno.serve(async (req) => {
       .select('id')
       .single()
     if (orderErr || !order) throw new Error(`Could not create order: ${orderErr?.message}`)
+
 
     if (provider === 'paypal') {
       if (!paypalConfigured()) throw new Error('PayPal is not configured')
