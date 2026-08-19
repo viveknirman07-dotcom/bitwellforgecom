@@ -29,28 +29,36 @@ function periodMonth(d: Date) {
 
 async function overview(affiliateId: string) {
   const db = admin()
-  const [{ data: commissions }, { data: clicks }, { data: payouts }] = await Promise.all([
+  const [{ data: commissions }, { data: clicks }, { data: payouts }, { data: orders }] = await Promise.all([
     db
       .from('commissions')
-      .select('id, amount_usd, status, period_month, created_at')
+      .select('id, amount_usd, status, period_month, created_at, discount_usd, commissionable_amount_usd')
       .eq('affiliate_id', affiliateId)
       .order('created_at', { ascending: false }),
     db
       .from('referral_clicks')
-      .select('id, created_at, landing_path')
+      .select('id, created_at, landing_path, event')
       .eq('affiliate_id', affiliateId)
       .order('created_at', { ascending: false })
-      .limit(50),
+      .limit(500),
     db
       .from('payout_records')
       .select('id, period_month, sales_count, amount_usd, status, paid_at, failure_reason')
       .eq('affiliate_id', affiliateId)
       .order('period_month', { ascending: false }),
+    db
+      .from('orders')
+      .select('id, status, commissionable_amount_usd, affiliate_discount_usd, attribution_status')
+      .eq('affiliate_id', affiliateId)
+      .eq('status', 'paid'),
   ])
 
   const list = commissions ?? []
   const sum = (s: string[]) =>
     list.filter((c) => s.includes(c.status)).reduce((t, c) => t + Number(c.amount_usd), 0)
+
+  const clickList = clicks ?? []
+  const paidOrders = orders ?? []
 
   const now = new Date()
   const prev = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1))
@@ -62,15 +70,22 @@ async function overview(affiliateId: string) {
       total_commission_usd: sum(['pending', 'approved', 'paid']),
       pending_commission_usd: sum(['pending', 'approved']),
       paid_commission_usd: sum(['paid']),
-      referral_clicks: (clicks ?? []).length,
+      referral_clicks: clickList.filter((c) => (c.event ?? 'click') === 'click').length,
+      code_validations: clickList.filter((c) => c.event === 'validate').length,
+      purchases: paidOrders.length,
+      revenue_usd:
+        Math.round(paidOrders.reduce((t, o) => t + Number(o.commissionable_amount_usd ?? 0), 0) * 100) / 100,
+      buyer_discounts_usd:
+        Math.round(paidOrders.reduce((t, o) => t + Number(o.affiliate_discount_usd ?? 0), 0) * 100) / 100,
       current_period: periodMonth(now),
       next_payout_period: periodMonth(prev),
     },
     commissions: list.slice(0, 100),
-    clicks: clicks ?? [],
+    clicks: clickList.slice(0, 50),
     payouts: payouts ?? [],
   }
 }
+
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
