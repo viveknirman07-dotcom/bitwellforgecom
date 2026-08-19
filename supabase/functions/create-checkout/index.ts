@@ -22,8 +22,12 @@ const BodySchema = z.object({
   /** The currency the customer chose to be billed in. Amount is never client-supplied. */
   currency: z.string().trim().length(3).optional(),
   pay_currency: z.string().trim().min(2).max(20).optional(),
+  /** Referral code carried by the affiliate link. */
   ref: z.string().trim().min(3).max(24).optional(),
+  /** Affiliate code typed by the buyer at checkout. */
+  affiliate_code: z.string().trim().min(1).max(24).optional(),
 })
+
 
 // The complete set of currencies PayPal is able to settle in.
 const PAYPAL_CURRENCIES = new Set([
