@@ -110,6 +110,35 @@ export async function convertFromInr(amountInr: number, currency: string) {
   return { amount: roundFor(currency, amountInr * rate), rate }
 }
 
+/**
+ * Converts a USD amount (the affiliate discount is always defined in USD)
+ * into the currency the customer is being billed in. Rates are INR-based, so
+ * USD is first expressed in INR and then in the target currency.
+ */
+export async function convertUsd(amountUsd: number, currency: string) {
+  if (amountUsd <= 0) return { amount: 0, rate: 1 }
+  const { rates } = await getRates()
+  const usdRate = rates.USD
+  if (!usdRate) throw new Error('No USD rate available')
+  const inr = amountUsd / usdRate
+  if (currency === 'INR') return { amount: roundFor('INR', inr), rate: 1 }
+  const rate = rates[currency]
+  if (!rate) throw new Error(`No rate available for ${currency}`)
+  return { amount: roundFor(currency, inr * rate), rate }
+}
+
+/** USD value of an amount expressed in another currency. */
+export async function toUsd(amount: number, currency: string) {
+  if (currency === 'USD') return Math.round(amount * 100) / 100
+  const { rates } = await getRates()
+  const usdRate = rates.USD
+  const rate = currency === 'INR' ? 1 : rates[currency]
+  if (!usdRate || !rate) throw new Error(`No rate available for ${currency}`)
+  const inr = amount / rate
+  return Math.round(inr * usdRate * 100) / 100
+}
+
+
 /** Resolve the visitor's ISO country from edge headers, then IP lookup. */
 export async function resolveCountry(req: Request, ip: string): Promise<string> {
   const header =
