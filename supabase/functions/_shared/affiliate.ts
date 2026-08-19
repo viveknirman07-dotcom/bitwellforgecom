@@ -108,11 +108,15 @@ export async function recordCommission(orderId: string) {
 
   const { data: order } = await db
     .from('orders')
-    .select('id, affiliate_id, status, user_id, email, paid_at, created_at')
+    .select(
+      'id, affiliate_id, status, user_id, email, paid_at, created_at, attribution_status, affiliate_discount_usd, commissionable_amount_usd',
+    )
     .eq('id', orderId)
     .maybeSingle()
 
   if (!order || !order.affiliate_id || order.status !== 'paid') return null
+  // Only orders whose attribution was verified at checkout may earn.
+  if (order.attribution_status !== 'verified') return null
 
   const { data: affiliate } = await db
     .from('affiliates')
@@ -139,6 +143,8 @@ export async function recordCommission(orderId: string) {
         affiliate_id: affiliate.id,
         order_id: order.id,
         amount_usd: COMMISSION_USD,
+        commissionable_amount_usd: order.commissionable_amount_usd ?? null,
+        discount_usd: capDiscountUsd(Number(order.affiliate_discount_usd ?? 0)),
         currency: 'USD',
         status: 'pending',
         period_month: period,
@@ -154,6 +160,7 @@ export async function recordCommission(orderId: string) {
   }
   return data?.id ?? null
 }
+
 
 export async function voidCommission(orderId: string, reason: string) {
   await admin()
