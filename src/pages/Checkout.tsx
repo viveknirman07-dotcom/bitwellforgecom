@@ -249,6 +249,52 @@ const Checkout = () => {
               <p className="mt-2 text-[11px] portal-muted">Your access is bound to this address.</p>
             </div>
 
+            {referral && (
+              <div className="pt-2">
+                <label htmlFor="co-aff" className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">
+                  Affiliate code <span aria-hidden="true">*</span>
+                </label>
+                <div className="flex gap-3">
+                  <input
+                    id="co-aff"
+                    className="portal-input flex-1"
+                    value={benefit ? benefit.code : affiliateCode}
+                    onChange={(e) => {
+                      setAffiliateCode(e.target.value.toUpperCase());
+                      setBenefit(null);
+                      setCodeError(null);
+                    }}
+                    maxLength={24}
+                    autoComplete="off"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={applyCode}
+                    disabled={applying || !affiliateCode.trim() || Boolean(benefit)}
+                    className="portal-btn whitespace-nowrap"
+                  >
+                    {applying ? "Checking" : benefit ? "Applied" : "Apply code"}
+                  </button>
+                </div>
+                {benefit ? (
+                  <p role="status" className="mt-2 text-[11px] portal-gold">
+                    {benefit.code} verified. Referral benefit applied.
+                  </p>
+                ) : (
+                  <p className="mt-2 text-[11px] portal-muted">
+                    This offer was reached through a partner referral. Enter the matching code to continue.
+                  </p>
+                )}
+                {codeError && (
+                  <p role="alert" className="mt-2 text-[12px] text-red-400">
+                    {codeError}
+                  </p>
+                )}
+              </div>
+            )}
+
+
             <fieldset className="pt-2">
               <legend className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-3">Payment method</legend>
               <div className="grid gap-3">
