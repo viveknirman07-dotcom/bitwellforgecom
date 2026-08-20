@@ -1284,6 +1284,171 @@ export const caseStudies: CaseStudy[] = [
       "Publishing cadence quadrupled while editorial review time dropped sixty percent. Engagement uplift of one hundred and eighty percent across six months, with a system the principal continues to operate as a permanent capability of the practice.",
     label: CONCEPT_LABEL,
   },
+  // ============================================================
+  // 15 — REVENUE SYSTEMS
+  // ============================================================
+  {
+    id: "renewal-architecture-retained-revenue",
+    category: "Revenue Systems",
+    tag: "Revenue Systems",
+    title: "Rebuilding Retained Revenue Around a Renewal Architecture",
+    subtitle:
+      "How a specialist services firm stopped losing accounts at the twelve month mark by treating renewal as a designed system rather than a conversation.",
+    clientType:
+      "Specialist B2B services firm, twelve person team, retainer led model, high six figure annual revenue.",
+    challenge:
+      "Strong acquisition, weak retention. Accounts renewed on sentiment rather than evidence, and roughly a third of the book churned each year. Every renewal was negotiated from scratch, and the firm had no structured view of account health until the cancellation email arrived.",
+    metrics: [
+      { label: "Annual churn reduction", value: "34% to 11%" },
+      { label: "Average account tenure", value: "11 to 26 months" },
+      { label: "Expansion revenue per account", value: "+41%" },
+      { label: "Renewal decisions with advance signal", value: "9 in 10" },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: [
+          "The firm had spent three years building an acquisition motion that worked. New logos arrived at a steady rate, the sales cycle was understood, and the delivery team was respected by the clients it served. On the surface this was a healthy business with a predictable engine at the front of it.",
+          "The problem sat at the back. Roughly a third of the retainer book disappeared every twelve months, and the departures were almost never anticipated. Clients would renew once, occasionally twice, and then leave with a short note that cited budget, restructuring, or a change of priorities. The stated reasons rarely matched what the delivery team had observed.",
+          "Because acquisition was strong, the churn had been survivable. It was also expensive. Every replaced account cost the firm a full acquisition cycle to stand still, and the delivery team was permanently onboarding rather than deepening. The leadership team asked us to look at the retention side of the business with the same rigour they had applied to the front end.",
+        ],
+      },
+      {
+        heading: "Diagnosis",
+        body: [
+          "We reviewed twenty four months of account history, every renewal conversation the firm could reconstruct, and the delivery records behind each departure. Three structural patterns emerged, and none of them were about the quality of the work.",
+          "The first was that value was invisible between reporting cycles. The firm delivered continuously but communicated in quarterly summaries, which meant the client's perception of value was shaped by whatever had happened in the fortnight before the review. Strong quarters with a slow finish read as weak quarters.",
+          "The second was that renewal was an event rather than a process. Nothing formal happened between month one and month eleven, and then a single conversation carried the entire commercial weight of the relationship. The third was that the firm had no leading indicators. Sponsor changes, declining meeting attendance, and shrinking scope requests were all visible in hindsight and invisible in the moment because nobody was tracking them.",
+        ],
+      },
+      {
+        heading: "Strategy",
+        body: [
+          "The operating thesis was that renewal is manufactured across the whole engagement, not decided at the end of it. If the firm could make value continuously legible, structure the relationship into defined commercial checkpoints, and instrument the account for early warning signals, the renewal conversation would become a confirmation rather than a negotiation.",
+          "We defined three components. A value ledger that recorded outcomes as they occurred and surfaced them to the client monthly. A checkpoint cadence at days thirty, ninety, one hundred and eighty, and two hundred and seventy, each with a defined agenda and a defined commercial outcome. An account health model that scored every account weekly against six observable signals.",
+          "The fourth component was an expansion pathway. The firm had been treating expansion as opportunistic, which meant it happened only where a client asked. We designed a structured pathway that tied each checkpoint to a specific expansion conversation, anchored to evidence already in the value ledger.",
+        ],
+      },
+      {
+        heading: "Build",
+        body: [
+          "The value ledger was built as a shared record inside the firm's existing project tooling. Every delivery milestone was logged with the commercial outcome it produced, in the client's own language, with the evidence attached. The ledger generated a one page monthly summary automatically, which removed the reporting burden that had killed previous attempts at the same idea.",
+          "The checkpoint cadence was documented as four meeting templates with defined inputs, agendas, and required outputs. The day ninety checkpoint carried the heaviest commercial weight, because the account history showed that clients who had not seen a named outcome by month three were significantly more likely to leave at month twelve.",
+          "The account health model scored six signals weekly: sponsor engagement, meeting attendance, response latency, scope direction, outcome delivery against plan, and payment behaviour. Scores below threshold triggered a defined intervention rather than a note in a spreadsheet. The interventions were the part most retention programmes omit, and they were the part that made the model operational.",
+        ],
+      },
+      {
+        heading: "Activation",
+        body: [
+          "We activated on the existing book before applying the system to new accounts, which was deliberate. Eleven live accounts were retrofitted with the value ledger and scored against the health model in the first fortnight. Four scored below threshold immediately, and two of those four had been considered safe by the account leads.",
+          "Both surprises were addressed through the defined intervention path within three weeks. One recovered fully and later expanded. The other departed at renewal, but the firm had four months of warning rather than four days, and the delivery capacity was redeployed before the revenue gap opened.",
+          "New accounts entered the full system from day one. By the end of the second quarter the checkpoint cadence was running without prompting, and the account leads had stopped treating the health scores as an administrative task and started treating them as the operating picture of their book.",
+        ],
+      },
+      {
+        heading: "Outcome",
+        body: [
+          "Annual churn moved from thirty four percent to eleven percent across the following twelve months. Average account tenure rose from eleven months to twenty six. The two figures together changed the economics of the business more than any acquisition improvement could have, because every retained account carried a full year of margin with no replacement cost attached.",
+          "Expansion revenue per account rose forty one percent. The lift came almost entirely from the structured expansion pathway rather than from price increases. Clients who could see a documented record of outcomes accepted scope increases with materially less friction than clients who were being asked to trust a summary.",
+          "Nine renewal decisions in ten now carried advance signal of at least sixty days. The firm stopped being surprised, which meant capacity planning, hiring, and cash forecasting all became tractable problems rather than reactive ones.",
+        ],
+      },
+      {
+        heading: "Reflection",
+        body: [
+          "The pattern this engagement reveals is that churn is rarely a delivery problem. The work here had always been good. What was missing was a structure that made the value of that work continuously visible and a set of signals that turned account health into something observable rather than something felt.",
+          "It also demonstrates that retention systems fail when they generate reporting instead of decisions. Every element of this build terminated in a defined action. A health score that triggers nothing is a number. A health score that triggers a named intervention is a system.",
+          "The broader principle is that revenue you keep is engineered with the same deliberateness as revenue you win. Most firms build one engine and hope the other takes care of itself.",
+        ],
+      },
+    ],
+    result:
+      "Churn fell from thirty four percent to eleven percent, average tenure more than doubled, and expansion revenue per account rose forty one percent under a renewal architecture the firm now operates independently.",
+    label: CONCEPT_LABEL,
+  },
+
+  // ============================================================
+  // 16 — GROWTH STRATEGY
+  // ============================================================
+  {
+    id: "partner-channel-second-engine",
+    category: "Growth Strategy",
+    tag: "Growth Strategy",
+    title: "Building a Second Acquisition Engine Through Partner Channels",
+    subtitle:
+      "How a founder led business reduced single channel dependency by engineering a partner network that produced qualified pipeline without paid media.",
+    clientType:
+      "Founder led B2B software services business, eight person team, single channel acquisition, mid seven figure annual revenue.",
+    challenge:
+      "Nearly all pipeline originated from one referral relationship and the founder's personal network. When that relationship slowed, new business slowed with it. There was no second engine, and no structured way to build one without adding headcount or advertising spend.",
+    metrics: [
+      { label: "Share of pipeline from a single source", value: "78% to 34%" },
+      { label: "Active producing partners", value: "0 to 9" },
+      { label: "Partner sourced qualified opportunities", value: "23 in two quarters" },
+      { label: "Cost per qualified opportunity", value: "≈ 60% below prior benchmark" },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: [
+          "The business had grown for four years on the strength of one relationship and the founder's reputation. A single consultancy sent the majority of its qualified work, and the founder's own network supplied the remainder. Both sources were genuine assets, and both were entirely outside the firm's control.",
+          "The vulnerability became concrete when the partner consultancy restructured its own delivery team and slowed its referral volume for two quarters. Pipeline fell by more than half. The work eventually resumed, but the episode made the concentration risk impossible to ignore.",
+          "The founder had considered paid acquisition and rejected it on economics, and had considered a sales hire and rejected it on timing. The brief was to build a second engine using the same mechanism that had already worked once, deliberately this time rather than accidentally.",
+        ],
+      },
+      {
+        heading: "Diagnosis",
+        body: [
+          "We mapped every opportunity from the prior twenty four months back to its origin. Seventy eight percent traced to one source. More revealing was what we found when we examined the relationship itself: it produced work because a specific individual inside the partner firm understood exactly which client situations to route across, and had a low friction way to do it.",
+          "That was the mechanism, and it had never been documented. There was no articulation of which client situations the firm was the right answer for, no material a partner could hand to a client, and no feedback loop that told a referring partner what had happened to the introduction they made.",
+          "The firm had also been treating partnership as a relationship rather than a channel. Relationships depend on individual goodwill. Channels depend on structure. Nine informal partner conversations had been had over two years, and none had produced repeatable volume, because none had been given anything to work with.",
+        ],
+      },
+      {
+        heading: "Strategy",
+        body: [
+          "The thesis was that the existing relationship was not luck but an accidental instance of a repeatable pattern, and that the pattern could be reproduced across a small, carefully chosen set of partners if the firm supplied the three things the original relationship had developed organically: a precise trigger definition, a low friction handover, and a closed feedback loop.",
+          "We deliberately scoped for depth rather than breadth. The target was nine to twelve producing partners, not fifty listed ones. Partner programmes fail on volume because enablement effort per partner collapses as the count rises.",
+          "Partner selection was defined against three criteria: adjacency without overlap, shared client profile, and an identifiable individual with routing authority. The third criterion was the one most partner programmes skip, and it was the one the original relationship had proved decisive.",
+        ],
+      },
+      {
+        heading: "Build",
+        body: [
+          "The trigger definition was the first asset built. It described, in the partner's own operating language, the eight client situations where the firm was the correct referral. Each situation had an observable signal a partner would encounter in normal delivery work rather than an abstract profile description.",
+          "The handover mechanism was reduced to a single form and a warm introduction template. Partners had previously been expected to explain the firm's value themselves, which meant introductions arrived poorly framed or not at all. The new mechanism required the partner to describe only what they had observed, and the firm carried the framing from there.",
+          "The feedback loop closed the system. Every introduction generated an acknowledgement within one working day, a status update at qualification, and an outcome note at close regardless of result. We also built a quarterly partner brief that reported aggregate outcomes, so partners could see the pattern of what worked rather than only individual results.",
+        ],
+      },
+      {
+        heading: "Activation",
+        body: [
+          "Activation ran in two waves. The first wave took the three warmest existing relationships through a structured onboarding conversation built around the trigger definition. All three produced their first qualified introduction within five weeks, which was faster than the strategy had projected and confirmed that the missing element had been enablement rather than intent.",
+          "The second wave added six new partners across the following quarter, sourced against the three selection criteria. Four produced within the first sixty days. Two did not, and the review showed both lacked an individual with routing authority, which validated the selection criteria by exception.",
+          "The feedback loop produced an unanticipated effect. Partners who received outcome notes began pre qualifying more aggressively without being asked, because they could see which introductions had converted and which had not. Introduction quality rose measurably between the first and second quarter.",
+        ],
+      },
+      {
+        heading: "Outcome",
+        body: [
+          "Single source concentration fell from seventy eight percent of pipeline to thirty four percent across two quarters. The original relationship did not decline in absolute terms. The concentration fell because a second engine was now producing alongside it.",
+          "Nine partners were actively producing by the end of the second quarter, generating twenty three qualified opportunities between them. Cost per qualified opportunity ran roughly sixty percent below the firm's prior benchmark, because the channel consumed structured enablement time rather than media spend or additional headcount.",
+          "The strategic outcome mattered more than the numbers. The firm could absorb a slowdown in any single source without a pipeline collapse, which changed how the founder made decisions about capacity, pricing, and which work to decline.",
+        ],
+      },
+      {
+        heading: "Reflection",
+        body: [
+          "The pattern here is that most businesses already contain one working instance of a channel they have never examined. The instinct when facing concentration risk is to add an unfamiliar channel. The higher return move is usually to study the channel already producing and build the structure that makes it repeatable.",
+          "It also shows that partner programmes fail on enablement, not intent. Nine informal conversations had produced nothing over two years, and the same category of relationship produced twenty three opportunities in two quarters once the trigger definition, handover mechanism, and feedback loop existed.",
+          "The final point concerns restraint on scale. A partner network of nine that produces is worth more than a directory of eighty that does not, and the difference is entirely in how much structure each partner receives.",
+        ],
+      },
+    ],
+    result:
+      "Single source pipeline concentration fell from seventy eight percent to thirty four percent, with nine producing partners generating twenty three qualified opportunities at roughly sixty percent below the prior cost per opportunity.",
+    label: CONCEPT_LABEL,
+  },
 ];
 
 export const caseStudyCategories = [
