@@ -18,6 +18,7 @@ import CaseStudyArticle from "./pages/CaseStudyArticle";
 import Careers from "./pages/Careers";
 import AffiliateProgram from "./pages/AffiliateProgram";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
+import AdminAffiliates from "./pages/AdminAffiliates";
 import Vault from "./pages/Vault";
 import ForgeVault from "./pages/ForgeVault";
 import Checkout from "./pages/Checkout";
@@ -75,6 +76,15 @@ const App = () => {
                 element={
                   <RequireAuth>
                     <AffiliateDashboard />
+                  </RequireAuth>
+                }
+              />
+
+              <Route
+                path="/admin/affiliates"
+                element={
+                  <RequireAuth>
+                    <AdminAffiliates />
                   </RequireAuth>
                 }
               />
