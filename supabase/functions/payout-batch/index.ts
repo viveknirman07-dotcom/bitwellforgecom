@@ -31,12 +31,55 @@ Deno.serve(async (req) => {
     if (!isAdmin) return json({ error: 'Forbidden' }, 403)
 
     if (req.method === 'GET') {
+      const view = new URL(req.url).searchParams.get('view')
+
+      // Admin affiliate performance table.
+      if (view === 'affiliates') {
+        const [{ data: affiliates }, { data: clicks }, { data: orders }, { data: commissions }] =
+          await Promise.all([
+            db.from('affiliates').select('id, code, full_name, email, status').order('created_at'),
+            db.from('referral_clicks').select('affiliate_id, event'),
+            db
+              .from('orders')
+              .select('affiliate_id, status, commissionable_amount_usd, affiliate_discount_usd')
+              .eq('status', 'paid'),
+            db.from('commissions').select('affiliate_id, amount_usd, status'),
+          ])
+
+        const rows = (affiliates ?? []).map((a) => {
+          const c = (clicks ?? []).filter((x) => x.affiliate_id === a.id)
+          const o = (orders ?? []).filter((x) => x.affiliate_id === a.id)
+          const m = (commissions ?? []).filter((x) => x.affiliate_id === a.id)
+          const round = (n: number) => Math.round(n * 100) / 100
+          return {
+            affiliate_id: a.id,
+            name: a.full_name,
+            email: a.email,
+            code: a.code,
+            status: a.status,
+            clicks: c.filter((x) => (x.event ?? 'click') === 'click').length,
+            validations: c.filter((x) => x.event === 'validate').length,
+            purchases: o.length,
+            revenue_usd: round(o.reduce((t, x) => t + Number(x.commissionable_amount_usd ?? 0), 0)),
+            discounts_usd: round(o.reduce((t, x) => t + Number(x.affiliate_discount_usd ?? 0), 0)),
+            commission_usd: round(
+              m.filter((x) => x.status !== 'void').reduce((t, x) => t + Number(x.amount_usd), 0),
+            ),
+            commission_paid_usd: round(
+              m.filter((x) => x.status === 'paid').reduce((t, x) => t + Number(x.amount_usd), 0),
+            ),
+          }
+        })
+        return json({ affiliates: rows })
+      }
+
       const { data: batches } = await db
         .from('payout_batches')
         .select('*')
         .order('period_month', { ascending: false })
       return json({ batches: batches ?? [] })
     }
+
 
     if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
 
