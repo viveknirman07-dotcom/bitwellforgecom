@@ -2,7 +2,7 @@ import { useEffect, useState, FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { getReferral } from "@/lib/referral";
+import { getReferral, isReferralValidated, markReferralValidated } from "@/lib/referral";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
 import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
 
@@ -12,6 +12,12 @@ interface Pricing {
   base: { currency: string; amount: number };
   currencies?: CurrencyOption[];
   conversion_unavailable?: boolean;
+}
+
+interface AppliedBenefit {
+  code: string;
+  discount_usd: number;
+  formatted: string | null;
 }
 
 const Checkout = () => {
@@ -25,6 +31,13 @@ const Checkout = () => {
   const [provider, setProvider] = useState<"paypal" | "nowpayments">("paypal");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Affiliate purchase mode
+  const [referral] = useState<string | null>(getReferral);
+  const [affiliateCode, setAffiliateCode] = useState("");
+  const [applying, setApplying] = useState(false);
+  const [codeError, setCodeError] = useState<string | null>(null);
+  const [benefit, setBenefit] = useState<AppliedBenefit | null>(null);
 
   useEffect(() => {
     document.title = "Checkout — BitwellForge";
@@ -41,6 +54,11 @@ const Checkout = () => {
     };
   }, [currency]);
 
+  // A currency change invalidates the converted benefit; it must be revalidated.
+  useEffect(() => {
+    setBenefit(null);
+  }, [currency]);
+
   const chooseCurrency = (code: string) => {
     setCurrency(code);
     setCurrencyState(code);
@@ -52,8 +70,47 @@ const Checkout = () => {
       ? pricing.currencies
       : [{ code: DEFAULT_CURRENCY, name: "US Dollar" }];
 
+  const applyCode = async () => {
+    if (!referral) return;
+    setApplying(true);
+    setCodeError(null);
+    try {
+      const { data } = await supabase.functions.invoke("referral-track", {
+        body: {
+          action: "validate",
+          ref: referral,
+          code: affiliateCode.trim(),
+          currency,
+          email: email.trim().toLowerCase() || undefined,
+        },
+      });
+      if (!data?.valid) {
+        setBenefit(null);
+        setCodeError(data?.message ?? "That affiliate code is not valid.");
+        return;
+      }
+      markReferralValidated(data.code);
+      setBenefit({
+        code: data.code,
+        discount_usd: data.discount_usd,
+        formatted: data.display_discount?.formatted ?? null,
+      });
+    } catch {
+      setBenefit(null);
+      setCodeError("The affiliate code could not be validated. Please try again.");
+    } finally {
+      setApplying(false);
+    }
+  };
+
+  const blocked = Boolean(referral) && !benefit;
+
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    if (blocked) {
+      setCodeError("Enter and apply the affiliate code to continue.");
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
@@ -63,7 +120,8 @@ const Checkout = () => {
           full_name: fullName.trim() || undefined,
           provider,
           currency,
-          ref: getReferral() ?? undefined,
+          ref: referral ?? undefined,
+          affiliate_code: referral ? benefit?.code ?? affiliateCode.trim() : undefined,
         },
       });
 
@@ -95,6 +153,7 @@ const Checkout = () => {
       setBusy(false);
     }
   };
+
 
   return (
     <div className="portal font-body flex flex-col">
