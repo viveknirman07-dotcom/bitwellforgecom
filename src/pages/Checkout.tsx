@@ -18,6 +18,7 @@ interface AppliedBenefit {
   code: string;
   discount_usd: number;
   formatted: string | null;
+  display_amount: number | null;
 }
 
 const Checkout = () => {
@@ -94,6 +95,7 @@ const Checkout = () => {
         code: data.code,
         discount_usd: data.discount_usd,
         formatted: data.display_discount?.formatted ?? null,
+        display_amount: data.display_discount?.amount ?? null,
       });
     } catch {
       setBenefit(null);
@@ -104,6 +106,20 @@ const Checkout = () => {
   };
 
   const blocked = Boolean(referral) && !benefit;
+
+  /** Total shown to the buyer. The server recomputes and re-caps this value. */
+  const formatTotal = (p: Pricing) => {
+    if (!benefit?.display_amount) return p.display.formatted;
+    const total = Math.max(0, p.display.amount - benefit.display_amount);
+    try {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: p.display.currency,
+      }).format(total);
+    } catch {
+      return `${p.display.currency} ${total.toFixed(2)}`;
+    }
+  };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
