@@ -324,9 +324,10 @@ const Checkout = () => {
 
             {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
 
-            <button type="submit" disabled={busy} className="portal-btn portal-btn--solid w-full">
-              {busy ? "Starting secure session" : "Proceed to payment"}
+            <button type="submit" disabled={busy || blocked} className="portal-btn portal-btn--solid w-full">
+              {busy ? "Starting secure session" : blocked ? "Apply affiliate code to continue" : "Proceed to payment"}
             </button>
+
             <p className="text-[11px] leading-relaxed portal-muted">
               Payment is processed by PayPal or NOWPayments. BitwellForge never stores card or wallet details.
             </p>
