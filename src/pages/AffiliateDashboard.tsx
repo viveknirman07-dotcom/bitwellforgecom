@@ -19,6 +19,10 @@ interface Metrics {
   pending_commission_usd: number;
   paid_commission_usd: number;
   referral_clicks: number;
+  code_validations: number;
+  purchases: number;
+  revenue_usd: number;
+  buyer_discounts_usd: number;
   next_payout_period: string;
 }
 
@@ -165,7 +169,7 @@ const AffiliateDashboard = () => {
     }
   };
 
-  const link = affiliate ? `${window.location.origin}/?ref=${affiliate.code}` : "";
+  const link = affiliate ? `${window.location.origin}/forge-vault?ref=${affiliate.code}` : "";
 
   return (
     <PortalShell eyebrow="Partner portal" title="Affiliate Dashboard">
@@ -201,10 +205,14 @@ const AffiliateDashboard = () => {
 
           <section className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 border-t portal-line pt-10">
             {[
-              { l: "Verified sales", v: String(metrics?.eligible_sales ?? 0) },
-              { l: "Total earned", v: money(metrics?.total_commission_usd ?? 0) },
-              { l: "Awaiting payout", v: money(metrics?.pending_commission_usd ?? 0) },
               { l: "Referral clicks", v: String(metrics?.referral_clicks ?? 0) },
+              { l: "Code validations", v: String(metrics?.code_validations ?? 0) },
+              { l: "Purchases", v: String(metrics?.purchases ?? 0) },
+              { l: "Revenue generated", v: money(metrics?.revenue_usd ?? 0) },
+              { l: "Buyer discounts granted", v: money(metrics?.buyer_discounts_usd ?? 0) },
+              { l: "Verified sales", v: String(metrics?.eligible_sales ?? 0) },
+              { l: "Commission earned", v: money(metrics?.total_commission_usd ?? 0) },
+              { l: "Awaiting payout", v: money(metrics?.pending_commission_usd ?? 0) },
             ].map((s) => (
               <div key={s.l}>
                 <p className="text-[11px] tracking-[0.22em] uppercase portal-muted">{s.l}</p>
