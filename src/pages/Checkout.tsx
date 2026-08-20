@@ -174,10 +174,25 @@ const Checkout = () => {
             <p className="mt-6 text-sm leading-relaxed portal-muted">{pricing.product.tagline}</p>
           )}
           <div className="mt-12 border-t portal-line pt-8">
+            {benefit && pricing && (
+              <div className="mb-8 space-y-2 text-[13px]">
+                <div className="flex items-baseline justify-between">
+                  <span className="portal-muted">Subtotal</span>
+                  <span>{pricing.display.formatted}</span>
+                </div>
+                <div className="flex items-baseline justify-between">
+                  <span className="portal-muted">Referral benefit · {benefit.code}</span>
+                  <span className="portal-gold">
+                    {benefit.formatted ? `- ${benefit.formatted}` : `- $${benefit.discount_usd}`}
+                  </span>
+                </div>
+              </div>
+            )}
             <p className="text-[11px] tracking-[0.2em] uppercase portal-muted mb-3">Total today</p>
             <p className="font-heading text-4xl tracking-tight">
-              {pricing ? pricing.display.formatted : "\u2014"}
+              {pricing ? formatTotal(pricing) : "\u2014"}
             </p>
+
             {pricing?.conversion_unavailable && (
               <p role="status" className="mt-3 text-[12px] portal-muted">
                 Live conversion is temporarily unavailable, so the base price is shown.
