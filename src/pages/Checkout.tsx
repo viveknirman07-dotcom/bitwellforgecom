@@ -2,7 +2,7 @@ import { useEffect, useState, FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { getReferral } from "@/lib/referral";
+import { getReferral, isReferralValidated, markReferralValidated } from "@/lib/referral";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
 import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
 
@@ -12,6 +12,13 @@ interface Pricing {
   base: { currency: string; amount: number };
   currencies?: CurrencyOption[];
   conversion_unavailable?: boolean;
+}
+
+interface AppliedBenefit {
+  code: string;
+  discount_usd: number;
+  formatted: string | null;
+  display_amount: number | null;
 }
 
 const Checkout = () => {
@@ -25,6 +32,13 @@ const Checkout = () => {
   const [provider, setProvider] = useState<"paypal" | "nowpayments">("paypal");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Affiliate purchase mode
+  const [referral] = useState<string | null>(getReferral);
+  const [affiliateCode, setAffiliateCode] = useState("");
+  const [applying, setApplying] = useState(false);
+  const [codeError, setCodeError] = useState<string | null>(null);
+  const [benefit, setBenefit] = useState<AppliedBenefit | null>(null);
 
   useEffect(() => {
     document.title = "Checkout — BitwellForge";
@@ -41,6 +55,11 @@ const Checkout = () => {
     };
   }, [currency]);
 
+  // A currency change invalidates the converted benefit; it must be revalidated.
+  useEffect(() => {
+    setBenefit(null);
+  }, [currency]);
+
   const chooseCurrency = (code: string) => {
     setCurrency(code);
     setCurrencyState(code);
@@ -52,8 +71,62 @@ const Checkout = () => {
       ? pricing.currencies
       : [{ code: DEFAULT_CURRENCY, name: "US Dollar" }];
 
+  const applyCode = async () => {
+    if (!referral) return;
+    setApplying(true);
+    setCodeError(null);
+    try {
+      const { data } = await supabase.functions.invoke("referral-track", {
+        body: {
+          action: "validate",
+          ref: referral,
+          code: affiliateCode.trim(),
+          currency,
+          email: email.trim().toLowerCase() || undefined,
+        },
+      });
+      if (!data?.valid) {
+        setBenefit(null);
+        setCodeError(data?.message ?? "That affiliate code is not valid.");
+        return;
+      }
+      markReferralValidated(data.code);
+      setBenefit({
+        code: data.code,
+        discount_usd: data.discount_usd,
+        formatted: data.display_discount?.formatted ?? null,
+        display_amount: data.display_discount?.amount ?? null,
+      });
+    } catch {
+      setBenefit(null);
+      setCodeError("The affiliate code could not be validated. Please try again.");
+    } finally {
+      setApplying(false);
+    }
+  };
+
+  const blocked = Boolean(referral) && !benefit;
+
+  /** Total shown to the buyer. The server recomputes and re-caps this value. */
+  const formatTotal = (p: Pricing) => {
+    if (!benefit?.display_amount) return p.display.formatted;
+    const total = Math.max(0, p.display.amount - benefit.display_amount);
+    try {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: p.display.currency,
+      }).format(total);
+    } catch {
+      return `${p.display.currency} ${total.toFixed(2)}`;
+    }
+  };
+
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    if (blocked) {
+      setCodeError("Enter and apply the affiliate code to continue.");
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
@@ -63,7 +136,8 @@ const Checkout = () => {
           full_name: fullName.trim() || undefined,
           provider,
           currency,
-          ref: getReferral() ?? undefined,
+          ref: referral ?? undefined,
+          affiliate_code: referral ? benefit?.code ?? affiliateCode.trim() : undefined,
         },
       });
 
@@ -96,6 +170,7 @@ const Checkout = () => {
     }
   };
 
+
   return (
     <div className="portal font-body flex flex-col">
       <header className="border-b portal-line">
@@ -115,10 +190,25 @@ const Checkout = () => {
             <p className="mt-6 text-sm leading-relaxed portal-muted">{pricing.product.tagline}</p>
           )}
           <div className="mt-12 border-t portal-line pt-8">
+            {benefit && pricing && (
+              <div className="mb-8 space-y-2 text-[13px]">
+                <div className="flex items-baseline justify-between">
+                  <span className="portal-muted">Subtotal</span>
+                  <span>{pricing.display.formatted}</span>
+                </div>
+                <div className="flex items-baseline justify-between">
+                  <span className="portal-muted">Referral benefit · {benefit.code}</span>
+                  <span className="portal-gold">
+                    {benefit.formatted ? `- ${benefit.formatted}` : `- $${benefit.discount_usd}`}
+                  </span>
+                </div>
+              </div>
+            )}
             <p className="text-[11px] tracking-[0.2em] uppercase portal-muted mb-3">Total today</p>
             <p className="font-heading text-4xl tracking-tight">
-              {pricing ? pricing.display.formatted : "\u2014"}
+              {pricing ? formatTotal(pricing) : "\u2014"}
             </p>
+
             {pricing?.conversion_unavailable && (
               <p role="status" className="mt-3 text-[12px] portal-muted">
                 Live conversion is temporarily unavailable, so the base price is shown.
@@ -159,6 +249,52 @@ const Checkout = () => {
               <p className="mt-2 text-[11px] portal-muted">Your access is bound to this address.</p>
             </div>
 
+            {referral && (
+              <div className="pt-2">
+                <label htmlFor="co-aff" className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">
+                  Affiliate code <span aria-hidden="true">*</span>
+                </label>
+                <div className="flex gap-3">
+                  <input
+                    id="co-aff"
+                    className="portal-input flex-1"
+                    value={benefit ? benefit.code : affiliateCode}
+                    onChange={(e) => {
+                      setAffiliateCode(e.target.value.toUpperCase());
+                      setBenefit(null);
+                      setCodeError(null);
+                    }}
+                    maxLength={24}
+                    autoComplete="off"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={applyCode}
+                    disabled={applying || !affiliateCode.trim() || Boolean(benefit)}
+                    className="portal-btn whitespace-nowrap"
+                  >
+                    {applying ? "Checking" : benefit ? "Applied" : "Apply code"}
+                  </button>
+                </div>
+                {benefit ? (
+                  <p role="status" className="mt-2 text-[11px] portal-gold">
+                    {benefit.code} verified. Referral benefit applied.
+                  </p>
+                ) : (
+                  <p className="mt-2 text-[11px] portal-muted">
+                    This offer was reached through a partner referral. Enter the matching code to continue.
+                  </p>
+                )}
+                {codeError && (
+                  <p role="alert" className="mt-2 text-[12px] text-red-400">
+                    {codeError}
+                  </p>
+                )}
+              </div>
+            )}
+
+
             <fieldset className="pt-2">
               <legend className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-3">Payment method</legend>
               <div className="grid gap-3">
@@ -188,9 +324,10 @@ const Checkout = () => {
 
             {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
 
-            <button type="submit" disabled={busy} className="portal-btn portal-btn--solid w-full">
-              {busy ? "Starting secure session" : "Proceed to payment"}
+            <button type="submit" disabled={busy || blocked} className="portal-btn portal-btn--solid w-full">
+              {busy ? "Starting secure session" : blocked ? "Apply affiliate code to continue" : "Proceed to payment"}
             </button>
+
             <p className="text-[11px] leading-relaxed portal-muted">
               Payment is processed by PayPal or NOWPayments. BitwellForge never stores card or wallet details.
             </p>
