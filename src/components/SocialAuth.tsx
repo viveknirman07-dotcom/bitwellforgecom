@@ -68,6 +68,7 @@ const SocialAuth = ({ next, onError }: Props) => {
           {busy === "apple" ? "Redirecting" : "Continue with Apple"}
         </Button>
       )}
+    </div>
   );
 };
 
