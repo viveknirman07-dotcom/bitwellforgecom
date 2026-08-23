@@ -14,6 +14,10 @@ interface Props {
  * account is created for returning users. Authorization is unchanged: it stays
  * entitlement- and role-driven server-side.
  */
+// Apple sign-in stays implemented but is hidden from the UI until BitwellForge
+// holds its own Apple Developer credentials. Flip to true to re-enable.
+const SHOW_APPLE = false;
+
 const SocialAuth = ({ next, onError }: Props) => {
   const [busy, setBusy] = useState<string | null>(null);
 

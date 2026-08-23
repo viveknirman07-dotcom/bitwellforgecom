@@ -300,6 +300,15 @@ const Account = () => {
                   Access is released to your account once your purchase of the Commercial Growth
                   System™ is verified.
                 </p>
+                <div className="mt-12 max-w-[560px]">
+                  <h3 className="font-heading text-lg md:text-xl font-semibold tracking-tight text-foreground">
+                    Lifetime Updates
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                    Access carries forward. Future additions, refinements, research and frameworks
+                    added to Forge Vault remain available to you without a further purchase.
+                  </p>
+                </div>
               </div>
             </section>
 
