@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import PortalShell from "@/portal/PortalShell";
+import VaultLink from "@/components/vault/VaultLink";
 
 interface Section {
   slug: string;
@@ -84,7 +84,7 @@ const Vault = () => {
             different email address, sign in with that address instead.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
-            <Link to="/checkout" className="portal-btn portal-btn--solid">Get access</Link>
+            <VaultLink to="/forge-vault" className="portal-btn portal-btn--solid">Get access</VaultLink>
           </div>
         </div>
       )}

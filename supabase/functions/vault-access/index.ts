@@ -23,6 +23,11 @@ Deno.serve(async (req) => {
     const db = admin()
     const ip = clientIp(req)
 
+    // Administrators (role held in public.user_roles, resolved server-side via
+    // has_role) hold full Vault access. Every other account keeps the existing
+    // entitlement rules unchanged.
+    const { data: isAdmin } = await db.rpc('has_role', { _user_id: user.id, _role: 'admin' })
+
     const { data: entitlements } = await db
       .from('entitlements')
       .select('product_id')
@@ -30,14 +35,20 @@ Deno.serve(async (req) => {
       .is('revoked_at', null)
 
     const productIds = (entitlements ?? []).map((e) => e.product_id)
-    if (productIds.length === 0) return json({ entitled: false, documents: [], updates: [] })
+    if (!isAdmin && productIds.length === 0) {
+      return json({ entitled: false, documents: [], updates: [] })
+    }
 
-    const { data: documents } = await db
+    let documentQuery = db
       .from('product_documents')
-      .select('id, slug, title, subtitle, category, summary, page_count, version, sort_order')
-      .in('product_id', productIds)
+      .select('id, slug, title, subtitle, category, summary, page_count, version, sort_order, product_id')
       .eq('is_published', true)
-      .order('sort_order')
+    if (!isAdmin) documentQuery = documentQuery.in('product_id', productIds)
+    const { data: documents } = await documentQuery.order('sort_order')
+
+    const updateProductIds = isAdmin
+      ? Array.from(new Set((documents ?? []).map((d) => d.product_id)))
+      : productIds
 
     // Library listing
     if (req.method === 'GET') {
@@ -51,7 +62,10 @@ Deno.serve(async (req) => {
       const { data: updates } = await db
         .from('product_updates')
         .select('title, body, version, published_at')
-        .in('product_id', productIds)
+        .in(
+          'product_id',
+          updateProductIds.length ? updateProductIds : ['00000000-0000-0000-0000-000000000000'],
+        )
         .order('published_at', { ascending: false })
 
       return json({

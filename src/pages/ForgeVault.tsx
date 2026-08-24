@@ -5,6 +5,7 @@ import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
 import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
+import VaultStage from "@/components/vault/VaultStage";
 
 interface PricingResponse {
   product: { name: string; tagline?: string; description?: string };
@@ -103,14 +104,17 @@ const ForgeVault = () => {
   const priceUnavailable = failed || pricing?.conversion_unavailable;
 
   return (
+   <VaultStage>
     <div className="font-body">
       <section className="section-padding pt-28 pb-16 md:pt-40 md:pb-24">
         <div className="max-w-[900px] mx-auto">
-          <Eyebrow>Forge Vault</Eyebrow>
-          <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground tracking-tight mt-6 text-balance">
+          <div data-vault-reveal="lede">
+            <Eyebrow>Forge Vault</Eyebrow>
+          </div>
+          <h1 data-vault-reveal="title" className="font-heading text-4xl md:text-6xl font-semibold text-foreground tracking-tight mt-6 text-balance">
             Commercial Growth System™
           </h1>
-          <p className="mt-8 text-lg leading-relaxed text-muted-foreground max-w-[640px]">
+          <p data-vault-reveal="primary" className="mt-8 text-lg leading-relaxed text-muted-foreground max-w-[640px]">
             The complete commercial operating layer BitwellForge installs inside client businesses,
             documented and released as a system you can run yourself. Lifetime access, delivered
             inside the private Forge Vault.
@@ -206,6 +210,7 @@ const ForgeVault = () => {
         </div>
       </section>
     </div>
+   </VaultStage>
   );
 };
 

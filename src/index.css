@@ -862,3 +862,92 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
 @media (prefers-reduced-motion: reduce) {
   .portal-metal { animation: none; }
 }
+
+/* ==========================================================
+   Forge Vault entry choreography
+   Transform/opacity only. One continuous sequence, then stillness.
+   ========================================================== */
+.vault-activate { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.vault-activate:active {
+  opacity: 0.86;
+  transform: translate3d(0, 0.5px, 0) scale(0.996);
+  transition: opacity 120ms ease-out, transform 120ms ease-out;
+}
+
+body.vault-departing #root {
+  transform: scale(0.985);
+  opacity: 0.92;
+  transition: transform 320ms cubic-bezier(0.32, 0.72, 0, 1), opacity 320ms ease-out;
+  will-change: transform, opacity;
+}
+body.vault-departing { overflow: hidden; }
+#root { transform-origin: 50% 42%; transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease-out; }
+
+.vault-stage { position: relative; }
+
+.vault-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  background: hsl(var(--background));
+  box-shadow: 0 0 80px hsl(var(--foreground) / 0.06);
+  transform: translate3d(-101%, 0, 0);
+  animation: vault-surface 920ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes vault-surface {
+  0%   { transform: translate3d(-101%, -1.5%, 0); }
+  38%  { transform: translate3d(0, 0, 0); }
+  46%  { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(101%, 1.5%, 0); }
+}
+
+@keyframes vault-rise {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes vault-settle {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.vault-stage--full [data-vault-reveal],
+.vault-stage--brief [data-vault-reveal] {
+  opacity: 0;
+  animation: vault-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.vault-stage--full [data-vault-reveal="title"]      { animation-delay: 420ms; }
+.vault-stage--full [data-vault-reveal="lede"]       { animation-delay: 520ms; }
+.vault-stage--full [data-vault-reveal="primary"]    { animation-delay: 570ms; }
+.vault-stage--full [data-vault-reveal="secondary"]  { animation-delay: 630ms; }
+
+.vault-stage--brief [data-vault-reveal]             { animation-duration: 420ms; }
+.vault-stage--brief [data-vault-reveal="title"]     { animation-delay: 0ms; }
+.vault-stage--brief [data-vault-reveal="lede"]      { animation-delay: 70ms; }
+.vault-stage--brief [data-vault-reveal="primary"]   { animation-delay: 115ms; }
+.vault-stage--brief [data-vault-reveal="secondary"] { animation-delay: 165ms; }
+
+.vault-stage--reduced [data-vault-reveal] {
+  opacity: 0;
+  animation: vault-settle 240ms ease-out forwards;
+}
+
+@media (max-width: 767px) {
+  /* Same concept, shorter spatial travel. */
+  @keyframes vault-surface {
+    0%   { transform: translate3d(-101%, 0, 0); }
+    40%  { transform: translate3d(0, 0, 0); }
+    48%  { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(101%, 0, 0); }
+  }
+  body.vault-departing #root { transform: scale(0.99); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vault-veil { display: none; }
+  body.vault-departing #root { transform: none; opacity: 1; transition: none; }
+  .vault-activate:active { transform: none; }
+  .vault-stage [data-vault-reveal] { animation: vault-settle 200ms ease-out forwards; }
+}
