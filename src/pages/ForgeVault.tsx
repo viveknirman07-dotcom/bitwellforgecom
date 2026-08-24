@@ -210,6 +210,7 @@ const ForgeVault = () => {
         </div>
       </section>
     </div>
+   </VaultStage>
   );
 };
 
