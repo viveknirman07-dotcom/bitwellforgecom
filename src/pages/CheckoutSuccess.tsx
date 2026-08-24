@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import VaultLink from "@/components/vault/VaultLink";
 import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -87,7 +88,7 @@ const CheckoutSuccess = () => {
                   in to open the Vault.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <Link to="/vault" className="portal-btn portal-btn--solid">Open the Forge Vault</Link>
+                  <VaultLink to="/vault" className="portal-btn portal-btn--solid">Open the Forge Vault</VaultLink>
                   <Link to="/account" className="portal-btn">Sign in</Link>
                 </div>
               </>

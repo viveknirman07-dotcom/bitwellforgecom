@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { hasActiveOpenings } from "@/data/jobs";
+import VaultLink from "@/components/vault/VaultLink";
 
 const navItems = [
   { label: "About", href: "/about" },
@@ -65,7 +66,10 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link
+              {(() => {
+                const NavEl = item.href === "/vault" ? VaultLink : Link;
+                return (
+              <NavEl
                 to={item.href}
                 className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
                   location.pathname === item.href
@@ -91,7 +95,9 @@ const Header = () => {
                   }`}
                   style={{ transitionTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)" }}
                 />
-              </Link>
+              </NavEl>
+                );
+              })()}
             </motion.div>
           ))}
           <motion.button
@@ -142,7 +148,10 @@ const Header = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Link
+                  {(() => {
+                    const NavEl = item.href === "/vault" ? VaultLink : Link;
+                    return (
+                  <NavEl
                     to={item.href}
                     className={`text-base font-medium transition-colors inline-flex items-center gap-2 ${
                       location.pathname === item.href
@@ -157,7 +166,9 @@ const Header = () => {
                         Hiring
                       </span>
                     )}
-                  </Link>
+                  </NavEl>
+                    );
+                  })()}
                 </motion.div>
               ))}
             </div>
