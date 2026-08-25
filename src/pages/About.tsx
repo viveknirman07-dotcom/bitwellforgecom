@@ -1,6 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
-import RevenueArchitecture from "@/components/about/RevenueArchitecture";
 
 const ABOUT_DESCRIPTION =
   "BitwellForge is a Revenue Infrastructure consulting firm strengthening the commercial, operational, and digital systems behind sustainable B2B growth.";
@@ -10,20 +9,20 @@ const aboutJsonLd = [
     "@context": "https://schema.org",
     "@type": "AboutPage",
     name: "About BitwellForge",
-    url: "https://bitwellforgecom.lovable.app/about",
+    url: "https://bitwellforge.com/about",
     description: ABOUT_DESCRIPTION,
     mainEntity: {
       "@type": "Organization",
       name: "BitwellForge",
-      url: "https://bitwellforgecom.lovable.app",
+      url: "https://bitwellforge.com",
       description: ABOUT_DESCRIPTION,
       slogan: "Growth is not a tactic. It is infrastructure.",
       knowsAbout: [
         "Revenue Infrastructure",
-        "Strategic Clarity",
-        "Commercial Systems",
-        "Operations & Automation",
-        "Execution",
+        "Growth Strategy",
+        "Client Acquisition",
+        "Revenue Operations",
+        "Digital Product Commercialisation",
       ],
     },
   },
@@ -31,10 +30,20 @@ const aboutJsonLd = [
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://bitwellforgecom.lovable.app/" },
-      { "@type": "ListItem", position: 2, name: "About", item: "https://bitwellforgecom.lovable.app/about" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://bitwellforge.com/" },
+      { "@type": "ListItem", position: 2, name: "About", item: "https://bitwellforge.com/about" },
     ],
   },
+];
+
+const paragraphs = [
+  "BitwellForge is a Revenue Infrastructure consulting firm serving agencies, consultants, coaches, and B2B service businesses across the commercial, operational, and digital dimensions of growth.",
+  "Our work spans distinct areas of commercial development—from growth strategy and client acquisition to revenue systems, market authority, digital visibility, performance growth, revenue operations, and digital product commercialisation.",
+  "The nature of the engagement is determined by the constraint at hand. Some requirements are discrete; others are less bounded, where the observed constraint is a consequence of interactions between several functions rather than a deficiency within one.",
+  "We begin with the commercial problem rather than a predetermined intervention. The visible symptom is not always the underlying cause. Our analysis considers the relevant economic and organisational variables in conjunction, with attention to the dependencies and constraints that emerge as a business scales.",
+  "Where the requirement is specific, we remain specific. Where the economics of the problem cross functional boundaries, we account for those dependencies—avoiding solutions that simply transfer the constraint elsewhere in the system.",
+  "The appropriate scope is determined by the business model, the economics of the situation, the maturity of existing systems, and the constraints governing execution.",
+  "Our work is designed to be proportionate to the problem, rigorous in application, and useful beyond the engagement.",
 ];
 
 const About = () => {
@@ -48,104 +57,47 @@ const About = () => {
 
   return (
     <div className="pt-20">
-      {/* SECTION 1 — Introduction */}
-      <section className="section-padding pt-24 md:pt-44 pb-24 md:pb-36">
+      <section className="section-padding pt-20 sm:pt-28 lg:pt-40 pb-28 sm:pb-36 lg:pb-52">
         <div className="max-w-[1180px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-3">
-              <ScrollReveal>
-                <p className="text-[10px] tracking-[0.32em] uppercase text-gold eyebrow md:pt-6">
-                  01 &nbsp;/&nbsp; Introduction
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="md:col-span-9">
-              <ScrollReveal>
-                <h1 className="font-heading text-[46px] md:text-[92px] lg:text-[112px] font-semibold text-foreground leading-[0.98] tracking-tightest -ml-[0.04em]">
-                  Who We <span className="font-quote italic text-gold/95">Are</span>
-                </h1>
-              </ScrollReveal>
-
-              <ScrollReveal delay={180}>
-                <p className="mt-12 md:mt-20 font-body text-foreground text-[21px] md:text-[30px] leading-[1.42] font-light max-w-[19ch] sm:max-w-[26ch] md:max-w-[22ch] tracking-tight text-balance">
-                  BitwellForge is a Revenue Infrastructure consulting firm that partners with agencies, consultants, coaches, and B2B service businesses to strengthen the commercial, operational, and digital systems that support sustainable growth.
-                </p>
-              </ScrollReveal>
-
-              <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-[900px]">
-                <ScrollReveal delay={280}>
-                  <p className="font-body text-muted-foreground text-[16px] md:text-[17.5px] leading-[1.8] font-light">
-                    We partner with knowledge driven businesses and independent advisors to improve strategic clarity, commercial execution, and organisational capability across the revenue lifecycle.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 sm:gap-y-20 lg:gap-x-20 xl:gap-x-28">
+            {/* LEFT — positioning anchor */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              <div className="lg:sticky lg:top-32">
+                <ScrollReveal>
+                  <p className="text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-[hsl(var(--eyebrow-color))] eyebrow">
+                    About BitwellForge
                   </p>
                 </ScrollReveal>
-                <ScrollReveal delay={360}>
-                  <p className="font-body text-muted-foreground text-[16px] md:text-[17.5px] leading-[1.8] font-light">
-                    Our work integrates strategy, commercial systems, operations, automation, and execution into a cohesive framework aligned with each client's growth objectives.
+
+                <ScrollReveal delay={100}>
+                  <div className="mt-6 sm:mt-8 h-px w-14 sm:w-20 bg-border/70" />
+                </ScrollReveal>
+
+                <ScrollReveal delay={160}>
+                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[28px] sm:text-[38px] lg:text-[46px] xl:text-[54px] font-semibold text-foreground leading-[1.14] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
+                    We work across the mechanisms through which revenue is originated, converted, operationalised, and compounded.
+                  </h1>
+                </ScrollReveal>
+
+                <ScrollReveal delay={240}>
+                  <p className="mt-10 sm:mt-14 lg:mt-16 border-l border-border/60 pl-5 sm:pl-7 font-body text-muted-foreground text-[15px] sm:text-[16.5px] leading-[1.75] font-light max-w-[38ch]">
+                    Revenue Infrastructure is our lens, not a limitation on what we provide.
                   </p>
                 </ScrollReveal>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* SECTION 2 — Core architecture diagram */}
-      <section className="section-padding py-24 md:py-40">
-        <div className="max-w-[1180px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 md:gap-16 border-t border-border/40 pt-16 md:pt-24">
-            <div className="md:col-span-3">
-              <ScrollReveal>
-                <p className="text-[10px] tracking-[0.32em] uppercase text-gold eyebrow">
-                  02 &nbsp;/&nbsp; Architecture
-                </p>
-              </ScrollReveal>
-            </div>
-            <div className="md:col-span-9">
-              <ScrollReveal delay={120}>
-                <div className="max-w-[820px] mx-auto md:mx-0">
-                  <RevenueArchitecture />
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3 — Belief & Vision */}
-      <section className="section-padding pt-24 md:pt-36 pb-32 md:pb-52">
-        <div className="max-w-[1180px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 md:gap-16 border-t border-border/40 pt-16 md:pt-24">
-            <div className="md:col-span-3">
-              <ScrollReveal>
-                <p className="text-[10px] tracking-[0.32em] uppercase text-gold eyebrow">
-                  03 &nbsp;/&nbsp; Position
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="md:col-span-9 space-y-16 md:space-y-24">
-              <ScrollReveal delay={120}>
-                <div className="grid grid-cols-1 md:grid-cols-[9rem_1fr] gap-4 md:gap-10 md:items-baseline">
-                  <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground eyebrow">
-                    The Belief
-                  </p>
-                  <h2 className="font-heading text-[28px] md:text-[46px] font-semibold text-foreground leading-[1.12] tracking-tightest text-balance max-w-[20ch]">
-                    Growth is not a tactic. It is infrastructure.
-                  </h2>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={220}>
-                <div className="grid grid-cols-1 md:grid-cols-[9rem_1fr] gap-4 md:gap-10 md:items-baseline">
-                  <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground eyebrow">
-                    The Vision
-                  </p>
-                  <h2 className="font-heading text-[28px] md:text-[46px] font-semibold text-foreground leading-[1.12] tracking-tightest text-balance max-w-[20ch]">
-                    Businesses that grow through design, not desperation.
-                  </h2>
-                </div>
-              </ScrollReveal>
+            {/* RIGHT — substantive explanation */}
+            <div className="lg:col-span-6 xl:col-start-8 xl:col-span-5">
+              <div className="space-y-8 sm:space-y-10 lg:space-y-12 max-w-[62ch]">
+                {paragraphs.map((text, i) => (
+                  <ScrollReveal key={i} delay={i === 0 ? 0 : 60}>
+                    <p className="font-body text-muted-foreground text-[15.5px] sm:text-[16.5px] lg:text-[17px] leading-[1.85] font-light">
+                      {text}
+                    </p>
+                  </ScrollReveal>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -153,6 +105,5 @@ const About = () => {
     </div>
   );
 };
-
 
 export default About;
