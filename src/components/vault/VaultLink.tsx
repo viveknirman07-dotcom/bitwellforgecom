@@ -1,12 +1,6 @@
-import { AnchorHTMLAttributes, MouseEvent, ReactNode, useEffect, useRef } from "react";
+import { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  DEPART_MS,
-  beginDeparture,
-  endDeparture,
-  markVaultIntent,
-  prefersReducedMotion,
-} from "./vault-entry";
+import { markVaultIntent, runVaultOpening } from "./vault-entry";
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
   to: string;
@@ -14,15 +8,12 @@ interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
 }
 
 /**
- * The single entry point used by every intentional Forge Vault link. It gives
- * the activated element a near-imperceptible response, lets the current page
- * recede, then navigates. Modified clicks and middle clicks stay native.
+ * The single entry point used by every intentional Forge Vault link, so the
+ * canonical opening transition plays no matter where the user came from.
+ * Modified clicks and middle clicks stay native.
  */
 const VaultLink = ({ to, children, className = "", onClick, ...rest }: Props) => {
   const navigate = useNavigate();
-  const timer = useRef<number>();
-
-  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const handle = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
@@ -31,18 +22,7 @@ const VaultLink = ({ to, children, className = "", onClick, ...rest }: Props) =>
 
     event.preventDefault();
     markVaultIntent();
-
-    if (prefersReducedMotion()) {
-      navigate(to);
-      return;
-    }
-
-    beginDeparture();
-    timer.current = window.setTimeout(() => {
-      navigate(to);
-      // Safety net in case the destination never mounts.
-      timer.current = window.setTimeout(endDeparture, 1200);
-    }, DEPART_MS);
+    runVaultOpening(() => navigate(to));
   };
 
   return (

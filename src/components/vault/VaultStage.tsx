@@ -1,32 +1,25 @@
 import { ReactNode, useEffect, useState } from "react";
-import { consumeVaultIntent, endDeparture, prefersReducedMotion } from "./vault-entry";
+import { clearVaultCurtain, consumeVaultIntent, prefersReducedMotion } from "./vault-entry";
 
-type Mode = "full" | "brief" | "reduced";
+type Mode = "arrive" | "brief" | "reduced";
 
 /**
- * Wraps a Forge Vault environment. Children marked with `data-vault-reveal`
- * ("title" | "lede" | "primary" | "secondary") resolve in one staggered
- * composition behind a single refined surface pass.
+ * Wraps a Forge Vault environment. After the opening gesture the content
+ * settles once — a single quiet pass, not a cascade.
  */
 const VaultStage = ({ children }: { children: ReactNode }) => {
   const [mode] = useState<Mode>(() => {
     const intentional = consumeVaultIntent();
     if (prefersReducedMotion()) return "reduced";
-    return intentional ? "full" : "brief";
+    return intentional ? "arrive" : "brief";
   });
 
   useEffect(() => {
-    // The outgoing page has been replaced; release its receded state.
-    const id = window.requestAnimationFrame(endDeparture);
+    const id = window.requestAnimationFrame(clearVaultCurtain);
     return () => window.cancelAnimationFrame(id);
   }, []);
 
-  return (
-    <div className={`vault-stage vault-stage--${mode}`}>
-      {mode === "full" && <div className="vault-veil" aria-hidden="true" />}
-      {children}
-    </div>
-  );
+  return <div className={`vault-stage vault-stage--${mode}`}>{children}</div>;
 };
 
 export default VaultStage;

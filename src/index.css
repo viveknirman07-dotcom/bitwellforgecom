@@ -864,48 +864,92 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
 }
 
 /* ==========================================================
-   Forge Vault entry choreography
-   Transform/opacity only. One continuous sequence, then stillness.
+   FORGE VAULT — identity tokens, entry choreography, accents.
+   Transform/opacity only. One continuous vertical gesture.
    ========================================================== */
+:root {
+  --vault-gold: 38 46% 38%;
+  --vault-canvas: 40 20% 99%;
+  --vault-ink: 226 51% 8%;
+}
+.dark {
+  --vault-gold: 42 62% 62%;
+  --vault-canvas: 0 0% 4%;
+  --vault-ink: 40 12% 92%;
+}
+/* Light-mode private environments keep the same gold accent. */
+html:not(.dark) .portal { --portal-gold: 38 46% 38%; }
+
+/* --- Vault entry points: differentiated by gold, nothing else --- */
 .vault-activate { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.vault-nav {
+  color: hsl(var(--vault-gold));
+  transition: color 260ms ease-out, opacity 260ms ease-out;
+}
+.vault-nav:hover { color: hsl(var(--vault-gold) / 0.82); }
+.vault-nav .vault-arrow {
+  display: inline-block;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vault-nav:hover .vault-arrow { transform: translate3d(3px, 0, 0); }
 .vault-activate:active {
-  opacity: 0.86;
-  transform: translate3d(0, 0.5px, 0) scale(0.996);
-  transition: opacity 120ms ease-out, transform 120ms ease-out;
+  opacity: 0.88;
+  transform: translate3d(0, 0.5px, 0) scale(0.997);
+  transition: opacity 110ms ease-out, transform 110ms ease-out;
 }
 
-body.vault-departing #root {
-  transform: scale(0.985);
-  opacity: 0.92;
-  transition: transform 320ms cubic-bezier(0.32, 0.72, 0, 1), opacity 320ms ease-out;
-  will-change: transform, opacity;
-}
-body.vault-departing { overflow: hidden; }
-#root { transform-origin: 50% 42%; transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease-out; }
+/* --- The canonical opening transition --- */
+body.vault-transitioning { overflow: hidden; }
 
-.vault-stage { position: relative; }
-
-.vault-veil {
+.vault-curtain {
   position: fixed;
   inset: 0;
-  z-index: 70;
+  z-index: 90;
   pointer-events: none;
-  background: hsl(var(--background));
-  box-shadow: 0 0 80px hsl(var(--foreground) / 0.06);
-  transform: translate3d(-101%, 0, 0);
-  animation: vault-surface 920ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  overflow: hidden;
+}
+.vault-curtain__panel {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--vault-canvas));
+  transform: translate3d(0, 100%, 0);
   will-change: transform;
 }
-
-@keyframes vault-surface {
-  0%   { transform: translate3d(-101%, -1.5%, 0); }
-  38%  { transform: translate3d(0, 0, 0); }
-  46%  { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(101%, 1.5%, 0); }
+/* The leading edge: a single hairline of gold that the handle rides on. */
+.vault-curtain__edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--vault-gold) / 0) 0%,
+    hsl(var(--vault-gold) / 0.55) 22%,
+    hsl(var(--vault-gold) / 0.9) 50%,
+    hsl(var(--vault-gold) / 0.55) 78%,
+    hsl(var(--vault-gold) / 0) 100%
+  );
+}
+.vault-curtain__handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 52px;
+  height: 4px;
+  border-radius: 999px;
+  background: hsl(var(--vault-gold));
+  transform: translate3d(-50%, -50%, 0);
+}
+@media (max-width: 767px) {
+  .vault-curtain__handle { width: 40px; height: 3px; }
 }
 
+/* --- Arrival: one quiet settle, never a cascade --- */
+.vault-stage { position: relative; }
+
 @keyframes vault-rise {
-  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 @keyframes vault-settle {
@@ -913,41 +957,29 @@ body.vault-departing { overflow: hidden; }
   to   { opacity: 1; }
 }
 
-.vault-stage--full [data-vault-reveal],
+.vault-stage--arrive [data-vault-reveal],
 .vault-stage--brief [data-vault-reveal] {
   opacity: 0;
-  animation: vault-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: vault-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.vault-stage--full [data-vault-reveal="title"]      { animation-delay: 420ms; }
-.vault-stage--full [data-vault-reveal="lede"]       { animation-delay: 520ms; }
-.vault-stage--full [data-vault-reveal="primary"]    { animation-delay: 570ms; }
-.vault-stage--full [data-vault-reveal="secondary"]  { animation-delay: 630ms; }
+.vault-stage--arrive [data-vault-reveal="title"]     { animation-delay: 120ms; }
+.vault-stage--arrive [data-vault-reveal="lede"]      { animation-delay: 90ms; }
+.vault-stage--arrive [data-vault-reveal="primary"]   { animation-delay: 180ms; }
+.vault-stage--arrive [data-vault-reveal="secondary"] { animation-delay: 210ms; }
 
-.vault-stage--brief [data-vault-reveal]             { animation-duration: 420ms; }
-.vault-stage--brief [data-vault-reveal="title"]     { animation-delay: 0ms; }
-.vault-stage--brief [data-vault-reveal="lede"]      { animation-delay: 70ms; }
-.vault-stage--brief [data-vault-reveal="primary"]   { animation-delay: 115ms; }
-.vault-stage--brief [data-vault-reveal="secondary"] { animation-delay: 165ms; }
+.vault-stage--brief [data-vault-reveal]              { animation-duration: 400ms; }
+.vault-stage--brief [data-vault-reveal="primary"]    { animation-delay: 80ms; }
+.vault-stage--brief [data-vault-reveal="secondary"]  { animation-delay: 110ms; }
 
 .vault-stage--reduced [data-vault-reveal] {
   opacity: 0;
-  animation: vault-settle 240ms ease-out forwards;
-}
-
-@media (max-width: 767px) {
-  /* Same concept, shorter spatial travel. */
-  @keyframes vault-surface {
-    0%   { transform: translate3d(-101%, 0, 0); }
-    40%  { transform: translate3d(0, 0, 0); }
-    48%  { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(101%, 0, 0); }
-  }
-  body.vault-departing #root { transform: scale(0.99); }
+  animation: vault-settle 220ms ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vault-veil { display: none; }
-  body.vault-departing #root { transform: none; opacity: 1; transition: none; }
+  .vault-curtain { display: none; }
   .vault-activate:active { transform: none; }
+  .vault-nav .vault-arrow { transition: none; }
   .vault-stage [data-vault-reveal] { animation: vault-settle 200ms ease-out forwards; }
 }
+
