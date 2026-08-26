@@ -59,26 +59,30 @@ const Header = () => {
 
         {/* Desktop */}
         <div className="hidden lg:flex items-center gap-10">
-          {navItems.map((item, i) => (
+          {navItems.map((item, i) => {
+            const isVault = item.href === "/vault";
+            const NavEl = isVault ? VaultLink : Link;
+            return (
             <motion.div
               key={item.href}
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className={isVault ? "ml-2 pl-8 border-l border-border/40" : undefined}
             >
-              {(() => {
-                const NavEl = item.href === "/vault" ? VaultLink : Link;
-                return (
               <NavEl
                 to={item.href}
                 className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
-                  location.pathname === item.href
+                  isVault
+                    ? "vault-nav"
+                    : location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <span className="inline-flex items-center gap-1.5">
                   {item.label}
+                  {isVault && <span className="vault-arrow" aria-hidden="true">→</span>}
                   {item.hiring && hasActiveOpenings() && (
                     <span
                       className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/70"
@@ -87,6 +91,7 @@ const Header = () => {
                     />
                   )}
                 </span>
+                {!isVault && (
                 <span
                   className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-600 ${
                     location.pathname === item.href
@@ -95,11 +100,12 @@ const Header = () => {
                   }`}
                   style={{ transitionTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)" }}
                 />
+                )}
               </NavEl>
-                );
-              })()}
             </motion.div>
-          ))}
+            );
+          })}
+
           <motion.button
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
