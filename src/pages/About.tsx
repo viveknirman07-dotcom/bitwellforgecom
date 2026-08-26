@@ -74,7 +74,7 @@ const About = () => {
                 </ScrollReveal>
 
                 <ScrollReveal delay={160}>
-                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[28px] sm:text-[38px] lg:text-[46px] xl:text-[54px] font-semibold text-foreground leading-[1.14] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
+                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[32px] sm:text-[44px] lg:text-[52px] xl:text-[58px] font-semibold text-foreground leading-[1.06] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
                     We work across the mechanisms through which revenue is originated, converted, operationalised, and compounded.
                   </h1>
                 </ScrollReveal>
