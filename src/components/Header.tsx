@@ -147,25 +147,29 @@ const Header = () => {
             className="lg:hidden bg-background/90 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
           >
             <div className="section-padding py-6 flex flex-col gap-5">
-              {navItems.map((item, i) => (
+              {navItems.map((item, i) => {
+                const isVault = item.href === "/vault";
+                const NavEl = isVault ? VaultLink : Link;
+                return (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className={isVault ? "mt-3 pt-5 border-t border-border/40" : undefined}
                 >
-                  {(() => {
-                    const NavEl = item.href === "/vault" ? VaultLink : Link;
-                    return (
                   <NavEl
                     to={item.href}
-                    className={`text-base font-medium transition-colors inline-flex items-center gap-2 ${
-                      location.pathname === item.href
+                    className={`text-base font-medium transition-colors inline-flex items-center gap-2 min-h-[44px] ${
+                      isVault
+                        ? "vault-nav"
+                        : location.pathname === item.href
                         ? "text-foreground"
                         : "text-muted-foreground"
                     }`}
                   >
                     {item.label}
+                    {isVault && <span className="vault-arrow" aria-hidden="true">→</span>}
                     {item.hiring && hasActiveOpenings() && (
                       <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.22em] uppercase text-muted-foreground">
                         <span className="h-1.5 w-1.5 rounded-full bg-foreground/70" />
@@ -173,10 +177,10 @@ const Header = () => {
                       </span>
                     )}
                   </NavEl>
-                    );
-                  })()}
                 </motion.div>
-              ))}
+                );
+              })}
+
             </div>
           </motion.div>
         )}
