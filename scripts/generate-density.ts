@@ -74,10 +74,10 @@ const esc = (cls: string) =>
 
 const round = (n: number) => Math.round(n * 100) / 100;
 
-/** Type scale keeps small labels legible: hard floor of 10px, and 12px for copy. */
+/** Type scale keeps copy comfortable: body never drops below 13px, labels 10px. */
 const scaleType = (px: number, factor: number) => {
   const raw = px * factor;
-  const floor = px >= 14 ? 12 : 10;
+  const floor = px >= 15 ? 13 : px >= 14 ? 12.5 : 10;
   return round(Math.max(raw, Math.min(px, floor)));
 };
 
