@@ -19,7 +19,7 @@ const VaultStage = ({ children }: { children: ReactNode }) => {
     return () => window.cancelAnimationFrame(id);
   }, []);
 
-  return <div className={`vault-stage vault-stage--${mode}`}>{children}</div>;
+  return <div className={`vault-env vault-stage vault-stage--${mode}`}>{children}</div>;
 };
 
 export default VaultStage;
