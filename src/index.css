@@ -285,13 +285,13 @@
   /* === EYEBROW LABEL (sitewide) === */
   .eyebrow {
     color: hsl(var(--eyebrow-color));
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-family: var(--font-body);
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .eyebrow { font-size: 10px; letter-spacing: 0.16em; }
   }
   .eyebrow-line {
@@ -320,9 +320,9 @@
   .btn-primary {
     background: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
-    padding: 16px 28px;
+    padding: 15px 26px;
     border-radius: 9999px;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.02em;
     display: inline-flex;
@@ -338,9 +338,9 @@
   .btn-ghost {
     border: 1px solid hsl(var(--border-button));
     color: hsl(var(--foreground));
-    padding: 16px 28px;
+    padding: 15px 26px;
     border-radius: 9999px;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -741,23 +741,23 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
 }
 
 /* =====================================================================
-   MOBILE SCALE REDUCTION (~11%) — buttons, spacing, icons.
-   Scope: <= 768px only. Tablet/desktop untouched.
+   MOBILE SCALE REDUCTION (~15%) — buttons, spacing, icons.
+   Scope: <= 767px only. Tablet/desktop handled separately.
    ===================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .btn-primary,
   .btn-ghost {
-    padding: 14px 22px !important;
-    font-size: 12px !important;
+    padding: 12px 19px !important;
+    font-size: 11.5px !important;
     min-height: 44px;
   }
   .section-y {
-    padding-top: 56px !important;
-    padding-bottom: 56px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
   }
   .section-padding {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding-left: 17px !important;
+    padding-right: 17px !important;
   }
   /* Slightly tighten icon sizing inside buttons / chips */
   button svg, a svg { transform: scale(0.92); transform-origin: center; }
