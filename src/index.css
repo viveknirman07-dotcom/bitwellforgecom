@@ -1077,12 +1077,12 @@ body.vault-transitioning #root {
 .vault-stage--arrive [data-vault-reveal],
 .vault-stage--brief [data-vault-reveal] {
   opacity: 0;
-  animation: vault-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: vault-rise 760ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.vault-stage--arrive [data-vault-reveal="title"]     { animation-delay: 120ms; }
-.vault-stage--arrive [data-vault-reveal="lede"]      { animation-delay: 90ms; }
-.vault-stage--arrive [data-vault-reveal="primary"]   { animation-delay: 180ms; }
-.vault-stage--arrive [data-vault-reveal="secondary"] { animation-delay: 210ms; }
+.vault-stage--arrive [data-vault-reveal="title"]     { animation-delay: 160ms; }
+.vault-stage--arrive [data-vault-reveal="lede"]      { animation-delay: 100ms; }
+.vault-stage--arrive [data-vault-reveal="primary"]   { animation-delay: 260ms; }
+.vault-stage--arrive [data-vault-reveal="secondary"] { animation-delay: 320ms; }
 
 .vault-stage--brief [data-vault-reveal]              { animation-duration: 400ms; }
 .vault-stage--brief [data-vault-reveal="primary"]    { animation-delay: 80ms; }
