@@ -38,10 +38,10 @@ const aboutJsonLd = [
 
 const paragraphs = [
   "BitwellForge is a Revenue Infrastructure consulting firm serving agencies, consultants, coaches, and B2B service businesses across the commercial, operational, and digital dimensions of growth.",
-  "Our work spans distinct areas of commercial development—from growth strategy and client acquisition to revenue systems, market authority, digital visibility, performance growth, revenue operations, and digital product commercialisation.",
+  "Our work spans distinct areas of commercial development, from growth strategy and client acquisition to revenue systems, market authority, digital visibility, performance growth, revenue operations, and digital product commercialisation.",
   "The nature of the engagement is determined by the constraint at hand. Some requirements are discrete; others are less bounded, where the observed constraint is a consequence of interactions between several functions rather than a deficiency within one.",
   "We begin with the commercial problem rather than a predetermined intervention. The visible symptom is not always the underlying cause. Our analysis considers the relevant economic and organisational variables in conjunction, with attention to the dependencies and constraints that emerge as a business scales.",
-  "Where the requirement is specific, we remain specific. Where the economics of the problem cross functional boundaries, we account for those dependencies—avoiding solutions that simply transfer the constraint elsewhere in the system.",
+  "Where the requirement is specific, we remain specific. Where the economics of the problem cross functional boundaries, we account for those dependencies, avoiding solutions that simply transfer the constraint elsewhere in the system.",
   "The appropriate scope is determined by the business model, the economics of the situation, the maturity of existing systems, and the constraints governing execution.",
   "Our work is designed to be proportionate to the problem, rigorous in application, and useful beyond the engagement.",
 ];
@@ -60,7 +60,7 @@ const About = () => {
       <section className="section-padding pt-20 sm:pt-28 lg:pt-40 pb-28 sm:pb-36 lg:pb-52">
         <div className="max-w-[1180px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 sm:gap-y-20 lg:gap-x-20 xl:gap-x-28">
-            {/* LEFT — positioning anchor */}
+            {/* LEFT: positioning anchor */}
             <div className="lg:col-span-6 xl:col-span-6">
               <div className="lg:sticky lg:top-32">
                 <ScrollReveal>
@@ -87,7 +87,7 @@ const About = () => {
               </div>
             </div>
 
-            {/* RIGHT — substantive explanation */}
+            {/* RIGHT: substantive explanation */}
             <div className="lg:col-span-6 xl:col-start-8 xl:col-span-5">
               <div className="space-y-8 sm:space-y-10 lg:space-y-12 max-w-[62ch]">
                 {paragraphs.map((text, i) => (

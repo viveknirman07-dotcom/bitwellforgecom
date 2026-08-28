@@ -193,7 +193,7 @@ const ForgeVault = () => {
               <div className="mt-10">
                 <Link
                   to="/checkout"
-                  className="inline-flex items-center justify-center bg-black text-white dark:bg-gold dark:text-navy px-8 py-4 text-sm font-medium tracking-wide rounded-full transition-transform duration-300 hover:scale-[1.04] active:scale-[0.98] min-h-[48px]"
+                  className="vault-cta"
                 >
                   Get Access
                 </Link>
