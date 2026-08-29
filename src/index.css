@@ -1093,23 +1093,10 @@ body.vault-transitioning #root {
   animation: vault-settle 220ms ease-out forwards;
 }
 
-/* Reduced motion: the calm curtain (opacity only) is the opening. */
-.vault-curtain--calm .vault-curtain__glow,
-.vault-curtain--calm .vault-curtain__ribbon,
-.vault-curtain--calm .vault-curtain__handle { display: none; }
-
-.vault-curtain--calm .vault-curtain__field {
-  background: hsl(var(--vault-canvas));
-}
-
-body.vault-transitioning--calm #root { animation: none; }
-
 @media (prefers-reduced-motion: reduce) {
-  .vault-curtain:not(.vault-curtain--calm) { display: none; }
-  body.vault-transitioning #root { animation: none; }
+  .vault-curtain { display: none; }
   .vault-activate:active { transform: none; }
   .vault-nav .vault-arrow { transition: none; }
-  .vault-stage [data-vault-reveal] { animation: vault-settle 240ms ease-out forwards; }
+  .vault-stage [data-vault-reveal] { animation: vault-settle 200ms ease-out forwards; }
 }
-
 
