@@ -1,58 +1,49 @@
 /**
- * Forge Vault entry choreography: vertical ribbon pull and unroll.
+ * Forge Vault opening transition.
  *
- * One canonical gesture, used by every intentional Vault entry point.
- * A handle is pulled from the bottom edge of the viewport, unrolling a narrow
- * painted ribbon behind it. Once the ribbon clears the top edge it expands
- * laterally into the field the Vault arrives in, and the field resolves away.
+ * Implementation of the VERTICAL_PULL_RIBBON_OPENING_TRANSITION specification.
+ * Every non-colour parameter (geometry, coordinates, timeline milestones,
+ * easing, masking, scaling, cleanup) follows the spec verbatim; only the
+ * colour system is the Forge Vault gold / black / warm-white palette, which
+ * lives in index.css and adapts to the active theme.
  *
- * The elements live on <body>, outside React, so the gesture survives the
- * route change and stays visually continuous even if the destination is slow.
+ * Total duration: 1150ms.
+ *   0ms    REST_ORIGIN               puck at calc(100vh - 120px), mask 100%
+ *   90ms   KINETIC_LAUNCH            puck 82vh, mask 82%, squash 0.98 / 1.04
+ *   320ms  MAXIMUM_VELOCITY_CRUISE   puck 44vh, mask 44%, squash 0.99 / 1.02
+ *   680ms  HIGH_DECELERATION_ZONE    puck 8vh,  mask 8%
+ *   860ms  TOP_BOUNDARY_CLEARED      puck -150px, mask 0%, full 100vh column
+ *   960ms  EXPANSION_INITIATION      puck -180px, ribbon scaleX(100vw / 112px)
+ *   1150ms TERMINAL_STATE_RESOLUTION overlay alpha 0, overlay removed
  *
- * Continuity rules followed here:
- *   every phase begins before its predecessor ends, so no segment ever
- *   decelerates to a stop and re-accelerates,
- *   handoffs happen at matched velocity: a phase that ends fast is followed by
- *   a phase whose curve starts fast,
- *   one easing family is shared by every element, so the ribbon, the handle
- *   and the light read as a single object in motion.
- *
- * Only transform, opacity, clip-path and filter are animated.
- *
- * A reduced-motion variant runs the same narrative with no movement at all:
- * the field simply resolves in, the route swaps behind it, and it resolves out.
+ * A reduced-motion variant runs the same three beats (cover, swap, reveal)
+ * purely as opacity, with no travel, scale, blur or parallax.
  */
 const INTENT_KEY = "bwf:vault-intent";
 const CURTAIN_CLASS = "vault-curtain";
 const CALM_CLASS = "vault-curtain--calm";
 
-const SETTLE_MS = 120; // the handle loads before it moves
-const PULL_MS = 860; // the long, eased ascent
-const CLEAR_MS = 420; // the handle leaves, the ribbon completes
-const EXPAND_MS = 520; // the ribbon becomes the environment
-const RESOLVE_MS = 560; // the field dissolves into the destination
+/** Spec: total_animation_duration_ms */
+const TOTAL_MS = 1150;
 
-/** Overlaps: each phase starts this far before the previous one finishes. */
-const PULL_LEAD = 70;
-const CLEAR_LEAD = 90;
-const EXPAND_LEAD = 130;
+/** Spec keyframe timestamps. */
+const T_LAUNCH = 90;
+const T_CRUISE = 320;
+const T_DECEL = 680;
+const T_CLEARED = 860;
+const T_EXPAND = 960;
 
-const PULL_AT = SETTLE_MS - PULL_LEAD;
-const CLEAR_AT = PULL_AT + PULL_MS - CLEAR_LEAD;
-const EXPAND_AT = CLEAR_AT + CLEAR_MS - EXPAND_LEAD;
+/** Spec: puck / ribbon geometry. */
+const PUCK_PX = 112;
+const RIBBON_PX = 112;
 
-/** Total time before the destination is uncovered. */
-export const COVER_MS = CLEAR_AT + CLEAR_MS;
+/** Spec: primary_ascent_curve. */
+const EASE_ASCENT = "cubic-bezier(0.18, 1, 0.28, 1)";
+/** Spec: gsap power2.inOut for the lateral expansion. */
+const EASE_EXPAND = "cubic-bezier(0.45, 0, 0.55, 1)";
 
-/**
- * A single easing family. Each curve leaves off at roughly the velocity the
- * next one picks up, which is what makes the whole gesture read as continuous.
- */
-const EASE_LOAD = "cubic-bezier(0.32, 0.04, 0.24, 1)";
-const EASE_PULL = "cubic-bezier(0.24, 0.58, 0.14, 1)";
-const EASE_CLEAR = "cubic-bezier(0.30, 0.46, 0.12, 1)";
-const EASE_EXPAND = "cubic-bezier(0.42, 0.06, 0.16, 1)";
-const EASE_RESOLVE = "cubic-bezier(0.22, 0.72, 0.20, 1)";
+/** Time at which the destination is fully covered (route swap point). */
+export const COVER_MS = T_CLEARED;
 
 /** Reduced motion: opacity only, gentle, short. */
 const CALM_IN_MS = 300;
@@ -88,10 +79,17 @@ const removeCurtain = () => {
   document.body.classList.remove("vault-transitioning--calm");
 };
 
+const ARROW_SVG =
+  "<svg class='vault-curtain__arrow' viewBox='0 0 42 42' fill='none' xmlns='http://www.w3.org/2000/svg'>" +
+  "<path d='M21 32V10M21 10L10 21M21 10L32 21' stroke='#C6A15B' stroke-width='3.2' " +
+  "stroke-linecap='round' stroke-linejoin='round'/></svg>";
+
 const buildCurtain = (calm: boolean) => {
   removeCurtain();
   const root = document.createElement("div");
-  root.className = calm ? `${CURTAIN_CLASS} ${CALM_CLASS}` : CURTAIN_CLASS;
+  root.className = calm
+    ? `${CURTAIN_CLASS} motion-viewport-overlay ${CALM_CLASS}`
+    : `${CURTAIN_CLASS} motion-viewport-overlay`;
   root.setAttribute("aria-hidden", "true");
   root.innerHTML =
     '<div class="vault-curtain__field"></div>' +
@@ -99,7 +97,10 @@ const buildCurtain = (calm: boolean) => {
       ? ""
       : '<div class="vault-curtain__glow"></div>' +
         '<div class="vault-curtain__ribbon"></div>' +
-        '<div class="vault-curtain__handle"><span>&#8593;</span></div>');
+        '<div class="vault-curtain__handle">' +
+        '<span class="vault-curtain__notch"></span>' +
+        ARROW_SVG +
+        "</div>");
   document.body.appendChild(root);
   document.body.classList.add("vault-transitioning");
   if (calm) document.body.classList.add("vault-transitioning--calm");
@@ -108,7 +109,7 @@ const buildCurtain = (calm: boolean) => {
 
 /**
  * Reduced-motion opening. Same three beats as the full gesture (cover, swap,
- * reveal) expressed purely as opacity, with no travel, scale, blur or parallax.
+ * reveal) expressed purely as opacity.
  */
 const runCalmOpening = (navigate: () => void) => {
   const root = buildCurtain(true);
@@ -140,8 +141,9 @@ const runCalmOpening = (navigate: () => void) => {
 };
 
 /**
- * Runs the canonical opening transition. `navigate` is invoked at the moment
- * the ribbon covers the viewport, so the route swap is never visible.
+ * Runs the canonical opening transition. `navigate` is invoked at
+ * TOP_BOUNDARY_CLEARED (t = 860ms), when the ribbon covers the viewport, so
+ * the route swap is never visible.
  */
 export const runVaultOpening = (navigate: () => void) => {
   if (typeof document === "undefined") {
@@ -157,9 +159,13 @@ export const runVaultOpening = (navigate: () => void) => {
   const field = root.querySelector(".vault-curtain__field") as HTMLElement;
   const glow = root.querySelector(".vault-curtain__glow") as HTMLElement;
   const ribbon = root.querySelector(".vault-curtain__ribbon") as HTMLElement;
-  const handle = root.querySelector(".vault-curtain__handle") as HTMLElement;
-  const ribbonWidth = ribbon.getBoundingClientRect().width || 112;
-  const spread = Math.ceil((window.innerWidth / ribbonWidth) * 1.08);
+  const puck = root.querySelector(".vault-curtain__handle") as HTMLElement;
+
+  const vh = window.innerHeight;
+  const vw = window.innerWidth;
+  /** Spec: exact 1:1 coupling between puck diameter and ribbon width. */
+  const width = RIBBON_PX;
+  const spread = vw / width;
   let done = false;
 
   const finish = () => {
@@ -168,124 +174,122 @@ export const runVaultOpening = (navigate: () => void) => {
     removeCurtain();
   };
 
-  const timing = (duration: number, delay: number, easing: string): KeyframeAnimationOptions => ({
-    duration,
-    delay,
-    easing,
-    fill: "both",
-  });
+  /** Spec Y positions, resolved against the live viewport. */
+  const y0 = vh - 120;
+  const y90 = vh * 0.82;
+  const y320 = vh * 0.44;
+  const y680 = vh * 0.08;
+  const y860 = -150;
+  const y960 = -180;
 
-  // The field arrives early and slowly, so nothing ever snaps into view.
-  field.animate(
+  const at = (ms: number) => ms / TOTAL_MS;
+
+  /**
+   * The puck: strict upward travel on the horizontal centreline, zero X
+   * displacement, with the specified squash / stretch matrix at each
+   * milestone. Each segment carries the primary ascent curve.
+   */
+  puck.animate(
     [
-      { opacity: 0 },
-      { opacity: 0.34, offset: 0.34 },
-      { opacity: 0.78, offset: 0.68 },
-      { opacity: 1 },
+      { offset: 0, transform: `translate3d(0, ${y0}px, 0) scale(1, 1)`, easing: EASE_ASCENT },
+      {
+        offset: at(T_LAUNCH),
+        transform: `translate3d(0, ${y90}px, 0) scale(0.98, 1.04)`,
+        easing: EASE_ASCENT,
+      },
+      {
+        offset: at(T_CRUISE),
+        transform: `translate3d(0, ${y320}px, 0) scale(0.99, 1.02)`,
+        easing: EASE_ASCENT,
+      },
+      {
+        offset: at(T_DECEL),
+        transform: `translate3d(0, ${y680}px, 0) scale(1, 1)`,
+        easing: EASE_ASCENT,
+      },
+      {
+        offset: at(T_CLEARED),
+        transform: `translate3d(0, ${y860}px, 0) scale(1, 1)`,
+        easing: EASE_ASCENT,
+      },
+      { offset: at(T_EXPAND), transform: `translate3d(0, ${y960}px, 0) scale(1, 1)` },
+      { offset: 1, transform: `translate3d(0, ${y960}px, 0) scale(1, 1)` },
     ],
-    timing(SETTLE_MS + PULL_MS * 0.9, 0, EASE_LOAD)
+    { duration: TOTAL_MS, fill: "both" }
   );
 
-  // A bloom of light travels ahead of the handle and fades as it clears.
+  /**
+   * The ribbon mask: the top edge tracks the puck's equator exactly, so the
+   * junction never separates and the column unrolls in step with the pull.
+   */
+  /**
+   * The ribbon mask: the top edge is coupled in world space to the puck's
+   * horizontal equator (puck Y + 56px radius, less the 1.5px subpixel overlap
+   * compensation), so the junction never separates or seams.
+   */
+  const edge = (y: number) => `inset(${Math.max(0, y + PUCK_PX / 2 - 1.5).toFixed(2)}px 0 0 0)`;
+  ribbon.animate(
+    [
+      { offset: 0, clipPath: edge(y0), easing: EASE_ASCENT },
+      { offset: at(T_LAUNCH), clipPath: edge(y90), easing: EASE_ASCENT },
+      { offset: at(T_CRUISE), clipPath: edge(y320), easing: EASE_ASCENT },
+      { offset: at(T_DECEL), clipPath: edge(y680), easing: EASE_ASCENT },
+      { offset: at(T_CLEARED), clipPath: "inset(0px 0 0 0)" },
+      { offset: 1, clipPath: "inset(0px 0 0 0)" },
+    ],
+    { duration: TOTAL_MS, fill: "both" }
+  );
+
+  /** Lateral expansion: t = 860ms, duration 240ms, power2.inOut. */
+  const expand = ribbon.animate(
+    [{ transform: "scaleX(1)" }, { transform: `scaleX(${spread})` }],
+    { duration: 240, delay: T_CLEARED, easing: EASE_EXPAND, fill: "both", composite: "add" }
+  );
+
+  /** Gold bloom travelling ahead of the puck, resolving as it clears. */
   glow.animate(
     [
       { transform: "translate3d(0, 0, 0) scale(0.74)", opacity: 0 },
-      { transform: "translate3d(0, -14vh, 0) scale(0.92)", opacity: 0.72, offset: 0.2 },
-      { transform: "translate3d(0, -44vh, 0) scale(1.06)", opacity: 0.9, offset: 0.46 },
-      { transform: "translate3d(0, -86vh, 0) scale(1.18)", opacity: 0.56, offset: 0.78 },
+      { transform: "translate3d(0, -44vh, 0) scale(1.06)", opacity: 0.85, offset: 0.46 },
       { transform: "translate3d(0, -126vh, 0) scale(1.28)", opacity: 0 },
     ],
-    timing(PULL_MS + CLEAR_MS + PULL_LEAD, 0, EASE_PULL)
+    { duration: T_CLEARED, easing: EASE_ASCENT, fill: "both" }
   );
 
-  // The handle loads, then is drawn upward in one long, unbroken arc.
-  handle.animate(
+  /** Background alpha: 1.0 through 900ms, then linear to 0 by 1150ms. */
+  field.animate(
     [
-      { transform: "translate3d(0, 0, 0) scale(0.94)", opacity: 0 },
-      { transform: "translate3d(0, -1.6vh, 0) scale(0.98)", opacity: 0.7, offset: 0.6 },
-      { transform: "translate3d(0, -4vh, 0) scale(1)", opacity: 1 },
+      { offset: 0, opacity: 1, easing: "linear" },
+      { offset: 900 / TOTAL_MS, opacity: 1, easing: "linear" },
+      { offset: 1, opacity: 0 },
     ],
-    timing(SETTLE_MS + 180, 0, EASE_LOAD)
-  );
-  handle.animate(
-    [
-      { transform: "translate3d(0, -4vh, 0)" },
-      { transform: "translate3d(0, -22vh, 0)", offset: 0.26 },
-      { transform: "translate3d(0, -50vh, 0)", offset: 0.56 },
-      { transform: "translate3d(0, -70vh, 0)", offset: 0.8 },
-      { transform: "translate3d(0, -82vh, 0)" },
-    ],
-    timing(PULL_MS, PULL_AT, EASE_PULL)
-  );
-  handle.animate(
-    [
-      { transform: "translate3d(0, -82vh, 0)", opacity: 1 },
-      { transform: "translate3d(0, -96vh, 0)", opacity: 0.74, offset: 0.42 },
-      { transform: "translate3d(0, -110vh, 0)", opacity: 0.3, offset: 0.76 },
-      { transform: "translate3d(0, -120vh, 0)", opacity: 0 },
-    ],
-    timing(CLEAR_MS, CLEAR_AT, EASE_CLEAR)
+    { duration: TOTAL_MS, fill: "both" }
   );
 
-  // The ribbon unrolls beneath the handle, tracking its curve exactly.
-  ribbon.animate(
-    [
-      { clipPath: "inset(100% 0 0 0)" },
-      { clipPath: "inset(78% 0 0 0)", offset: 0.26 },
-      { clipPath: "inset(50% 0 0 0)", offset: 0.56 },
-      { clipPath: "inset(30% 0 0 0)", offset: 0.8 },
-      { clipPath: "inset(18% 0 0 0)" },
-    ],
-    timing(PULL_MS, PULL_AT, EASE_PULL)
-  );
-  ribbon.animate(
-    [
-      { clipPath: "inset(18% 0 0 0)" },
-      { clipPath: "inset(7% 0 0 0)", offset: 0.46 },
-      { clipPath: "inset(0% 0 0 0)" },
-    ],
-    timing(CLEAR_MS, CLEAR_AT, EASE_CLEAR)
-  );
-
-  // The ribbon becomes the environment: a wide, eased lateral opening that
-  // starts while the ribbon is still completing, so the two never separate.
-  const expand = ribbon.animate(
-    [
-      { transform: "scaleX(1)" },
-      { transform: `scaleX(${(1 + (spread - 1) * 0.14).toFixed(2)})`, offset: 0.28 },
-      { transform: `scaleX(${(1 + (spread - 1) * 0.52).toFixed(2)})`, offset: 0.62 },
-      { transform: `scaleX(${(1 + (spread - 1) * 0.88).toFixed(2)})`, offset: 0.85 },
-      { transform: `scaleX(${spread})` },
-    ],
-    timing(EXPAND_MS, EXPAND_AT, EASE_EXPAND)
-  );
-
-  // The route swaps behind full cover, then the field resolves away slowly.
-  window.setTimeout(() => {
-    navigate();
-    root.animate(
-      [
-        { opacity: 1, filter: "blur(0px)" },
-        { opacity: 0.78, filter: "blur(1.4px)", offset: 0.32 },
-        { opacity: 0.36, filter: "blur(3.6px)", offset: 0.66 },
-        { opacity: 0, filter: "blur(8px)" },
-      ],
-      {
-        duration: RESOLVE_MS,
-        delay: EXPAND_MS * 0.6,
-        easing: EASE_RESOLVE,
-        fill: "forwards",
-      }
-    ).onfinish = finish;
-  }, EXPAND_AT + EXPAND_MS * 0.4);
-
+  /** Overlay resolution: t = 970ms, duration 180ms, linear. */
+  const resolve = root.animate([{ opacity: 1 }, { opacity: 0 }], {
+    duration: 180,
+    delay: 970,
+    easing: "linear",
+    fill: "forwards",
+  });
+  resolve.onfinish = finish;
+  resolve.oncancel = finish;
   expand.oncancel = finish;
 
-  // Safety net: never trap the interface behind the curtain.
-  window.setTimeout(finish, EXPAND_AT + EXPAND_MS + RESOLVE_MS + 900);
+  /** Route swap behind full cover. */
+  window.setTimeout(navigate, T_CLEARED);
+
+  /** Interaction hand-off: pointer events restored the moment the overlay goes. */
+  window.setTimeout(() => {
+    root.style.pointerEvents = "none";
+  }, TOTAL_MS);
+
+  /** Safety net: never trap the interface behind the overlay. */
+  window.setTimeout(finish, TOTAL_MS + 600);
 };
 
-/** Called by the destination in case a curtain was orphaned. */
+/** Called by the destination in case an overlay was orphaned. */
 export const clearVaultCurtain = () => {
   if (!document.querySelector(`.${CURTAIN_CLASS}`)) {
     document.body.classList.remove("vault-transitioning");
