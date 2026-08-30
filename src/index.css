@@ -1010,7 +1010,8 @@ html:not(.dark) .vault-curtain__field { background: #f4f1e8; }
 /* Trailing textured ribbon column: 112px, world-space locked texture. */
 .vault-curtain__ribbon {
   position: absolute;
-  bottom: -1.5px;
+  top: 0;
+  bottom: auto;
   left: 50%;
   width: 112px;
   margin-left: -56px;
