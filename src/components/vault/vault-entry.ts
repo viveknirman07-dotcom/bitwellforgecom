@@ -222,14 +222,20 @@ export const runVaultOpening = (navigate: () => void) => {
    * The ribbon mask: the top edge tracks the puck's equator exactly, so the
    * junction never separates and the column unrolls in step with the pull.
    */
+  /**
+   * The ribbon mask: the top edge is coupled in world space to the puck's
+   * horizontal equator (puck Y + 56px radius, less the 1.5px subpixel overlap
+   * compensation), so the junction never separates or seams.
+   */
+  const edge = (y: number) => `inset(${Math.max(0, y + PUCK_PX / 2 - 1.5).toFixed(2)}px 0 0 0)`;
   ribbon.animate(
     [
-      { offset: 0, clipPath: "inset(100% 0 0 0)", easing: EASE_ASCENT },
-      { offset: at(T_LAUNCH), clipPath: "inset(82% 0 0 0)", easing: EASE_ASCENT },
-      { offset: at(T_CRUISE), clipPath: "inset(44% 0 0 0)", easing: EASE_ASCENT },
-      { offset: at(T_DECEL), clipPath: "inset(8% 0 0 0)", easing: EASE_ASCENT },
-      { offset: at(T_CLEARED), clipPath: "inset(0% 0 0 0)" },
-      { offset: 1, clipPath: "inset(0% 0 0 0)" },
+      { offset: 0, clipPath: edge(y0), easing: EASE_ASCENT },
+      { offset: at(T_LAUNCH), clipPath: edge(y90), easing: EASE_ASCENT },
+      { offset: at(T_CRUISE), clipPath: edge(y320), easing: EASE_ASCENT },
+      { offset: at(T_DECEL), clipPath: edge(y680), easing: EASE_ASCENT },
+      { offset: at(T_CLEARED), clipPath: "inset(0px 0 0 0)" },
+      { offset: 1, clipPath: "inset(0px 0 0 0)" },
     ],
     { duration: TOTAL_MS, fill: "both" }
   );
