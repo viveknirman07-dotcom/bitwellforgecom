@@ -1,7 +1,7 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { z } from 'npm:zod@3.23.8'
 import { admin, clientIp, rateLimit } from '../_shared/db.ts'
-import { capDiscountUsd, hashIp, verifyAttribution, AFFILIATE_DISCOUNT_USD } from '../_shared/affiliate.ts'
+import { capDiscountUsd, hashIp, verifyAttribution } from '../_shared/affiliate.ts'
 import { convertUsd, formatMoney } from '../_shared/money.ts'
 
 const TrackSchema = z.object({
@@ -11,13 +11,21 @@ const TrackSchema = z.object({
   referer: z.string().trim().max(300).optional(),
 })
 
-const ValidateSchema = z.object({
-  action: z.literal('validate'),
-  ref: z.string().trim().min(3).max(24),
-  code: z.string().trim().min(1).max(24),
-  currency: z.string().trim().length(3).optional(),
-  email: z.string().trim().email().max(255).optional(),
-})
+/**
+ * Validation at checkout. Either side of the attribution is optional: a code
+ * alone, a link alone, or both together are all acceptable. The buyer email is
+ * required so the benefit rolled here is the same one charged later.
+ */
+const ValidateSchema = z
+  .object({
+    action: z.literal('validate'),
+    ref: z.string().trim().min(3).max(24).optional(),
+    code: z.string().trim().min(1).max(24).optional(),
+    currency: z.string().trim().length(3).optional(),
+    email: z.string().trim().email().max(255),
+  })
+  .refine((v) => Boolean(v.ref || v.code), { message: 'code_required' })
+
 
 const json = (payload: unknown, status = 200) =>
   new Response(JSON.stringify(payload), {
