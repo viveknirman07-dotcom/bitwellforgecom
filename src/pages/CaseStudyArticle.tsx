@@ -62,21 +62,22 @@ const CaseStudyArticle = () => {
 
           {/* Metric strip */}
           <ScrollReveal delay={200}>
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-[hsl(var(--foreground)/0.10)] rounded-xl overflow-hidden border border-[hsl(var(--foreground)/0.10)]">
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-[hsl(var(--foreground)/0.10)] rounded-xl overflow-hidden border border-[hsl(var(--foreground)/0.10)]">
               {study.metrics.map((m) => (
                 <div
                   key={m.label}
-                  className="bg-background/80 backdrop-blur-xl p-5 md:p-6"
+                  className="bg-background/80 backdrop-blur-xl p-5 md:p-6 min-w-0"
                 >
-                  <div className="font-heading text-2xl md:text-3xl font-semibold text-foreground leading-none mb-2">
+                  <div className="font-heading text-[clamp(1.35rem,7vw,1.75rem)] md:text-3xl font-semibold text-foreground leading-[1.1] mb-2 min-w-0 break-words [overflow-wrap:anywhere] tabular-nums">
                     {m.value}
                   </div>
-                  <div className="text-[11px] uppercase tracking-widest text-muted-foreground leading-snug">
+                  <div className="text-[11px] uppercase tracking-widest text-muted-foreground leading-snug break-words [overflow-wrap:anywhere]">
                     {m.label}
                   </div>
                 </div>
               ))}
             </div>
+
           </ScrollReveal>
         </div>
       </header>
