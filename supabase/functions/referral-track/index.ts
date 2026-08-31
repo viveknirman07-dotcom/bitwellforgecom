@@ -47,15 +47,22 @@ Deno.serve(async (req) => {
         return json({ valid: false, message: 'Too many attempts. Please try again shortly.' }, 429)
       }
       const parsed = ValidateSchema.safeParse(body)
-      if (!parsed.success) return json({ valid: false, message: 'That affiliate code is not valid.' })
+      if (!parsed.success) {
+        return json({ valid: false, message: 'Enter a valid affiliate code and email address.' })
+      }
 
       const result = await verifyAttribution(parsed.data.ref, parsed.data.code, parsed.data.email)
       if (!result.ok || !result.affiliate) {
-        return json({ valid: false, code: result.code, message: result.message })
+        return json({
+          valid: false,
+          code: result.code,
+          message: result.message ?? 'That affiliate code is not valid.',
+        })
       }
 
-      // The discount is decided here, server-side, and capped absolutely.
-      const discountUsd = capDiscountUsd(result.discount_usd ?? AFFILIATE_DISCOUNT_USD)
+      // The discount was decided server-side and bound to this customer.
+      const discountUsd = capDiscountUsd(result.discount_usd ?? 0)
+
       const currency = (parsed.data.currency ?? 'USD').toUpperCase()
       let display: { amount: number; currency: string; formatted: string } | null = null
       try {
