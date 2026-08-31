@@ -2,7 +2,7 @@ import { useEffect, useState, FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { getReferral, isReferralValidated, markReferralValidated } from "@/lib/referral";
+import { getReferral, markReferralValidated } from "@/lib/referral";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
 import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
 
@@ -21,6 +21,8 @@ interface AppliedBenefit {
   display_amount: number | null;
 }
 
+const emailValid = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
+
 const Checkout = () => {
   const [params] = useSearchParams();
   const cancelled = params.get("cancelled") === "1";
@@ -33,7 +35,7 @@ const Checkout = () => {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Affiliate purchase mode
+  // Affiliate benefit. Entirely optional: a purchase never depends on it.
   const [referral] = useState<string | null>(getReferral);
   const [affiliateCode, setAffiliateCode] = useState("");
   const [applying, setApplying] = useState(false);
@@ -41,7 +43,7 @@ const Checkout = () => {
   const [benefit, setBenefit] = useState<AppliedBenefit | null>(null);
 
   useEffect(() => {
-    document.title = "Checkout — BitwellForge";
+    document.title = "Secure checkout — Commercial Growth System | BitwellForge";
   }, []);
 
   useEffect(() => {
@@ -71,18 +73,23 @@ const Checkout = () => {
       ? pricing.currencies
       : [{ code: DEFAULT_CURRENCY, name: "US Dollar" }];
 
+  const canApply = Boolean(affiliateCode.trim() || referral) && emailValid(email);
+
   const applyCode = async () => {
-    if (!referral) return;
+    if (!canApply) {
+      setCodeError("Enter your email address first, then apply the code.");
+      return;
+    }
     setApplying(true);
     setCodeError(null);
     try {
       const { data } = await supabase.functions.invoke("referral-track", {
         body: {
           action: "validate",
-          ref: referral,
-          code: affiliateCode.trim(),
+          ref: referral ?? undefined,
+          code: affiliateCode.trim() || undefined,
           currency,
-          email: email.trim().toLowerCase() || undefined,
+          email: email.trim().toLowerCase(),
         },
       });
       if (!data?.valid) {
@@ -105,8 +112,6 @@ const Checkout = () => {
     }
   };
 
-  const blocked = Boolean(referral) && !benefit;
-
   /** Total shown to the buyer. The server recomputes and re-caps this value. */
   const formatTotal = (p: Pricing) => {
     if (!benefit?.display_amount) return p.display.formatted;
@@ -123,10 +128,6 @@ const Checkout = () => {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    if (blocked) {
-      setCodeError("Enter and apply the affiliate code to continue.");
-      return;
-    }
     setBusy(true);
     setError(null);
     try {
@@ -137,7 +138,7 @@ const Checkout = () => {
           provider,
           currency,
           ref: referral ?? undefined,
-          affiliate_code: referral ? benefit?.code ?? affiliateCode.trim() : undefined,
+          affiliate_code: (benefit?.code ?? affiliateCode.trim()) || undefined,
         },
       });
 
@@ -170,141 +171,196 @@ const Checkout = () => {
     }
   };
 
-
   return (
-    <div className="portal font-body flex flex-col">
+    <div className="portal font-body flex min-h-screen w-full flex-col overflow-x-hidden">
       <header className="border-b portal-line">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
-          <Link to="/" className="font-heading text-lg md:text-xl tracking-tight">BitwellForge</Link>
-          <span className="text-[11px] tracking-[0.2em] uppercase portal-muted">Secure checkout</span>
+        <div className="mx-auto flex h-14 w-full max-w-[1200px] items-center justify-between gap-4 px-5 sm:h-16 sm:px-8 lg:h-20 lg:px-10">
+          <Link to="/" className="font-heading text-base tracking-tight sm:text-lg lg:text-xl">
+            BitwellForge
+          </Link>
+          <span className="text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]">
+            Secure checkout
+          </span>
         </div>
       </header>
 
-      <main className="flex-1 max-w-[1000px] w-full mx-auto px-6 md:px-10 py-16 md:py-24 grid gap-16 md:grid-cols-[1fr_1fr]">
-        <section>
-          <p className="text-[11px] tracking-[0.28em] uppercase portal-gold mb-5">The product</p>
-          <h1 className="font-heading text-3xl md:text-4xl tracking-tight portal-metal inline-block">
+      <main className="mx-auto grid w-full max-w-[1000px] flex-1 grid-cols-1 gap-10 px-5 py-10 sm:px-8 sm:py-14 md:grid-cols-2 md:gap-14 lg:px-10 lg:py-20">
+        <section className="min-w-0">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.24em] portal-gold sm:text-[11px] sm:tracking-[0.28em]">
+            The product
+          </p>
+          <h1 className="portal-metal inline-block font-heading text-2xl tracking-tight sm:text-3xl lg:text-4xl">
             {pricing?.product?.name ?? "Commercial Growth System"}
           </h1>
           {pricing?.product?.tagline && (
-            <p className="mt-6 text-sm leading-relaxed portal-muted">{pricing.product.tagline}</p>
+            <p className="mt-5 text-sm leading-relaxed portal-muted">{pricing.product.tagline}</p>
           )}
-          <div className="mt-12 border-t portal-line pt-8">
+
+          <div className="mt-8 border-t portal-line pt-7 sm:mt-10 sm:pt-8">
             {benefit && pricing && (
-              <div className="mb-8 space-y-2 text-[13px]">
-                <div className="flex items-baseline justify-between">
+              <div className="mb-6 space-y-2 text-[13px]">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <span className="portal-muted">Subtotal</span>
-                  <span>{pricing.display.formatted}</span>
+                  <span className="tabular-nums">{pricing.display.formatted}</span>
                 </div>
-                <div className="flex items-baseline justify-between">
-                  <span className="portal-muted">Referral benefit · {benefit.code}</span>
-                  <span className="portal-gold">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <span className="min-w-0 break-words portal-muted">
+                    Referral benefit · {benefit.code}
+                  </span>
+                  <span className="portal-gold tabular-nums">
                     {benefit.formatted ? `- ${benefit.formatted}` : `- $${benefit.discount_usd}`}
                   </span>
                 </div>
               </div>
             )}
-            <p className="text-[11px] tracking-[0.2em] uppercase portal-muted mb-3">Total today</p>
-            <p className="font-heading text-4xl tracking-tight">
+
+            <p className="mb-3 text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]">
+              Total today
+            </p>
+            <p className="font-heading text-[clamp(1.9rem,9vw,2.5rem)] leading-none tracking-tight tabular-nums break-words">
               {pricing ? formatTotal(pricing) : "\u2014"}
             </p>
 
             {pricing?.conversion_unavailable && (
-              <p role="status" className="mt-3 text-[12px] portal-muted">
+              <p role="status" className="mt-3 text-[12px] leading-relaxed portal-muted">
                 Live conversion is temporarily unavailable, so the base price is shown.
               </p>
             )}
             {pricing && !pricing.conversion_unavailable && pricing.display.currency !== "INR" && (
-              <p className="mt-3 text-[12px] portal-muted">
-                Billed as the local equivalent of ₹{pricing.base.amount.toLocaleString("en-IN")} at live rates.
+              <p className="mt-3 text-[12px] leading-relaxed portal-muted">
+                Billed as the local equivalent of ₹{pricing.base.amount.toLocaleString("en-IN")} at live
+                rates.
               </p>
             )}
 
-            <div className="mt-8">
+            <div className="mt-7 w-full max-w-full">
               <CurrencySelect value={currency} options={options} onChange={chooseCurrency} />
             </div>
 
-            <p className="mt-8 text-[12px] leading-relaxed portal-muted">
-              Lifetime access to the Forge Vault. Account access is delivered to your email the moment payment
-              is verified.
+            <p className="mt-7 text-[12px] leading-relaxed portal-muted">
+              Lifetime access to the Forge Vault, including lifetime updates. Account access is delivered
+              to your email the moment payment is verified.
             </p>
           </div>
         </section>
 
-        <section>
-          <p className="text-[11px] tracking-[0.28em] uppercase portal-gold mb-5">Complete purchase</p>
+        <section className="min-w-0">
+          <p className="mb-4 text-[10px] uppercase tracking-[0.24em] portal-gold sm:text-[11px] sm:tracking-[0.28em]">
+            Complete purchase
+          </p>
           {cancelled && (
-            <p role="status" className="mb-6 text-sm portal-muted">
+            <p role="status" className="mb-5 text-sm portal-muted">
               That payment was cancelled. Nothing was charged.
             </p>
           )}
+
           <form onSubmit={submit} className="space-y-5">
-            <div>
-              <label htmlFor="co-name" className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">Full name</label>
-              <input id="co-name" className="portal-input" value={fullName} onChange={(e) => setFullName(e.target.value)} maxLength={120} required />
-            </div>
-            <div>
-              <label htmlFor="co-email" className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">Email</label>
-              <input id="co-email" type="email" autoComplete="email" className="portal-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
-              <p className="mt-2 text-[11px] portal-muted">Your access is bound to this address.</p>
+            <div className="min-w-0">
+              <label
+                htmlFor="co-name"
+                className="mb-2 block text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]"
+              >
+                Full name
+              </label>
+              <input
+                id="co-name"
+                className="portal-input"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                maxLength={120}
+                autoComplete="name"
+                required
+              />
             </div>
 
-            {referral && (
-              <div className="pt-2">
-                <label htmlFor="co-aff" className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-2">
-                  Affiliate code <span aria-hidden="true">*</span>
-                </label>
-                <div className="flex gap-3">
-                  <input
-                    id="co-aff"
-                    className="portal-input flex-1"
-                    value={benefit ? benefit.code : affiliateCode}
-                    onChange={(e) => {
-                      setAffiliateCode(e.target.value.toUpperCase());
-                      setBenefit(null);
-                      setCodeError(null);
-                    }}
-                    maxLength={24}
-                    autoComplete="off"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={applyCode}
-                    disabled={applying || !affiliateCode.trim() || Boolean(benefit)}
-                    className="portal-btn whitespace-nowrap"
-                  >
-                    {applying ? "Checking" : benefit ? "Applied" : "Apply code"}
-                  </button>
-                </div>
-                {benefit ? (
-                  <p role="status" className="mt-2 text-[11px] portal-gold">
-                    {benefit.code} verified. Referral benefit applied.
-                  </p>
-                ) : (
-                  <p className="mt-2 text-[11px] portal-muted">
-                    This offer was reached through a partner referral. Enter the matching code to continue.
-                  </p>
-                )}
-                {codeError && (
-                  <p role="alert" className="mt-2 text-[12px] text-red-400">
-                    {codeError}
-                  </p>
-                )}
+            <div className="min-w-0">
+              <label
+                htmlFor="co-email"
+                className="mb-2 block text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]"
+              >
+                Email
+              </label>
+              <input
+                id="co-email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                className="portal-input"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setBenefit(null);
+                }}
+                required
+              />
+              <p className="mt-2 text-[11px] leading-relaxed portal-muted">
+                Your access is bound to this address.
+              </p>
+            </div>
+
+            <div className="min-w-0 pt-1">
+              <label
+                htmlFor="co-aff"
+                className="mb-2 block text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]"
+              >
+                Affiliate code <span className="normal-case tracking-normal">(optional)</span>
+              </label>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  id="co-aff"
+                  className="portal-input min-w-0 sm:flex-1"
+                  value={benefit ? benefit.code : affiliateCode}
+                  onChange={(e) => {
+                    setAffiliateCode(e.target.value.toUpperCase().slice(0, 24));
+                    setBenefit(null);
+                    setCodeError(null);
+                  }}
+                  maxLength={24}
+                  autoComplete="off"
+                  autoCapitalize="characters"
+                  spellCheck={false}
+                />
+                <button
+                  type="button"
+                  onClick={applyCode}
+                  disabled={applying || Boolean(benefit) || !canApply}
+                  className="portal-btn w-full whitespace-nowrap sm:w-auto"
+                >
+                  {applying ? "Checking" : benefit ? "Applied" : "Apply code"}
+                </button>
               </div>
-            )}
+              {benefit ? (
+                <p role="status" className="mt-2 text-[11px] leading-relaxed portal-gold">
+                  {benefit.code} verified. Referral benefit applied.
+                </p>
+              ) : (
+                <p className="mt-2 text-[11px] leading-relaxed portal-muted">
+                  {referral
+                    ? "You reached this offer through a partner. Apply the code to claim your benefit, or continue without it."
+                    : "Have a partner code? Apply it to claim a benefit. It is not required to purchase."}
+                </p>
+              )}
+              {codeError && (
+                <p role="alert" className="mt-2 text-[12px] leading-relaxed text-red-400">
+                  {codeError}
+                </p>
+              )}
+            </div>
 
-
-            <fieldset className="pt-2">
-              <legend className="block text-[11px] tracking-[0.2em] uppercase portal-muted mb-3">Payment method</legend>
+            <fieldset className="min-w-0 pt-1">
+              <legend className="mb-3 block text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]">
+                Payment method
+              </legend>
               <div className="grid gap-3">
-                {([
-                  { id: "paypal", label: "PayPal or card" },
-                  { id: "nowpayments", label: "Cryptocurrency" },
-                ] as const).map((opt) => (
+                {(
+                  [
+                    { id: "paypal", label: "PayPal or card" },
+                    { id: "nowpayments", label: "Cryptocurrency" },
+                  ] as const
+                ).map((opt) => (
                   <label
                     key={opt.id}
-                    className={`flex items-center gap-3 border px-4 py-3 cursor-pointer transition-colors ${
+                    className={`flex min-w-0 cursor-pointer items-center gap-3 border px-4 py-3 transition-colors ${
                       provider === opt.id ? "portal-line portal-gold" : "portal-line portal-muted"
                     }`}
                   >
@@ -316,20 +372,27 @@ const Checkout = () => {
                       onChange={() => setProvider(opt.id)}
                       className="accent-current"
                     />
-                    <span className="text-[12px] tracking-[0.16em] uppercase">{opt.label}</span>
+                    <span className="text-[11px] uppercase tracking-[0.14em] sm:text-[12px] sm:tracking-[0.16em]">
+                      {opt.label}
+                    </span>
                   </label>
                 ))}
               </div>
             </fieldset>
 
-            {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
+            {error && (
+              <p role="alert" className="text-sm leading-relaxed text-red-400">
+                {error}
+              </p>
+            )}
 
-            <button type="submit" disabled={busy || blocked} className="portal-btn portal-btn--solid w-full">
-              {busy ? "Starting secure session" : blocked ? "Apply affiliate code to continue" : "Proceed to payment"}
+            <button type="submit" disabled={busy} className="portal-btn portal-btn--solid w-full">
+              {busy ? "Starting secure session" : "Proceed to payment"}
             </button>
 
             <p className="text-[11px] leading-relaxed portal-muted">
-              Payment is processed by PayPal or NOWPayments. BitwellForge never stores card or wallet details.
+              Payment is processed by PayPal or NOWPayments. BitwellForge never stores card or wallet
+              details.
             </p>
           </form>
         </section>
