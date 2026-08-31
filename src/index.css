@@ -895,7 +895,34 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
   --vault-ink: 43 30% 93%;
 }
 /* Light-mode private environments keep the same gold accent. */
-html:not(.dark) .portal { --portal-gold: 39 44% 47%; }
+/* Light-mode private environments: warm white ground, near-black ink, gold. */
+html:not(.dark) .portal {
+  --portal-gold: 39 44% 47%;
+  --portal-ink: 43 30% 97%;
+  --portal-surface: 43 24% 94%;
+  --portal-text: 0 0% 8%;
+  --portal-muted: 0 0% 38%;
+  --portal-line: 0 0% 10% / 0.14;
+  --primary-foreground: 43 30% 97%;
+  --accent-foreground: 43 30% 97%;
+}
+html:not(.dark) .portal .portal-input { background: hsl(0 0% 100% / 0.7); }
+html:not(.dark) .portal .portal-glass {
+  background: linear-gradient(180deg, hsl(0 0% 100% / 0.8), hsl(0 0% 100% / 0.45));
+  box-shadow: 0 24px 60px -34px hsl(0 0% 0% / 0.28);
+}
+html:not(.dark) .portal .portal-btn--solid { color: hsl(43 30% 97%); }
+html:not(.dark) .portal .portal-metal {
+  background-image: linear-gradient(
+    100deg,
+    hsl(var(--portal-gold) / 0.85) 0%,
+    hsl(var(--portal-gold)) 38%,
+    hsl(36 30% 30%) 52%,
+    hsl(var(--portal-gold)) 66%,
+    hsl(var(--portal-gold) / 0.85) 100%
+  );
+}
+
 
 /* The Vault environment: gold, black and white only. */
 .vault-env {
