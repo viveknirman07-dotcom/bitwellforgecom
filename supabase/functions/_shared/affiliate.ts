@@ -20,11 +20,12 @@ export async function resolveAffiliateByCode(code: string) {
 export const COMMISSION_USD = 50
 
 /**
- * Buyer benefit granted when a referred visitor validates the matching
- * affiliate code. $10 is an absolute ceiling enforced server-side; every
- * discount in the system passes through capDiscountUsd().
+ * Buyer benefit granted through affiliate attribution. The value is decided
+ * randomly, server-side, once per customer, between $1 and $10 USD. $10 is an
+ * absolute ceiling: every discount in the system passes through
+ * capDiscountUsd().
  */
-export const AFFILIATE_DISCOUNT_USD = 10
+export const MIN_AFFILIATE_DISCOUNT_USD = 1
 export const MAX_AFFILIATE_DISCOUNT_USD = 10
 
 export function capDiscountUsd(value: number): number {
@@ -33,69 +34,165 @@ export function capDiscountUsd(value: number): number {
   return Math.min(MAX_AFFILIATE_DISCOUNT_USD, Math.round(n * 100) / 100)
 }
 
+/** Cryptographically random whole-dollar benefit in [1, 10]. */
+export function rollDiscountUsd(): number {
+  const span = MAX_AFFILIATE_DISCOUNT_USD - MIN_AFFILIATE_DISCOUNT_USD + 1
+  const buf = crypto.getRandomValues(new Uint32Array(1))[0]
+  return capDiscountUsd(MIN_AFFILIATE_DISCOUNT_USD + (buf % span))
+}
+
 export interface AttributionResult {
   ok: boolean
-  code?: 'referral_inactive' | 'code_required' | 'code_invalid' | 'code_mismatch' | 'self_referral'
+  code?: 'code_invalid' | 'code_mismatch' | 'self_referral'
   message?: string
   affiliate?: { id: string; code: string; email: string | null; user_id: string }
   discount_usd?: number
+  /** True when the benefit came from a pre-existing permanent binding. */
+  persisted?: boolean
 }
 
 /**
  * The single authority on affiliate attribution.
  *
- * Both the referral code carried by the link AND the code typed at checkout are
- * resolved independently against the database and must point at the same active
- * affiliate row before any benefit or commission eligibility exists.
+ * Rules:
+ *  - An affiliate code is OPTIONAL. A purchase with neither a referral link
+ *    nor a typed code is an ordinary direct sale.
+ *  - A referral link alone is sufficient attribution.
+ *  - A typed code alone is sufficient attribution.
+ *  - When both are present they must resolve to the same active affiliate.
+ *  - Once a customer email is bound to an affiliate, that binding is
+ *    permanent. Later purchases by the same customer stay attributed even if
+ *    they arrive directly, and a different link can never steal them.
+ *  - The discount is rolled once, stored with the binding, and reused for
+ *    every subsequent qualifying purchase. The client can never influence it.
  */
 export async function verifyAttribution(
   refCode: string | null | undefined,
   enteredCode: string | null | undefined,
   buyerEmail?: string | null,
+  options: { persist?: boolean } = {},
 ): Promise<AttributionResult> {
+  const persist = options.persist !== false
   const ref = (refCode ?? '').trim()
-  if (!ref) return { ok: true, discount_usd: 0 }
-
-  const referred = await resolveAffiliateByCode(ref)
-  // A stale or unknown referral never blocks a purchase: it degrades to a
-  // plain direct sale with no benefit and no attribution.
-  if (!referred || referred.status !== 'active') {
-    return { ok: false, code: 'referral_inactive', message: 'This referral link is no longer active.' }
-  }
-
   const entered = (enteredCode ?? '').trim()
-  if (!entered) {
-    return { ok: false, code: 'code_required', message: 'An affiliate code is required to complete this purchase.' }
+  const email = String(buyerEmail ?? '').trim().toLowerCase()
+
+  // A permanent binding always wins over whatever the current visit carries.
+  const existing = email ? await getAttribution(email) : null
+
+  let candidate: Awaited<ReturnType<typeof resolveAffiliateByCode>> = null
+
+  if (entered) {
+    const typed = await resolveAffiliateByCode(entered)
+    if (!typed || typed.status !== 'active') {
+      return { ok: false, code: 'code_invalid', message: 'That affiliate code is not valid.' }
+    }
+    candidate = typed
   }
 
-  const typed = await resolveAffiliateByCode(entered)
-  if (!typed || typed.status !== 'active') {
-    return { ok: false, code: 'code_invalid', message: 'That affiliate code is not valid.' }
-  }
-  if (typed.id !== referred.id) {
-    return {
-      ok: false,
-      code: 'code_mismatch',
-      message: 'This affiliate code does not match the referral link used to access this offer.',
+  if (ref) {
+    const referred = await resolveAffiliateByCode(ref)
+    // A stale link never blocks a purchase; it simply carries no attribution.
+    if (referred && referred.status === 'active') {
+      if (candidate && candidate.id !== referred.id) {
+        return {
+          ok: false,
+          code: 'code_mismatch',
+          message: 'This affiliate code does not match the referral link used to reach this offer.',
+        }
+      }
+      candidate = candidate ?? referred
     }
   }
 
-  const email = String(buyerEmail ?? '').toLowerCase()
-  if (email && String(referred.email ?? '').toLowerCase() === email) {
+  const affiliate = existing?.affiliate ?? candidate
+  if (!affiliate) return { ok: true, discount_usd: 0 }
+
+  if (email && String(affiliate.email ?? '').toLowerCase() === email) {
     return { ok: false, code: 'self_referral', message: 'An affiliate cannot use their own referral code.' }
+  }
+
+  if (existing) {
+    return {
+      ok: true,
+      persisted: true,
+      affiliate: {
+        id: existing.affiliate.id,
+        code: existing.affiliate.code,
+        email: existing.affiliate.email,
+        user_id: existing.affiliate.user_id,
+      },
+      discount_usd: capDiscountUsd(existing.discount_usd),
+    }
+  }
+
+  const discount = rollDiscountUsd()
+  if (email && persist) {
+    const stored = await persistAttribution(email, affiliate.id, affiliate.code, discount)
+    return {
+      ok: true,
+      persisted: Boolean(stored?.reused),
+      affiliate: {
+        id: affiliate.id,
+        code: affiliate.code,
+        email: affiliate.email,
+        user_id: affiliate.user_id,
+      },
+      discount_usd: capDiscountUsd(stored?.discount_usd ?? discount),
+    }
   }
 
   return {
     ok: true,
     affiliate: {
-      id: referred.id,
-      code: referred.code,
-      email: referred.email,
-      user_id: referred.user_id,
+      id: affiliate.id,
+      code: affiliate.code,
+      email: affiliate.email,
+      user_id: affiliate.user_id,
     },
-    discount_usd: capDiscountUsd(AFFILIATE_DISCOUNT_USD),
+    discount_usd: discount,
   }
 }
+
+/** Reads the permanent affiliate binding for a customer email, if any. */
+export async function getAttribution(email: string) {
+  const lower = email.trim().toLowerCase()
+  if (!lower) return null
+  const { data } = await admin()
+    .from('affiliate_attributions')
+    .select('id, affiliate_id, code, discount_usd, affiliates!inner(id, user_id, code, email, status)')
+    .ilike('email', lower)
+    .maybeSingle()
+  if (!data) return null
+  const affiliate = (data as { affiliates: { id: string; user_id: string; code: string; email: string | null; status: string } }).affiliates
+  if (!affiliate || affiliate.status !== 'active') return null
+  return { discount_usd: Number(data.discount_usd ?? 0), affiliate }
+}
+
+/**
+ * Writes the permanent binding. A unique index on lower(email) makes this
+ * first-writer-wins: a concurrent or later attempt reads back the original.
+ */
+async function persistAttribution(
+  email: string,
+  affiliateId: string,
+  code: string,
+  discountUsd: number,
+) {
+  const db = admin()
+  const { error } = await db.from('affiliate_attributions').insert({
+    email: email.toLowerCase(),
+    affiliate_id: affiliateId,
+    code,
+    discount_usd: discountUsd,
+  })
+  if (!error) return { discount_usd: discountUsd, reused: false }
+
+  const existing = await getAttribution(email)
+  if (existing) return { discount_usd: existing.discount_usd, reused: true }
+  return { discount_usd: discountUsd, reused: false }
+}
+
 
 
 /**
