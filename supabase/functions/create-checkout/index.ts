@@ -66,9 +66,10 @@ Deno.serve(async (req) => {
     const { email, full_name, provider, currency, pay_currency, ref, affiliate_code } = parsed.data
 
     /*
-     * Attribution authority. When a referral code is present the buyer MUST
-     * supply the matching affiliate code; the server resolves both sides
-     * independently. Any failure blocks the checkout entirely.
+     * Attribution authority. The affiliate code is optional; a referral link,
+     * a typed code, or a permanent binding already held against this customer
+     * email are each sufficient. Both sides are resolved server-side and must
+     * agree when both are present. The benefit is never client-supplied.
      */
     const attribution = await verifyAttribution(ref, affiliate_code, email)
     if (!attribution.ok) {
@@ -77,6 +78,7 @@ Deno.serve(async (req) => {
     const attributed = attribution.affiliate ?? null
     // Cap is applied again here: the client can never influence the value.
     const discountUsd = attributed ? capDiscountUsd(attribution.discount_usd ?? 0) : 0
+
 
 
     const { data: product } = await db
