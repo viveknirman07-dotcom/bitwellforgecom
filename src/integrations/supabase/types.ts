@@ -41,6 +41,47 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_attributions: {
+        Row: {
+          affiliate_id: string
+          code: string
+          created_at: string
+          discount_usd: number
+          email: string
+          id: string
+          source: string
+          user_id: string | null
+        }
+        Insert: {
+          affiliate_id: string
+          code: string
+          created_at?: string
+          discount_usd: number
+          email: string
+          id?: string
+          source?: string
+          user_id?: string | null
+        }
+        Update: {
+          affiliate_id?: string
+          code?: string
+          created_at?: string
+          discount_usd?: number
+          email?: string
+          id?: string
+          source?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_attributions_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       affiliate_resource_access: {
         Row: {
           access_type: string
