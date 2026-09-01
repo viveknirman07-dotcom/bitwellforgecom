@@ -9,6 +9,49 @@ import { readingTime } from "@/lib/insights";
 
 export const articles = [
   {
+    slug: "the-trust-window-why-speed-to-decision-defines-modern-b2b-sales",
+    title: "The Trust Window: Why Speed to Decision Defines Modern B2B Sales",
+    excerpt:
+      "Between the moment a buyer shows intent and the moment that intent cools sits a narrow window. The businesses that close consistently are engineered to move inside it. The rest are still assembling a response.",
+    category: "Revenue Infrastructure",
+    date: "Sep 2026",
+    content: `
+Every serious buying decision has a lifespan. It begins the moment a buyer recognises a problem clearly enough to act on it, and it ends when that urgency is absorbed back into the noise of a working week. Between those two points sits a narrow span of time where trust, relevance, and momentum align. That span is the trust window, and the architecture of a commercial system determines whether a business can operate inside it.
+
+**The Anatomy of the Window**
+
+The trust window is not a metaphor for urgency tactics. It is a structural property of how decisions are made. When a buyer reaches out, three conditions are simultaneously true. The problem is visible and named. The buyer has permission, implicit or explicit, to explore a solution. The alternatives have not yet crowded in. Each of these conditions decays on its own schedule, and none of them wait for a proposal that takes nine days to assemble.
+
+Most businesses experience this decay as a mystery. The conversation was strong. The fit was obvious. Then the buyer went quiet. What actually happened is rarely a rejection. It is an expiry. The window closed while the response was still being prepared, and a closed window is almost impossible to reopen from the outside.
+
+**Where Systems Lose the Window**
+
+The loss almost never happens in the conversation. It happens in the gaps around it. The enquiry that sits unanswered for a day because ownership was unclear. The proposal that waits on a custom deck because no standard structure exists. The follow up that depends on one person remembering to send it. Each gap is small. Their sum is longer than the window, and so the deal does not die in a single moment. It dissolves across a sequence of small delays that no one was measuring.
+
+This is why speed to decision is an architectural property rather than a personal virtue. A fast team inside a slow system produces slow outcomes. The system sets the floor, and effort can only ever raise performance toward the ceiling the design allows.
+
+**Designing for the Window**
+
+Closing the gap between intent and response is an engineering exercise, and the levers are well understood.
+
+Ownership must be assigned before the enquiry arrives, not negotiated after it. Response paths must be standardised so that the first reply is a decision of minutes rather than a project of hours. The proposal must exist as a structure that gets populated, not a document that gets created. Qualification must happen early enough that effort concentrates on buyers inside the window rather than being spread evenly across everyone who once expressed interest.
+
+None of these require more people. They require that the path from first contact to clear next step was designed in advance, measured honestly, and shortened deliberately.
+
+**The Compounding Effect**
+
+Businesses that operate inside the trust window do not merely close more of the same deals. The entire economics of their pipeline changes. Conversion rates rise because conversations happen while intent is warm. Cycle times shorten because momentum is never allowed to reset. Forecasting becomes reliable because outcomes stop depending on whether a particular week was calm enough to allow follow up.
+
+The compounding runs in the other direction too. Every deal lost to expiry teaches the market something. Referrals weaken. The brand of responsiveness erodes. The pipeline fills with conversations that were real opportunities two weeks before anyone acted on them.
+
+**The Reflection**
+
+The question worth asking is not how to persuade buyers to wait longer. It is how the current architecture performs against the window that actually exists. Measure the time from first signal to first substantive response, from response to proposal, and from proposal to decision. Compare those numbers against the pace at which buyer intent decays in your market, not against the pace your process finds comfortable.
+
+The businesses that win the next era of B2B sales will not be the ones with the most persuasive decks. They will be the ones whose infrastructure was built to move at the speed trust expires. Everything else is negotiation with a clock that is not listening.
+    `,
+  },
+  {
     slug: "pipeline-capacity-is-a-design-decision-not-a-headcount-problem",
     title: "Pipeline Capacity Is a Design Decision, Not a Headcount Problem",
     excerpt:
