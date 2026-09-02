@@ -59,7 +59,7 @@ const Contact = () => {
       `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nInterested In: ${form.service}\nCurrent Challenge: ${form.challenge}`
     );
 
-    window.location.href = `mailto:v@bitwellforge.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:bitwellforge@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -86,7 +86,7 @@ const Contact = () => {
                 <div className="space-y-5">
                   <div>
                     <h3 className="text-[13px] font-semibold text-foreground mb-1">Email</h3>
-                    <a href="mailto:v@bitwellforge.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-300">v@bitwellforge.com</a>
+                    <a href="mailto:bitwellforge@gmail.com" className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-300">bitwellforge@gmail.com</a>
                   </div>
                   <div>
                     <h3 className="text-[13px] font-semibold text-foreground mb-1">Response Time</h3>
