@@ -293,39 +293,6 @@ export type Database = {
           },
         ]
       }
-      contact_submissions: {
-        Row: {
-          challenge: string
-          company: string | null
-          created_at: string
-          email: string
-          id: string
-          name: string
-          service: string
-          status: string
-        }
-        Insert: {
-          challenge: string
-          company?: string | null
-          created_at?: string
-          email: string
-          id?: string
-          name: string
-          service: string
-          status?: string
-        }
-        Update: {
-          challenge?: string
-          company?: string | null
-          created_at?: string
-          email?: string
-          id?: string
-          name?: string
-          service?: string
-          status?: string
-        }
-        Relationships: []
-      }
       document_sections: {
         Row: {
           created_at: string

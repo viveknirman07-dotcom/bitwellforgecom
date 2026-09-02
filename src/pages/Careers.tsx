@@ -625,7 +625,7 @@ const ApplicationForm = ({
       `Please attach the resume file manually before sending.`,
     ].join("\n");
 
-    const url = `mailto:bitwellforge@gmail.com?subject=${encodeURIComponent(
+    const url = `mailto:v@bitwellforge.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 
@@ -915,10 +915,10 @@ const BlockedView = ({ job, onBack }: { job: Job; onBack: () => void }) => {
           <p>
             If you believe this is an error, please contact{" "}
             <a
-              href="mailto:bitwellforge@gmail.com"
+              href="mailto:v@bitwellforge.com"
               className="text-foreground underline underline-offset-4"
             >
-              bitwellforge@gmail.com
+              v@bitwellforge.com
             </a>
             .
           </p>
