@@ -300,9 +300,13 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          ip_address: string | null
+          kind: string
           name: string
+          phone: string | null
           service: string
           status: string
+          updated_at: string
         }
         Insert: {
           challenge: string
@@ -310,9 +314,13 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
+          ip_address?: string | null
+          kind?: string
           name: string
+          phone?: string | null
           service: string
           status?: string
+          updated_at?: string
         }
         Update: {
           challenge?: string
@@ -320,9 +328,13 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
+          ip_address?: string | null
+          kind?: string
           name?: string
+          phone?: string | null
           service?: string
           status?: string
+          updated_at?: string
         }
         Relationships: []
       }
