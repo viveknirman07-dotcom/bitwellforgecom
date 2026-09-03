@@ -114,16 +114,11 @@ const Contact = () => {
                     </div>
                     <div>
                       <h2 className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground mb-2">Phone</h2>
-                      <a
-                        href="tel:+919999999999"
-                        className="text-[15px] text-foreground hover:opacity-70 transition-opacity duration-300"
-                      >
-                        +91 99999 99999
-                      </a>
-                      <p className="mt-1 text-[13px] text-muted-foreground">
-                        Weekdays, 10:00 to 18:00 IST
+                      <p className="text-[15px] text-muted-foreground max-w-[34ch] leading-relaxed">
+                        Leave a number in the form and we will call you back within one working day.
                       </p>
                     </div>
+
                     <div>
                       <h2 className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground mb-2">Response time</h2>
                       <p className="text-[15px] text-muted-foreground">Within one working day</p>
