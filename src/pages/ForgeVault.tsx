@@ -6,6 +6,8 @@ import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from 
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 import VaultStage from "@/components/vault/VaultStage";
+import EnquiryForm from "@/components/EnquiryForm";
+
 
 interface PricingResponse {
   product: { name: string; tagline?: string; description?: string };
@@ -40,6 +42,47 @@ const CONTENTS = [
     use: "Use these when you need the artefact itself rather than the reasoning behind it.",
   },
 ];
+
+const USAGE = [
+  {
+    title: "Diagnose",
+    body: "Establish where commercial output is actually constrained before changing anything, using the diagnostics in the Blueprint.",
+  },
+  {
+    title: "Install",
+    body: "Work the Operating System phases in sequence, validating each module against your own numbers rather than assumptions.",
+  },
+  {
+    title: "Operate",
+    body: "Run the toolkit assets inside your weekly rhythm so the system keeps producing after the build is finished.",
+  },
+];
+
+const SUITED = [
+  "Agencies, consultants and B2B service businesses past first revenue.",
+  "Operators who intend to build the system themselves rather than outsource it.",
+  "Teams whose growth is limited by structure rather than effort.",
+];
+
+const NOT_SUITED = [
+  "Pre offer businesses with nothing yet proven in market.",
+  "Anyone looking for a single tactic rather than an operating layer.",
+  "Teams unwilling to change how acquisition and delivery are run.",
+];
+
+const INCLUDED = [
+  "Immediate access to the Blueprint, Operating System and Commercial Toolkit.",
+  "Lifetime Updates as the system is revised.",
+  "Private Forge Vault account created on payment verification.",
+];
+
+const BOOKING_TOPICS = [
+  "Whether the system fits my business",
+  "Installing the system with my team",
+  "Diagnosing my current constraint",
+  "Access and billing question",
+];
+
 
 /**
  * Public product page for the Commercial Growth System.
@@ -142,6 +185,45 @@ const ForgeVault = () => {
         </div>
       </section>
 
+      <section className="section-padding pb-20 md:pb-28">
+        <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
+          <Eyebrow>How it is used</Eyebrow>
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
+            {USAGE.map((u, i) => (
+              <div key={u.title}>
+                <p className="font-heading text-sm text-muted-foreground">0{i + 1}</p>
+                <h3 className="font-heading text-xl text-foreground tracking-tight mt-3">{u.title}</h3>
+                <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">{u.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding pb-24 md:pb-32">
+        <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
+          <Eyebrow>Who it is for</Eyebrow>
+          <div className="mt-12 grid gap-12 md:grid-cols-2 max-w-[760px]">
+            <div>
+              <p className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">Suited to</p>
+              <div className="mt-5 space-y-4">
+                {SUITED.map((s) => (
+                  <p key={s} className="text-[15px] leading-relaxed text-foreground/85">{s}</p>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">Not suited to</p>
+              <div className="mt-5 space-y-4">
+                {NOT_SUITED.map((s) => (
+                  <p key={s} className="text-[15px] leading-relaxed text-muted-foreground">{s}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section-padding pb-28 md:pb-40">
         <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
           <Eyebrow>Access</Eyebrow>
@@ -190,6 +272,12 @@ const ForgeVault = () => {
                 </>
               )}
 
+              <div className="mt-10 space-y-3 max-w-[420px]">
+                {INCLUDED.map((inc) => (
+                  <p key={inc} className="text-[14px] leading-relaxed text-foreground/80">{inc}</p>
+                ))}
+              </div>
+
               <div className="mt-10">
                 <Link
                   to="/checkout"
@@ -209,9 +297,37 @@ const ForgeVault = () => {
           </div>
         </div>
       </section>
+
+      <section id="booking" className="section-padding pb-32 md:pb-44 scroll-mt-28">
+        <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
+          <Eyebrow>Speak to us first</Eyebrow>
+          <div className="mt-10 grid gap-12 md:grid-cols-[1fr_1fr] md:gap-16">
+            <div className="max-w-[42ch]">
+              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
+                Book a working session before you buy.
+              </h2>
+              <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
+                If you would rather understand where the system applies to your business before
+                taking access, request a short session. We will look at your current commercial
+                structure and tell you plainly whether the Vault is the right instrument, or whether
+                the constraint calls for something else.
+              </p>
+            </div>
+            <div>
+              <EnquiryForm
+                kind="booking"
+                options={BOOKING_TOPICS}
+                optionLabel="What you want to discuss"
+                submitLabel="Request Session"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
    </VaultStage>
   );
 };
 
 export default ForgeVault;
+
