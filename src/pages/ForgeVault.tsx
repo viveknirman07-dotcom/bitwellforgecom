@@ -41,6 +41,47 @@ const CONTENTS = [
   },
 ];
 
+const USAGE = [
+  {
+    title: "Diagnose",
+    body: "Establish where commercial output is actually constrained before changing anything, using the diagnostics in the Blueprint.",
+  },
+  {
+    title: "Install",
+    body: "Work the Operating System phases in sequence, validating each module against your own numbers rather than assumptions.",
+  },
+  {
+    title: "Operate",
+    body: "Run the toolkit assets inside your weekly rhythm so the system keeps producing after the build is finished.",
+  },
+];
+
+const SUITED = [
+  "Agencies, consultants and B2B service businesses past first revenue.",
+  "Operators who intend to build the system themselves rather than outsource it.",
+  "Teams whose growth is limited by structure rather than effort.",
+];
+
+const NOT_SUITED = [
+  "Pre offer businesses with nothing yet proven in market.",
+  "Anyone looking for a single tactic rather than an operating layer.",
+  "Teams unwilling to change how acquisition and delivery are run.",
+];
+
+const INCLUDED = [
+  "Immediate access to the Blueprint, Operating System and Commercial Toolkit.",
+  "Lifetime Updates as the system is revised.",
+  "Private Forge Vault account created on payment verification.",
+];
+
+const BOOKING_TOPICS = [
+  "Whether the system fits my business",
+  "Installing the system with my team",
+  "Diagnosing my current constraint",
+  "Access and billing question",
+];
+
+
 /**
  * Public product page for the Commercial Growth System.
  * This is the destination for affiliate referral links; nothing on this page
