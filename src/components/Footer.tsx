@@ -35,8 +35,8 @@ const Footer = () => {
           {/* Brand */}
           <motion.div className="md:col-span-5" {...fade(0)}>
             <Link to="/" className="inline-block mb-5">
-              <span className="font-heading text-2xl md:text-3xl font-semibold tracking-tightest text-foreground">
-                Bitwell<span className="text-gold">Forge</span>
+              <span className="font-heading text-2xl md:text-3xl font-semibold tracking-tightest text-white">
+                Bitwell<span className="text-white">Forge</span>
               </span>
             </Link>
             <p className="font-quote italic text-[17px] md:text-lg text-muted-foreground leading-[1.55] max-w-sm mb-8">

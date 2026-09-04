@@ -70,7 +70,7 @@ const services = [
 
 const stats = [
   { value: 11, suffix: "", label: "Qualified calls in 6 weeks", sub: "from a standing start" },
-  { value: 4800, prefix: "$", label: "Closed in 30 days", sub: "with zero paid spend" },
+  { value: 8978, prefix: "$", label: "Closed in 30 days", sub: "with zero paid spend" },
   { value: 3, suffix: "×", label: "Pipeline density", sub: "within 90 days" },
   { value: 14, suffix: " hrs", label: "Reclaimed weekly", sub: "through automation" },
 ];
@@ -272,11 +272,11 @@ const Index = () => {
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-x-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-6 lg:gap-x-10 gap-y-12">
             {stats.map((s, i) => (
               <ScrollReveal key={s.label} delay={i * 120}>
-                <div className="text-center">
-                  <div className="font-heading font-semibold text-gold leading-none text-[44px] md:text-[64px] lg:text-[76px] mb-4 tracking-tightest">
+                <div className="text-center min-w-0">
+                  <div className="font-heading font-semibold text-gold leading-none text-[clamp(2.25rem,10.5vw,2.75rem)] md:text-[64px] lg:text-[76px] mb-4 tracking-tightest whitespace-nowrap">
                     <StatCounter value={s.value} prefix={s.prefix} suffix={s.suffix} />
                   </div>
                   <div className="text-foreground text-[13px] md:text-sm font-medium mb-1">
