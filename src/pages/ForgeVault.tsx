@@ -295,7 +295,10 @@ const ForgeVault = () => {
           </div>
         </div>
       </section>
+
+      <VaultBooking />
     </div>
+
    </VaultStage>
   );
 };
