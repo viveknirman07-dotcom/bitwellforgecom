@@ -6,6 +6,8 @@ import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from 
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 import VaultStage from "@/components/vault/VaultStage";
+import VaultBooking from "@/components/vault/VaultBooking";
+
 
 interface PricingResponse {
   product: { name: string; tagline?: string; description?: string };
