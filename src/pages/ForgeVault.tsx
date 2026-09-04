@@ -41,6 +41,45 @@ const CONTENTS = [
   },
 ];
 
+const AUDIENCE = [
+  {
+    title: "Agencies and studios",
+    body: "Teams delivering client work whose growth depends on the owner personally originating and closing every engagement.",
+  },
+  {
+    title: "Independent consultants",
+    body: "Operators with genuine expertise and inconsistent pipeline, where revenue moves with attention rather than structure.",
+  },
+  {
+    title: "B2B service businesses",
+    body: "Firms past the referral stage that now need a repeatable acquisition and delivery layer rather than more effort.",
+  },
+  {
+    title: "Coaches and advisors",
+    body: "Practitioners pricing on time who want to move toward outcome based positioning without diluting the offer.",
+  },
+];
+
+const STEPS = [
+  {
+    title: "Purchase",
+    body: "A single payment in your local currency. Card, PayPal, and crypto are supported at checkout.",
+  },
+  {
+    title: "Account creation",
+    body: "Your Forge Vault account is issued to the email used at checkout the moment payment clears, and access is licensed to that account.",
+  },
+  {
+    title: "Entry",
+    body: "Sign in to the Vault and open any document through a single use link. The full library is available immediately, in the order you choose.",
+  },
+  {
+    title: "Lifetime updates",
+    body: "Revisions, new modules, and added assets appear in the Vault as they are released, at no further cost.",
+  },
+];
+
+
 /**
  * Public product page for the Commercial Growth System.
  * This is the destination for affiliate referral links; nothing on this page
