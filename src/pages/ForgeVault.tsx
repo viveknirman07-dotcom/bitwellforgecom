@@ -142,6 +142,53 @@ const ForgeVault = () => {
         </div>
       </section>
 
+      <section className="section-padding pb-20 md:pb-28">
+        <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
+          <Eyebrow>Who this is built for</Eyebrow>
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-14">
+            {AUDIENCE.map((a) => (
+              <div key={a.title} className="max-w-[42ch]">
+                <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground tracking-tight">
+                  {a.title}
+                </h3>
+                <p className="mt-4 text-[15.5px] leading-[1.85] font-light text-muted-foreground">
+                  {a.body}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-14 border-l border-border/60 pl-5 sm:pl-7 text-[15px] leading-[1.8] font-light text-muted-foreground max-w-[52ch]">
+            It is not built for businesses looking for a single tactic or a shortcut around
+            positioning, pricing, and delivery.
+          </p>
+        </div>
+      </section>
+
+      <section className="section-padding pb-20 md:pb-28">
+        <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
+          <Eyebrow>How access works</Eyebrow>
+          <div className="mt-12 space-y-12 md:space-y-16">
+            {STEPS.map((s, i) => (
+              <div key={s.title} className="grid gap-3 md:grid-cols-[6rem_1fr] md:gap-10">
+                <p className="text-[11px] tracking-[0.24em] uppercase text-muted-foreground pt-1">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <div className="max-w-[52ch]">
+                  <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground tracking-tight">
+                    {s.title}
+                  </h3>
+                  <p className="mt-4 text-[15.5px] leading-[1.85] font-light text-muted-foreground">
+                    {s.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       <section className="section-padding pb-28 md:pb-40">
         <div className="max-w-[900px] mx-auto border-t border-border pt-14 md:pt-20">
           <Eyebrow>Access</Eyebrow>
