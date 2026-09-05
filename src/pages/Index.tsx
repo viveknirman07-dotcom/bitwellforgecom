@@ -276,7 +276,7 @@ const Index = () => {
             {stats.map((s, i) => (
               <ScrollReveal key={s.label} delay={i * 120}>
                 <div className="text-center min-w-0">
-                  <div className="font-heading font-semibold text-gold leading-none text-[clamp(1.5rem,7.5vw,2.5rem)] md:text-[64px] lg:text-[76px] mb-4 tracking-tightest whitespace-nowrap">
+                  <div className="font-heading font-semibold text-gold leading-none text-[clamp(1.5rem_7.5vw_2.5rem)] md:text-[64px] lg:text-[76px] mb-4 tracking-tightest whitespace-nowrap">
                     <StatCounter value={s.value} prefix={s.prefix} suffix={s.suffix} />
                   </div>
                   <div className="text-foreground text-[13px] md:text-sm font-medium mb-1">
