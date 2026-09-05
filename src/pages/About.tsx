@@ -59,7 +59,7 @@ const About = () => {
     <div className="pt-20">
       <section className="section-padding pt-20 sm:pt-28 lg:pt-40 pb-28 sm:pb-36 lg:pb-52">
         <div className="max-w-[1180px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 sm:gap-y-20 lg:gap-x-20 xl:gap-x-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 sm:gap-y-20 lg:gap-x-20 xl:gap-x-20">
             {/* LEFT: positioning anchor */}
             <div className="lg:col-span-6 xl:col-span-6">
               <div className="lg:sticky lg:top-32">
