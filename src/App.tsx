@@ -20,7 +20,6 @@ import AffiliateProgram from "./pages/AffiliateProgram";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
 import AdminAffiliates from "./pages/AdminAffiliates";
 import Vault from "./pages/Vault";
-import ForgeVault from "./pages/ForgeVault";
 import Checkout from "./pages/Checkout";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import Account from "./pages/Account";
@@ -54,7 +53,6 @@ const App = () => {
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/insights/:slug" element={<InsightArticle />} />
                 <Route path="/careers" element={<Careers />} />
-                <Route path="/forge-vault" element={<ForgeVault />} />
                 <Route path="/affiliate" element={<AffiliateProgram />} />
                 <Route path="/contact" element={<Contact />} />
               </Route>

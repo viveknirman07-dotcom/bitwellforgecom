@@ -84,7 +84,7 @@ const Vault = () => {
             different email address, sign in with that address instead.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
-            <VaultLink to="/forge-vault" className="portal-btn portal-btn--solid">Get access</VaultLink>
+            <VaultLink to="/checkout" className="portal-btn portal-btn--solid">Get access</VaultLink>
           </div>
         </div>
       )}

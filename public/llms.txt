@@ -13,7 +13,6 @@ BitwellForge is a revenue infrastructure consultancy. Engagements begin with an 
 - [Case Studies](/case-studies): Concept studies showing system design and projected outcomes.
 - [Insights](/insights): Strategic intelligence library on growth systems, pipeline design, and positioning.
 - [Careers](/careers): Open roles and the application process.
-- [Forge Vault](/forge-vault): The Commercial Growth System product.
 - [Affiliate Program](/affiliate): Partner and referral program overview.
 - [Contact](/contact): Book an infrastructure audit or open a discovery conversation.
 
