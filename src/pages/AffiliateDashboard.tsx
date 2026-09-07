@@ -169,7 +169,7 @@ const AffiliateDashboard = () => {
     }
   };
 
-  const link = affiliate ? `${window.location.origin}/checkout?ref=${affiliate.code}` : "";
+  const link = affiliate ? `${window.location.origin}/forge-vault?ref=${affiliate.code}` : "";
 
   return (
     <PortalShell eyebrow="Partner portal" title="Affiliate Dashboard">

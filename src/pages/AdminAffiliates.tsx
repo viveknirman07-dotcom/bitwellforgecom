@@ -85,7 +85,7 @@ const AdminAffiliates = () => {
                   <td className="py-4 pr-6">
                     <span className="block">{r.code}</span>
                     <span className="block text-[11px] portal-muted break-all">
-                      /checkout?ref={r.code}
+                      /forge-vault?ref={r.code}
                     </span>
                   </td>
                   <td className="py-4 pr-6">{r.clicks}</td>

@@ -6,7 +6,8 @@ import { captureReferral } from "@/lib/referral";
  * Handles affiliate referral arrivals.
  *
  * A referral link (bitwellforge.com/?ref=CODE) validates the code server-side,
- * stores the attribution locally, then sends the prospect to checkout. The ref parameter is removed from the URL so the visitor
+ * stores the attribution locally, then sends the prospect to the public Forge
+ * Vault product page. The ref parameter is removed from the URL so the visitor
  * sees the ordinary product experience with no sign of the referral.
  */
 const ReferralGate = () => {
@@ -33,7 +34,7 @@ const ReferralGate = () => {
     const rest = params.toString();
 
     // Referred prospects always land on the product page, never affiliate surfaces.
-    const target = "/checkout";
+    const target = "/forge-vault";
     navigate({ pathname: target, search: rest ? `?${rest}` : "" }, { replace: true });
   }, [location.search, navigate]);
 

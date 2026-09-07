@@ -28,6 +28,7 @@ const entries: SitemapEntry[] = [
   { path: "/process", changefreq: "monthly", priority: "0.7" },
   { path: "/insights", changefreq: "weekly", priority: "0.8" },
   { path: "/careers", changefreq: "monthly", priority: "0.6" },
+  { path: "/forge-vault", changefreq: "monthly", priority: "0.7" },
   { path: "/affiliate", changefreq: "monthly", priority: "0.6" },
   { path: "/contact", changefreq: "monthly", priority: "0.7" },
   ...serviceSlugs.map((slug) => ({
