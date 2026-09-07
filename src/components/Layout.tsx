@@ -15,16 +15,11 @@ const Layout = () => {
       <MovingCursor />
       <Header />
       <main className="flex-1">
-        {/* Forge Vault runs its own entry choreography, so the global wipe is skipped there. */}
-        {location.pathname === "/forge-vault" ? (
-          <Outlet />
-        ) : (
-          <AnimatePresence mode="wait">
-            <PageTransition key={location.pathname}>
-              <Outlet />
-            </PageTransition>
-          </AnimatePresence>
-        )}
+        <AnimatePresence mode="wait">
+          <PageTransition key={location.pathname}>
+            <Outlet />
+          </PageTransition>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>
