@@ -478,7 +478,7 @@ const ForgeVault = () => {
           </div>
         </section>
 
-        <section className="section-padding py-20 md:py-28">
+        <section className="section-padding pb-28 pt-20 md:pb-36 md:pt-28">
           <div className="mx-auto max-w-[900px]">
             <Eyebrow>Questions before purchase</Eyebrow>
             <h2 className="mt-7 max-w-[620px] font-heading text-3xl font-semibold tracking-tight text-foreground md:text-5xl">The details, without a sales call.</h2>
