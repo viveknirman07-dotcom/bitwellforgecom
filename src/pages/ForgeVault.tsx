@@ -466,9 +466,6 @@ const ForgeVault = () => {
                 {!loading && !priceUnavailable && pricing && (
                   <div>
                     <p className="mt-4 break-words font-heading text-4xl tracking-tight text-foreground md:text-5xl">{pricing.display.formatted}</p>
-                    {pricing.display.currency !== "INR" && (
-                      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Base price ₹{pricing.base.amount.toLocaleString("en-IN")} INR. You are charged the live amount shown.</p>
-                    )}
                     {pricing.requested_currency_unsupported && (
                       <p role="alert" className="mt-4 text-xs leading-relaxed text-muted-foreground">No live rate is available for {pricing.requested_currency_unsupported}. Showing {pricing.display.currency} instead.</p>
                     )}

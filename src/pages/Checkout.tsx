@@ -4,13 +4,14 @@ import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { getReferral, markReferralValidated } from "@/lib/referral";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
-import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
+import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
 
 interface Pricing {
   product: { name: string; tagline?: string; description?: string };
   display: { currency: string; amount: number; formatted: string };
   base: { currency: string; amount: number };
   currencies?: CurrencyOption[];
+  suggested_currency?: string;
   conversion_unavailable?: boolean;
 }
 
@@ -50,7 +51,21 @@ const Checkout = () => {
     let cancelledReq = false;
     supabase.functions
       .invoke(`pricing?currency=${encodeURIComponent(currency)}`, { method: "GET" })
-      .then(({ data }) => !cancelledReq && setPricing(data ?? null))
+      .then(({ data }) => {
+        if (cancelledReq) return;
+        const response = (data as Pricing | null) ?? null;
+        // The visitor's own country sets the default until they choose otherwise.
+        if (
+          response &&
+          !hasExplicitCurrency() &&
+          response.suggested_currency &&
+          response.suggested_currency !== currency
+        ) {
+          setCurrencyState(response.suggested_currency);
+          return;
+        }
+        setPricing(response);
+      })
       .catch(() => !cancelledReq && setPricing(null));
     return () => {
       cancelledReq = true;

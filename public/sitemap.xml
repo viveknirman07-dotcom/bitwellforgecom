@@ -171,6 +171,16 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.bitwellforge.com/insights/the-cost-of-an-undecided-offer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.bitwellforge.com/insights/retention-is-an-operational-outcome</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.bitwellforge.com/insights/the-trust-window-why-speed-to-decision-defines-modern-b2b-sales</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -28,9 +28,10 @@ Deno.serve(async (req) => {
 
     const country = await resolveCountry(req, ip)
 
-    // USD is the documented default. Geo only supplies a hint the client may use.
+    // The visitor's own country decides the default. An explicit ?currency wins.
+    const geoCurrency = COUNTRY_CURRENCY[country] ?? 'USD'
     const currency =
-      forced && /^[A-Z]{3}$/.test(forced) ? forced : 'USD'
+      forced && /^[A-Z]{3}$/.test(forced) ? forced : geoCurrency
 
     const amountInr = Number(product.price_inr)
 
