@@ -9,6 +9,80 @@ import { readingTime } from "@/lib/insights";
 
 export const articles = [
   {
+    slug: "the-cost-of-an-undecided-offer",
+    title: "The Cost of an Undecided Offer",
+    excerpt:
+      "An offer that has not been decided forces every buyer to do the deciding for you. The price of that unfinished work is paid in longer cycles, weaker margin, and delivery that never settles.",
+    category: "Commercial Strategy",
+    date: "Sep 2026",
+    content: `
+Most businesses believe they have an offer. What they usually have is a range of possibilities described in a way that sounds accommodating. The scope adjusts, the outcome is framed loosely, the price responds to the room. From the inside this feels like flexibility. From the outside it reads as a business that has not yet decided what it does, and that leaves the deciding to the buyer.
+
+**Where the Cost Appears First**
+
+An undecided offer does not announce itself. It surfaces as a lengthening sales cycle, because every conversation has to rebuild the same definition from scratch. It surfaces as discounting, because a proposition without fixed edges has no defensible floor. It surfaces as delivery drift, because the team is interpreting a promise that was never written precisely enough to be interpreted the same way twice.
+
+Each of these is treated as its own problem. A sales problem, a pricing problem, a delivery problem. They are one problem observed at three points in the system.
+
+**Why Flexibility Feels Safer**
+
+Deciding an offer means excluding buyers. That exclusion is immediate, visible, and uncomfortable, while the cost of remaining undecided is spread thinly across months and attributed to market conditions. The asymmetry is what keeps most offers unfinished. The discomfort of narrowing arrives all at once. The penalty for staying broad arrives quietly and never sends an invoice.
+
+**What a Decided Offer Contains**
+
+A decided offer names the specific situation it is built for and, by implication, the situations it is not. It states the outcome in language the buyer would use to describe success themselves. It fixes the boundary of what is included, so that the delivery team and the buyer hold the same picture on day one. It carries a price that reflects the value of the outcome rather than the hours the work happens to consume.
+
+None of this makes the business rigid. It makes the business legible, and legibility is what allows a buyer to move quickly.
+
+**The Second Order Effect**
+
+Once the offer is decided, the rest of the commercial system becomes buildable. Marketing has a claim worth repeating. Qualification has a standard to test against. Proposals become populated structures instead of original documents. Delivery gains a definition of done. Pricing gains a reason. Every one of these depends on a decision that was postponed because postponement felt safer than commitment.
+
+**The Reflection**
+
+Read your own offer as a stranger would and ask a single question. Could a qualified buyer determine, without a call, whether this is for them and roughly what it costs. If the answer is no, the buyer is being asked to perform work the business avoided, and most of them will simply decline the task.
+
+The businesses that scale cleanly are not the ones that can serve everyone. They are the ones that finished deciding early enough for everything downstream to be built on solid ground.
+    `,
+  },
+  {
+    slug: "retention-is-an-operational-outcome",
+    title: "Retention Is an Operational Outcome, Not a Relationship Skill",
+    excerpt:
+      "Clients rarely leave because the relationship failed. They leave because the operating rhythm stopped making progress visible, and silence eventually looks like stagnation.",
+    category: "Growth Operations",
+    date: "Sep 2026",
+    content: `
+When a client leaves, the explanation offered internally is usually personal. The relationship cooled. The contact changed. The chemistry was never quite right. These accounts are comforting because they place the cause outside the system. They are also, in most cases, inaccurate. Retention is produced by an operating rhythm, and when that rhythm is absent the relationship is left to carry weight it was never designed to hold.
+
+**What the Client Is Actually Measuring**
+
+A client is not continuously evaluating whether they like working with you. They are periodically evaluating whether the engagement is still moving something that matters. That evaluation happens in short bursts, usually at renewal, budget review, or the arrival of a new decision maker. In those moments the client reaches for evidence, and what they find is whatever the operating rhythm has made visible.
+
+If the rhythm produced a clear record of decisions made, work completed, and movement against a stated objective, the evaluation is short. If it produced a series of pleasant conversations and a folder of deliverables with no narrative, the client must reconstruct the value themselves. Reconstruction under time pressure rarely favours continuation.
+
+**Where the Rhythm Breaks**
+
+The break is almost always gradual. Early in an engagement the cadence is tight because the work is new and the attention is high. As delivery becomes routine, the reporting thins, the check ins become reactive, and progress stops being narrated. Nothing has gone wrong operationally. The work may be excellent. But excellence that is not made legible is indistinguishable from drift when viewed from the client's side of the table.
+
+The second break is ownership. When no one holds the account rhythm explicitly, it defaults to whoever happens to be closest to the current task. That is a fragile arrangement, and it fails precisely when the team is busiest, which is also when the client is most likely to feel deprioritised.
+
+**Designing Retention In**
+
+A retention rhythm has four properties. It is scheduled rather than triggered by concern. It is owned by a named person rather than the team collectively. It reports against the objective the engagement was sold on rather than the tasks completed this month. And it surfaces the next decision the client needs to make, so the relationship always has forward motion attached to it.
+
+This is unglamorous infrastructure. It is also the difference between an engagement that renews by default and one that must be resold every cycle.
+
+**The Economic Weight**
+
+The commercial case is straightforward. Extending average engagement length changes acquisition economics more reliably than improving conversion, because retained revenue arrives without new acquisition cost. A business that retains well can afford to acquire patiently. A business that does not is permanently dependent on the top of its funnel, and that dependency dictates every other decision it makes.
+
+**The Reflection**
+
+Look at the last three clients who left and ask what the final ninety days of rhythm looked like. Not the relationship, the rhythm. In most cases the cadence had already lapsed well before the decision was made, and the departure was a formality confirming something the operating system had stopped preventing months earlier.
+    `,
+  },
+  {
     slug: "the-trust-window-why-speed-to-decision-defines-modern-b2b-sales",
     title: "The Trust Window: Why Speed to Decision Defines Modern B2B Sales",
     excerpt:
