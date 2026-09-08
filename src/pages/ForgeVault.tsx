@@ -494,16 +494,6 @@ const ForgeVault = () => {
             </div>
           </div>
         </section>
-
-        <section className="section-padding pb-32 pt-20 md:pb-40 md:pt-28">
-          <div className="mx-auto max-w-[900px] border-t border-border pt-14 text-center md:pt-20">
-            <Eyebrow>Forge Vault</Eyebrow>
-            <h2 className="mx-auto mt-7 max-w-[760px] text-balance font-heading text-4xl font-semibold tracking-tight text-foreground md:text-6xl">Better commercial decisions begin with better context.</h2>
-            <p className="mx-auto mt-7 max-w-[600px] text-base font-light leading-[1.85] text-muted-foreground">Explore the system. Understand the mechanics. Build from there.</p>
-            <p className="mt-9 font-heading text-3xl text-foreground">₹14,500</p>
-            <PurchaseLink className="mt-7 w-full max-w-[360px]" />
-          </div>
-        </section>
       </main>
     </VaultStage>
   );
