@@ -2,6 +2,8 @@ import { admin, logActivity } from './db.ts'
 import { recordCommission } from './affiliate.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
+const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
+const FROM_EMAIL = Deno.env.get('FROM_EMAIL') ?? 'BitwellForge <v@bitwellforge.com>'
 
 async function logEmail(
   recipient: string,
@@ -15,6 +17,67 @@ async function logEmail(
     .from('email_logs')
     .insert({ recipient, template, subject, status, error: error ?? null, metadata })
 }
+
+/**
+ * Sends a transactional email when a delivery key is configured.
+ * Without a key the event is still recorded so nothing is silently lost.
+ */
+async function sendEmail(
+  recipient: string,
+  template: string,
+  subject: string,
+  html: string,
+  metadata: Record<string, unknown> = {},
+) {
+  if (!RESEND_API_KEY) {
+    await logEmail(recipient, template, subject, 'skipped', 'No email delivery key configured', metadata)
+    return
+  }
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ from: FROM_EMAIL, to: [recipient], subject, html }),
+    })
+    const body = await res.text()
+    await logEmail(recipient, template, subject, res.ok ? 'sent' : 'failed', res.ok ? undefined : body, metadata)
+  } catch (e) {
+    await logEmail(recipient, template, subject, 'failed', String(e), metadata)
+  }
+}
+
+function confirmationHtml(opts: {
+  name: string | null
+  currency: string
+  amount: string
+  orderId: string
+}) {
+  return `
+  <div style="font-family:Georgia,'Times New Roman',serif;background:#0b0d10;color:#f4f1ea;padding:40px">
+    <div style="max-width:560px;margin:0 auto">
+      <p style="letter-spacing:.28em;text-transform:uppercase;font-size:11px;color:#c9a227;margin:0 0 18px">Access granted</p>
+      <h1 style="font-size:26px;margin:0 0 24px;font-weight:600">Your Forge Vault purchase is confirmed</h1>
+      <p style="font-size:15px;line-height:1.8;color:#cfcbc2;margin:0 0 18px">
+        ${opts.name ? `${opts.name}, thank` : 'Thank'} you. Your payment of
+        <strong style="color:#f4f1ea">${opts.currency} ${opts.amount}</strong> has been verified and lifetime
+        access to the Forge Vault has been issued to this email address.
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#cfcbc2;margin:0 0 28px">
+        If this is your first purchase, use the password link sent separately to set a password, then sign in.
+      </p>
+      <p style="margin:0 0 32px">
+        <a href="${SITE_URL}/vault" style="display:inline-block;background:#c9a227;color:#0b0d10;text-decoration:none;padding:14px 22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Open the Forge Vault</a>
+      </p>
+      <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6f6a61;margin:0">
+        Order reference ${opts.orderId.slice(0, 8)}
+      </p>
+    </div>
+  </div>`
+}
+
 
 /**
  * Ensures an auth user exists for the buyer.
