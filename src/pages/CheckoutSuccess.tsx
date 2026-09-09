@@ -79,9 +79,25 @@ const CheckoutSuccess = () => {
 
             {paid && (
               <>
+                <dl className="grid grid-cols-1 gap-6 border-y portal-line py-8 sm:grid-cols-3">
+                  <div>
+                    <dt className="text-[11px] uppercase tracking-[0.2em]">Amount paid</dt>
+                    <dd className="mt-2 font-heading text-xl text-foreground">
+                      {state?.currency ?? ""} {state?.amount ?? ""}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] uppercase tracking-[0.2em]">Currency</dt>
+                    <dd className="mt-2 font-heading text-xl text-foreground">{state?.currency ?? "—"}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] uppercase tracking-[0.2em]">Access</dt>
+                    <dd className="mt-2 font-heading text-xl text-foreground">Lifetime</dd>
+                  </div>
+                </dl>
                 <p>
-                  Payment verified{state?.amount ? ` (${state.currency} ${state.amount})` : ""}. Lifetime access
-                  to the Forge Vault has been issued to {state?.email_masked ?? "your email address"}.
+                  Lifetime access to the Forge Vault has been issued to {state?.email_masked ?? "your email address"},
+                  and a confirmation email with these details is on its way to the same address.
                 </p>
                 <p>
                   First time here? Use the password reset link sent to your inbox to set a password, then sign
@@ -93,6 +109,7 @@ const CheckoutSuccess = () => {
                 </div>
               </>
             )}
+
 
             {orderId && (
               <p className="pt-6 text-[11px] tracking-[0.18em] uppercase">

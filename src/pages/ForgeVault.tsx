@@ -78,6 +78,26 @@ const PREVIEWS = [
   },
 ];
 
+const PHASES = [
+  ["Phase 01", "Commercial diagnosis", ["Revenue constraint mapping", "Demand and delivery audit", "Capacity and margin reading", "Baseline scorecard"]],
+  ["Phase 02", "Positioning and selection", ["Defensible market definition", "Client selection criteria", "Positioning statement build", "Disqualification rules"]],
+  ["Phase 03", "Offer engineering", ["Outcome architecture", "Scope and boundary design", "Pricing logic", "Offer validation checklist"]],
+  ["Phase 04", "Acquisition", ["Channel selection decision tree", "Outreach rhythm design", "Message construction", "Weekly activity tracker"]],
+  ["Phase 05", "Pipeline architecture", ["Stage definitions", "Qualification standard", "Forecast model", "Pipeline review protocol"]],
+  ["Phase 06", "Consultative sales", ["Discovery structure", "Diagnostic questioning", "Proposal construction", "Decision follow through"]],
+  ["Phase 07", "Client delivery", ["Onboarding sequence", "Delivery standard", "Reporting cadence", "Renewal and expansion review"]],
+  ["Phase 08", "Operations and leverage", ["Repeatable work mapping", "Automation decisions", "Role and handover design", "Operating review rhythm"]],
+] as const;
+
+const TOOLKIT_GROUPS = [
+  ["Strategy", 8, ["Commercial diagnostic worksheet", "Constraint isolation map", "Quarterly direction sheet"]],
+  ["Positioning", 7, ["Market definition canvas", "Client selection scorecard", "Positioning validation sheet"]],
+  ["Acquisition", 8, ["Outreach cadence planner", "Message library", "Channel performance tracker"]],
+  ["Pipeline", 7, ["Pipeline stage tracker", "Qualification scorecard", "Forecast worksheet"]],
+  ["Client delivery", 7, ["Onboarding checklist", "Delivery status report", "Renewal review sheet"]],
+  ["Operations", 7, ["Repeatable work inventory", "Automation decision tree", "Handover template"]],
+] as const;
+
 const REASONING = [
   "Commercial problem",
   "Diagnosis",
@@ -87,6 +107,7 @@ const REASONING = [
   "Sequence",
   "Execution",
 ];
+
 
 const WORK_EXAMPLES = [
   {
