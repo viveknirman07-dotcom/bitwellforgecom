@@ -183,15 +183,24 @@ export async function fulfillOrder(orderId: string) {
       .update({ status: 'paid', paid_at: new Date().toISOString() })
       .eq('id', order.id)
 
-    await logEmail(order.email, 'purchase_confirmation', 'Your purchase is confirmed', 'sent', undefined, {
-      order_id: order.id,
-      amount_inr: order.amount_inr,
-      display_currency: order.display_currency,
-      display_amount: order.display_amount,
-    })
-    await logEmail(order.email, 'welcome', 'Welcome to Forge Vault™', 'sent', undefined, {
-      order_id: order.id,
-    })
+    await sendEmail(
+      order.email,
+      'purchase_confirmation',
+      'Your Forge Vault purchase is confirmed',
+      confirmationHtml({
+        name: order.full_name,
+        currency: String(order.display_currency ?? 'INR'),
+        amount: String(order.display_amount ?? order.amount_inr),
+        orderId: order.id,
+      }),
+      {
+        order_id: order.id,
+        amount_inr: order.amount_inr,
+        display_currency: order.display_currency,
+        display_amount: order.display_amount,
+      },
+    )
+
   }
 
   // Affiliate attribution. Unique on order_id, so retries never double-pay.
