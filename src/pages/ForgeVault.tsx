@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
 import { Button } from "@/components/ui/button";
-import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
+import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 import VaultStage from "@/components/vault/VaultStage";
