@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
 import { Button } from "@/components/ui/button";
-import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
+import { DEFAULT_CURRENCY, getCurrency, setCurrency } from "@/lib/currency";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 import VaultStage from "@/components/vault/VaultStage";
@@ -167,7 +167,7 @@ const FAQS = [
   ["Do I need to complete the modules in order?", "The full library is available immediately. The Operating System is intentionally sequenced because later decisions often depend on earlier ones, while the Blueprint and Toolkit can also be consulted as references."],
   ["Is implementation or support included?", "The purchase provides self directed access to the Forge Vault. Personal consulting, done for you implementation and custom advisory work are not included."],
   ["Can I inspect the product before purchasing?", "Yes. The genuine product views on this page show the Vault environment, the Blueprint contents, the Operating System structure and the Commercial Toolkit organisation without exposing the complete paid material."],
-  ["Is the ₹14,500 price one time or recurring?", "It is a one time purchase for lifetime access under the current offer terms. There is no recurring subscription shown for this product."],
+  ["Is the price one time or recurring?", "It is a one time purchase for lifetime access under the current offer terms, shown in USD by default with other currencies available. There is no recurring subscription shown for this product."],
 ];
 
 const PurchaseLink = ({ className = "" }: { className?: string }) => (
@@ -186,7 +186,7 @@ const ForgeVault = () => {
   useSEO({
     title: "Forge Vault Commercial Growth System | BitwellForge",
     description:
-      "Explore Forge Vault: BitwellForge commercial reasoning, a 31 module operating system and 44 commercial toolkit assets. Lifetime access for ₹14,500.",
+      "Explore Forge Vault: BitwellForge commercial reasoning, a 31 module operating system and 44 commercial toolkit assets. Lifetime access through a one time purchase.",
     canonicalPath: "/forge-vault",
   });
 
@@ -202,16 +202,8 @@ const ForgeVault = () => {
           setFailed(true);
           return;
         }
-        const response = data as PricingResponse;
-        if (
-          !hasExplicitCurrency() &&
-          response.suggested_currency &&
-          response.suggested_currency !== currency
-        ) {
-          setCurrencyState(response.suggested_currency);
-          return;
-        }
-        setPricing(response);
+        // Forge Vault always defaults to USD; the visitor can still switch currency manually.
+        setPricing(data as PricingResponse);
       })
       .catch(() => !cancelled && setFailed(true))
       .finally(() => !cancelled && setLoading(false));
@@ -250,7 +242,7 @@ const ForgeVault = () => {
               </div>
               <div className="border-t border-border pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                 <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">One time access</p>
-                <p className="mt-3 font-heading text-4xl tracking-tight text-foreground">₹14,500</p>
+                <p className="mt-3 font-heading text-4xl tracking-tight text-foreground">{pricing?.display.formatted ?? "USD"}</p>
                 <PurchaseLink className="mt-7 w-full" />
               </div>
             </div>
@@ -477,7 +469,7 @@ const ForgeVault = () => {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">One time purchase</p>
-                {loading && <p className="mt-4 font-heading text-4xl text-muted-foreground">₹14,500</p>}
+                {loading && <p className="mt-4 font-heading text-4xl text-muted-foreground">…</p>}
                 {!loading && priceUnavailable && (
                   <div role="status">
                     <p className="mt-4 font-heading text-4xl tracking-tight text-foreground">₹14,500 INR</p>
