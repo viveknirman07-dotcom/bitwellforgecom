@@ -105,13 +105,13 @@ export const ArchitectVisual = () => {
       {/* modules resolving into place */}
       {modules.map((m, i) => (
         <g key={i}>
-          <rect x={m.x - 10} y={m.y - 8} width="20" height="16" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.55" opacity="0.85">
+          <rect x={m.x - 17} y={m.y - 7} width="34" height="14" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.55" opacity="0.85">
             <animate attributeName="opacity" values="0;0.9;0.9" keyTimes="0;0.5;1" dur="8s" begin={`${1 + i * 0.4}s`} repeatCount="indefinite" />
           </rect>
-          <circle cx={m.x} cy={m.y - 2} r="1.3" fill="currentColor" />
-          <text x={m.x} y={m.y + 4} textAnchor="middle" fontSize="3.6" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.65" letterSpacing="0.6">{m.label}</text>
+          <text x={m.x} y={m.y + 1.4} textAnchor="middle" fontSize="3.8" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.7" letterSpacing="0.6">{m.label}</text>
         </g>
       ))}
+
       {/* dimension lines */}
       <line x1="30" y1="18" x2="210" y2="18" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
       <line x1="30" y1="16" x2="30" y2="20" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
