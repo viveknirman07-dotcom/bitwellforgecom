@@ -133,7 +133,7 @@ const Process = () => {
                 </div>
                 <div className="lg:col-span-6">
                   <div
-                    className="diagram-frame aspect-[4/3] md:aspect-[5/3]"
+                    className="diagram-frame aspect-[3/2]"
                     style={{ color: "var(--svg-stroke)" }}
                   >
                     <div className="diagram-grid" />

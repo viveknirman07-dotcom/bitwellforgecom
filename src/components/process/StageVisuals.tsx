@@ -4,20 +4,8 @@
  * Mode-adaptive via --svg-* and currentColor.
  */
 
-const VB = "0 0 240 160";
-const frame = "w-full h-full";
+import { VB, FRAME as frame, Grid } from "@/components/diagrams/kit";
 
-/* Shared grid backdrop */
-const Grid = ({ w = 240, h = 160 }: { w?: number; h?: number }) => (
-  <g opacity="0.16">
-    {Array.from({ length: Math.floor(w / 12) }).map((_, i) => (
-      <line key={`gx${i}`} x1={i * 12} y1={0} x2={i * 12} y2={h} stroke="currentColor" strokeWidth="0.15" />
-    ))}
-    {Array.from({ length: Math.floor(h / 12) }).map((_, i) => (
-      <line key={`gy${i}`} x1={0} y1={i * 12} x2={w} y2={i * 12} stroke="currentColor" strokeWidth="0.15" />
-    ))}
-  </g>
-);
 
 /* ─────────── 01 Diagnose — scan surface, discovered anomalies, annotation lines ─────────── */
 export const DiagnoseVisual = () => {
