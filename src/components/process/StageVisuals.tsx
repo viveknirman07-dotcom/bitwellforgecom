@@ -78,11 +78,10 @@ export const ArchitectVisual = () => {
     { x: 150, y: 110, label: "RETAIN" },
   ];
   const paths = [
-    "M 60 50 L 150 50",
-    "M 150 50 L 150 110",
-    "M 150 110 L 60 110",
-    "M 60 110 L 60 50",
-    "M 60 50 L 150 110",
+    "M 77 50 L 133 50",
+    "M 150 57 L 150 103",
+    "M 133 110 L 77 110",
+    "M 60 103 L 60 57",
   ];
   return (
     <svg viewBox={VB} className={frame} aria-hidden>
@@ -118,7 +117,7 @@ export const ArchitectVisual = () => {
       <line x1="210" y1="16" x2="210" y2="20" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
       {/* traveling architect signal */}
       <circle r="1.5" fill="currentColor">
-        <animateMotion dur="6s" repeatCount="indefinite" begin="3s" path="M 60 50 L 150 50 L 150 110 L 60 110 Z" />
+        <animateMotion dur="6s" repeatCount="indefinite" begin="3s" path="M 77 50 L 133 50 L 150 67 L 150 103 L 133 110 L 77 110 L 60 103 L 60 57 Z" />
         <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="3s" />
       </circle>
     </svg>
