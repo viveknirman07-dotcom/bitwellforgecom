@@ -66,8 +66,8 @@ export const Diagram = ({
 );
 
 type TextProps = {
-  x: number;
-  y: number;
+  x?: number | string;
+  y?: number | string;
   children: string;
   anchor?: "start" | "middle" | "end";
   size?: number;
