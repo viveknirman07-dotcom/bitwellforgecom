@@ -359,6 +359,8 @@ export const CompoundVisual = () => (
     <Grid />
     <line x1="30" y1="140" x2="220" y2="140" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
     <line x1="30" y1="20" x2="30" y2="140" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+    <text x="30" y="14" fontSize="4.2" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.55" letterSpacing="0.7">COMPOUNDING RETURN</text>
+    <text x="220" y="152" textAnchor="end" fontSize="3.8" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.5" letterSpacing="0.7">TIME</text>
     {/* baseline reference */}
     <line x1="30" y1="120" x2="220" y2="120" stroke="currentColor" strokeWidth="0.3" strokeDasharray="2 3" opacity="0.35" />
     {/* compounding curve */}
