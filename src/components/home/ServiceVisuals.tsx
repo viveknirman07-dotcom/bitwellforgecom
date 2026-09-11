@@ -1,247 +1,257 @@
+import { Diagram, Caption, Label, Node, Link, Flow, FIELD, STROKE, TYPE } from "@/components/diagrams/kit";
+
 /**
- * Service section diagrams. Mode-adaptive via --svg-* CSS vars.
- * Uses CSS keyframes (anim-*) so diagrams breathe permanently.
+ * Homepage capability diagrams.
+ * Same geometry, type scale and stroke scale as every other diagram on the site.
  */
 
-/* 4. Lead Generation Node Graph */
+/* ─────────── Demand architecture: scattered channels resolving into one pipeline */
 export const DemandGraph = () => {
-  const nodes = [
-    { id: "li", x: 60, y: 50, label: "LinkedIn" },
-    { id: "em", x: 60, y: 190, label: "Email" },
-    { id: "co", x: 340, y: 50, label: "Content" },
-    { id: "tr", x: 340, y: 190, label: "Triggers" },
+  const hub = { x: 132, y: 84 };
+  const sources = [
+    { x: 40, y: 42, l: "LINKEDIN" },
+    { x: 40, y: 72, l: "EMAIL" },
+    { x: 40, y: 102, l: "CONTENT" },
+    { x: 40, y: 132, l: "TRIGGERS" },
   ];
-  const center = { x: 200, y: 120 };
+  const outs = [58, 84, 110];
 
   return (
-    <svg viewBox="0 0 400 240" className="anim-float w-full h-full" aria-hidden>
-      {/* Connector lines */}
-      {nodes.map((n, i) => (
-        <line
-          key={`l-${n.id}`}
-          x1={n.x}
-          y1={n.y}
-          x2={center.x}
-          y2={center.y}
-          className="svg-accent anim-line"
-          strokeWidth="0.9"
-          strokeDasharray="6 6"
-          style={{ animationDelay: `${i * 0.6}s` }}
-        />
-      ))}
+    <Diagram>
+      <Caption>DEMAND ARCHITECTURE</Caption>
 
-      {/* Outer nodes */}
-      {nodes.map((n, i) => (
-        <g key={n.id}>
-          <circle
-            cx={n.x}
-            cy={n.y}
-            r="7"
-            className="svg-fill anim-node"
-            strokeWidth="1"
-            style={{ animationDelay: `${i * 0.4}s` }}
-          />
-          <text
-            x={n.x}
-            y={n.y - 14}
-            textAnchor="middle"
-            fontSize="10"
-            className="svg-text"
-          >
-            {n.label}
-          </text>
+      {sources.map((s, i) => (
+        <g key={s.l}>
+          <Label x={s.x - 6} y={s.y + 1.4} anchor="end" size={TYPE.micro} opacity={0.55}>
+            {s.l}
+          </Label>
+          <circle cx={s.x} cy={s.y} r="1.8" fill="currentColor" opacity="0.8" />
+          <Link d={`M ${s.x} ${s.y} L ${hub.x - 18} ${hub.y}`} />
+          <Flow path={`M ${s.x} ${s.y} L ${hub.x - 18} ${hub.y}`} dur={5.5} begin={i * 0.7} />
         </g>
       ))}
 
-      {/* Central hub */}
-      <circle
-        cx={center.x}
-        cy={center.y}
-        r="18"
-        className="svg-fill anim-glow anim-hub-only"
-        strokeWidth="1.2"
+      {/* qualification core */}
+      <rect
+        x={hub.x - 18}
+        y={hub.y - 18}
+        width="36"
+        height="36"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={STROKE.base}
+        opacity="0.7"
       />
-      <circle cx={center.x} cy={center.y} r="6" className="svg-highlight" />
-      <text
-        x={center.x}
-        y={center.y + 36}
-        textAnchor="middle"
-        fontSize="11"
-        className="svg-text"
-        fontStyle="italic"
-        fontFamily="Playfair Display, serif"
-      >
-        Pipeline
-      </text>
-    </svg>
+      <rect
+        x={hub.x - 11}
+        y={hub.y - 11}
+        width="22"
+        height="22"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={STROKE.thin}
+        opacity="0.45"
+      />
+      <Label x={hub.x} y={hub.y + 1.4} size={TYPE.label} opacity={0.7}>
+        PIPELINE
+      </Label>
+      <circle cx={hub.x} cy={hub.y + 9} r="1.5" fill="currentColor">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2.6s" repeatCount="indefinite" />
+      </circle>
+
+      {/* qualified output */}
+      {outs.map((y, i) => (
+        <g key={y}>
+          <Link d={`M ${hub.x + 18} ${hub.y} L ${FIELD.x2 - 8} ${y}`} opacity={0.5} />
+          <Node x={FIELD.x2 - 8} y={y} r={4} />
+          <Flow path={`M ${hub.x + 18} ${hub.y} L ${FIELD.x2 - 8} ${y}`} dur={4} begin={1 + i * 1.2} />
+        </g>
+      ))}
+      <Label x={FIELD.x2} y={FIELD.y1 + 14} anchor="end" size={TYPE.micro} opacity={0.5}>
+        QUALIFIED
+      </Label>
+    </Diagram>
   );
 };
 
-/* 5. Revenue Funnel — horizontal bars */
+/* ─────────── Revenue funnel: stage widths, conversion read-out */
 export const RevenueFunnel = () => {
   const stages = [
-    { label: "Awareness", w: 360, pct: "100%" },
-    { label: "Engaged",   w: 223, pct: "62%" },
-    { label: "Qualified", w: 122, pct: "34%" },
-    { label: "Proposal",  w:  65, pct: "18%" },
-    { label: "Closed",    w:  32, pct: "9%", glow: true },
+    { l: "AWARENESS", pct: 100 },
+    { l: "ENGAGED", pct: 62 },
+    { l: "QUALIFIED", pct: 34 },
+    { l: "PROPOSAL", pct: 18 },
+    { l: "CLOSED", pct: 9 },
   ];
+  const maxW = 150;
+  const top = 36;
+  const gap = 22;
+
   return (
-    <svg viewBox="0 0 400 260" className="anim-float w-full h-full" aria-hidden>
+    <Diagram>
+      <Caption>CONVERSION ECONOMICS</Caption>
+
       {stages.map((s, i) => {
-        const y = 16 + i * 46;
-        const x = (400 - s.w) / 2;
+        const w = Math.max(12, (s.pct / 100) * maxW);
+        const y = top + i * gap;
+        const x = FIELD.x1 + 44;
         return (
-          <g key={s.label} style={{ transformOrigin: "center" }}>
-            <rect
-              x={x}
-              y={y}
-              width={s.w}
-              height={28}
-              className={`svg-fill ${s.glow ? "anim-glow anim-hub-only" : "anim-node"}`}
-              style={{ animationDelay: `${i * 0.3}s` }}
-              strokeWidth="0.8"
-            />
-            <text
-              x={x + 8}
-              y={y + 18}
-              fontSize="10.5"
-              className="svg-text"
-            >
-              {s.label}
-            </text>
-            <text
-              x={x + s.w + 8}
-              y={y + 18}
-              fontSize="10.5"
-              className="svg-text"
-              fontStyle="italic"
-              fontFamily="Playfair Display, serif"
-            >
-              {s.pct}
-            </text>
+          <g key={s.l}>
+            <Label x={x - 6} y={y + 6} anchor="end" size={TYPE.micro} opacity={0.6}>
+              {s.l}
+            </Label>
+            <rect x={x} y={y} width={maxW} height="9" fill="none" stroke="currentColor" strokeWidth="0.2" opacity="0.25" />
+            <rect x={x} y={y} width={w} height="9" fill="currentColor" opacity={0.14 + i * 0.03} />
+            <rect x={x} y={y} width={w} height="9" fill="none" stroke="currentColor" strokeWidth={STROKE.thin} opacity="0.7" />
+            <Label x={x + maxW + 8} y={y + 6.4} anchor="start" size={TYPE.micro} opacity={0.55}>
+              {`${s.pct}%`}
+            </Label>
+            {i < stages.length - 1 && (
+              <Link d={`M ${x + 4} ${y + 9} L ${x + 4} ${y + gap}`} opacity={0.35} dashed />
+            )}
           </g>
         );
       })}
-    </svg>
+
+      <Flow path={`M ${FIELD.x1 + 48} ${top + 4.5} L ${FIELD.x1 + 48} ${top + 4 * gap + 4.5}`} dur={6} r={1.5} />
+    </Diagram>
   );
 };
 
-/* 6. Positioning Matrix */
+/* ─────────── Positioning: price / differentiation field */
 export const PositioningMatrix = () => {
+  const x0 = FIELD.x1 + 26;
+  const x1 = FIELD.x2 - 6;
+  const y0 = FIELD.y1 + 10;
+  const y1 = FIELD.y2 - 14;
+  const midX = (x0 + x1) / 2;
+  const midY = (y0 + y1) / 2;
+  const you = { x: x1 - 30, y: y0 + 20 };
+
   return (
-    <svg viewBox="0 0 320 240" className="anim-float w-full h-full" aria-hidden>
-      {/* axes */}
-      <line x1="40" y1="20" x2="40" y2="210" className="svg-accent" strokeWidth="0.7" />
-      <line x1="40" y1="210" x2="300" y2="210" className="svg-accent" strokeWidth="0.7" />
+    <Diagram>
+      <Caption>POSITIONING FIELD</Caption>
 
-      {/* quadrant dividers */}
-      <line x1="170" y1="20" x2="170" y2="210" className="svg-secondary" strokeDasharray="2 4" strokeWidth="0.5" />
-      <line x1="40" y1="115" x2="300" y2="115" className="svg-secondary" strokeDasharray="2 4" strokeWidth="0.5" />
+      <Link d={`M ${x0} ${y0} L ${x0} ${y1}`} opacity={0.55} width={STROKE.thin} />
+      <Link d={`M ${x0} ${y1} L ${x1} ${y1}`} opacity={0.55} width={STROKE.thin} />
+      <Link d={`M ${midX} ${y0} L ${midX} ${y1}`} opacity={0.3} dashed />
+      <Link d={`M ${x0} ${midY} L ${x1} ${midY}`} opacity={0.3} dashed />
 
-      {/* axis labels */}
-      <text x="22" y="22" fontSize="9" className="svg-text">High</text>
-      <text x="22" y="212" fontSize="9" className="svg-text">Low</text>
-      <text x="40" y="226" fontSize="9" className="svg-text">Low Price</text>
-      <text x="300" y="226" textAnchor="end" fontSize="9" className="svg-text">High Price</text>
-      <text
-        x="170" y="14"
-        textAnchor="middle"
-        fontSize="10"
-        className="svg-text"
-        fontStyle="italic"
-        fontFamily="Playfair Display, serif"
-      >
-        Differentiation
-      </text>
+      <Label x={x0 - 4} y={y0 + 2} anchor="end" size={TYPE.micro} opacity={0.5}>
+        HIGH
+      </Label>
+      <Label x={x0 - 4} y={y1} anchor="end" size={TYPE.micro} opacity={0.5}>
+        LOW
+      </Label>
+      <Label x={x0} y={y1 + 10} anchor="start" size={TYPE.micro} opacity={0.5}>
+        LOW PRICE
+      </Label>
+      <Label x={x1} y={y1 + 10} anchor="end" size={TYPE.micro} opacity={0.5}>
+        HIGH PRICE
+      </Label>
+      <Label x={x0 - 4} y={midY - 6} anchor="end" size={TYPE.micro} opacity={0.5}>
+        DIFF
+      </Label>
 
-      {/* competitor dots */}
+      {/* undifferentiated cluster */}
       {[
-        [80, 175], [105, 155], [130, 185], [90, 140], [150, 165],
-        [115, 175], [70, 195],
+        [58, 118], [76, 106], [92, 124], [66, 96], [104, 114], [84, 118], [52, 128],
       ].map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="3.2" className="svg-secondary" fill="currentColor" fillOpacity="0.45" />
+        <circle key={i} cx={x} cy={y} r="1.7" fill="currentColor" opacity="0.35">
+          <animate attributeName="opacity" values="0.2;0.45;0.2" dur="4s" begin={`${i * 0.3}s`} repeatCount="indefinite" />
+        </circle>
       ))}
 
-      {/* "You" — orbiting + glowing in top-right */}
-      <g className="anim-orbit" style={{ transformOrigin: "240px 60px" }}>
-        <circle cx="240" cy="60" r="14" className="svg-fill" strokeWidth="0.8" />
-        <circle cx="240" cy="60" r="6" className="svg-highlight anim-glow anim-hub-only" />
-      </g>
-      <text x="258" y="56" fontSize="10" className="svg-text">You</text>
-    </svg>
+      {/* the engineered position */}
+      <circle cx={you.x} cy={you.y} r="9" fill="none" stroke="currentColor" strokeWidth={STROKE.thin} opacity="0.6">
+        <animate attributeName="r" values="9;13;9" dur="3.2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;0;0.6" dur="3.2s" repeatCount="indefinite" />
+      </circle>
+      <Node x={you.x} y={you.y} r={5} />
+      <Label x={you.x + 10} y={you.y + 1.4} anchor="start" size={TYPE.micro} opacity={0.7}>
+        YOUR POSITION
+      </Label>
+      <Link d={`M ${you.x - 5} ${you.y + 5} L 104 114`} opacity={0.3} dashed />
+    </Diagram>
   );
 };
 
-/* 7. AI Workflow */
+/* ─────────── Automation: inputs → routing → running workflows */
 export const AutomationFlow = () => {
-  return (
-    <svg viewBox="0 0 420 240" className="anim-float w-full h-full" aria-hidden>
-      <defs>
-        <marker id="arr-light" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--svg-accent)" />
-        </marker>
-      </defs>
+  const inputs = [46, 68, 90, 112];
+  const router = { x: 108, y: 82 };
+  const flows = [
+    { y: 46, l: "NURTURE" },
+    { y: 74, l: "QUALIFY" },
+    { y: 102, l: "ROUTE" },
+    { y: 130, l: "REPORT" },
+  ];
 
-      {/* Nodes */}
-      {[
-        { x: 20,  y: 106, w: 70, label: "Lead" },
-        { x: 120, y: 106, w: 80, label: "AI Score", glow: true },
-        { x: 240, y: 50,  w: 70, label: "Nurture" },
-        { x: 240, y: 162, w: 80, label: "AI Route", glow: true },
-        { x: 340, y: 106, w: 70, label: "Close" },
-      ].map((b, i) => (
-        <g key={b.label}>
+  return (
+    <Diagram>
+      <Caption>OPERATIONAL LEVERAGE</Caption>
+
+      <Label x={FIELD.x1} y={FIELD.y1 + 12} anchor="start" size={TYPE.micro} opacity={0.5}>
+        INPUTS
+      </Label>
+      {inputs.map((y, i) => (
+        <g key={y}>
           <rect
-            x={b.x}
-            y={b.y}
-            width={b.w}
-            height={28}
-            className={`svg-fill ${b.glow ? "anim-glow anim-hub-only" : "anim-node"}`}
-            style={{ animationDelay: `${i * 0.4}s` }}
-            strokeWidth="0.8"
+            x={FIELD.x1}
+            y={y - 2.5}
+            width="13"
+            height="5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={STROKE.thin}
+            opacity="0.65"
           />
-          <text
-            x={b.x + b.w / 2}
-            y={b.y + 18}
-            fontSize="10"
-            textAnchor="middle"
-            className="svg-text"
-          >
-            {b.label}
-          </text>
+          <Link d={`M ${FIELD.x1 + 13} ${y} L ${router.x - 16} ${router.y}`} />
+          <Flow path={`M ${FIELD.x1 + 13} ${y} L ${router.x - 16} ${router.y}`} dur={5} begin={i * 0.6} r={1.2} />
         </g>
       ))}
 
-      {/* Diamond decision split */}
-      <g className="anim-node" style={{ transformOrigin: "215px 120px" }}>
-        <polygon
-          points="215,104 230,120 215,136 200,120"
-          className="svg-fill"
-          strokeWidth="0.8"
-        />
-      </g>
+      <polygon
+        points={`${router.x},${router.y - 16} ${router.x + 16},${router.y} ${router.x},${router.y + 16} ${router.x - 16},${router.y}`}
+        fill="hsl(var(--background))"
+        stroke="currentColor"
+        strokeWidth={STROKE.base}
+        opacity="0.8"
+      />
+      <Label x={router.x} y={router.y + 1.4} size={TYPE.micro} opacity={0.75}>
+        ROUTE
+      </Label>
 
-      {/* Connector arrows */}
-      {[
-        { d: "M 90 120 L 118 120",            i: 0 },
-        { d: "M 200 120 L 215 120",           i: 1 },
-        { d: "M 215 104 L 215 80 L 240 64",   i: 2 },
-        { d: "M 215 136 L 215 160 L 240 176", i: 3 },
-        { d: "M 310 64 L 340 110",            i: 4 },
-        { d: "M 320 176 L 340 130",           i: 5 },
-      ].map((c) => (
-        <path
-          key={c.i}
-          d={c.d}
-          className="svg-accent anim-line"
-          strokeWidth="0.9"
-          strokeDasharray="5 5"
-          markerEnd="url(#arr-light)"
-          style={{ animationDelay: `${c.i * 0.6}s` }}
-          fill="none"
-        />
+      {flows.map((f, i) => (
+        <g key={f.l}>
+          <Link d={`M ${router.x + 16} ${router.y} L 156 ${f.y}`} opacity={0.45} />
+          <rect
+            x="156"
+            y={f.y - 6}
+            width={FIELD.x2 - 156}
+            height="12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={STROKE.thin}
+            opacity="0.7"
+          />
+          <Label x="160" y={f.y + 1.4} anchor="start" size={TYPE.micro} opacity={0.6}>
+            {f.l}
+          </Label>
+          <rect x={FIELD.x2 - 22} y={f.y - 1} width="16" height="2" fill="currentColor" opacity="0.2" />
+          <rect x={FIELD.x2 - 22} y={f.y - 1} width="0" height="2" fill="currentColor" opacity="0.8">
+            <animate
+              attributeName="width"
+              values="0;16;16;0"
+              keyTimes="0;0.4;0.85;1"
+              dur="6s"
+              begin={`${i * 1.2}s`}
+              repeatCount="indefinite"
+            />
+          </rect>
+          <Flow path={`M ${router.x + 16} ${router.y} L 156 ${f.y}`} dur={4} begin={1.5 + i} />
+        </g>
       ))}
-    </svg>
+    </Diagram>
   );
 };

@@ -22,10 +22,10 @@ const ProblemCard = ({ title, description, diagram, delay = 0 }: Props) => {
 
         {/* Borderless diagram surface */}
         <div
-          className="diagram-frame aspect-[4/3] md:aspect-[5/3] mt-auto transition-opacity duration-500 group-hover:opacity-100 opacity-90"
+          className="diagram-frame aspect-[3/2] mt-auto transition-opacity duration-500 group-hover:opacity-100 opacity-90"
           style={{ color: "var(--svg-stroke)" }}
         >
-          <div className="relative w-full h-full flex items-center justify-center p-3">
+          <div className="relative w-full h-full flex items-center justify-center p-4 md:p-6">
             {diagram}
           </div>
         </div>

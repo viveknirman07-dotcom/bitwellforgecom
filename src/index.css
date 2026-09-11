@@ -613,12 +613,17 @@ html:not(.dark) .text-gold { color: hsl(var(--foreground)); }
   overflow: hidden;
   border-radius: 0;
 }
-.diagram-frame > svg {
+.diagram-frame svg {
   width: 100%;
   height: 100%;
   display: block;
   color: var(--svg-stroke); /* currentColor fallback */
 }
+/* Travelling signals inside diagrams are decorative only. */
+@media (prefers-reduced-motion: reduce) {
+  .diagram-motion { display: none; }
+}
+
 .diagram-frame .diagram-grid {
   position: absolute;
   inset: 0;

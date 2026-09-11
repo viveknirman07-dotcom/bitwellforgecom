@@ -4,20 +4,8 @@
  * Mode-adaptive via --svg-* and currentColor.
  */
 
-const VB = "0 0 240 160";
-const frame = "w-full h-full";
+import { VB, FRAME as frame, Grid } from "@/components/diagrams/kit";
 
-/* Shared grid backdrop */
-const Grid = ({ w = 240, h = 160 }: { w?: number; h?: number }) => (
-  <g opacity="0.16">
-    {Array.from({ length: Math.floor(w / 12) }).map((_, i) => (
-      <line key={`gx${i}`} x1={i * 12} y1={0} x2={i * 12} y2={h} stroke="currentColor" strokeWidth="0.15" />
-    ))}
-    {Array.from({ length: Math.floor(h / 12) }).map((_, i) => (
-      <line key={`gy${i}`} x1={0} y1={i * 12} x2={w} y2={i * 12} stroke="currentColor" strokeWidth="0.15" />
-    ))}
-  </g>
-);
 
 /* ─────────── 01 Diagnose — scan surface, discovered anomalies, annotation lines ─────────── */
 export const DiagnoseVisual = () => {
@@ -90,11 +78,10 @@ export const ArchitectVisual = () => {
     { x: 150, y: 110, label: "RETAIN" },
   ];
   const paths = [
-    "M 60 50 L 150 50",
-    "M 150 50 L 150 110",
-    "M 150 110 L 60 110",
-    "M 60 110 L 60 50",
-    "M 60 50 L 150 110",
+    "M 77 50 L 133 50",
+    "M 150 57 L 150 103",
+    "M 133 110 L 77 110",
+    "M 60 103 L 60 57",
   ];
   return (
     <svg viewBox={VB} className={frame} aria-hidden>
@@ -117,20 +104,20 @@ export const ArchitectVisual = () => {
       {/* modules resolving into place */}
       {modules.map((m, i) => (
         <g key={i}>
-          <rect x={m.x - 10} y={m.y - 8} width="20" height="16" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.55" opacity="0.85">
+          <rect x={m.x - 17} y={m.y - 7} width="34" height="14" fill="hsl(var(--background))" stroke="currentColor" strokeWidth="0.55" opacity="0.85">
             <animate attributeName="opacity" values="0;0.9;0.9" keyTimes="0;0.5;1" dur="8s" begin={`${1 + i * 0.4}s`} repeatCount="indefinite" />
           </rect>
-          <circle cx={m.x} cy={m.y - 2} r="1.3" fill="currentColor" />
-          <text x={m.x} y={m.y + 4} textAnchor="middle" fontSize="3.6" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.65" letterSpacing="0.6">{m.label}</text>
+          <text x={m.x} y={m.y + 1.4} textAnchor="middle" fontSize="3.8" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.7" letterSpacing="0.6">{m.label}</text>
         </g>
       ))}
+
       {/* dimension lines */}
       <line x1="30" y1="18" x2="210" y2="18" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
       <line x1="30" y1="16" x2="30" y2="20" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
       <line x1="210" y1="16" x2="210" y2="20" stroke="currentColor" strokeWidth="0.3" opacity="0.35" />
       {/* traveling architect signal */}
       <circle r="1.5" fill="currentColor">
-        <animateMotion dur="6s" repeatCount="indefinite" begin="3s" path="M 60 50 L 150 50 L 150 110 L 60 110 Z" />
+        <animateMotion dur="6s" repeatCount="indefinite" begin="3s" path="M 77 50 L 133 50 L 150 67 L 150 103 L 133 110 L 77 110 L 60 103 L 60 57 Z" />
         <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="3s" />
       </circle>
     </svg>
@@ -371,6 +358,8 @@ export const CompoundVisual = () => (
     <Grid />
     <line x1="30" y1="140" x2="220" y2="140" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
     <line x1="30" y1="20" x2="30" y2="140" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+    <text x="30" y="14" fontSize="4.2" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.55" letterSpacing="0.7">COMPOUNDING RETURN</text>
+    <text x="220" y="152" textAnchor="end" fontSize="3.8" fontFamily="DM Sans, sans-serif" fill="currentColor" opacity="0.5" letterSpacing="0.7">TIME</text>
     {/* baseline reference */}
     <line x1="30" y1="120" x2="220" y2="120" stroke="currentColor" strokeWidth="0.3" strokeDasharray="2 3" opacity="0.35" />
     {/* compounding curve */}
