@@ -149,7 +149,7 @@ const Index = () => {
             >
               What's assembled breaks down.
               <br />
-              <span className="font-quote italic text-foreground/95">What's engineered compounds.</span>
+              <span className="text-foreground/95">What's engineered compounds.</span>
             </motion.h1>
 
             <motion.p
@@ -158,7 +158,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
             >
-              BitwellForge works alongside founders and operators building service-based businesses, designing the commercial infrastructure that sustains growth beyond any single campaign.
+              BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.
             </motion.p>
 
             <motion.div
