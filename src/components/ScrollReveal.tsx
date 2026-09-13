@@ -23,10 +23,25 @@ const ScrollReveal = ({
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => setReduceMotion(mediaQuery.matches);
+    updateMotionPreference();
+    mediaQuery.addEventListener("change", updateMotionPreference);
+
+    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    if (reduceMotion) {
+      setIsVisible(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -56,7 +71,7 @@ const ScrollReveal = ({
       observer.disconnect();
       clearTimeout(timeout);
     };
-  }, [once, delay]);
+  }, [once, delay, reduceMotion]);
 
   // Remove will-change after animation completes
   const handleTransitionEnd = useCallback(() => {
@@ -66,6 +81,13 @@ const ScrollReveal = ({
   }, [isVisible]);
 
   const getStyles = (): React.CSSProperties => {
+    if (reduceMotion) {
+      return {
+        opacity: 1,
+        transform: "none",
+      };
+    }
+
     const base: React.CSSProperties = {
       transitionProperty: "transform, opacity",
       transitionDuration: `${duration}ms`,
