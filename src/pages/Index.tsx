@@ -44,6 +44,7 @@ const services = [
     body:
       "Outbound sequencing, inbound demand capture, and trigger-based nurture designed against your specific sales cycle. ICP definition, channel selection, and message architecture engineered for pipeline density rather than surface reach.",
     visual: <DemandGraph />,
+    href: "/services/lead-generation",
   },
   {
     tag: "High-Ticket Revenue Systems",
@@ -51,6 +52,7 @@ const services = [
     body:
       "A precise commercial offer, a repeatable discovery motion, and the conversion architecture behind it. Scripts, sequencing, objection handling, and CRM logic tuned so revenue behaves predictably instead of episodically.",
     visual: <RevenueFunnel />,
+    href: "/services/sales-systems",
   },
   {
     tag: "Commercial Growth Strategy",
@@ -58,6 +60,7 @@ const services = [
     body:
       "A structured diagnostic that resolves positioning, pricing, and category before any execution begins. Strategy grounds every downstream decision in commercial logic rather than in preference.",
     visual: <PositioningMatrix />,
+    href: "/services/growth-strategy",
   },
   {
     tag: "AI-Powered Revenue Operations",
@@ -65,6 +68,7 @@ const services = [
     body:
       "An operations audit that identifies every workflow suitable for automation, then intelligent execution across scoring, routing, nurture, and reporting. Your team stops touching repeatable tasks and starts owning irreplaceable ones.",
     visual: <AutomationFlow />,
+    href: "/services/ai-automation",
   },
 ];
 
@@ -228,29 +232,38 @@ const Index = () => {
       {/* WHAT WE BUILD */}
       <section className="relative section-padding py-24 md:py-32">
         <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <div className="grid grid-cols-1 gap-8 border-b border-border pb-12 md:pb-16 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
             <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
+              <p className="font-mono text-[9px] uppercase text-[hsl(var(--eyebrow-color))] mb-5">
                 What We Build
               </p>
             </ScrollReveal>
             <ScrollReveal delay={100}>
-              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance mb-6">
+              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[56px] font-medium text-foreground leading-[1.06] text-balance">
                 Four commercial disciplines. One{" "}
-                <span className="font-quote italic text-gold/95">compounding</span> growth engine.
+                <span className="italic text-muted-foreground">compounding</span> growth engine.
               </h2>
             </ScrollReveal>
+            </div>
+            <div className="lg:col-span-4 lg:pl-6">
             <ScrollReveal delay={180}>
-              <p className="text-muted-foreground text-[15px] leading-[1.8] font-light">
+              <p className="text-muted-foreground text-[14px] leading-[1.8] font-light">
                 Acquisition, revenue, positioning, and operations engineered as interlocking layers. Every layer strengthens the next, and value accrues the longer the architecture operates.
               </p>
             </ScrollReveal>
+            </div>
           </div>
 
-          <div>
+          <div className="grid grid-cols-1 border-x border-border md:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
-              <ServiceFeature key={s.tag} index={i} reverse={i % 2 === 1} {...s} />
+              <ServiceFeature key={s.tag} index={i} {...s} />
             ))}
+          </div>
+
+          <div className="flex items-center justify-between border-t border-border pt-5 font-mono text-[8px] uppercase text-muted-foreground/60">
+            <span>Commercial architecture</span>
+            <span>Four interlocking disciplines</span>
           </div>
         </div>
       </section>
