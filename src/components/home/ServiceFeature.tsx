@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 interface Props {
@@ -9,63 +7,42 @@ interface Props {
   title: string;
   body: string;
   visual: ReactNode;
-  href: string;
+  reverse?: boolean;
 }
 
-const ServiceFeature = ({ index, tag, title, body, visual, href }: Props) => {
+const ServiceFeature = ({ index, tag, title, body, visual, reverse }: Props) => {
   const num = String(index + 1).padStart(2, "0");
-
   return (
-    <ScrollReveal
-      variant="fade"
-      delay={index * 70}
-      className="h-full min-w-0 border-b border-border md:[&:nth-child(odd)]:border-r lg:border-r lg:[&:nth-child(4n)]:border-r-0"
-    >
-      <Link
-        to={href}
-        aria-label={`${tag}: ${title}`}
-        className="group relative flex h-full min-h-[560px] flex-col overflow-hidden bg-background p-6 transition-colors duration-500 hover:bg-card/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring sm:p-8 lg:min-h-[620px] lg:p-9"
-      >
-        <div className="flex items-start justify-between gap-4">
-          <span className="font-mono text-[11px] text-muted-foreground/55 transition-colors duration-300 group-hover:text-foreground" aria-hidden="true">
-            /{num}
-          </span>
-          <ArrowUpRight
-            size={16}
-            strokeWidth={1.5}
-            className="text-muted-foreground/60 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-foreground"
-            aria-hidden="true"
-          />
-        </div>
-
-        <div className="mt-9 min-h-[210px] sm:mt-11 lg:min-h-[250px]">
-          <p className="font-mono text-[9px] uppercase leading-[1.65] text-[hsl(var(--eyebrow-color))]">
-            {tag}
-          </p>
-          <h3 className="mt-5 font-heading text-[29px] font-medium leading-[1.08] text-foreground transition-transform duration-500 group-hover:translate-x-1 sm:text-[32px] lg:text-[35px]">
-            {title}
-          </h3>
-        </div>
-
+    <ScrollReveal variant="fade" delay={50}>
+      <div className="relative border-t border-gold/15 py-14 md:py-20">
         <div
-          className="relative my-8 aspect-[3/2] w-full border-y border-border py-3 text-muted-foreground transition-colors duration-500 group-hover:text-foreground"
-          style={{ color: "var(--svg-stroke)" }}
-          aria-hidden="true"
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${
+            reverse ? "lg:[&>*:first-child]:order-2" : ""
+          }`}
         >
-          <div className="flex h-full w-full items-center justify-center transition-transform duration-700 group-hover:scale-[1.025]">
-            {visual}
+          <div className="lg:col-span-6">
+            <div className="flex items-center gap-4 mb-5">
+              <span className="font-quote text-gold text-2xl">{num}</span>
+              <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">
+                {tag}
+              </span>
+            </div>
+            <h3 className="font-heading text-3xl md:text-[40px] lg:text-[44px] font-semibold text-foreground leading-[1.1] mb-6 tracking-tightest">
+              {title}
+            </h3>
+            <p className="text-muted-foreground text-[15px] leading-[1.85] font-light max-w-xl">
+              {body}
+            </p>
+          </div>
+          <div className="lg:col-span-6">
+            <div className="diagram-frame aspect-[3/2]" style={{ color: "var(--svg-stroke)" }}>
+              <div className="relative w-full h-full flex items-center justify-center p-4 md:p-6">
+                {visual}
+              </div>
+            </div>
           </div>
         </div>
-
-        <p className="mt-auto text-[13px] font-light leading-[1.75] text-muted-foreground sm:text-[13.5px]">
-          {body}
-        </p>
-
-        <span className="mt-8 inline-flex items-center gap-3 font-mono text-[9px] uppercase text-foreground">
-          Explore discipline
-          <span className="h-px w-8 origin-left bg-foreground/40 transition-transform duration-500 group-hover:scale-x-150" aria-hidden="true" />
-        </span>
-      </Link>
+      </div>
     </ScrollReveal>
   );
 };
