@@ -1,21 +1,15 @@
-# Forge Vault product portal
+# Forge Vault precision scale adjustment
 
 ## Goal
-Turn the existing buyer-only Vault into a structured working product while preserving secure entitlement checks, expiring document links, download logging, and the current gold, black, and warm-white identity.
+Make only the post-purchase Forge Vault interface appear exactly 8% smaller while preserving its current design, hierarchy, behavior, content, and responsive composition.
 
-## Portal experience
-1. Add a clear library overview showing the Blueprint, 31 Operating System modules, and 44 Commercial Toolkit assets.
-2. Organize the 31 verified modules into their existing eight phases, with phase navigation, module summaries, progress-friendly numbering, and direct access to the Operating System document.
-3. Expand the six existing Toolkit sections into all 44 verified, individually named assets so buyers can inspect exactly what is included and open the secure Toolkit document.
-4. Keep the Blueprint as a reference library with its existing chapters and provide a dedicated access action.
-5. Retain product updates and the existing account-only licensing notice.
-6. Make loading, access-denied, empty-library, and download-error states clear and usable.
+## Changes
+1. Apply a Vault-scoped 0.92 proportional scale to typography, controls, icons, spacing, containers, navigation, and content dimensions.
+2. Preserve the available viewport width so scaling does not create blank side space or horizontal overflow.
+3. Set only the Open document action to a 12px corner radius after scaling.
 
-## Product integrity
-Use only existing database-backed titles, summaries, document metadata, and asset names. Do not invent new modules, assets, files, outcomes, or capabilities. The current entitlement and signed-link system remains authoritative.
-
-## Customer evidence
-Add the testimonial and outcome only after receiving the approved customer name, role, company, exact quote, measurable outcome, and confirmation that it may be published. No placeholder or fabricated endorsement will be shown.
+## Technical details
+Use a Vault-only scale variable and scoped sizing so no public page or affiliate screen changes. Keep all existing breakpoints, colors, motion, and functional code unchanged.
 
 ## Verification
-Check the portal while authenticated as an entitled user, secure document actions, all module and asset counts, keyboard controls, phone and desktop layouts, both themes, and console/network errors.
+Check the authenticated Vault at phone, tablet, and desktop widths for consistent sizing, unchanged composition, correct 12px button corners, and zero horizontal overflow.
