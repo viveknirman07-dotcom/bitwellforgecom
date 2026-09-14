@@ -1,9 +1,13 @@
 import { ReactNode, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { LogOut, Moon, Sun } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Eyebrow from "@/components/Eyebrow";
 import { useAuth } from "@/hooks/use-auth";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 import VaultStage from "@/components/vault/VaultStage";
+import { Button } from "@/components/ui/button";
 
 
 interface Props {
@@ -19,6 +23,7 @@ interface Props {
  */
 const PortalShell = ({ title, eyebrow, variant = "vault", children }: Props) => {
   const { user, signOut } = useAuth();
+  const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
     let el = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
@@ -31,6 +36,34 @@ const PortalShell = ({ title, eyebrow, variant = "vault", children }: Props) => 
     document.title = `${title} — BitwellForge`;
     return () => el?.setAttribute("content", "index, follow");
   }, [title]);
+
+  if (variant === "vault") {
+    return (
+      <VaultStage>
+        <div className="portal vault-workspace-shell font-body min-h-screen">
+          <header className="vault-workspace-header">
+            <Link to="/" className="vault-workspace-brand" aria-label="BitwellForge home">
+              <span>BitwellForge</span>
+              <span aria-hidden="true" className="vault-workspace-brand-mark" />
+              <span>Forge Vault</span>
+            </Link>
+            <div className="vault-workspace-account">
+              {user?.email && <span className="vault-workspace-email">{user.email}</span>}
+              <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme" title="Toggle theme">
+                {isDark ? <Sun /> : <Moon />}
+              </Button>
+              <Button variant="ghost" size="icon" onClick={signOut} aria-label="Sign out" title="Sign out">
+                <LogOut />
+              </Button>
+            </div>
+          </header>
+          <main className="vault-workspace-main" aria-label={title}>
+            {children}
+          </main>
+        </div>
+      </VaultStage>
+    );
+  }
 
   return (
     <VaultStage>

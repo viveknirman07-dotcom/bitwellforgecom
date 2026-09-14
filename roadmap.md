@@ -1,5 +1,5 @@
 ## Vault portal and customer evidence
-- [ ] Organize the purchased Vault into 31 modules and 44 assets
-- [ ] Preserve entitlement checks and secure document access
+- [x] Organize the purchased Vault into 31 modules and 44 assets
+- [x] Preserve entitlement checks and secure document access
 - [ ] Add verified customer testimonial and outcome when supplied
-- [ ] Verify buyer portal across phone and desktop
+- [ ] Verify redesigned buyer portal across phone, tablet and desktop
