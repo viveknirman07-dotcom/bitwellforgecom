@@ -73,6 +73,7 @@ const Vault = () => {
   const [open, setOpen] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [query, setQuery] = useState("");
 
@@ -88,7 +89,10 @@ const Vault = () => {
         setActiveSlug((current) => current ?? nextDocuments[0]?.slug ?? null);
         setUpdates(data?.updates ?? []);
       })
-      .catch(() => setError("The Vault could not be reached. Refresh and try again."))
+      .catch(() => {
+        setLoadError(true);
+        setError("The Vault could not be reached. Refresh and try again.");
+      })
       .finally(() => active && setLoading(false));
     return () => {
       active = false;
@@ -98,14 +102,22 @@ const Vault = () => {
   const openDocument = async (slug: string) => {
     setBusy(slug);
     setError(null);
+    const destination = window.open("", "_blank");
+    if (destination) {
+      destination.document.title = "Preparing secure document";
+      destination.document.body.textContent = "Preparing your secure document…";
+    }
     try {
       const { data, error: fnError } = await supabase.functions.invoke("vault-access", {
         body: { document_slug: slug },
       });
       if (fnError) throw fnError;
       if (!data?.url) throw new Error(typeof data?.error === "string" ? data.error : "Could not open document");
-      window.open(data.url, "_blank", "noopener,noreferrer");
+      if (!destination) throw new Error("Your browser blocked the document window. Allow popups and try again.");
+      destination.opener = null;
+      destination.location.replace(data.url);
     } catch (err) {
+      destination?.close();
       setError(err instanceof Error ? err.message : "Could not open that document.");
     } finally {
       setBusy(null);
@@ -148,14 +160,19 @@ const Vault = () => {
       {!loading && !entitled && (
         <div className="vault-empty-state">
           <span className="vault-empty-icon"><ShieldCheck aria-hidden="true" /></span>
-          <p className="vault-kicker">Access required</p>
-          <h1>This Vault is linked to the email used at purchase.</h1>
+          <p className="vault-kicker">{loadError ? "Connection interrupted" : "Access required"}</p>
+          <h1>{loadError ? "We could not verify your library." : "This Vault is linked to the email used at purchase."}</h1>
           <p className="portal-muted">
-            This account does not yet hold access to the Commercial Growth System. Sign in with the purchasing
-            email, or get access below.
+            {loadError
+              ? "Your access has not changed. Refresh this page to reconnect securely."
+              : "This account does not yet hold access to the Commercial Growth System. Sign in with the purchasing email, or get access below."}
           </p>
           <div className="vault-empty-actions">
-            <VaultLink to="/forge-vault" className="portal-btn portal-btn--solid">View Forge Vault</VaultLink>
+            {loadError ? (
+              <Button onClick={() => window.location.reload()} className="portal-btn portal-btn--solid">Try again</Button>
+            ) : (
+              <VaultLink to="/forge-vault" className="portal-btn portal-btn--solid">View Forge Vault</VaultLink>
+            )}
           </div>
         </div>
       )}
@@ -286,6 +303,7 @@ const Vault = () => {
                       <Button
                         onClick={() => openDocument(activeDocument.slug)}
                         disabled={busy === activeDocument.slug}
+                        aria-busy={busy === activeDocument.slug}
                         className="portal-btn portal-btn--solid"
                       >
                         {busy === activeDocument.slug ? <LoaderCircle className="vault-spin" /> : <FileText />}
