@@ -889,7 +889,10 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
   --vault-raised: 0 0% 8%;
   --vault-focus: 42 62% 62%;
   --vault-ok: 132 34% 56%;
-  min-height: 100dvh;
+  --vault-ui-scale: 0.92;
+  width: calc(100% / var(--vault-ui-scale));
+  min-height: calc(100dvh / var(--vault-ui-scale));
+  zoom: var(--vault-ui-scale);
   background: hsl(var(--vault-canvas-surface));
 }
 .vault-workspace-header {
@@ -1025,6 +1028,7 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
 .vault-document-action > p span:first-child { color: hsl(var(--portal-text)); font-family: var(--font-heading); font-size: 20px; }
 .vault-document-action > p span:last-child { color: hsl(var(--portal-muted)); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
 .vault-document-action .portal-btn { width: 100%; border-radius: 3px; }
+.vault-document-action .vault-open-document { border-radius: calc(12px / var(--vault-ui-scale)); }
 .vault-content-index { padding-top: 50px; border-top: 1px solid hsl(var(--portal-line)); }
 .vault-section-heading h2 { max-width: 650px; margin-top: 14px; font-size: clamp(27px, 3vw, 40px); font-weight: 500; line-height: 1.08; }
 .vault-groups { margin-top: 38px; border-top: 1px solid hsl(var(--portal-line)); }
