@@ -890,8 +890,8 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
   --vault-focus: 42 62% 62%;
   --vault-ok: 132 34% 56%;
   --vault-ui-scale: 0.92;
-  width: calc(100% / var(--vault-ui-scale));
-  min-height: calc(100dvh / var(--vault-ui-scale));
+  width: 100%;
+  min-height: 100dvh;
   zoom: var(--vault-ui-scale);
   background: hsl(var(--vault-canvas-surface));
 }
