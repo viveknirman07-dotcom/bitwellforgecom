@@ -3,3 +3,4 @@
 - [x] Preserve entitlement checks and secure document access
 - [ ] Add verified customer testimonial and outcome when supplied
 - [x] Verify redesigned buyer portal across phone, tablet and desktop
+- [x] Reduce only the post-purchase Vault interface scale by 8% and round the document action

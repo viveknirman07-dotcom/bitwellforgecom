@@ -304,7 +304,7 @@ const Vault = () => {
                         onClick={() => openDocument(activeDocument.slug)}
                         disabled={busy === activeDocument.slug}
                         aria-busy={busy === activeDocument.slug}
-                        className="portal-btn portal-btn--solid"
+                        className="portal-btn portal-btn--solid vault-open-document"
                       >
                         {busy === activeDocument.slug ? <LoaderCircle className="vault-spin" /> : <FileText />}
                         {busy === activeDocument.slug ? "Preparing" : "Open document"}
