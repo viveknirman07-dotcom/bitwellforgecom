@@ -892,7 +892,6 @@ html.mobile-lock .diagram-frame { height: 220px !important; }
   --vault-ui-scale: 0.92;
   width: 100%;
   min-height: 100dvh;
-  zoom: var(--vault-ui-scale);
   background: hsl(var(--vault-canvas-surface));
 }
 .vault-workspace-header {
@@ -1101,6 +1100,7 @@ html:not(.dark) .vault-workspace-header { background: hsl(var(--vault-rail) / 0.
   .vault-updates article > span { display: none; }
 }
 @media (max-width: 640px) {
+  .vault-workspace-main { zoom: var(--vault-ui-scale); }
   .vault-workspace-header { height: 56px; padding: 0 15px; }
   .vault-workspace-brand { gap: 8px; font-size: 15px; }
   .vault-workspace-brand > span:last-child { font-size: 8px; letter-spacing: 0.12em; }
