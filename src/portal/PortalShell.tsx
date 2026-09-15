@@ -44,9 +44,9 @@ const PortalShell = ({ title, eyebrow, variant = "vault", children }: Props) => 
           <header className="vault-workspace-header">
             <Link to="/" className="vault-workspace-brand" aria-label="BitwellForge home">
               <span>BitwellForge</span>
-              <span aria-hidden="true" className="vault-workspace-brand-mark" />
               <span>Forge Vault</span>
             </Link>
+            <span className="vault-workspace-context">Private library</span>
             <div className="vault-workspace-account">
               {user?.email && <span className="vault-workspace-email">{user.email}</span>}
               <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme" title="Toggle theme">
