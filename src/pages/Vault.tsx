@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
   ChevronDown,
   FileText,
+  Library,
   LoaderCircle,
   Search,
   ShieldCheck,
+  Wrench,
   X,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -45,6 +48,12 @@ const documentMeta: Record<string, { index: string; count: string; label: string
   blueprint: { index: "01", count: "12 chapters", label: "Reasoning" },
   "operating-system": { index: "02", count: "31 modules", label: "Sequence" },
   "commercial-toolkit": { index: "03", count: "44 assets", label: "Application" },
+};
+
+const documentIcon = (slug: string) => {
+  if (slug === "operating-system") return Wrench;
+  if (slug === "commercial-toolkit") return Library;
+  return BookOpen;
 };
 
 const sectionGroups = (sections: Section[]) => {
@@ -133,9 +142,7 @@ const Vault = () => {
     setActiveSlug(slug);
     setQuery("");
     setOpen(null);
-    window.requestAnimationFrame(() => {
-      document.getElementById("vault-contents")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -171,13 +178,59 @@ const Vault = () => {
       )}
 
       {!loading && entitled && activeDocument && (
-        <div className="vault-editorial">
-          <section className="vault-editorial-intro">
-            <div className="vault-intro-copy">
-              <p className="vault-kicker"><span aria-hidden="true" /> Private library · Authenticated access</p>
+        <div className="vault-workspace">
+          <aside className="vault-library-rail" aria-label="Vault collections">
+            <div className="vault-rail-heading">
+              <p className="vault-kicker">Private library</p>
               <h1>The Forge Vault</h1>
               <p>One system. Three connected layers.</p>
             </div>
+
+            <nav className="vault-collection-nav">
+              {documents.map((document) => {
+                const meta = documentMeta[document.slug];
+                const Icon = documentIcon(document.slug);
+                const selected = document.slug === activeDocument.slug;
+                return (
+                  <Button
+                    key={document.id}
+                    variant="ghost"
+                    onClick={() => selectDocument(document.slug)}
+                    className={`vault-collection-button ${selected ? "is-active" : ""}`}
+                    aria-current={selected ? "page" : undefined}
+                  >
+                    <span className="vault-collection-index">{meta?.index ?? "•"}</span>
+                    <span className="vault-collection-copy">
+                      <strong>{document.title.replace("BitwellForge ", "")}</strong>
+                      <span>{meta?.count ?? `${document.sections.length} sections`}</span>
+                    </span>
+                    <Icon aria-hidden="true" />
+                  </Button>
+                );
+              })}
+            </nav>
+
+            <div className="vault-trust-note">
+              <ShieldCheck aria-hidden="true" />
+              <p><strong>Private access</strong><span>Secure links expire after five minutes.</span></p>
+            </div>
+          </aside>
+
+          <section className="vault-library-canvas">
+            <div className="vault-mobile-tabs" aria-label="Choose a collection">
+              {documents.map((document) => (
+                <Button
+                  key={document.id}
+                  variant="ghost"
+                  className={document.slug === activeDocument.slug ? "is-active" : ""}
+                  onClick={() => selectDocument(document.slug)}
+                >
+                  {documentMeta[document.slug]?.index ?? "•"}
+                  <span>{document.title.replace("BitwellForge ", "").replace("™", "")}</span>
+                </Button>
+              ))}
+            </div>
+
             <div className="vault-canvas-tools">
               <label className="vault-search">
                 <Search aria-hidden="true" />
@@ -196,12 +249,11 @@ const Vault = () => {
               </label>
               <span className="vault-library-status"><span /> Library current</span>
             </div>
-          </section>
 
-          {error && <p role="alert" className="vault-alert">{error}</p>}
+            {error && <p role="alert" className="vault-alert">{error}</p>}
 
-          <AnimatePresence mode="wait">
-            {query.trim() ? (
+            <AnimatePresence mode="wait">
+              {query.trim() ? (
                 <motion.div
                   key="search"
                   className="vault-search-results"
@@ -227,62 +279,18 @@ const Vault = () => {
                         <small>{document.title.replace("BitwellForge ", "")} · {section.part ?? "Contents"}</small>
                         <strong>{section.title}</strong>
                       </span>
-                      <ArrowRight aria-hidden="true" />
+                      <ArrowUpRight aria-hidden="true" />
                     </Button>
                   ))}
                 </motion.div>
-            ) : (
-              <motion.div
-                key="library"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <section className="vault-collection-index" aria-labelledby="vault-library-heading">
-                  <div className="vault-section-heading">
-                    <p className="vault-kicker">Your library</p>
-                    <h2 id="vault-library-heading">The complete commercial system.</h2>
-                  </div>
-                  <div className="vault-resource-list">
-                    {documents.map((document) => {
-                      const meta = documentMeta[document.slug];
-                      return (
-                        <article key={document.id} className="vault-resource-card">
-                          <div className="vault-resource-number">{meta?.index ?? "•"}</div>
-                          <div className="vault-resource-copy">
-                            <p className="vault-kicker">{meta?.label ?? document.category}</p>
-                            <h2>{document.title}</h2>
-                            {document.subtitle && <p className="vault-document-subtitle">{document.subtitle}</p>}
-                            {document.summary && <p className="portal-muted">{document.summary}</p>}
-                            <p className="vault-resource-meta">
-                              <span>{meta?.count ?? `${document.sections.length} sections`}</span>
-                              <span>Version {document.version}{document.page_count ? ` · ${document.page_count} pages` : ""}</span>
-                            </p>
-                          </div>
-                          <div className="vault-resource-actions">
-                            <Button variant="ghost" onClick={() => selectDocument(document.slug)} className="vault-text-action">
-                              View contents <ArrowRight aria-hidden="true" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              onClick={() => openDocument(document.slug)}
-                              disabled={busy === document.slug}
-                              aria-busy={busy === document.slug}
-                              className="vault-text-action vault-open-document"
-                            >
-                              {busy === document.slug ? <LoaderCircle className="vault-spin" /> : <FileText />}
-                              {busy === document.slug ? "Preparing" : "Open document"}
-                              {busy !== document.slug && <ArrowRight aria-hidden="true" />}
-                            </Button>
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
-
-                <section id="vault-contents" className="vault-content-index">
+              ) : (
+                <motion.div
+                  key={activeDocument.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                >
                   <header className="vault-document-hero">
                     <div className="vault-document-heading">
                       <p className="vault-kicker">{documentMeta[activeDocument.slug]?.label ?? activeDocument.category}</p>
@@ -304,12 +312,13 @@ const Vault = () => {
                     </div>
                   </header>
 
-                  <div className="vault-section-heading">
-                    <p className="vault-kicker">Structured index</p>
-                    <h2>{activeDocument.slug === "operating-system" ? "Follow the sequence." : "Find the right reference."}</h2>
-                  </div>
+                  <div className="vault-content-index">
+                    <div className="vault-section-heading">
+                      <p className="vault-kicker">Structured index</p>
+                      <h2>{activeDocument.slug === "operating-system" ? "Follow the sequence." : "Find the right reference."}</h2>
+                    </div>
 
-                  <div className="vault-groups">
+                    <div className="vault-groups">
                       {groups.map(([part, sections], groupIndex) => {
                         const isOpen = open === part || (open === null && groupIndex === 0);
                         return (
@@ -352,13 +361,13 @@ const Vault = () => {
                           </article>
                         );
                       })}
+                    </div>
                   </div>
-                </section>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-          {updates.length > 0 && !query && (
+            {updates.length > 0 && !query && (
               <section className="vault-updates">
                 <div className="vault-section-heading">
                   <p className="vault-kicker">Product journal</p>
@@ -375,7 +384,8 @@ const Vault = () => {
                   ))}
                 </div>
               </section>
-          )}
+            )}
+          </section>
         </div>
       )}
     </PortalShell>

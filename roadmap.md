@@ -5,6 +5,3 @@
 - [x] Verify redesigned buyer portal across phone, tablet and desktop
 - [x] Reduce only the post-purchase Vault interface scale by 8% and round the document action
 - [x] Limit the reduced Vault scale to mobile content while keeping the header at standard site size
-- [ ] Rebuild the post-purchase Vault as the selected editorial research library
-- [ ] Replace every public Forge Vault preview with current product captures
-- [ ] Verify the editorial Vault across phone, tablet and desktop
