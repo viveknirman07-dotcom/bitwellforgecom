@@ -107,9 +107,9 @@ const faqItems = [
 const Index = () => {
   const reduced = useReducedMotion();
   useSEO({
-    title: "BitwellForge | Commercial Growth Consultancy for B2B Businesses",
+    title: "BitwellForge | Commercial Architecture & Constraint Advisory",
     description:
-      "BitwellForge builds commercial growth architecture for agencies, consultants, and B2B service businesses. Client acquisition, revenue systems, positioning, and AI-powered operations engineered to compound.",
+      "BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.",
     canonicalPath: "/",
     jsonLdId: "home-jsonld",
     jsonLd: {
