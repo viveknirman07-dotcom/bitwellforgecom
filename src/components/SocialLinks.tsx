@@ -26,7 +26,7 @@ const socials = [
   },
   {
     label: "Email",
-    href: "mailto:v@bitwellforge.com",
+    href: "mailto:business@bitwellforge.com",
     icon: Mail,
     isCustom: false,
   },
