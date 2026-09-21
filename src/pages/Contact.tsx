@@ -80,7 +80,7 @@ const Contact = () => {
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nCompany: ${form.company}\nInterested In: ${form.service}\nCurrent Challenge: ${form.challenge}`
     );
-    window.location.href = `mailto:v@bitwellforge.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:business@bitwellforge.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -119,10 +119,10 @@ const Contact = () => {
                     <div>
                       <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground mb-3">Email</p>
                       <a
-                        href="mailto:v@bitwellforge.com"
+                        href="mailto:business@bitwellforge.com"
                         className="text-[15px] text-foreground hover:text-muted-foreground transition-colors duration-300"
                       >
-                        v@bitwellforge.com
+                        business@bitwellforge.com
                       </a>
                     </div>
                     <div>

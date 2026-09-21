@@ -3,7 +3,7 @@ import { recordCommission } from './affiliate.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
-const FROM_EMAIL = Deno.env.get('FROM_EMAIL') ?? 'BitwellForge <v@bitwellforge.com>'
+const FROM_EMAIL = Deno.env.get('FROM_EMAIL') ?? 'BitwellForge Support <support@bitwellforge.com>'
 
 async function logEmail(
   recipient: string,
