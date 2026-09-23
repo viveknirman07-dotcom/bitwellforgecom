@@ -10,3 +10,10 @@
 - [x] Replace general and commercial contact references with business@bitwellforge.com
 - [x] Route support and post-purchase contact references to support@bitwellforge.com
 - [x] Verify the previous contact address is absent project-wide
+
+## Corporate website restructure
+- [ ] Rebuild the public header with a desktop mega menu and full screen mobile navigation
+- [ ] Restructure the homepage around Hero, Our Expertise, Latest Insights, and Global Footprint
+- [ ] Rebuild the public footer with desktop columns and mobile accordions
+- [ ] Apply the BitwellForge black, ivory, gold, titanium, and navy design system
+- [ ] Verify responsive behavior, reduced motion, navigation, and metadata
