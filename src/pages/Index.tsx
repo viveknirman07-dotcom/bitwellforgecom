@@ -41,6 +41,7 @@ const services = [
   {
     tag: "Client Acquisition Architecture",
     title: "From Invisible to In-Demand",
+    href: "/services/lead-generation",
     body:
       "Outbound sequencing, inbound demand capture, and trigger-based nurture designed against your specific sales cycle. ICP definition, channel selection, and message architecture engineered for pipeline density rather than surface reach.",
     visual: <DemandGraph />,
@@ -48,6 +49,7 @@ const services = [
   {
     tag: "High-Ticket Revenue Systems",
     title: "Offers That Close. Sales Motions That Compound.",
+    href: "/services/sales-systems",
     body:
       "A precise commercial offer, a repeatable discovery motion, and the conversion architecture behind it. Scripts, sequencing, objection handling, and CRM logic tuned so revenue behaves predictably instead of episodically.",
     visual: <RevenueFunnel />,
@@ -55,6 +57,7 @@ const services = [
   {
     tag: "Commercial Growth Strategy",
     title: "Clarity Before Campaigns",
+    href: "/services/growth-strategy",
     body:
       "A structured diagnostic that resolves positioning, pricing, and category before any execution begins. Strategy grounds every downstream decision in commercial logic rather than in preference.",
     visual: <PositioningMatrix />,
@@ -62,6 +65,7 @@ const services = [
   {
     tag: "AI-Powered Revenue Operations",
     title: "Human Attention on Human Work",
+    href: "/services/ai-automation",
     body:
       "An operations audit that identifies every workflow suitable for automation, then intelligent execution across scoring, routing, nurture, and reporting. Your team stops touching repeatable tasks and starts owning irreplaceable ones.",
     visual: <AutomationFlow />,
@@ -228,28 +232,32 @@ const Index = () => {
       {/* WHAT WE BUILD */}
       <section className="relative section-padding py-24 md:py-32">
         <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-            <ScrollReveal>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
-                What We Build
-              </p>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance mb-6">
-                Four commercial disciplines. One{" "}
-                <span className="font-quote italic text-gold/95">compounding</span> growth engine.
-              </h2>
-            </ScrollReveal>
-            <ScrollReveal delay={180}>
-              <p className="text-muted-foreground text-[15px] leading-[1.8] font-light">
-                Acquisition, revenue, positioning, and operations engineered as interlocking layers. Every layer strengthens the next, and value accrues the longer the architecture operates.
-              </p>
-            </ScrollReveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end mb-14 md:mb-20">
+            <div className="lg:col-span-8">
+              <ScrollReveal>
+                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
+                  What We Build
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={100}>
+                <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
+                  Four commercial disciplines. One{" "}
+                  <span className="font-quote italic text-gold/95">compounding</span> growth engine.
+                </h2>
+              </ScrollReveal>
+            </div>
+            <div className="lg:col-span-4 lg:pb-1">
+              <ScrollReveal delay={180}>
+                <p className="text-muted-foreground text-[15px] leading-[1.8] font-light">
+                  Acquisition, revenue, positioning, and operations engineered as interlocking layers. Every layer strengthens the next, and value accrues the longer the architecture operates.
+                </p>
+              </ScrollReveal>
+            </div>
           </div>
 
-          <div>
+          <div className="border-b border-gold/20">
             {services.map((s, i) => (
-              <ServiceFeature key={s.tag} index={i} reverse={i % 2 === 1} {...s} />
+              <ServiceFeature key={s.tag} index={i} {...s} />
             ))}
           </div>
         </div>
