@@ -13,6 +13,7 @@
 
 ## Corporate website restructure
 - [ ] Rebuild the public header with a desktop mega menu and full screen mobile navigation
+- [x] Redesign the homepage services section as a distinct editorial capability index
 - [ ] Restructure the homepage around Hero, Our Expertise, Latest Insights, and Global Footprint
 - [ ] Rebuild the public footer with desktop columns and mobile accordions
 - [ ] Apply the BitwellForge black, ivory, gold, titanium, and navy design system
