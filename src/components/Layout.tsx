@@ -11,7 +11,7 @@ const Layout = () => {
   useSmoothScroll();
 
   return (
-    <div className="min-h-screen flex flex-col font-body">
+    <div className="public-site min-h-screen flex flex-col font-body">
       <MovingCursor />
       <Header />
       <main className="flex-1">
