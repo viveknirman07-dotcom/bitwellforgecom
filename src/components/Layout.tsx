@@ -12,7 +12,6 @@ const Layout = () => {
 
   return (
     <div className="public-site min-h-screen flex flex-col font-body">
-      <MovingCursor />
       <Header />
       <main className="flex-1">
         {/* Forge Vault runs its own entry choreography, so the global wipe is skipped there. */}

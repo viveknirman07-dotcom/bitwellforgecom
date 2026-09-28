@@ -35,6 +35,7 @@
 .public-mega { background: hsl(var(--background)); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); box-shadow: 0 24px 40px hsl(var(--foreground) / 0.08); }
 .public-menu-panel { background: hsl(var(--background)); }
 .public-hero { min-height: min(800px, 91svh); background: hsl(var(--background)); }
+.public-hero > div.relative { padding-top: clamp(120px, 14vh, 180px); padding-bottom: 130px; }
 .public-hero-image { object-fit: cover; object-position: center; }
 .public-image-shade { background: linear-gradient(90deg, hsl(var(--background) / 0.99) 0%, hsl(var(--background) / 0.94) 41%, hsl(var(--background) / 0.28) 73%, transparent 100%); }
 .public-kicker { color: hsl(var(--accent)); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
@@ -49,7 +50,8 @@
   .public-site h3 { font-size: 22px !important; }
   .public-site p, .public-site li { font-size: 15px !important; line-height: 1.65 !important; }
   .public-site .public-kicker { font-size: 11px !important; }
-  .public-hero { min-height: 86svh; }
+  .public-hero { min-height: min(800px, 91svh); }
+  .public-hero > div.relative { padding-top: 110px; padding-bottom: 75px; }
   .public-hero-image { opacity: 0.33; object-position: 67% center; }
   .public-image-shade { background: linear-gradient(90deg, hsl(var(--background) / 0.97), hsl(var(--background) / 0.7)); }
 }
