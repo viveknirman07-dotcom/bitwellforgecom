@@ -10,7 +10,7 @@ const Layout = () => {
   useSmoothScroll();
 
   return (
-    <div className="public-site min-h-screen flex flex-col font-body">
+    <div className={`${location.pathname === "/forge-vault" ? "" : "public-site "}min-h-screen flex flex-col font-body`}>
       <Header />
       <main className="flex-1">
         {/* Forge Vault runs its own entry choreography, so the global wipe is skipped there. */}

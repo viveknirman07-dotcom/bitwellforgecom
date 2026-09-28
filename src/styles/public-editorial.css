@@ -54,4 +54,4 @@
   .public-hero-image { opacity: 0.33; object-position: 67% center; }
   .public-image-shade { background: linear-gradient(90deg, hsl(var(--background) / 0.97), hsl(var(--background) / 0.7)); }
 }
-@media (prefers-reduced-motion: reduce) { .public-site *, .public-site *::before, .public-site *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) { .public-site *, .public-site *::before, .public-site *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } .public-home [style*="opacity: 0"] { opacity: 1 !important; transform: none !important; } }
