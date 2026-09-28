@@ -69,7 +69,7 @@ const Header = () => {
           <Link className="public-nav-link text-[13px]" to="/about" aria-current={location.pathname === "/about" ? "page" : undefined}>About</Link>
           {(["Services", "Insights"] as const).map((name) => (
             <div key={name} onMouseEnter={() => setOpen(name)}>
-              <Button variant="ghost" size="sm" aria-expanded={open === name} aria-controls="public-mega-menu" onClick={() => setOpen(open === name ? null : name)} onFocus={() => setOpen(name)} className="public-nav-link h-11 rounded-none px-0 text-[13px] hover:bg-transparent hover:text-accent">
+               <Button variant="ghost" size="sm" aria-expanded={open === name} aria-controls="public-mega-menu" onClick={() => setOpen(open === name ? null : name)} onFocus={() => setOpen(name)} onKeyDown={(event) => { if (event.key === "ArrowDown" || (event.key === "Tab" && !event.shiftKey)) { event.preventDefault(); document.querySelector<HTMLElement>("#public-mega-menu a")?.focus(); } }} className="public-nav-link h-11 rounded-none px-0 text-[13px] hover:bg-transparent hover:text-accent">
                 {name}<ChevronDown size={14} className={`transition-transform duration-300 ${open === name ? "rotate-180" : ""}`} />
               </Button>
             </div>
