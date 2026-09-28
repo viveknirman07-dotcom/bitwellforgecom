@@ -1,53 +1,368 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/use-seo";
-import { articles } from "@/pages/Insights";
-import architecture from "@/assets/editorial-architecture.jpg";
+import SectionDivider from "@/components/SectionDivider";
+import CTABlock from "@/components/CTABlock";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
-const description = "BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.";
-const disciplines = [
-  { number: "01", name: "Strategy", title: "Commercial Growth Strategy", detail: "Define the commercial thesis, position the offer, and make every investment answer to a clear market decision.", href: "/services/growth-strategy" },
-  { number: "02", name: "Acquisition", title: "Client Acquisition Architecture", detail: "Build deliberate pathways from market attention to qualified conversations, beyond any single channel.", href: "/services/lead-generation" },
-  { number: "03", name: "Revenue", title: "High-Ticket Revenue Systems", detail: "Turn the sales process into a repeatable operating discipline with clearer decisions and stronger conversion.", href: "/services/sales-systems" },
-  { number: "04", name: "Operations", title: "AI-Powered Revenue Operations", detail: "Connect workflows, data, and automation so the organisation can grow without equivalent friction.", href: "/services/ai-automation" },
+import ProblemCard from "@/components/home/ProblemCard";
+import { LeakyFunnel, ChannelWire, FeedbackLoop } from "@/components/home/ProblemDiagrams";
+import ServiceFeature from "@/components/home/ServiceFeature";
+import { DemandGraph, RevenueFunnel, PositioningMatrix, AutomationFlow } from "@/components/home/ServiceVisuals";
+import StatCounter from "@/components/home/StatCounter";
+import QuoteCard from "@/components/home/QuoteCard";
+import HowEngagementsWork from "@/components/home/HowEngagementsWork";
+import EngagementFormats from "@/components/home/EngagementFormats";
+
+const problems = [
+  {
+    title: "Leaking Pipelines",
+    description:
+      "Qualified interest enters the top of the funnel and quietly disappears before it becomes revenue. Without structured qualification, the highest-value conversations are the ones that never happen.",
+    diagram: <LeakyFunnel />,
+  },
+  {
+    title: "Single-Channel Dependency",
+    description:
+      "Commercial growth tied to one platform, one operator, or one campaign. When the channel wavers, so does the business. Durable revenue never sits on a single wire.",
+    diagram: <ChannelWire />,
+  },
+  {
+    title: "Absent Feedback Intelligence",
+    description:
+      "Effort goes out, outcomes come back, and the connection between the two remains invisible. Growth without measurement is a rehearsal that never becomes a performance.",
+    diagram: <FeedbackLoop />,
+  },
+];
+
+const services = [
+  {
+    tag: "Client Acquisition Architecture",
+    title: "From Invisible to In-Demand",
+    href: "/services/lead-generation",
+    body:
+      "Outbound sequencing, inbound demand capture, and trigger-based nurture designed against your specific sales cycle. ICP definition, channel selection, and message architecture engineered for pipeline density rather than surface reach.",
+    visual: <DemandGraph />,
+  },
+  {
+    tag: "High-Ticket Revenue Systems",
+    title: "Offers That Close. Sales Motions That Compound.",
+    href: "/services/sales-systems",
+    body:
+      "A precise commercial offer, a repeatable discovery motion, and the conversion architecture behind it. Scripts, sequencing, objection handling, and CRM logic tuned so revenue behaves predictably instead of episodically.",
+    visual: <RevenueFunnel />,
+  },
+  {
+    tag: "Commercial Growth Strategy",
+    title: "Clarity Before Campaigns",
+    href: "/services/growth-strategy",
+    body:
+      "A structured diagnostic that resolves positioning, pricing, and category before any execution begins. Strategy grounds every downstream decision in commercial logic rather than in preference.",
+    visual: <PositioningMatrix />,
+  },
+  {
+    tag: "AI-Powered Revenue Operations",
+    title: "Human Attention on Human Work",
+    href: "/services/ai-automation",
+    body:
+      "An operations audit that identifies every workflow suitable for automation, then intelligent execution across scoring, routing, nurture, and reporting. Your team stops touching repeatable tasks and starts owning irreplaceable ones.",
+    visual: <AutomationFlow />,
+  },
+];
+
+const stats = [
+  { value: 11, suffix: "", label: "Qualified calls in 6 weeks", sub: "from a standing start" },
+  { value: 8978, prefix: "$", label: "Closed in 30 days", sub: "with zero paid spend" },
+  { value: 3, suffix: "×", label: "Pipeline density", sub: "within 90 days" },
+  { value: 14, suffix: " hrs", label: "Reclaimed weekly", sub: "through automation" },
+];
+
+const testimonials = [
+  {
+    quote:
+      "Before BitwellForge, I was posting, cold emailing, and hoping. Six weeks into our engagement I had eleven qualified calls on the calendar from an outreach motion I no longer had to run daily. That is not luck. That is architecture.",
+    author: "Marcus T.",
+    role: "B2B Consulting Firm Founder",
+  },
+  {
+    quote:
+      "I had been sitting on a high-ticket offer for three months, unsure how to sell it. They rebuilt the positioning, wrote the conversation sequence, and coached me through the pitch. I closed $4,800 in the first thirty days on organic conversations alone.",
+    author: "Danielle R.",
+    role: "Executive Coach",
+  },
+  {
+    quote:
+      "I was spending twenty hours a week on operational work that should never have touched me. After the automation build, that number dropped below six. Same client volume, a fraction of the operational drag.",
+    author: "James O.",
+    role: "Independent Consultant",
+  },
+];
+
+const faqItems = [
+  { question: "Do I need a large team or a large budget to work with BitwellForge", answer: "No. Most of our clients begin as solo operators or small teams. We build against the resources you already have and scale the architecture as commercial capacity grows." },
+  { question: "How is this different from hiring a marketing agency", answer: "An agency runs campaigns on your behalf. We build the commercial architecture that makes every acquisition effort compound. You own the operating layer and it continues to work whether or not we are actively involved." },
+  { question: "How long before results become visible", answer: "Most engagements show pipeline movement within thirty to forty-five days. Full compounding across acquisition, sales, and operations typically becomes visible between sixty and ninety days depending on scope." },
+  { question: "Do you work with businesses outside India", answer: "Yes. We operate across multiple markets. Our engagements are built for remote collaboration and are not constrained by geography." },
+  { question: "What happens after I reach out", answer: "We open with a discovery conversation to understand your business, your commercial context, and your current acquisition posture. From there we map the architecture we would build before any engagement begins." },
 ];
 
 const Index = () => {
   const reduced = useReducedMotion();
-  useSEO({ title: "BitwellForge | Commercial Architecture & Constraint Advisory", description, canonicalPath: "/" });
-  return <div className="public-home">
-    <section className="public-hero relative flex items-center overflow-hidden section-padding">
-      <motion.img src={architecture} alt="Precise geometry of a contemporary institutional building" width={1600} height={900} className="public-hero-image absolute inset-0 h-full w-full" initial={false} animate={reduced ? {} : { scale: 1.04 }} transition={{ duration: 8, ease: "easeOut" }} />
-      <div className="public-image-shade absolute inset-0" aria-hidden="true" />
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-32 pb-20 md:pt-36 md:pb-28">
-        <motion.div initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-[830px]">
-          <p className="public-kicker mb-7">Commercial infrastructure &amp; revenue growth consulting</p>
-          <h1 className="font-heading font-semibold leading-[1.08] text-foreground text-[42px] sm:text-[54px] md:text-[65px] lg:text-[78px]">What's assembled breaks down.<br />What's engineered compounds.</h1>
-          <div className="mt-8 max-w-[640px] border-l-2 border-accent pl-5 md:mt-10 md:pl-7"><p className="text-[16px] leading-[1.7] text-muted-foreground md:text-[18px]">{description}</p></div>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-11">
-            <Button asChild className="h-12 rounded-none px-7 text-[13px] sm:h-14"><Link to="/contact?service=General+Inquiry">Book Infrastructure Audit <ArrowRight size={16} /></Link></Button>
-            <Button asChild variant="outline" className="h-12 rounded-none border-foreground bg-background/70 px-7 text-[13px] sm:h-14"><Link to="/about">Explore the firm <ArrowUpRight size={16} /></Link></Button>
+  useSEO({
+    title: "BitwellForge | Commercial Architecture & Constraint Advisory",
+    description:
+      "BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.",
+    canonicalPath: "/",
+    jsonLdId: "home-jsonld",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  });
+
+  return (
+    <div className="relative">
+      {/* Page-level noise */}
+      <div className="pointer-events-none fixed inset-0 z-0 bg-noise opacity-[0.035] mix-blend-overlay" aria-hidden />
+
+      {/* HERO */}
+      <section className="relative min-h-[100svh] flex items-center section-padding overflow-hidden bg-background">
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full pt-24 md:pt-28 pb-16">
+          <div className="max-w-3xl">
+            <motion.p
+              className="text-[10px] md:text-[11px] tracking-[0.28em] uppercase text-gold mb-6 md:mb-8"
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              A Growth Practice
+            </motion.p>
+
+            <motion.h1
+              className="font-heading font-semibold text-foreground tracking-tightest leading-[1.02] text-balance text-[40px] xs:text-[44px] sm:text-5xl md:text-6xl lg:text-[78px] xl:text-[86px] mb-7 md:mb-10"
+              initial={reduced ? false : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              What's assembled breaks down.
+              <br />
+              <span className="text-foreground/95">What's engineered compounds.</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-muted-foreground text-[15px] md:text-lg leading-[1.8] font-light max-w-2xl mb-10 md:mb-12"
+              initial={reduced ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            >
+              BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+              initial={reduced ? false : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Link
+                to="/contact?service=General+Inquiry"
+                data-hero-primary-cta
+                className="group inline-flex items-center justify-center gap-2 bg-black text-white dark:bg-gold dark:text-navy px-7 py-4 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/90 dark:hover:bg-white dark:hover:text-navy hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] dark:hover:shadow-[0_12px_40px_hsl(0_0%_100%/0.18)] active:scale-[0.98]"
+              >
+                Book Infrastructure Audit
+                <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/case-studies"
+                data-hero-secondary-cta
+                className="group inline-flex items-center justify-center gap-2 border border-foreground text-foreground px-7 py-4 rounded-full text-[13px] font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:bg-foreground hover:text-background active:scale-[0.98]"
+              >
+                See Case Studies
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
           </div>
-        </motion.div>
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 z-10 hidden border-t border-border bg-background/80 md:block"><div className="section-padding mx-auto flex max-w-[1440px] items-center justify-between py-4 text-[11px] font-medium uppercase tracking-wide text-muted-foreground"><span>Independent advisory</span><span>Strategy / Acquisition / Revenue / Operations</span><span>Worldwide</span></div></div>
-    </section>
+        </div>
 
-    <section className="section-padding border-t border-border bg-background py-20 md:py-28" id="expertise"><div className="mx-auto max-w-[1440px]">
-      <ScrollReveal><div className="grid gap-8 border-b border-border pb-12 lg:grid-cols-12 lg:gap-16"><div className="lg:col-span-7"><p className="public-kicker mb-5">Our expertise / 01</p><h2 className="max-w-[760px] font-heading text-[36px] font-semibold leading-[1.14] text-foreground md:text-[50px]">Four disciplines.<br />One revenue infrastructure.</h2></div><p className="max-w-[390px] self-end text-[16px] leading-[1.7] text-muted-foreground lg:col-span-5">The commercial system is only as strong as the relationship between its parts. Our work addresses those relationships rather than isolated symptoms.</p></div></ScrollReveal>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">{disciplines.map((item, i) => <ScrollReveal key={item.number} delay={i * 100} className="h-full"><article className="group flex h-full min-h-[360px] flex-col border-b border-border py-9 md:border-r md:px-6 lg:min-h-[420px] lg:px-7 first:pl-0 last:border-r-0"><div className="flex items-center justify-between text-[12px] font-semibold text-accent"><span>{item.number} / {item.name}</span><ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" /></div><div className="mt-14"><h3 className="font-heading text-[27px] font-semibold leading-[1.18] text-foreground md:text-[30px]">{item.title}</h3><p className="mt-6 text-[14px] leading-[1.7] text-muted-foreground">{item.detail}</p></div><Link className="mt-auto inline-flex min-h-11 items-center gap-2 pt-7 text-[12px] font-semibold text-accent hover:underline" to={item.href}>Explore discipline <ArrowRight size={15} /></Link></article></ScrollReveal>)}</div>
-      <div className="flex justify-end pt-8"><Link className="inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold text-accent hover:underline" to="/services">View all services <ArrowRight size={16} /></Link></div>
-    </div></section>
+      </section>
 
-    <section className="public-deep section-padding py-20 md:py-28"><div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-12 lg:gap-20"><ScrollReveal className="lg:col-span-5"><p className="public-kicker mb-6">Our approach / 02</p><h2 className="font-heading text-[35px] font-semibold leading-[1.16] text-foreground md:text-[48px]">Find the constraint.<br />Design the system.</h2><p className="mt-7 max-w-[430px] text-[16px] leading-[1.75] text-muted-foreground">A visible performance issue is rarely a standalone problem. We study how strategy, demand, conversion, and delivery interact before deciding what to change.</p><Link to="/process" className="mt-9 inline-flex min-h-11 items-center gap-3 border-b border-border text-[13px] font-semibold text-foreground hover:text-accent">How we work <ArrowUpRight size={17} /></Link></ScrollReveal><ScrollReveal className="lg:col-span-7" delay={120}><div className="border-t border-border"><div className="grid grid-cols-[70px_1fr] gap-5 border-b border-border py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">INPUT</span><span className="font-heading text-[22px] text-foreground">Commercial signal</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">What the business observes</span></div><div className="grid grid-cols-[70px_1fr] gap-5 border-b border-border py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">ANALYSIS</span><span className="font-heading text-[22px] text-foreground">Underlying constraint</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">Why performance stalls</span></div><div className="grid grid-cols-[70px_1fr] gap-5 border-b border-border py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">DESIGN</span><span className="font-heading text-[22px] text-foreground">Connected intervention</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">What the system needs</span></div><div className="grid grid-cols-[70px_1fr] gap-5 py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">OUTCOME</span><span className="font-heading text-[22px] text-foreground">Durable capacity</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">What continues to work</span></div></div></ScrollReveal></div></section>
+      {/* PROBLEM */}
+      <section className="relative section-padding py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-16 md:mb-20">
+            <div className="lg:col-span-7">
+              <ScrollReveal>
+                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
+                  What Is Actually Broken
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={100}>
+                <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
+                  Most businesses do not have a growth problem. They have an{" "}
+                  <span className="font-quote italic text-gold/95">architecture</span> problem.
+                </h2>
+              </ScrollReveal>
+            </div>
+            <div className="lg:col-span-5">
+              <ScrollReveal delay={200}>
+                <p className="text-muted-foreground text-[14.5px] md:text-[15.5px] leading-[1.85] font-light">
+                  Leads arrive but do not convert. Outbound gets started and quietly exhausts the team. Paid spend produces movement, then dries up the moment budget pauses. The issue is rarely effort. It is that the commercial engine was assembled from tactics rather than engineered as a whole.
+                </p>
+              </ScrollReveal>
+            </div>
+          </div>
 
-    <section className="section-padding bg-secondary py-20 md:py-28"><div className="mx-auto max-w-[1440px]"><ScrollReveal><div className="mb-12 flex flex-col justify-between gap-6 border-b border-border pb-9 md:flex-row md:items-end"><div><p className="public-kicker mb-5">Perspectives / 03</p><h2 className="font-heading text-[36px] font-semibold text-foreground md:text-[50px]">Latest insights</h2></div><Link to="/insights" className="inline-flex min-h-11 items-center gap-3 text-[13px] font-semibold text-accent hover:underline">Explore all insights <ArrowRight size={16} /></Link></div></ScrollReveal><div className="grid gap-0 md:grid-cols-2 lg:grid-cols-3">{articles.slice(0, 3).map((article, i) => <ScrollReveal key={article.slug} delay={i * 100} className="h-full"><Link to={`/insights/${article.slug}`} className="group flex h-full min-h-[335px] flex-col border-b border-border bg-background p-7 transition-colors duration-300 hover:bg-card md:border-r md:p-9 last:border-r-0"><span className="public-kicker">{article.category} / {article.date}</span><h3 className="mt-9 font-heading text-[27px] font-semibold leading-[1.2] text-foreground group-hover:underline md:text-[30px]">{article.title}</h3><p className="mt-5 line-clamp-3 text-[14px] leading-[1.7] text-muted-foreground">{article.excerpt}</p><span className="mt-auto flex min-h-11 items-end gap-2 pt-8 text-[12px] font-semibold text-accent">Read perspective <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" /></span></Link></ScrollReveal>)}</div></div></section>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+            {problems.map((p, i) => (
+              <ProblemCard key={p.title} {...p} delay={i * 120} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-    <section className="section-padding bg-background py-20 md:py-28"><div className="mx-auto grid max-w-[1440px] gap-12 border-t border-border pt-12 lg:grid-cols-12 lg:gap-20"><ScrollReveal className="lg:col-span-6"><p className="public-kicker mb-5">Global footprint / 04</p><h2 className="font-heading text-[35px] font-semibold leading-[1.18] text-foreground md:text-[48px]">Built for businesses without borders.</h2></ScrollReveal><ScrollReveal className="lg:col-span-6" delay={100}><p className="max-w-[540px] text-[16px] leading-[1.8] text-muted-foreground">BitwellForge works with service businesses across markets. Our engagements are designed for remote collaboration, with a focus on commercial context rather than geography.</p><div className="mt-9 grid grid-cols-2 border-y border-border py-6 text-[12px] font-semibold uppercase text-accent"><span>Operating model</span><span>Worldwide / Remote</span></div></ScrollReveal></div></section>
-    <section className="public-deep section-padding py-20 md:py-28"><div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-9 md:flex-row md:items-end"><div><p className="public-kicker mb-6">Start a conversation</p><h2 className="max-w-[720px] font-heading text-[38px] font-semibold leading-[1.12] text-foreground md:text-[56px]">Build the infrastructure behind what comes next.</h2></div><Button asChild className="h-14 shrink-0 rounded-none bg-background px-7 text-[13px] text-primary hover:bg-secondary"><Link to="/contact?service=General+Inquiry">Book Infrastructure Audit <ArrowRight size={16} /></Link></Button></div></section>
-  </div>;
+      <SectionDivider />
+
+      {/* WHAT WE BUILD */}
+      <section className="relative section-padding py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end mb-14 md:mb-20">
+            <div className="lg:col-span-8">
+              <ScrollReveal>
+                <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">
+                  What We Build
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={100}>
+                <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
+                  Four commercial disciplines. One{" "}
+                  <span className="font-quote italic text-gold/95">compounding</span> growth engine.
+                </h2>
+              </ScrollReveal>
+            </div>
+            <div className="lg:col-span-4 lg:pb-1">
+              <ScrollReveal delay={180}>
+                <p className="text-muted-foreground text-[15px] leading-[1.8] font-light">
+                  Acquisition, revenue, positioning, and operations engineered as interlocking layers. Every layer strengthens the next, and value accrues the longer the architecture operates.
+                </p>
+              </ScrollReveal>
+            </div>
+          </div>
+
+          <div className="border-b border-gold/20">
+            {services.map((s, i) => (
+              <ServiceFeature key={s.tag} index={i} {...s} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RESULTS / NUMBERS */}
+      <section className="relative section-padding py-24 md:py-32 overflow-hidden border-y border-gold/15">
+        <div className="absolute inset-0 bg-radial-gold pointer-events-none" />
+        <div className="absolute inset-0 bg-gold-grid opacity-40 pointer-events-none" />
+        <div className="relative max-w-[1400px] mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+            <ScrollReveal>
+              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Outcomes</p>
+            </ScrollReveal>
+            <ScrollReveal delay={100}>
+              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance">
+                The numbers speak to the architecture,{" "}
+                <span className="font-quote italic text-gold/95">not the effort.</span>
+              </h2>
+            </ScrollReveal>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-2 sm:gap-x-3 md:gap-x-6 lg:gap-x-10 gap-y-12">
+            {stats.map((s, i) => (
+              <ScrollReveal key={s.label} delay={i * 120}>
+                <div className="text-center min-w-0">
+                  <div className="font-heading font-semibold text-gold leading-none text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 tracking-tightest whitespace-nowrap">
+                    <StatCounter value={s.value} prefix={s.prefix} suffix={s.suffix} />
+                  </div>
+                  <div className="text-foreground text-[13px] md:text-sm font-medium mb-1">
+                    {s.label}
+                  </div>
+                  <div className="text-muted-foreground/70 text-[11px] md:text-xs font-light">
+                    {s.sub}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="relative section-padding py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-14 md:mb-20">
+            <ScrollReveal>
+              <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Voices</p>
+            </ScrollReveal>
+            <ScrollReveal delay={100}>
+              <h2 className="font-heading text-3xl md:text-[44px] lg:text-[52px] font-semibold text-foreground leading-[1.08] tracking-tightest text-balance font-quote italic">
+                What changes when the architecture holds
+              </h2>
+            </ScrollReveal>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+            {testimonials.map((t, i) => (
+              <QuoteCard key={t.author} {...t} delay={i * 140} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* HOW ENGAGEMENTS WORK */}
+      <HowEngagementsWork />
+
+      {/* ENGAGEMENT FORMATS */}
+      <EngagementFormats />
+
+      <SectionDivider />
+
+      {/* FAQ */}
+      <section className="relative section-padding py-24 md:py-32">
+        <div className="max-w-[1100px] mx-auto">
+          <ScrollReveal>
+            <p className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5">Common Questions</p>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <h2 className="font-heading text-3xl md:text-[40px] lg:text-[48px] font-semibold text-foreground leading-[1.1] tracking-tightest mb-12 text-balance">
+              Answers before you ask.
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={180}>
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border-gold/15">
+                  <AccordionTrigger className="text-left font-heading text-[16px] md:text-xl font-medium text-foreground hover:no-underline hover:text-gold py-5 md:py-6 transition-colors">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-[14.5px] leading-[1.8] font-light pb-6">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <CTABlock />
+    </div>
+  );
 };
+
 export default Index;

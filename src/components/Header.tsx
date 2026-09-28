@@ -1,112 +1,192 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useDarkMode } from "@/hooks/use-dark-mode";
+import { hasActiveOpenings } from "@/data/jobs";
 import VaultLink from "@/components/vault/VaultLink";
 
-const services = [
-  { label: "Commercial Growth Strategy", href: "/services/growth-strategy" },
-  { label: "Client Acquisition Architecture", href: "/services/lead-generation" },
-  { label: "High-Ticket Revenue Systems", href: "/services/sales-systems" },
-  { label: "AI-Powered Revenue Operations", href: "/services/ai-automation" },
-];
-const insights = [
-  { label: "Insights Library", href: "/insights" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Our Process", href: "/process" },
-];
-const links = [
+const navItems = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Process", href: "/process" },
   { label: "Insights", href: "/insights" },
-  { label: "Careers", href: "/careers" },
+  { label: "Careers", href: "/careers", hiring: true },
   { label: "Contact", href: "/contact" },
   { label: "Vault", href: "/vault" },
 ];
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState<"Services" | "Insights" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const menuRef = useRef<HTMLDivElement>(null);
-  const toggleRef = useRef<HTMLButtonElement>(null);
+  const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
-    setOpen(null);
-    setMobileOpen(false);
-  }, [location.pathname]);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
-    onScroll();
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") { setOpen(null); setMobileOpen(false); toggleRef.current?.focus(); }
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const first = menuRef.current?.querySelector<HTMLElement>("a");
-    first?.focus();
-    return () => { document.body.style.overflow = previous; };
-  }, [mobileOpen]);
-  const close = () => { setOpen(null); setMobileOpen(false); };
+    setMobileOpen(false);
+  }, [location]);
 
   return (
-    <header onMouseLeave={() => setOpen(null)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(null); }} className={`public-header fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 ${scrolled ? "shadow-subtle" : "public-header--top"}`}>
-      <nav aria-label="Main navigation" className="section-padding mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-8">
-        <Link to="/" onClick={close} className="font-heading text-[24px] font-semibold leading-none text-foreground md:text-[27px]">BitwellForge<span className="text-accent">.</span></Link>
-        <div className="hidden lg:flex items-center gap-7 xl:gap-9">
-          <Link className="public-nav-link text-[13px]" to="/about" aria-current={location.pathname === "/about" ? "page" : undefined}>About</Link>
-          {(["Services", "Insights"] as const).map((name) => (
-            <div key={name} onMouseEnter={() => setOpen(name)}>
-               <Button variant="ghost" size="sm" aria-expanded={open === name} aria-controls="public-mega-menu" onClick={() => setOpen(open === name ? null : name)} onFocus={() => setOpen(name)} onKeyDown={(event) => { if (event.key === "ArrowDown" || (event.key === "Tab" && !event.shiftKey)) { event.preventDefault(); document.querySelector<HTMLElement>("#public-mega-menu a")?.focus(); } }} className="public-nav-link h-11 rounded-none px-0 text-[13px] hover:bg-transparent hover:text-accent">
-                {name}<ChevronDown size={14} className={`transition-transform duration-300 ${open === name ? "rotate-180" : ""}`} />
-              </Button>
-            </div>
-          ))}
-          <Link className="public-nav-link text-[13px]" to="/case-studies" aria-current={location.pathname.startsWith("/case-studies") ? "page" : undefined}>Case Studies</Link>
-          <Link className="public-nav-link text-[13px]" to="/process" aria-current={location.pathname === "/process" ? "page" : undefined}>Process</Link>
-          <Link className="public-nav-link text-[13px]" to="/careers" aria-current={location.pathname === "/careers" ? "page" : undefined}>Careers</Link>
-          <VaultLink to="/vault" className="public-nav-link text-[13px]">Vault</VaultLink>
-          <Button asChild size="sm" className="h-11 rounded-none px-5 text-[12px]"><Link to="/contact?service=General+Inquiry">Book Infrastructure Audit <ArrowRight size={15} /></Link></Button>
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/70 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
+          : "bg-background/20 backdrop-blur-lg"
+      }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+    >
+      <nav className="section-padding flex items-center justify-between h-14 md:h-[72px] max-w-[1400px] mx-auto">
+        <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+          <motion.span
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block"
+          >
+            BitwellForge
+          </motion.span>
+        </Link>
+
+        {/* Desktop */}
+        <div className="hidden lg:flex items-center gap-10">
+          {navItems.map((item, i) => {
+            const isVault = item.href === "/vault";
+            const NavEl = isVault ? VaultLink : Link;
+            return (
+            <motion.div
+              key={item.href}
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className={isVault ? "ml-2 pl-8 border-l border-border/40" : undefined}
+            >
+              <NavEl
+                to={item.href}
+                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
+                  isVault
+                    ? "vault-nav"
+                    : location.pathname === item.href
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  {item.label}
+                  {isVault && <span className="vault-arrow" aria-hidden="true">→</span>}
+                  {item.hiring && hasActiveOpenings() && (
+                    <span
+                      className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/70"
+                      aria-label="Hiring"
+                      title="We're hiring"
+                    />
+                  )}
+                </span>
+                {!isVault && (
+                <span
+                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-600 ${
+                    location.pathname === item.href
+                      ? "scale-x-100 origin-left"
+                      : "scale-x-0 origin-left group-hover:scale-x-100 group-hover:origin-left"
+                  }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)" }}
+                />
+                )}
+              </NavEl>
+            </motion.div>
+            );
+          })}
+
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, type: "spring", stiffness: 300, damping: 20 }}
+            onClick={toggle}
+            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-300"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </motion.button>
         </div>
-        <Button ref={toggleRef} variant="ghost" size="icon" className="lg:hidden h-11 w-11 rounded-none" aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</Button>
+
+        {/* Mobile + Tablet */}
+        <div className="flex lg:hidden items-center gap-2">
+          <button
+            onClick={toggle}
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-foreground p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
-      {open && !mobileOpen && (
-         <div id="public-mega-menu" className="public-mega hidden lg:block absolute left-0 right-0">
-          <div className="section-padding mx-auto grid max-w-[1440px] grid-cols-12 gap-10 py-10">
-            <div className="col-span-4 border-r border-border pr-10"><span className="public-kicker">Explore {open}</span><h2 className="mt-5 font-heading text-[30px] leading-tight text-foreground">{open === "Services" ? "The architecture behind durable growth." : "Thinking for consequential decisions."}</h2></div>
-            <div className="col-span-8 grid grid-cols-2 gap-x-10 gap-y-1">
-              {(open === "Services" ? services : insights).map((item) => <Link to={item.href} key={item.href} onClick={close} className="group flex min-h-14 items-center justify-between border-b border-border py-3 text-[14px] text-foreground hover:text-accent">{item.label}<ArrowRight size={16} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1" /></Link>)}
-              {open === "Services" && <Link to="/services" onClick={close} className="group flex min-h-14 items-center justify-between border-b border-border py-3 text-[14px] text-accent">All services<ArrowRight size={16} /></Link>}
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden bg-background/90 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
+          >
+            <div className="section-padding py-6 flex flex-col gap-5">
+              {navItems.map((item, i) => {
+                const isVault = item.href === "/vault";
+                const NavEl = isVault ? VaultLink : Link;
+                return (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className={isVault ? "mt-3 pt-5 border-t border-border/40" : undefined}
+                >
+                  <NavEl
+                    to={item.href}
+                    className={`text-base font-medium transition-colors inline-flex items-center gap-2 min-h-[44px] ${
+                      isVault
+                        ? "vault-nav"
+                        : location.pathname === item.href
+                        ? "text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {item.label}
+                    {isVault && <span className="vault-arrow" aria-hidden="true">→</span>}
+                    {item.hiring && hasActiveOpenings() && (
+                      <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.22em] uppercase text-muted-foreground">
+                        <span className="h-1.5 w-1.5 rounded-full bg-foreground/70" />
+                        Hiring
+                      </span>
+                    )}
+                  </NavEl>
+                </motion.div>
+                );
+              })}
+
             </div>
-          </div>
-        </div>
-      )}
-      {mobileOpen && <div ref={menuRef} className="public-menu-panel fixed left-0 right-0 top-[72px] h-[calc(100dvh-72px)] overflow-y-auto border-t border-border section-padding py-6 lg:hidden" onKeyDown={(event) => {
-        if (event.key !== "Tab") return;
-        const focusable = menuRef.current?.querySelectorAll<HTMLElement>("a,button");
-        if (!focusable?.length) return;
-        const first = focusable[0]; const last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-      }}>
-        <div className="mx-auto max-w-[700px]">
-           {links.map((item, i) => { const NavLink = item.href === "/vault" ? VaultLink : Link; return <div key={item.href} className="border-b border-border"><NavLink to={item.href} onClick={close} className="flex min-h-[62px] items-center justify-between font-heading text-[24px] text-foreground hover:text-accent"><span><span className="mr-5 font-body text-[11px] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>{item.label}</span><ArrowRight size={18} /></NavLink></div>; })}
-          <p className="mt-10 text-[13px] text-muted-foreground">Revenue infrastructure, built to compound.</p>
-        </div>
-      </div>}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
+
 export default Header;
