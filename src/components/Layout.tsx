@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
+import MovingCursor from "@/components/MovingCursor";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 const Layout = () => {
@@ -10,7 +11,8 @@ const Layout = () => {
   useSmoothScroll();
 
   return (
-    <div className={`${location.pathname === "/forge-vault" ? "" : "public-site "}min-h-screen flex flex-col font-body`}>
+    <div className="min-h-screen flex flex-col font-body">
+      <MovingCursor />
       <Header />
       <main className="flex-1">
         {/* Forge Vault runs its own entry choreography, so the global wipe is skipped there. */}

@@ -1,29 +1,81 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import SocialLinks from "@/components/SocialLinks";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
-const groups = [
-  { title: "Firm", links: [{ label: "About", href: "/about" }, { label: "Our Process", href: "/process" }, { label: "Careers", href: "/careers" }] },
-  { title: "Explore", links: [{ label: "Services", href: "/services" }, { label: "Case Studies", href: "/case-studies" }, { label: "Insights", href: "/insights" }, { label: "Forge Vault", href: "/forge-vault" }] },
-  { title: "Connect", links: [{ label: "Contact", href: "/contact" }, { label: "Business enquiries", href: "mailto:business@bitwellforge.com" }, { label: "Client support", href: "mailto:support@bitwellforge.com" }] },
+const navLinks = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Process", href: "/process" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Footer = () => {
-  const [expanded, setExpanded] = useState<string | null>(null);
-  return <footer className="public-deep section-padding pt-16 md:pt-24 pb-8">
-    <div className="mx-auto max-w-[1440px]">
-      <div className="grid grid-cols-1 gap-12 border-b border-border pb-14 md:grid-cols-12 md:gap-10 md:pb-20">
-        <div className="md:col-span-5"><Link to="/" className="font-heading text-[34px] font-semibold text-foreground">BitwellForge<span className="text-accent">.</span></Link><p className="mt-5 max-w-[320px] text-[15px] leading-relaxed text-muted-foreground">Revenue infrastructure. Built to compound.</p><Link to="/contact?service=General+Inquiry" className="mt-9 inline-flex min-h-11 items-center gap-3 border-b border-border text-[13px] font-medium text-foreground hover:text-accent">Book Infrastructure Audit <ArrowUpRight size={16} /></Link></div>
-        <div className="md:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-8">
-          {groups.map((group) => <div key={group.title} className="border-t border-border md:border-0">
-            <Button variant="ghost" onClick={() => setExpanded(expanded === group.title ? null : group.title)} aria-expanded={expanded === group.title} className="flex h-14 w-full justify-between rounded-none px-0 text-left text-[11px] font-semibold uppercase text-foreground hover:bg-transparent md:pointer-events-none md:h-auto md:justify-start md:pb-5"><span>{group.title}</span><ChevronDown size={16} className={`md:hidden transition-transform ${expanded === group.title ? "rotate-180" : ""}`} /></Button>
-            <ul className={`${expanded === group.title ? "block" : "hidden"} space-y-4 pb-6 md:block md:pb-0`}>{group.links.map((link) => <li key={link.href}><Link to={link.href} className="inline-flex min-h-8 items-center text-[13px] text-muted-foreground hover:text-foreground">{link.label}</Link></li>)}</ul>
-          </div>)}
+  const { ref, isVisible } = useScrollReveal({ once: true });
+
+  const fade = (delay: number) => ({
+    initial: { opacity: 0, y: 20 } as const,
+    animate: isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
+  });
+
+  return (
+    <footer
+      ref={ref}
+      className="relative bg-navy-deepest text-foreground border-t border-gold/15 overflow-hidden"
+    >
+      {/* Subtle gold grid */}
+      <div className="absolute inset-0 bg-gold-grid opacity-30 pointer-events-none" />
+      <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay pointer-events-none" />
+
+      <div className="relative section-padding max-w-[1400px] mx-auto pt-20 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-10">
+          {/* Brand */}
+          <motion.div className="md:col-span-5" {...fade(0)}>
+            <Link to="/" className="inline-block mb-5">
+              <span className="font-heading text-2xl md:text-3xl font-semibold tracking-tightest text-white">
+                Bitwell<span className="text-white">Forge</span>
+              </span>
+            </Link>
+            <p className="font-quote italic text-[17px] md:text-lg text-muted-foreground leading-[1.55] max-w-sm mb-8">
+              Revenue infrastructure. Built to compound.
+            </p>
+            <SocialLinks size={16} animate />
+          </motion.div>
+
+          {/* Nav */}
+          <motion.div className="md:col-span-7 md:text-right" {...fade(0.12)}>
+            <h4 className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 md:pr-0">Navigate</h4>
+            <ul className="space-y-3 md:ml-auto md:inline-block md:text-left">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    to={l.href}
+                    className="text-[13.5px] text-muted-foreground hover:text-gold transition-colors duration-300 inline-flex items-center gap-2 group"
+                  >
+                    <span className="h-px w-0 bg-gold/60 transition-all duration-400 group-hover:w-3" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* Gold divider */}
+        <div className="mt-16 mb-6 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-[11.5px]">
+          <p className="text-muted-foreground/70">
+            © {new Date().getFullYear()} BitwellForge. All rights reserved.
+          </p>
+          <p className="font-quote italic text-gold/80 text-[13px]">Crafted To Last</p>
         </div>
       </div>
-      <div className="flex flex-col gap-3 pt-6 text-[11px] text-muted-foreground md:flex-row md:justify-between"><span>© {new Date().getFullYear()} BitwellForge. All rights reserved.</span><span>Worldwide advisory, delivered remotely.</span></div>
-    </div>
-  </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

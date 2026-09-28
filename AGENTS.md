@@ -1,2 +1,0 @@
-- Scope the institutional public visual system to `.public-site` rather than changing root tokens, because the purchased Vault, affiliate portal, and checkout retain independent product identities.
-- Keep public navigation and homepage editorial data in small arrays, because current routes and article destinations must remain consistent across responsive views.
