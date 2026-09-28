@@ -62,13 +62,13 @@ const Header = () => {
   const close = () => { setOpen(null); setMobileOpen(false); };
 
   return (
-    <header className={`public-header fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 ${scrolled ? "shadow-subtle" : "public-header--top"}`}>
+    <header onMouseLeave={() => setOpen(null)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(null); }} className={`public-header fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 ${scrolled ? "shadow-subtle" : "public-header--top"}`}>
       <nav aria-label="Main navigation" className="section-padding mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-8">
         <Link to="/" onClick={close} className="font-heading text-[24px] font-semibold leading-none text-foreground md:text-[27px]">BitwellForge<span className="text-accent">.</span></Link>
         <div className="hidden lg:flex items-center gap-7 xl:gap-9">
           <Link className="public-nav-link text-[13px]" to="/about" aria-current={location.pathname === "/about" ? "page" : undefined}>About</Link>
           {(["Services", "Insights"] as const).map((name) => (
-            <div key={name} onMouseEnter={() => setOpen(name)} onMouseLeave={() => setOpen(null)}>
+            <div key={name} onMouseEnter={() => setOpen(name)}>
               <Button variant="ghost" size="sm" aria-expanded={open === name} aria-controls="public-mega-menu" onClick={() => setOpen(open === name ? null : name)} onFocus={() => setOpen(name)} className="public-nav-link h-11 rounded-none px-0 text-[13px] hover:bg-transparent hover:text-accent">
                 {name}<ChevronDown size={14} className={`transition-transform duration-300 ${open === name ? "rotate-180" : ""}`} />
               </Button>
@@ -83,7 +83,7 @@ const Header = () => {
         <Button ref={toggleRef} variant="ghost" size="icon" className="lg:hidden h-11 w-11 rounded-none" aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</Button>
       </nav>
       {open && !mobileOpen && (
-        <div id="public-mega-menu" className="public-mega hidden lg:block absolute left-0 right-0" onMouseEnter={() => setOpen(open)} onMouseLeave={() => setOpen(null)}>
+         <div id="public-mega-menu" className="public-mega hidden lg:block absolute left-0 right-0">
           <div className="section-padding mx-auto grid max-w-[1440px] grid-cols-12 gap-10 py-10">
             <div className="col-span-4 border-r border-border pr-10"><span className="public-kicker">Explore {open}</span><h2 className="mt-5 font-heading text-[30px] leading-tight text-foreground">{open === "Services" ? "The architecture behind durable growth." : "Thinking for consequential decisions."}</h2></div>
             <div className="col-span-8 grid grid-cols-2 gap-x-10 gap-y-1">
@@ -102,7 +102,7 @@ const Header = () => {
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       }}>
         <div className="mx-auto max-w-[700px]">
-          {links.map((item, i) => <div key={item.href} className="border-b border-border"><Link to={item.href} onClick={close} className="flex min-h-[62px] items-center justify-between font-heading text-[24px] text-foreground hover:text-accent"><span><span className="mr-5 font-body text-[11px] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>{item.label}</span><ArrowRight size={18} /></Link></div>)}
+           {links.map((item, i) => { const NavLink = item.href === "/vault" ? VaultLink : Link; return <div key={item.href} className="border-b border-border"><NavLink to={item.href} onClick={close} className="flex min-h-[62px] items-center justify-between font-heading text-[24px] text-foreground hover:text-accent"><span><span className="mr-5 font-body text-[11px] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>{item.label}</span><ArrowRight size={18} /></NavLink></div>; })}
           <p className="mt-10 text-[13px] text-muted-foreground">Revenue infrastructure, built to compound.</p>
         </div>
       </div>}
