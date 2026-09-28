@@ -33,7 +33,8 @@
 .public-nav-link { position: relative; display: inline-flex; align-items: center; min-height: 44px; gap: 5px; color: hsl(var(--foreground)); font-weight: 500; }
 .public-nav-link:hover, .public-nav-link[aria-current="page"], .public-nav-link[aria-expanded="true"] { color: hsl(var(--accent)); }
 .public-mega { background: hsl(var(--background)); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); box-shadow: 0 24px 40px hsl(var(--foreground) / 0.08); }
-.public-menu-panel { background: hsl(var(--background)); }
+.public-menu-panel { background: hsl(var(--background)); animation: public-menu-enter 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+@keyframes public-menu-enter { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
 .public-hero { min-height: min(800px, 91svh); background: hsl(var(--background)); }
 .public-hero-image { object-fit: cover; object-position: center; }
 .public-image-shade { background: linear-gradient(90deg, hsl(var(--background) / 0.99) 0%, hsl(var(--background) / 0.94) 41%, hsl(var(--background) / 0.28) 73%, transparent 100%); }
