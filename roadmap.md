@@ -14,7 +14,7 @@
 ## Institutional editorial rebuild
 - [x] Rebuild public identity as bright editorial consulting publication while preserving About, revenue infrastructure, and four disciplines
 - [x] Replace abstract homepage graphics with a structured operating framework and editorial imagery
-- [ ] Verify phone, tablet, desktop navigation and page presentation
+- [x] Verify phone, tablet, desktop navigation and page presentation
 
 ## Corporate website restructure
 - [ ] Rebuild the public header with a desktop mega menu and full screen mobile navigation
