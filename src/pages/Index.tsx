@@ -8,14 +8,14 @@ import operatorReview from "@/assets/advisory-operator-review.jpg";
 import strategySession from "@/assets/advisory-strategy-session.jpg";
 
 const capabilities = [
-  { number: "01", title: "Commercial Growth Strategy", copy: "Resolve market, offer, pricing, and growth decisions before execution compounds the wrong assumptions.", href: "/services/commercial-growth-strategy" },
-  { number: "02", title: "Client Acquisition Architecture", copy: "Design the connected demand, qualification, and conversion paths that create dependable commercial momentum.", href: "/services/client-acquisition-architecture" },
-  { number: "03", title: "Revenue Systems", copy: "Build offer, pipeline, sales, and reporting infrastructure around the economics of the business.", href: "/services/high-ticket-revenue-systems" },
-  { number: "04", title: "Market Authority Positioning", copy: "Make the firm legible to the right market through precise category, narrative, and evidence design.", href: "/services/market-authority-positioning" },
-  { number: "05", title: "Digital Visibility", copy: "Create durable discovery systems across search, content, and owned digital environments.", href: "/services/search-digital-visibility" },
-  { number: "06", title: "Performance Growth", copy: "Align paid growth with contribution economics, conversion quality, and operational capacity.", href: "/services/performance-growth" },
-  { number: "07", title: "Revenue Operations", copy: "Remove manual friction from commercial workflows while preserving human judgment where it matters.", href: "/services/ai-powered-revenue-operations" },
-  { number: "08", title: "Digital Product Commercialisation", copy: "Turn expertise into structured, valuable digital products with coherent routes to market.", href: "/services/digital-product-commercialization" },
+  { number: "01", title: "Commercial Growth Strategy", copy: "Resolve market, offer, pricing, and growth decisions before execution compounds the wrong assumptions.", href: "/services/growth-strategy" },
+  { number: "02", title: "Client Acquisition Architecture", copy: "Design the connected demand, qualification, and conversion paths that create dependable commercial momentum.", href: "/services/lead-generation" },
+  { number: "03", title: "Revenue Systems", copy: "Build offer, pipeline, sales, and reporting infrastructure around the economics of the business.", href: "/services/sales-systems" },
+  { number: "04", title: "Market Authority Positioning", copy: "Make the firm legible to the right market through precise category, narrative, and evidence design.", href: "/services/linkedin" },
+  { number: "05", title: "Digital Visibility", copy: "Create durable discovery systems across search, content, and owned digital environments.", href: "/services/seo" },
+  { number: "06", title: "Performance Growth", copy: "Align paid growth with contribution economics, conversion quality, and operational capacity.", href: "/services/performance-marketing" },
+  { number: "07", title: "Revenue Operations", copy: "Remove manual friction from commercial workflows while preserving human judgment where it matters.", href: "/services/ai-automation" },
+  { number: "08", title: "Digital Product Commercialisation", copy: "Turn expertise into structured, valuable digital products with coherent routes to market.", href: "/services/digital-products" },
 ];
 
 const systems = [
@@ -60,6 +60,7 @@ const Index = () => {
             <Link className="bf-action bf-action-primary" to="/contact?service=Commercial+Constraint">Discuss a Commercial Constraint <ArrowRight aria-hidden size={16} /></Link>
             <Link className="bf-action bf-action-secondary" to="/process">Explore Our Approach <ArrowRight aria-hidden size={16} /></Link>
           </motion.div>
+          <p className="bf-image-disclosure">Editorial illustration. Not a client engagement.</p>
         </div>
       </section>
 
