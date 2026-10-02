@@ -12,8 +12,8 @@
 - [x] Verify the previous contact address is absent project-wide
 
 ## Corporate website restructure
-- [x] Rebuild the public header with restrained desktop navigation and full screen mobile navigation
-- [x] Restructure the homepage around problem, approach, capabilities, systems, people, and insights
-- [x] Rebuild the public footer with desktop columns and mobile accordions
-- [x] Apply the BitwellForge black, ivory, gold, titanium, and navy design system
+- [ ] Rebuild the public header with a desktop mega menu and full screen mobile navigation
+- [ ] Restructure the homepage around Hero, Our Expertise, Latest Insights, and Global Footprint
+- [ ] Rebuild the public footer with desktop columns and mobile accordions
+- [ ] Apply the BitwellForge black, ivory, gold, titanium, and navy design system
 - [ ] Verify responsive behavior, reduced motion, navigation, and metadata

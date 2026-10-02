@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Menu, Moon, Sun, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
-import { Button } from "@/components/ui/button";
+import { hasActiveOpenings } from "@/data/jobs";
+import VaultLink from "@/components/vault/VaultLink";
 
-const primaryNav = [
-  { label: "Approach", href: "/process" },
-  { label: "Capabilities", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Insights", href: "/insights" },
+const navItems = [
   { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Process", href: "/process" },
+  { label: "Insights", href: "/insights" },
+  { label: "Careers", href: "/careers", hiring: true },
+  { label: "Contact", href: "/contact" },
+  { label: "Vault", href: "/vault" },
 ];
 
 const Header = () => {
@@ -20,45 +24,168 @@ const Header = () => {
   const { isDark, toggle } = useDarkMode();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 28);
-    onScroll();
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMobileOpen(false), [location.pathname]);
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+    setMobileOpen(false);
+  }, [location]);
 
   return (
-    <header className={`bf-header ${scrolled || mobileOpen ? "is-scrolled" : ""}`}>
-      <nav className="bf-header-inner" aria-label="Primary navigation">
-        <Link to="/" className="bf-wordmark" aria-label="BitwellForge home">BitwellForge</Link>
-        <div className="bf-desktop-nav">
-          {primaryNav.map(item => <Link key={item.href} to={item.href} className={location.pathname.startsWith(item.href) ? "is-active" : ""}>{item.label}</Link>)}
-          <Link to="/forge-vault">Forge Vault</Link>
-          <Link className="bf-header-cta" to="/contact?service=Commercial+Constraint">Discuss a Constraint <ArrowRight size={14} aria-hidden /></Link>
-          <Button variant="ghost" size="icon" onClick={toggle} className="bf-icon-button" aria-label={isDark ? "Use light theme" : "Use dark theme"}>{isDark ? <Sun /> : <Moon />}</Button>
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/70 backdrop-blur-2xl border-b border-border/30 shadow-[0_1px_20px_hsl(var(--foreground)/0.04)]"
+          : "bg-background/20 backdrop-blur-lg"
+      }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+    >
+      <nav className="section-padding flex items-center justify-between h-14 md:h-[72px] max-w-[1400px] mx-auto">
+        <Link to="/" className="font-heading text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+          <motion.span
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block"
+          >
+            BitwellForge
+          </motion.span>
+        </Link>
+
+        {/* Desktop */}
+        <div className="hidden lg:flex items-center gap-10">
+          {navItems.map((item, i) => {
+            const isVault = item.href === "/vault";
+            const NavEl = isVault ? VaultLink : Link;
+            return (
+            <motion.div
+              key={item.href}
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className={isVault ? "ml-2 pl-8 border-l border-border/40" : undefined}
+            >
+              <NavEl
+                to={item.href}
+                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 group ${
+                  isVault
+                    ? "vault-nav"
+                    : location.pathname === item.href
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  {item.label}
+                  {isVault && <span className="vault-arrow" aria-hidden="true">→</span>}
+                  {item.hiring && hasActiveOpenings() && (
+                    <span
+                      className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/70"
+                      aria-label="Hiring"
+                      title="We're hiring"
+                    />
+                  )}
+                </span>
+                {!isVault && (
+                <span
+                  className={`absolute -bottom-1 left-0 h-px w-full bg-accent transition-transform duration-600 ${
+                    location.pathname === item.href
+                      ? "scale-x-100 origin-left"
+                      : "scale-x-0 origin-left group-hover:scale-x-100 group-hover:origin-left"
+                  }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.76, 0, 0.24, 1)" }}
+                />
+                )}
+              </NavEl>
+            </motion.div>
+            );
+          })}
+
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, type: "spring", stiffness: 300, damping: 20 }}
+            onClick={toggle}
+            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-all duration-300"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </motion.button>
         </div>
-        <div className="bf-mobile-controls">
-          <Button variant="ghost" size="icon" onClick={toggle} className="bf-icon-button" aria-label={isDark ? "Use light theme" : "Use dark theme"}>{isDark ? <Sun /> : <Moon />}</Button>
-          <Button variant="ghost" size="icon" onClick={() => setMobileOpen(value => !value)} className="bf-icon-button" aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? "Close menu" : "Open menu"}>{mobileOpen ? <X /> : <Menu />}</Button>
+
+        {/* Mobile + Tablet */}
+        <div className="flex lg:hidden items-center gap-2">
+          <button
+            onClick={toggle}
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-foreground p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </nav>
+
       <AnimatePresence>
-        {mobileOpen && <motion.div id="mobile-navigation" className="bf-mobile-menu" initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}>
-          <div className="bf-mobile-menu-inner">
-            <p className="bf-kicker">Navigate</p>
-            {primaryNav.map((item, index) => <motion.div key={item.href} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04 }}><Link to={item.href}>{item.label}<ArrowRight size={18} aria-hidden /></Link></motion.div>)}
-            <Link to="/forge-vault">Forge Vault<ArrowRight size={18} aria-hidden /></Link>
-            <Link className="bf-mobile-cta" to="/contact?service=Commercial+Constraint">Discuss a Commercial Constraint</Link>
-            <div className="bf-mobile-meta"><Link to="/careers">Careers</Link><Link to="/contact">Contact</Link><Link to="/vault">Client access</Link></div>
-          </div>
-        </motion.div>}
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden bg-background/90 backdrop-blur-2xl border-t border-border/50 overflow-hidden"
+          >
+            <div className="section-padding py-6 flex flex-col gap-5">
+              {navItems.map((item, i) => {
+                const isVault = item.href === "/vault";
+                const NavEl = isVault ? VaultLink : Link;
+                return (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className={isVault ? "mt-3 pt-5 border-t border-border/40" : undefined}
+                >
+                  <NavEl
+                    to={item.href}
+                    className={`text-base font-medium transition-colors inline-flex items-center gap-2 min-h-[44px] ${
+                      isVault
+                        ? "vault-nav"
+                        : location.pathname === item.href
+                        ? "text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {item.label}
+                    {isVault && <span className="vault-arrow" aria-hidden="true">→</span>}
+                    {item.hiring && hasActiveOpenings() && (
+                      <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.22em] uppercase text-muted-foreground">
+                        <span className="h-1.5 w-1.5 rounded-full bg-foreground/70" />
+                        Hiring
+                      </span>
+                    )}
+                  </NavEl>
+                </motion.div>
+                );
+              })}
+
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 };
 
