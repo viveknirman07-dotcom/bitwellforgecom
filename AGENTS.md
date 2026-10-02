@@ -1,2 +1,3 @@
-- Scope the institutional public visual system to `.public-site` rather than changing root tokens, because the purchased Vault, affiliate portal, and checkout retain independent product identities.
-- Keep public navigation and homepage editorial data in small arrays, because current routes and article destinations must remain consistent across responsive views.
+# Project architecture
+
+The public website uses a human editorial consulting system with scoped `bf-*` classes, while the authenticated Vault retains its separate product workspace language. This keeps public brand changes from destabilising purchased product flows.
