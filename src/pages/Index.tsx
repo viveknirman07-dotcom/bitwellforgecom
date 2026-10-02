@@ -1,122 +1,53 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/use-seo";
-import founderSession from "@/assets/advisory-founder-session.jpg";
-import operatorReview from "@/assets/advisory-operator-review.jpg";
-import strategySession from "@/assets/advisory-strategy-session.jpg";
+import { articles } from "@/pages/Insights";
+import architecture from "@/assets/editorial-architecture.jpg";
 
-const capabilities = [
-  { number: "01", title: "Commercial Growth Strategy", copy: "Resolve market, offer, pricing, and growth decisions before execution compounds the wrong assumptions.", href: "/services/growth-strategy" },
-  { number: "02", title: "Client Acquisition Architecture", copy: "Design the connected demand, qualification, and conversion paths that create dependable commercial momentum.", href: "/services/lead-generation" },
-  { number: "03", title: "Revenue Systems", copy: "Build offer, pipeline, sales, and reporting infrastructure around the economics of the business.", href: "/services/sales-systems" },
-  { number: "04", title: "Market Authority Positioning", copy: "Make the firm legible to the right market through precise category, narrative, and evidence design.", href: "/services/linkedin" },
-  { number: "05", title: "Digital Visibility", copy: "Create durable discovery systems across search, content, and owned digital environments.", href: "/services/seo" },
-  { number: "06", title: "Performance Growth", copy: "Align paid growth with contribution economics, conversion quality, and operational capacity.", href: "/services/performance-marketing" },
-  { number: "07", title: "Revenue Operations", copy: "Remove manual friction from commercial workflows while preserving human judgment where it matters.", href: "/services/ai-automation" },
-  { number: "08", title: "Digital Product Commercialisation", copy: "Turn expertise into structured, valuable digital products with coherent routes to market.", href: "/services/digital-products" },
-];
-
-const systems = [
-  { name: "FounderOS", descriptor: "Decision infrastructure", copy: "A disciplined operating layer for founders making interconnected commercial and operational decisions." },
-  { name: "Client Acquisition OS", descriptor: "Demand infrastructure", copy: "A connected system for market selection, outreach, qualification, follow up, and pipeline learning." },
-  { name: "Forge Vault", descriptor: "Commercial knowledge system", copy: "Thirty one modules and forty four working assets for building a more rigorous commercial operation.", href: "/forge-vault" },
-];
-
-const insights = [
-  { slug: "the-cost-of-an-undecided-offer", category: "Commercial Strategy", date: "Sep 2026", title: "The Cost of an Undecided Offer", excerpt: "An unfinished offer transfers the work of definition to the buyer, then pays for it through slower cycles and weaker margin." },
-  { slug: "retention-is-an-operational-outcome", category: "Growth Operations", date: "Sep 2026", title: "Retention Is an Operational Outcome, Not a Relationship Skill", excerpt: "Clients rarely leave because the relationship failed. They leave when the operating rhythm stops making progress visible." },
-  { slug: "the-trust-window-why-speed-to-decision-defines-modern-b2b-sales", category: "Revenue Infrastructure", date: "Sep 2026", title: "The Trust Window", excerpt: "Between buyer intent and buyer inertia sits a narrow window. Commercial architecture determines whether a firm can move inside it." },
+const description = "BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.";
+const disciplines = [
+  { number: "01", name: "Strategy", title: "Commercial Growth Strategy", detail: "Define the commercial thesis, position the offer, and make every investment answer to a clear market decision.", href: "/services/growth-strategy" },
+  { number: "02", name: "Acquisition", title: "Client Acquisition Architecture", detail: "Build deliberate pathways from market attention to qualified conversations, beyond any single channel.", href: "/services/lead-generation" },
+  { number: "03", name: "Revenue", title: "High-Ticket Revenue Systems", detail: "Turn the sales process into a repeatable operating discipline with clearer decisions and stronger conversion.", href: "/services/sales-systems" },
+  { number: "04", name: "Operations", title: "AI-Powered Revenue Operations", detail: "Connect workflows, data, and automation so the organisation can grow without equivalent friction.", href: "/services/ai-automation" },
 ];
 
 const Index = () => {
   const reduced = useReducedMotion();
-  useSEO({
-    title: "BitwellForge | Commercial Architecture & Constraint Advisory",
-    description: "BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.",
-    canonicalPath: "/",
-  });
-
-  return (
-    <div className="bf-home">
-      <section className="bf-hero" aria-labelledby="home-title">
-        <motion.img
-          src={founderSession}
-          width={1600}
-          height={1200}
-          alt="A founder and advisor reviewing commercial performance together"
-          className="bf-hero-image"
-          initial={false}
-          animate={reduced ? undefined : { scale: [1.035, 1] }}
-          transition={{ duration: 1.4, ease: [0.25, 0.1, 0.25, 1] }}
-        />
-        <div className="bf-hero-shade" aria-hidden="true" />
-        <div className="bf-shell bf-hero-content">
-          <motion.p className="bf-kicker" initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>Revenue Infrastructure Advisory</motion.p>
-          <motion.h1 id="home-title" initial={reduced ? false : { opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.25 }}>Growth rarely fails in one place.</motion.h1>
-          <motion.p className="bf-hero-copy" initial={reduced ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.42 }}>BitwellForge works across the commercial, operational, and digital constraints that govern performance. We begin with the problem, then determine the intervention.</motion.p>
-          <motion.div className="bf-actions" initial={reduced ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.58 }}>
-            <Link className="bf-action bf-action-primary" to="/contact?service=Commercial+Constraint">Discuss a Commercial Constraint <ArrowRight aria-hidden size={16} /></Link>
-            <Link className="bf-action bf-action-secondary" to="/process">Explore Our Approach <ArrowRight aria-hidden size={16} /></Link>
-          </motion.div>
-          <p className="bf-image-disclosure">Editorial illustration. Not a client engagement.</p>
-        </div>
-      </section>
-
-      <section className="bf-section bf-ivory" aria-labelledby="problem-title">
-        <div className="bf-shell bf-editorial-split">
-          <ScrollReveal><p className="bf-kicker">The commercial problem</p><h2 id="problem-title">The visible issue is rarely the governing constraint.</h2></ScrollReveal>
-          <ScrollReveal delay={100}><div className="bf-copy-stack"><p>When growth slows, businesses often respond with a predetermined intervention. More activity. A new channel. Another hire. A different tool.</p><p>But acquisition, offer design, sales, delivery, and operations are interdependent. Improving one in isolation can move pressure elsewhere without changing the economics of the whole.</p><p>Our work is to identify the constraint that governs the system, understand its second order effects, and design a proportionate response.</p></div></ScrollReveal>
-        </div>
-      </section>
-
-      <section className="bf-section bf-dark" aria-labelledby="approach-title">
-        <div className="bf-shell">
-          <div className="bf-image-editorial">
-            <ScrollReveal className="bf-image-wrap"><img src={operatorReview} width={1600} height={1200} loading="lazy" alt="An operator reviewing business information and commercial documents" /></ScrollReveal>
-            <ScrollReveal className="bf-image-copy" delay={120}><p className="bf-kicker">Our approach</p><h2 id="approach-title">Diagnosis before prescription.</h2><p>We assess the business model, economics, maturity, operating capacity, and dependencies surrounding the problem. Scope follows evidence, not a fixed menu of interventions.</p><Link className="bf-text-link" to="/process">How we work <ArrowRight aria-hidden size={15} /></Link></ScrollReveal>
+  useSEO({ title: "BitwellForge | Commercial Architecture & Constraint Advisory", description, canonicalPath: "/" });
+  return <div className="public-home">
+    <section className="public-hero relative flex items-center overflow-hidden section-padding">
+      <motion.img src={architecture} alt="Precise geometry of a contemporary institutional building" width={1600} height={900} className="public-hero-image absolute inset-0 h-full w-full" initial={false} animate={reduced ? {} : { scale: 1.04 }} transition={{ duration: 8, ease: "easeOut" }} />
+      <div className="public-image-shade absolute inset-0" aria-hidden="true" />
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-32 pb-20 md:pt-36 md:pb-28">
+        <motion.div initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-[830px]">
+          <p className="public-kicker mb-7">Commercial infrastructure &amp; revenue growth consulting</p>
+          <h1 className="font-heading font-semibold leading-[1.08] text-foreground text-[42px] sm:text-[54px] md:text-[65px] lg:text-[78px]">What's assembled breaks down.<br />What's engineered compounds.</h1>
+          <div className="mt-8 max-w-[640px] border-l-2 border-accent pl-5 md:mt-10 md:pl-7"><p className="text-[16px] leading-[1.7] text-muted-foreground md:text-[18px]">{description}</p></div>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-11">
+            <Button asChild className="h-12 rounded-none px-7 text-[13px] sm:h-14"><Link to="/contact?service=General+Inquiry">Book Infrastructure Audit <ArrowRight size={16} /></Link></Button>
+            <Button asChild variant="outline" className="h-12 rounded-none border-foreground bg-background/70 px-7 text-[13px] sm:h-14"><Link to="/about">Explore the firm <ArrowUpRight size={16} /></Link></Button>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 z-10 hidden border-t border-border bg-background/80 md:block"><div className="section-padding mx-auto flex max-w-[1440px] items-center justify-between py-4 text-[11px] font-medium uppercase tracking-wide text-muted-foreground"><span>Independent advisory</span><span>Strategy / Acquisition / Revenue / Operations</span><span>Worldwide</span></div></div>
+    </section>
 
-      <section className="bf-section bf-ivory" aria-labelledby="capabilities-title">
-        <div className="bf-shell">
-          <ScrollReveal className="bf-section-head"><p className="bf-kicker">Capabilities</p><h2 id="capabilities-title">Connected disciplines for connected problems.</h2><p>Each capability can stand alone. The value emerges from understanding how it affects the broader revenue infrastructure.</p></ScrollReveal>
-          <div className="bf-capability-list">
-            {capabilities.map((item, index) => <ScrollReveal key={item.title} delay={(index % 4) * 70}><Link to={item.href} className="bf-capability"><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p><ArrowRight aria-hidden size={18} /></Link></ScrollReveal>)}
-          </div>
-        </div>
-      </section>
+    <section className="section-padding border-t border-border bg-background py-20 md:py-28" id="expertise"><div className="mx-auto max-w-[1440px]">
+      <ScrollReveal><div className="grid gap-8 border-b border-border pb-12 lg:grid-cols-12 lg:gap-16"><div className="lg:col-span-7"><p className="public-kicker mb-5">Our expertise / 01</p><h2 className="max-w-[760px] font-heading text-[36px] font-semibold leading-[1.14] text-foreground md:text-[50px]">Four disciplines.<br />One revenue infrastructure.</h2></div><p className="max-w-[390px] self-end text-[16px] leading-[1.7] text-muted-foreground lg:col-span-5">The commercial system is only as strong as the relationship between its parts. Our work addresses those relationships rather than isolated symptoms.</p></div></ScrollReveal>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">{disciplines.map((item, i) => <ScrollReveal key={item.number} delay={i * 100} className="h-full"><article className="group flex h-full min-h-[360px] flex-col border-b border-border py-9 md:border-r md:px-6 lg:min-h-[420px] lg:px-7 first:pl-0 last:border-r-0"><div className="flex items-center justify-between text-[12px] font-semibold text-accent"><span>{item.number} / {item.name}</span><ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" /></div><div className="mt-14"><h3 className="font-heading text-[27px] font-semibold leading-[1.18] text-foreground md:text-[30px]">{item.title}</h3><p className="mt-6 text-[14px] leading-[1.7] text-muted-foreground">{item.detail}</p></div><Link className="mt-auto inline-flex min-h-11 items-center gap-2 pt-7 text-[12px] font-semibold text-accent hover:underline" to={item.href}>Explore discipline <ArrowRight size={15} /></Link></article></ScrollReveal>)}</div>
+      <div className="flex justify-end pt-8"><Link className="inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold text-accent hover:underline" to="/services">View all services <ArrowRight size={16} /></Link></div>
+    </div></section>
 
-      <section className="bf-section bf-navy" aria-labelledby="systems-title">
-        <div className="bf-shell">
-          <ScrollReveal className="bf-section-head"><p className="bf-kicker">Systems and playbooks</p><h2 id="systems-title">Infrastructure that remains useful beyond the engagement.</h2></ScrollReveal>
-          <div className="bf-systems">
-            {systems.map((system, index) => <ScrollReveal key={system.name} delay={index * 90}><article className="bf-system"><p className="bf-system-index">0{index + 1}</p><p className="bf-kicker">{system.descriptor}</p><h3>{system.name}</h3><p>{system.copy}</p>{system.href && <Link className="bf-text-link" to={system.href}>Access Forge Vault <ArrowRight aria-hidden size={15} /></Link>}</article></ScrollReveal>)}
-          </div>
-        </div>
-      </section>
+    <section className="public-deep section-padding py-20 md:py-28"><div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-12 lg:gap-20"><ScrollReveal className="lg:col-span-5"><p className="public-kicker mb-6">Our approach / 02</p><h2 className="font-heading text-[35px] font-semibold leading-[1.16] text-foreground md:text-[48px]">Find the constraint.<br />Design the system.</h2><p className="mt-7 max-w-[430px] text-[16px] leading-[1.75] text-muted-foreground">A visible performance issue is rarely a standalone problem. We study how strategy, demand, conversion, and delivery interact before deciding what to change.</p><Link to="/process" className="mt-9 inline-flex min-h-11 items-center gap-3 border-b border-border text-[13px] font-semibold text-foreground hover:text-accent">How we work <ArrowUpRight size={17} /></Link></ScrollReveal><ScrollReveal className="lg:col-span-7" delay={120}><div className="border-t border-border"><div className="grid grid-cols-[70px_1fr] gap-5 border-b border-border py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">INPUT</span><span className="font-heading text-[22px] text-foreground">Commercial signal</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">What the business observes</span></div><div className="grid grid-cols-[70px_1fr] gap-5 border-b border-border py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">ANALYSIS</span><span className="font-heading text-[22px] text-foreground">Underlying constraint</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">Why performance stalls</span></div><div className="grid grid-cols-[70px_1fr] gap-5 border-b border-border py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">DESIGN</span><span className="font-heading text-[22px] text-foreground">Connected intervention</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">What the system needs</span></div><div className="grid grid-cols-[70px_1fr] gap-5 py-6 sm:grid-cols-[110px_1fr_1fr]"><span className="text-[12px] font-semibold text-accent">OUTCOME</span><span className="font-heading text-[22px] text-foreground">Durable capacity</span><span className="col-start-2 text-[13px] text-muted-foreground sm:col-auto">What continues to work</span></div></div></ScrollReveal></div></section>
 
-      <section className="bf-section bf-ivory" aria-labelledby="human-title">
-        <div className="bf-shell bf-human-grid">
-          <ScrollReveal className="bf-human-copy"><p className="bf-kicker">Human judgment</p><h2 id="human-title">Systems clarify the work. People still make the decisions.</h2><p>Commercial infrastructure is not an abstraction. It changes how founders allocate attention, how teams coordinate, and how clients experience the business. The strongest system supports judgment rather than attempting to replace it.</p><Link className="bf-text-link" to="/about">About BitwellForge <ArrowRight aria-hidden size={15} /></Link></ScrollReveal>
-          <ScrollReveal className="bf-image-wrap" delay={100}><img src={strategySession} width={1600} height={1200} loading="lazy" alt="A small strategy group examining a commercial operating model" /></ScrollReveal>
-        </div>
-      </section>
+    <section className="section-padding bg-secondary py-20 md:py-28"><div className="mx-auto max-w-[1440px]"><ScrollReveal><div className="mb-12 flex flex-col justify-between gap-6 border-b border-border pb-9 md:flex-row md:items-end"><div><p className="public-kicker mb-5">Perspectives / 03</p><h2 className="font-heading text-[36px] font-semibold text-foreground md:text-[50px]">Latest insights</h2></div><Link to="/insights" className="inline-flex min-h-11 items-center gap-3 text-[13px] font-semibold text-accent hover:underline">Explore all insights <ArrowRight size={16} /></Link></div></ScrollReveal><div className="grid gap-0 md:grid-cols-2 lg:grid-cols-3">{articles.slice(0, 3).map((article, i) => <ScrollReveal key={article.slug} delay={i * 100} className="h-full"><Link to={`/insights/${article.slug}`} className="group flex h-full min-h-[335px] flex-col border-b border-border bg-background p-7 transition-colors duration-300 hover:bg-card md:border-r md:p-9 last:border-r-0"><span className="public-kicker">{article.category} / {article.date}</span><h3 className="mt-9 font-heading text-[27px] font-semibold leading-[1.2] text-foreground group-hover:underline md:text-[30px]">{article.title}</h3><p className="mt-5 line-clamp-3 text-[14px] leading-[1.7] text-muted-foreground">{article.excerpt}</p><span className="mt-auto flex min-h-11 items-end gap-2 pt-8 text-[12px] font-semibold text-accent">Read perspective <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" /></span></Link></ScrollReveal>)}</div></div></section>
 
-      <section className="bf-section bf-dark" aria-labelledby="insights-title">
-        <div className="bf-shell">
-          <ScrollReveal className="bf-section-head"><p className="bf-kicker">Latest insights</p><h2 id="insights-title">Thinking for the commercial decisions that compound.</h2></ScrollReveal>
-          <div className="bf-insights">
-            {insights.map((article, index) => <ScrollReveal key={article.slug} delay={index * 100}><Link to={`/insights/${article.slug}`} className="bf-insight"><p className="bf-insight-meta">{article.category}<span>{article.date}</span></p><h3>{article.title}</h3><p>{article.excerpt}</p><span className="bf-text-link">Read insight <ArrowRight aria-hidden size={15} /></span></Link></ScrollReveal>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="bf-closing" aria-labelledby="closing-title"><div className="bf-shell"><ScrollReveal><p className="bf-kicker">Begin with the constraint</p><h2 id="closing-title">A serious commercial problem deserves a precise first conversation.</h2><p>Tell us what is changing, where performance is stalling, and what the business has already tried.</p><Link className="bf-action bf-action-primary" to="/contact?service=Commercial+Constraint">Discuss a Commercial Constraint <ArrowRight aria-hidden size={16} /></Link></ScrollReveal></div></section>
-    </div>
-  );
+    <section className="section-padding bg-background py-20 md:py-28"><div className="mx-auto grid max-w-[1440px] gap-12 border-t border-border pt-12 lg:grid-cols-12 lg:gap-20"><ScrollReveal className="lg:col-span-6"><p className="public-kicker mb-5">Global footprint / 04</p><h2 className="font-heading text-[35px] font-semibold leading-[1.18] text-foreground md:text-[48px]">Built for businesses without borders.</h2></ScrollReveal><ScrollReveal className="lg:col-span-6" delay={100}><p className="max-w-[540px] text-[16px] leading-[1.8] text-muted-foreground">BitwellForge works with service businesses across markets. Our engagements are designed for remote collaboration, with a focus on commercial context rather than geography.</p><div className="mt-9 grid grid-cols-2 border-y border-border py-6 text-[12px] font-semibold uppercase text-accent"><span>Operating model</span><span>Worldwide / Remote</span></div></ScrollReveal></div></section>
+    <section className="public-deep section-padding py-20 md:py-28"><div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-9 md:flex-row md:items-end"><div><p className="public-kicker mb-6">Start a conversation</p><h2 className="max-w-[720px] font-heading text-[38px] font-semibold leading-[1.12] text-foreground md:text-[56px]">Build the infrastructure behind what comes next.</h2></div><Button asChild className="h-14 shrink-0 rounded-none bg-background px-7 text-[13px] text-primary hover:bg-secondary"><Link to="/contact?service=General+Inquiry">Book Infrastructure Audit <ArrowRight size={16} /></Link></Button></div></section>
+  </div>;
 };
-
 export default Index;
