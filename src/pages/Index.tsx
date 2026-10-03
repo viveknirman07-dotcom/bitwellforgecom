@@ -75,7 +75,7 @@ const Index = () => {
     <div className="bf-home bg-background text-foreground">
       {/* Announcement */}
       {bannerOpen && (
-        <div className="dark bg-background text-foreground relative z-[60] mt-[72px] md:mt-[88px]">
+        <div className="dark bg-background text-foreground relative z-[60] mt-[72px] lg:mt-[113px]">
           <div className="max-w-[1400px] mx-auto px-12 h-11 flex items-center justify-center">
             <Link to="/forge-vault" className="group inline-flex items-center gap-2 font-heading text-[14px] md:text-[16px] text-center">
               The Commercial Growth System is now available in Forge Vault
@@ -89,7 +89,7 @@ const Index = () => {
       )}
 
       {/* HERO */}
-      <section className={`relative ${bannerOpen ? "" : "mt-[72px] md:mt-[88px]"}`}>
+      <section className={`relative ${bannerOpen ? "" : "mt-[72px] lg:mt-[113px]"}`}>
         <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
           <motion.img src={heroImg} alt="Advisor overlooking the city at dusk" width={1920} height={1080} fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
