@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Sun, Moon, Search, ChevronDown, Globe, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { hasActiveOpenings } from "@/data/jobs";
+import { Button } from "@/components/ui/button";
 
 type Mega = { heading: string; intro: string; links: { label: string; href: string }[] };
 
@@ -48,12 +49,14 @@ const ease = [0.25, 0.1, 0.25, 1] as const;
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
   const [openMega, setOpenMega] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const { isDark, toggle } = useDarkMode();
+  const reduced = useReducedMotion();
   const closeTimer = useRef<number>();
 
   useEffect(() => {
@@ -65,22 +68,26 @@ const Header = () => {
 
   useEffect(() => {
     setMobileOpen(false);
+    setMobileSection(null);
     setOpenMega(null);
     setSearchOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    const previousOverflow = document.body.style.overflow;
+    if (mobileOpen) document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") { setOpenMega(null); setMobileOpen(false); setSearchOpen(false); }
     };
     window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", onKey); };
   }, [mobileOpen]);
 
   const onSearch = (e: FormEvent) => {
     e.preventDefault();
     navigate(`/insights${q.trim() ? `?q=${encodeURIComponent(q.trim())}` : ""}`);
+    setMobileOpen(false);
+    setSearchOpen(false);
   };
 
   const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/");
@@ -89,8 +96,8 @@ const Header = () => {
 
   return (
     <header
-      className={`${overHero ? "dark " : ""}fixed top-0 inset-x-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 border-b ${
-        solid ? "bg-background/85 backdrop-blur-xl border-border" : "bg-transparent border-transparent"
+      className={`${overHero ? "dark " : ""}fixed top-0 inset-x-0 z-50 transition-[background-color,border-color] duration-300 border-b ${
+        solid ? "bg-background border-border" : "bg-background border-transparent"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.25,0.1,0.25,1)" }}
       onMouseLeave={() => { closeTimer.current = window.setTimeout(() => setOpenMega(null), 150); }}
@@ -100,9 +107,9 @@ const Header = () => {
       <div className="hidden lg:block border-b border-border/60">
         <div className="max-w-[1440px] mx-auto px-10 h-9 flex items-center justify-end gap-6 text-[12px] text-muted-foreground">
           <span className="inline-flex items-center gap-1.5"><Globe size={13} aria-hidden /> Global, remote delivery</span>
-          <button onClick={toggle} aria-label="Toggle theme" className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors min-h-[36px]">
+          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors min-h-[36px]">
             {isDark ? <Sun size={13} /> : <Moon size={13} />} {isDark ? "Light" : "Dark"}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -140,20 +147,20 @@ const Header = () => {
         </ul>
 
         <div className="hidden lg:flex items-center">
-          <button onClick={() => setSearchOpen((v) => !v)} aria-label="Search insights" aria-expanded={searchOpen}
+          <Button variant="ghost" onClick={() => setSearchOpen((v) => !v)} aria-label="Search insights" aria-expanded={searchOpen}
             className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:bg-secondary transition-colors">
             {searchOpen ? <X size={18} /> : <Search size={18} />}
-          </button>
+          </Button>
         </div>
 
         <div className="flex lg:hidden items-center gap-1">
-          <button onClick={toggle} aria-label="Toggle theme" className="h-11 w-11 inline-flex items-center justify-center text-foreground">
+          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <button onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={mobileOpen}
-            className="h-11 w-11 inline-flex items-center justify-center text-foreground">
+          </Button>
+          <Button variant="ghost" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={mobileOpen} aria-controls="mobile-site-menu"
+            className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          </Button>
         </div>
       </nav>
 
@@ -166,7 +173,7 @@ const Header = () => {
               <Search size={20} className="text-muted-foreground" aria-hidden />
               <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search insights and perspectives"
                 aria-label="Search insights" className="flex-1 bg-transparent text-2xl font-heading text-foreground placeholder:text-muted-foreground outline-none" />
-              <button type="submit" className="h-11 px-5 bg-primary text-primary-foreground text-[13px] font-semibold">Search</button>
+              <Button type="submit" className="h-11 px-5 bg-primary text-primary-foreground text-[13px] font-semibold">Search</Button>
             </div>
           </motion.form>
         )}
@@ -200,23 +207,28 @@ const Header = () => {
       {/* Mobile full screen menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.45, ease }}
-            className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-background overflow-y-auto">
-            <div className="px-4 md:px-8 py-6 flex flex-col">
+          <motion.div initial={reduced ? false : { opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, x: "100%" }}
+            transition={{ duration: reduced ? 0 : 0.45, ease }}
+            id="mobile-site-menu" aria-label="Mobile navigation" role="navigation"
+            className="lg:hidden fixed inset-x-0 top-16 h-[calc(100dvh-4rem)] bg-background overflow-y-auto overscroll-contain touch-pan-y shadow-elevated">
+            <div className="px-4 md:px-8 py-6 pb-16 flex flex-col">
               <form onSubmit={onSearch} className="flex items-center gap-3 border-b border-border pb-4 mb-2">
                 <Search size={18} className="text-muted-foreground" aria-hidden />
                 <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search insights" aria-label="Search insights"
                   className="flex-1 h-11 bg-transparent text-foreground placeholder:text-muted-foreground outline-none" />
               </form>
               {navItems.map((item, i) => (
-                <motion.div key={item.href} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05, duration: 0.35, ease }}>
-                  <Link to={item.href} className={`flex items-center justify-between min-h-[56px] border-b border-border font-heading text-[24px] ${isActive(item.href) ? "text-foreground" : "text-foreground/80"}`}>
+                <motion.div key={item.href} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduced ? 0 : 0.1 + i * 0.05, duration: reduced ? 0 : 0.35, ease }}>
+                  <div className="flex items-center border-b border-border">
+                  <Link to={item.href} onClick={() => setMobileOpen(false)} className={`flex flex-1 items-center justify-between min-h-[56px] font-heading text-[24px] ${isActive(item.href) ? "text-foreground" : "text-foreground/80"}`}>
                     <span className="inline-flex items-center gap-2">{item.label}
                       {item.hiring && hasActiveOpenings() && <span className="text-[10px] font-body uppercase tracking-[0.2em] text-muted-foreground">Hiring</span>}
                     </span>
-                    <ArrowRight size={18} />
+                    {!mega[item.label] && <ArrowRight size={18} />}
                   </Link>
+                  {mega[item.label] && <Button variant="ghost" size="icon" className="shrink-0 h-12 w-12" aria-label={`Show ${item.label} links`} aria-expanded={mobileSection === item.label} aria-controls={`mobile-submenu-${i}`} onClick={() => setMobileSection(mobileSection === item.label ? null : item.label)}><ChevronDown size={18} className={`transition-transform ${mobileSection === item.label ? "rotate-180" : ""}`} /></Button>}
+                  </div>
+                  {mega[item.label] && mobileSection === item.label && <div id={`mobile-submenu-${i}`} className="border-b border-border pb-3 pl-4">{mega[item.label].links.map((link) => <Link key={link.href} to={link.href} onClick={() => setMobileOpen(false)} className="block py-3 text-[15px] text-foreground/80 hover:text-foreground">{link.label}</Link>)}</div>}
                 </motion.div>
               ))}
               <p className="mt-6 inline-flex items-center gap-2 text-[13px] text-muted-foreground"><Globe size={14} aria-hidden /> Global, remote delivery</p>

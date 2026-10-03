@@ -35,13 +35,15 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
       image.src = src;
     }));
     const maxTimer = window.setTimeout(() => active && setShow(false), maximum);
+    let minTimer: number | undefined;
     Promise.all(preload).then(() => {
       const remaining = Math.max(0, minimum - (performance.now() - started));
-      window.setTimeout(() => active && setShow(false), remaining);
+      minTimer = window.setTimeout(() => active && setShow(false), remaining);
     });
     return () => {
       active = false;
       clearTimeout(maxTimer);
+      if (minTimer !== undefined) clearTimeout(minTimer);
       document.documentElement.style.overflow = "";
     };
   }, [show, onDone]);

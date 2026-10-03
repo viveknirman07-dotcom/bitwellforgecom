@@ -5,7 +5,7 @@ import Eyebrow from "@/components/Eyebrow";
 import { caseStudies, caseStudyCategories } from "@/lib/case-studies-data";
 import { cn } from "@/lib/utils";
 import { useSEO } from "@/hooks/use-seo";
-import caseImage from "@/assets/photos/editorial-case.jpg";
+import caseImage from "@/assets/photos/engineered-pathways.jpg";
 
 type Filter = "All" | (typeof caseStudyCategories)[number];
 
@@ -47,7 +47,7 @@ const CaseStudies = () => {
             </p>
           </ScrollReveal>
           <div className="mt-12 md:mt-16 aspect-[16/7] overflow-hidden">
-            <img src={caseImage} alt="Structural cables and deck of a bridge over water" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            <img src={caseImage} alt="Several engineered routes connecting through one architectural interchange" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
         </div>
       </section>

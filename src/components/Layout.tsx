@@ -4,6 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 import MovingCursor from "@/components/MovingCursor";
+import CookieConsent from "@/components/CookieConsent";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 const Layout = () => {
@@ -27,6 +28,7 @@ const Layout = () => {
         )}
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 };
