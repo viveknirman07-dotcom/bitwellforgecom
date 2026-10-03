@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import HomePreloader from "@/components/home/HomePreloader";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useSEO } from "@/hooks/use-seo";
 import { articles } from "@/pages/Insights";
@@ -13,6 +13,12 @@ import revImg from "@/assets/photos/revenue.jpg";
 import stratImg from "@/assets/photos/strategy.jpg";
 import opsImg from "@/assets/photos/operations.jpg";
 import globalImg from "@/assets/photos/global.jpg";
+import preStratImg from "@/assets/photos/preloader/strategy-640.webp";
+import preOpsImg from "@/assets/photos/preloader/operations-640.webp";
+import preCaseImg from "@/assets/photos/preloader/case-640.webp";
+import preAcqImg from "@/assets/photos/preloader/acquisition-640.webp";
+import preGlobalImg from "@/assets/photos/preloader/global-640.webp";
+import preHeroImg from "@/assets/photos/preloader/hero-640.webp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
@@ -60,7 +66,6 @@ const perspectiveImgs = [stratImg, opsImg, acqImg];
 
 const Index = () => {
   const reduced = useReducedMotion();
-  const [bannerOpen, setBannerOpen] = useState(true);
   const [ready, setReady] = useState(false);
   const handleDone = useCallback(() => setReady(true), []);
 
@@ -76,24 +81,10 @@ const Index = () => {
 
   return (
     <div className="bf-home bg-background text-foreground">
-      <HomePreloader images={[stratImg, opsImg, caseImg, acqImg, globalImg, heroImg]} headline="Real structure for compounding growth" onDone={handleDone} />
-      {/* Announcement */}
-      {bannerOpen && (
-        <div className="dark bg-background text-foreground relative z-[60] mt-[72px] lg:mt-[113px]">
-          <div className="max-w-[1400px] mx-auto px-12 h-11 flex items-center justify-center">
-            <Link to="/forge-vault" className="group inline-flex items-center gap-2 font-heading text-[14px] md:text-[16px] text-center">
-              The Commercial Growth System is now available in Forge Vault
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-            <button onClick={() => setBannerOpen(false)} aria-label="Dismiss announcement" className="absolute right-3 md:right-6 w-11 h-11 inline-flex items-center justify-center opacity-80 hover:opacity-100">
-              <X size={14} />
-            </button>
-          </div>
-        </div>
-      )}
+      <HomePreloader images={[preStratImg, preOpsImg, preCaseImg, preAcqImg, preGlobalImg, preHeroImg]} headline="Real structure for compounding growth" onDone={handleDone} />
 
       {/* HERO */}
-      <section className={`relative ${bannerOpen ? "" : "mt-[72px] lg:mt-[113px]"}`}>
+      <section className="relative mt-[72px] lg:mt-[113px]">
         <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
           <motion.img src={heroImg} alt="Glass atrium overlooking the city at dawn" width={1920} height={1080} fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
@@ -205,9 +196,6 @@ const Index = () => {
             </h2>
           </Reveal>
         </div>
-        <Link to="/contact" className="absolute right-4 md:right-5 bottom-8 inline-flex items-center gap-2 h-11 px-5 bg-foreground/80 text-background text-[15px] hover:bg-foreground transition-colors">
-          <ArrowUpRight size={16} strokeWidth={1.5} /> Book Infrastructure Audit
-        </Link>
       </section>
     </div>
   );

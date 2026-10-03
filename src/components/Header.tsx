@@ -4,7 +4,6 @@ import { Menu, X, Sun, Moon, Search, ChevronDown, Globe, ArrowRight } from "luci
 import { motion, AnimatePresence } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { hasActiveOpenings } from "@/data/jobs";
-import VaultLink from "@/components/vault/VaultLink";
 
 type Mega = { heading: string; intro: string; links: { label: string; href: string }[] };
 
@@ -101,7 +100,6 @@ const Header = () => {
       <div className="hidden lg:block border-b border-border/60">
         <div className="max-w-[1440px] mx-auto px-10 h-9 flex items-center justify-end gap-6 text-[12px] text-muted-foreground">
           <span className="inline-flex items-center gap-1.5"><Globe size={13} aria-hidden /> Global, remote delivery</span>
-          <VaultLink to="/vault" className="hover:text-foreground transition-colors">Forge Vault</VaultLink>
           <button onClick={toggle} aria-label="Toggle theme" className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors min-h-[36px]">
             {isDark ? <Sun size={13} /> : <Moon size={13} />} {isDark ? "Light" : "Dark"}
           </button>
@@ -141,16 +139,11 @@ const Header = () => {
           })}
         </ul>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center">
           <button onClick={() => setSearchOpen((v) => !v)} aria-label="Search insights" aria-expanded={searchOpen}
             className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:bg-secondary transition-colors">
             {searchOpen ? <X size={18} /> : <Search size={18} />}
           </button>
-          <Link to="/contact?service=General+Inquiry"
-            className="group inline-flex items-center gap-2 h-11 px-5 bg-primary text-primary-foreground text-[13px] font-semibold tracking-wide transition-opacity hover:opacity-90">
-            Book Infrastructure Audit
-            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
         </div>
 
         <div className="flex lg:hidden items-center gap-1">
@@ -226,12 +219,6 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
-              <VaultLink to="/vault" className="flex items-center justify-between min-h-[56px] border-b border-border font-heading text-[24px] text-foreground/80">
-                Forge Vault <ArrowRight size={18} />
-              </VaultLink>
-              <Link to="/contact?service=General+Inquiry" className="mt-8 h-12 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-[14px] font-semibold">
-                Book Infrastructure Audit <ArrowRight size={15} />
-              </Link>
               <p className="mt-6 inline-flex items-center gap-2 text-[13px] text-muted-foreground"><Globe size={14} aria-hidden /> Global, remote delivery</p>
             </div>
           </motion.div>

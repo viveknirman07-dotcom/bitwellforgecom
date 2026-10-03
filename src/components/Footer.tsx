@@ -20,7 +20,6 @@ const columns = [
       { label: "Insights", href: "/insights" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "Process", href: "/process" },
-      { label: "Forge Vault", href: "/forge-vault" },
     ],
   },
   {

@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import ScrollReveal from "@/components/ScrollReveal";
-import CTABlock from "@/components/CTABlock";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 
@@ -165,14 +164,6 @@ const CaseStudyArticle = () => {
           </ScrollReveal>
         </div>
       </article>
-
-      <ScrollReveal>
-        <CTABlock
-          heading="Ready to build your growth system?"
-          subtext="Let's talk about applying these frameworks to your business."
-          buttonLabel="Book Infrastructure Audit"
-        />
-      </ScrollReveal>
     </div>
   );
 };
