@@ -10,14 +10,17 @@ import globalImg from "@/assets/photos/global.jpg";
 import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
 import knowledgeImg from "@/assets/photos/engineered-knowledge.jpg";
 import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
+import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
+import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
+import connectionsImg from "@/assets/photos/engineered-connections.jpg";
 
 const serviceImages: Record<ServiceSlug, { src: string; alt: string }> = {
-  "growth-strategy": { src: strategyImg, alt: "Layered architectural structure expressing a planned commercial strategy" },
+  "growth-strategy": { src: strategyModelImg, alt: "Physical scale model and drawings showing an interconnected system designed before construction" },
   "sales-systems": { src: infrastructureImg, alt: "Interconnected concrete and steel spans expressing a resilient revenue system" },
   "performance-marketing": { src: globalImg, alt: "City lights reflecting measurable market activity" },
-  "lead-generation": { src: pathwaysImg, alt: "Connected pathways leading through a precisely engineered interchange" },
+  "lead-generation": { src: connectionsImg, alt: "Several pathways converging through a precisely engineered bridge junction" },
   linkedin: { src: knowledgeImg, alt: "Organized archive expressing the structure behind market authority" },
-  "ai-automation": { src: operationsImg, alt: "High performance computing infrastructure in operation" },
+  "ai-automation": { src: operationsPlantImg, alt: "Coordinated mechanical assemblies and conduits in a precision-engineered facility" },
   seo: { src: globalImg, alt: "Connected city environment representing digital visibility" },
   "digital-products": { src: knowledgeImg, alt: "Organized physical knowledge archive with modular sections" },
 };

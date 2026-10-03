@@ -13,6 +13,9 @@ import revImg from "@/assets/photos/revenue.jpg";
 import stratImg from "@/assets/photos/strategy.jpg";
 import opsImg from "@/assets/photos/operations.jpg";
 import globalImg from "@/assets/photos/global.jpg";
+import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
+import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
+import connectionsImg from "@/assets/photos/engineered-connections.jpg";
 import preStratImg from "@/assets/photos/preloader/strategy-640.webp";
 import preOpsImg from "@/assets/photos/preloader/operations-640.webp";
 import preCaseImg from "@/assets/photos/preloader/case-640.webp";
@@ -29,7 +32,7 @@ const SplitReveal = ({ text, as: Tag = "h2", className = "", delay = 0, inView =
   const reduced = useReducedMotion();
   const words = text.split(" ");
   const MotionTag = Tag === "h1" ? motion.h1 : motion.h2;
-  const trigger = inView ? { whileInView: "show", viewport: { once: true, margin: "-80px" } } : { animate: play ? "show" : "hide" };
+  const trigger = reduced ? { animate: "show" } : inView ? { whileInView: "show", viewport: { once: true, margin: "-80px" } } : { animate: play ? "show" : "hide" };
   return (
     <MotionTag className={className} initial={reduced ? false : "hide"} {...trigger}
       variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: delay } } }} aria-label={text}>
@@ -62,11 +65,11 @@ const ArrowLink = ({ to, children, className = "" }: { to: string; children: Rea
 );
 
 const perspectiveLabels = ["Insight", "Analysis", "Trends"];
-const perspectiveImgs = [stratImg, opsImg, acqImg];
+const perspectiveImgs = [strategyModelImg, operationsPlantImg, connectionsImg];
 
 const Index = () => {
   const reduced = useReducedMotion();
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(!!reduced);
   const handleDone = useCallback(() => setReady(true), []);
 
   useSEO({
@@ -116,7 +119,7 @@ const Index = () => {
           </div>
           <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none">
             <div className="w-[60%] md:w-[72%] aspect-[225/243] overflow-hidden mb-5">
-              <img src={revImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" />
+              <img src={revImg} alt="" aria-hidden loading="lazy" width={1600} height={1066} className="w-full h-full object-cover" />
             </div>
             <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{story.subtitle}</p>
             <ArrowLink to={`/case-studies/${story.id}`}>Learn how we helped</ArrowLink>
@@ -124,7 +127,7 @@ const Index = () => {
           </Reveal>
           <Reveal delay={0.1} className="md:col-span-8 md:row-start-2">
             <Link to={`/case-studies/${story.id}`} className="block overflow-hidden aspect-[930/484] group">
-              <img src={caseImg} alt={story.title} loading="lazy" width={1600} height={1066} className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]" />
+              <img src={connectionsImg} alt="Converging structural routes representing the coordinated acquisition approach" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]" />
             </Link>
           </Reveal>
         </div>
@@ -152,7 +155,7 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="md:col-span-2 md:col-start-11 justify-self-end w-20 md:w-[108px] aspect-square overflow-hidden">
-                    <img src={perspectiveImgs[i]} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={perspectiveImgs[i]} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
                 </Link>
               </li>
@@ -165,15 +168,15 @@ const Index = () => {
       <section className="pb-24 md:pb-32 overflow-hidden">
         <div className={`${wrap} grid grid-cols-12 gap-y-10 md:gap-x-6`}>
           <div className="col-span-12 md:col-span-6 relative h-[360px] md:h-[440px]">
-            <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={stratImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" /></Reveal>
+            <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={strategyModelImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
             <Reveal delay={0.15} className="absolute left-[8%] md:left-[10%] top-[34%] w-[52%] md:w-[48%]">
-              <div className="aspect-[224/280] overflow-hidden"><img src={opsImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" /></div>
+              <div className="aspect-[224/280] overflow-hidden"><img src={operationsPlantImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
               <ArrowLink to="/about" className="mt-2">Meet the practice</ArrowLink>
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-6 relative h-[420px] md:h-[560px] md:mt-40">
             <Reveal className="absolute left-0 top-0 w-[70%] md:w-[60%]">
-              <div className="aspect-[342/428] overflow-hidden"><img src={acqImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" /></div>
+              <div className="aspect-[342/428] overflow-hidden"><img src={connectionsImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
               <ArrowLink to="/insights" className="mt-2">Recent insights</ArrowLink>
             </Reveal>
             <Reveal delay={0.15} className="absolute right-[4%] md:right-[8%] top-[58%] w-[40%] aspect-[224/280]"><img src={globalImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" /></Reveal>

@@ -6,6 +6,9 @@ import engineerImg from "@/assets/photos/operations.jpg";
 import optimizeImg from "@/assets/photos/revenue.jpg";
 import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
 import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
+import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
+import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
+import connectionsImg from "@/assets/photos/engineered-connections.jpg";
 
 interface Stage {
   number: string;
@@ -23,8 +26,8 @@ const stages: Stage[] = [
     outcome: "Identify system bottlenecks.",
     description:
       "An infrastructure scan across acquisition, conversion, and operations. Where revenue leaks, where channels concentrate risk, where decisions happen without data. The diagnosis defines what the engagement is actually solving for.",
-    image: diagnoseImg,
-    imageAlt: "Layered architectural structure used to examine the underlying system",
+    image: strategyModelImg,
+    imageAlt: "Physical architectural model with layered plans and structural sections for diagnosing a system",
   },
   {
     number: "02",
@@ -32,8 +35,8 @@ const stages: Stage[] = [
     outcome: "Infrastructure design.",
     description:
       "A systems map is generated from the diagnosis. Acquisition channels, sales mechanics, automation layers, and measurement loops are sequenced into a single coherent architecture before any build begins.",
-    image: architectImg,
-    imageAlt: "City infrastructure viewed through architectural glass",
+    image: strategyModelImg,
+    imageAlt: "Scale model of interconnected infrastructure planned before construction",
   },
   {
     number: "03",
@@ -41,8 +44,8 @@ const stages: Stage[] = [
     outcome: "System deployment.",
     description:
       "Components are constructed and connected. CRM logic, outbound sequences, sales workflows, automation pipes, reporting dashboards. The infrastructure assembles into a single operating layer the business can run.",
-    image: engineerImg,
-    imageAlt: "Precision data infrastructure in a quiet technology environment",
+    image: operationsPlantImg,
+    imageAlt: "Interconnected precision-engineered industrial systems in a turbine hall",
   },
   {
     number: "04",
@@ -50,8 +53,8 @@ const stages: Stage[] = [
     outcome: "Predictable acquisition.",
     description:
       "Demand begins flowing through the system. Pipelines fill, opportunities appear, conversations compound. The business shifts from reactive marketing to a measured, controllable acquisition rhythm.",
-    image: pathwaysImg,
-    imageAlt: "Connected pedestrian bridges and pathways converging through an interchange",
+    image: connectionsImg,
+    imageAlt: "Several engineered routes converging at a structural junction",
   },
   {
     number: "05",
