@@ -33,7 +33,6 @@ const AffiliateProgram = () => {
           Commercial Growth System. No tiers, no sliding scales, no negotiation.
         </p>
         <div className="mt-12 flex flex-wrap gap-4">
-          <Link to="/account?type=affiliate&mode=signup&next=%2Faffiliate%2Fdashboard" className="btn-primary">Become an Affiliate</Link>
           <Link to="/account?type=affiliate&next=%2Faffiliate%2Fdashboard" className="btn-secondary">Sign In</Link>
         </div>
       </section>

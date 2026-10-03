@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import PortalShell from "@/portal/PortalShell";
-import VaultLink from "@/components/vault/VaultLink";
 import { Button } from "@/components/ui/button";
 
 interface Section {

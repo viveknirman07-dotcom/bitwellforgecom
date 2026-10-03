@@ -62,8 +62,8 @@
     --accent-blue-bg: 220 79% 48% / 0.08;
 
     /* Typography */
-    --font-heading: 'Playfair Display', Georgia, serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-heading: 'Newsreader', Georgia, serif;
+    --font-body: 'Noto Sans', system-ui, sans-serif;
 
     /* Shadows */
     --shadow-sm: 0 1px 3px hsl(226 30% 12% / 0.05);
