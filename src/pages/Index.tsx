@@ -14,7 +14,7 @@ import opsImg from "@/assets/photos/operations.jpg";
 import globalImg from "@/assets/photos/global.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const wrap = "max-w-[1400px] mx-auto px-5 md:px-12 lg:px-[13.5%] xl:px-[260px]";
+const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
 const cap = "text-[13px] md:text-[14px] uppercase tracking-[0.02em] font-medium";
 
 /** Word-by-word rising reveal for large editorial headlines. */
@@ -98,14 +98,14 @@ const Index = () => {
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
               <SplitReveal as="h1" inView={false} delay={0.4} text="Real structure for compounding growth"
-                className="font-heading text-foreground text-[44px] sm:text-[64px] md:text-[88px] lg:text-[112px] leading-[0.98] max-w-[12ch]" />
+                className="font-heading text-foreground text-[44px] sm:text-[64px] md:text-[88px] lg:text-[104px] leading-[0.98] max-w-[15ch]" />
             </div>
           </div>
         </div>
 
         <div className={`${wrap} pt-10 md:pt-14 pb-24 md:pb-40`}>
           <Reveal>
-            <p className="font-heading text-[28px] sm:text-[36px] md:text-[48px] lg:text-[62px] leading-[1.14] tracking-[-0.015em]">
+            <p className="font-heading text-[28px] sm:text-[36px] md:text-[48px] lg:text-[54px] leading-[1.14] tracking-[-0.015em]">
               BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.
             </p>
           </Reveal>
@@ -140,7 +140,7 @@ const Index = () => {
         <div className={wrap}>
           <SplitReveal text="Featured perspectives" className="font-heading text-[44px] md:text-[72px] lg:text-[96px] leading-[1] mb-10 md:mb-14" />
         </div>
-        <div className="max-w-[1440px] mx-auto px-5 md:px-12 lg:px-[12.5%] xl:px-[240px]">
+        <div className="max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[12.5%]">
           <ol className="border-t border-foreground/60">
             {perspectives.map((a, i) => (
               <li key={a.slug} className="border-b border-foreground/60">
