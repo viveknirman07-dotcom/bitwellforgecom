@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies-data";
 import ScrollReveal from "@/components/ScrollReveal";
-import CTABlock from "@/components/CTABlock";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 
@@ -149,8 +148,7 @@ const CaseStudyArticle = () => {
               <div className="relative">
                 <Eyebrow className="mb-4">Outcome</Eyebrow>
                 <p
-                  className="text-foreground text-xl md:text-2xl leading-[1.55] font-light italic"
-                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                  className="font-heading text-foreground text-xl md:text-2xl leading-[1.55] font-light italic"
                 >
                   {study.result}
                 </p>
@@ -165,14 +163,6 @@ const CaseStudyArticle = () => {
           </ScrollReveal>
         </div>
       </article>
-
-      <ScrollReveal>
-        <CTABlock
-          heading="Ready to build your growth system?"
-          subtext="Let's talk about applying these frameworks to your business."
-          buttonLabel="Book Infrastructure Audit"
-        />
-      </ScrollReveal>
     </div>
   );
 };

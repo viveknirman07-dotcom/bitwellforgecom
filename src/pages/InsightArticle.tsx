@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { articles } from "@/pages/Insights";
 import ScrollReveal from "@/components/ScrollReveal";
-import CTABlock from "@/components/CTABlock";
 import Eyebrow from "@/components/Eyebrow";
 import ReadingProgress from "@/components/ReadingProgress";
 import { useSEO } from "@/hooks/use-seo";
@@ -219,14 +218,6 @@ const InsightArticle = () => {
           )}
         </div>
       </article>
-
-      <ScrollReveal>
-        <CTABlock
-          heading="Ready to explore this further?"
-          subtext="Let's talk about applying these ideas to your business."
-          buttonLabel="Book Infrastructure Audit"
-        />
-      </ScrollReveal>
     </div>
   );
 };

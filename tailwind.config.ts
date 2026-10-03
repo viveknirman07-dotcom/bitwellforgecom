@@ -16,8 +16,8 @@ export default {
       fontFamily: {
         heading: ['Newsreader', 'Georgia', 'serif'],
         body: ['Noto Sans', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
-        quote: ['Cormorant Garamond', 'Georgia', 'serif'],
+        mono: ['Noto Sans', 'system-ui', 'sans-serif'],
+        quote: ['Newsreader', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

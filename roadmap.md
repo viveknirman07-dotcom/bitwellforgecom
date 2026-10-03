@@ -12,9 +12,11 @@
 - [x] Verify the previous contact address is absent project-wide
 
 ## Institutional website reconstruction
-- [ ] Establish the new semantic visual and typography system
-- [ ] Rebuild global public navigation and footer
-- [ ] Reconstruct the homepage authority journey and system visuals
+- [x] Establish the new semantic visual and typography system
+- [x] Rebuild global public navigation and footer
+- [x] Reconstruct the homepage authority journey and photographic visuals
 - [ ] Recompose Services, Process, Case Studies, Insights, About, Contact, and Careers
-- [ ] Align Forge Vault marketing pages without changing commerce logic
+- [x] Remove public Forge Vault promotion without changing buyer access or commerce logic
+- [x] Remove public diagrams and replace active diagram placements with natural photography
+- [x] Optimize the six-image homepage opening for mobile and slower connections
 - [ ] Verify accessibility, responsive behavior, performance, SEO, and protected handoffs

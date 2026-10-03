@@ -1,11 +1,25 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import CTABlock from "@/components/CTABlock";
 import IdealFor from "@/components/services/IdealFor";
-import { ServiceHero } from "@/components/services/ServiceVisuals";
 import { serviceData, type ServiceSlug } from "@/data/services";
 import { useSEO } from "@/hooks/use-seo";
+import strategyImg from "@/assets/photos/strategy.jpg";
+import operationsImg from "@/assets/photos/operations.jpg";
+import acquisitionImg from "@/assets/photos/acquisition.jpg";
+import revenueImg from "@/assets/photos/revenue.jpg";
+import globalImg from "@/assets/photos/global.jpg";
+
+const serviceImages: Record<ServiceSlug, { src: string; alt: string }> = {
+  "growth-strategy": { src: strategyImg, alt: "Executive strategy workspace with market materials" },
+  "sales-systems": { src: revenueImg, alt: "Engineered structural cables representing a resilient revenue system" },
+  "performance-marketing": { src: globalImg, alt: "City lights reflecting measurable market activity" },
+  "lead-generation": { src: acquisitionImg, alt: "Architectural corridor representing a clear acquisition path" },
+  linkedin: { src: strategyImg, alt: "Editorial workspace prepared for authority building" },
+  "ai-automation": { src: operationsImg, alt: "High performance computing infrastructure in operation" },
+  seo: { src: globalImg, alt: "Connected city environment representing digital visibility" },
+  "digital-products": { src: acquisitionImg, alt: "Refined digital environment designed for product delivery" },
+};
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-[10px] tracking-[0.28em] uppercase text-[hsl(var(--eyebrow-color))] font-medium mb-3">
@@ -71,6 +85,8 @@ const ServiceDetail = () => {
     );
   }
 
+  const serviceImage = serviceImages[slug as ServiceSlug];
+
   return (
     <div className="pt-20">
       <section className="section-padding section-y">
@@ -97,10 +113,10 @@ const ServiceDetail = () => {
             </p>
           </ScrollReveal>
 
-          {/* ── Single hero visual (only retained visual in body) */}
+          {/* ── Photographic context */}
           <ScrollReveal delay={200}>
-            <div className="mb-12">
-              <ServiceHero slug={slug!} />
+            <div className="mb-12 aspect-[16/9] overflow-hidden">
+              <img src={serviceImage.src} alt={serviceImage.alt} width={1600} height={900} decoding="async" className="h-full w-full object-cover" />
             </div>
           </ScrollReveal>
 
@@ -232,12 +248,6 @@ const ServiceDetail = () => {
           <IdealFor items={service.idealFor} />
         </div>
       </section>
-
-
-
-      <ScrollReveal>
-        <CTABlock service={service.contactService} />
-      </ScrollReveal>
     </div>
   );
 };

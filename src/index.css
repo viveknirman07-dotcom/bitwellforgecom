@@ -62,8 +62,8 @@
     --accent-blue-bg: 220 79% 48% / 0.08;
 
     /* Typography */
-    --font-heading: 'Playfair Display', Georgia, serif;
-    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-heading: 'Newsreader', Georgia, serif;
+    --font-body: 'Noto Sans', system-ui, sans-serif;
 
     /* Shadows */
     --shadow-sm: 0 1px 3px hsl(226 30% 12% / 0.05);
@@ -85,16 +85,6 @@
     --gold: 233 81% 10%;
     --gold-soft: 220 79% 48% / 0.10;
 
-    /* === SVG DIAGRAM TOKENS (light mode) === */
-    --svg-stroke:    rgba(15, 20, 40, 0.60);
-    --svg-fill:      rgba(15, 20, 40, 0.06);
-    --svg-text:      #0f1428;
-    --svg-accent:    rgba(15, 20, 40, 0.40);
-    --svg-highlight: rgba(10, 15, 35, 0.80);
-    --svg-secondary: rgba(10, 15, 35, 0.35);
-    --svg-glow:      rgba(10, 15, 35, 0.40);
-    --svg-border:    rgba(10, 15, 35, 0.10);
-    --svg-grid:      rgba(10, 15, 35, 0.04);
   }
 
   .dark {
@@ -149,16 +139,6 @@
     --eyebrow-color: 206 74% 89%;
     --eyebrow-line: 206 74% 89% / 0.5;
 
-    /* === SVG DIAGRAM TOKENS (dark mode) === */
-    --svg-stroke:    rgba(255, 255, 255, 0.70);
-    --svg-fill:      rgba(255, 255, 255, 0.08);
-    --svg-text:      #f0ece4;
-    --svg-accent:    rgba(255, 255, 255, 0.50);
-    --svg-highlight: rgba(255, 255, 255, 0.85);
-    --svg-secondary: rgba(255, 255, 255, 0.40);
-    --svg-glow:      rgba(255, 255, 255, 0.50);
-    --svg-border:    rgba(255, 255, 255, 0.10);
-    --svg-grid:      rgba(255, 255, 255, 0.04);
   }
 }
 
@@ -461,7 +441,7 @@
   }
 
   .font-quote {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-heading);
     font-style: italic;
     font-weight: 400;
     letter-spacing: 0.005em;
@@ -539,36 +519,6 @@ html:not(.dark) .hero-section {
     hsl(var(--background));
 }
 
-/* --- SVG diagram overrides ---
-   Hero/service diagrams hardcode white-tinted strokes/fills like
-   "hsl(0 0% 100% / 0.06)". Retune them to navy/blue for light mode. */
-html:not(.dark) svg line[stroke^="hsl(0 0% 100%"],
-html:not(.dark) svg circle[stroke^="hsl(0 0% 100%"],
-html:not(.dark) svg path[stroke^="hsl(0 0% 100%"] {
-  stroke: hsl(226 60% 10% / 0.30) !important;
-}
-html:not(.dark) svg circle[fill^="hsl(0 0% 100%"],
-html:not(.dark) svg rect[fill^="hsl(0 0% 100%"] {
-  fill: hsl(220 79% 48% / 0.55) !important;
-}
-
-/* Service visuals reference hsl(var(--gold) / X). In light mode --gold
-   is now navy, which is too heavy for soft fills. Re-route to blue. */
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.18)"],
-html:not(.dark) svg circle[fill="hsl(var(--gold))"] {
-  fill: hsl(220 79% 48% / 0.85) !important;
-}
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.25)"] {
-  fill: hsl(220 79% 48% / 0.40) !important;
-}
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.22)"] {
-  fill: hsl(220 79% 48% / 0.30) !important;
-}
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.05)"],
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.04)"] {
-  fill: hsl(220 79% 48% / 0.06) !important;
-}
-
 /* Header and footer surfaces are controlled by their components. */
 
 /* --- Glass surfaces --- */
@@ -591,53 +541,6 @@ html:not(.dark) .btn-ghost:hover {
 html:not(.dark) .border-gold { border-color: hsl(var(--border-global)) !important; }
 html:not(.dark) .text-gold { color: hsl(var(--foreground)); }
 
-/* =====================================================================
-   DIAGRAM CONTAINER + SVG GLOBAL DEFAULTS
-   Every SVG inherits stroke/fill from CSS variables. No hardcoded colors.
-   ===================================================================== */
-.diagram-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: transparent;
-  overflow: hidden;
-  border-radius: 0;
-}
-.diagram-frame svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  color: var(--svg-stroke); /* currentColor fallback */
-}
-/* Travelling signals inside diagrams are decorative only. */
-@media (prefers-reduced-motion: reduce) {
-  .diagram-motion { display: none; }
-}
-
-.diagram-frame .diagram-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, var(--svg-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--svg-grid) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-.svg-text {
-  fill: var(--svg-text);
-  font-family: var(--font-body);
-}
-.svg-stroke   { stroke: var(--svg-stroke); fill: none; }
-.svg-fill     { fill: var(--svg-fill); stroke: var(--svg-stroke); }
-.svg-accent   { stroke: var(--svg-accent); fill: none; }
-.svg-secondary{ stroke: var(--svg-secondary); fill: none; }
-.svg-highlight{ fill: var(--svg-highlight); stroke: var(--svg-highlight); }
-
-/* Per-element animation utilities (will-change for GPU) */
-.anim-node     { animation: nodePulse 3s ease-in-out infinite;        will-change: transform, opacity; transform-origin: center; transform-box: fill-box; }
-.anim-line     { animation: lineDraw 4s ease-in-out infinite;         will-change: stroke-dashoffset, opacity; }
-.anim-glow     { animation: glowPulse 2.5s ease-in-out infinite;      will-change: filter; }
 .anim-float    { animation: floatDrift 6s ease-in-out infinite;       will-change: transform; }
 .anim-rotate-slow   { animation: rotateSlow 20s linear infinite;      will-change: transform; transform-origin: center; transform-box: fill-box; }
 .anim-rotate-gear   { animation: rotateSlow 12s linear infinite;      will-change: transform; transform-origin: center; transform-box: fill-box; }
@@ -719,9 +622,6 @@ html.mobile-lock [data-hero-secondary-cta] {
 /* Hide desktop nav links, force hamburger visible (Header uses lg: classes) */
 html.mobile-lock .lg\:flex { display: none !important; }
 html.mobile-lock .lg\:hidden { display: flex !important; }
-
-/* Diagram heights locked */
-html.mobile-lock .diagram-frame { height: 220px !important; }
 
 /* =====================================================================
    EYEBROW UNIFICATION — every uppercase kicker uses --eyebrow-color.

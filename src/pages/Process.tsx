@@ -1,22 +1,19 @@
-import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
-import {
-  DiagnoseVisual,
-  ArchitectVisual,
-  EngineerVisual,
-  ActivateVisual,
-  OptimizeVisual,
-  CompoundVisual,
-} from "@/components/process/StageVisuals";
-import { ReactNode } from "react";
+import diagnoseImg from "@/assets/photos/strategy.jpg";
+import architectImg from "@/assets/photos/global.jpg";
+import engineerImg from "@/assets/photos/operations.jpg";
+import activateImg from "@/assets/photos/acquisition.jpg";
+import optimizeImg from "@/assets/photos/revenue.jpg";
+import compoundImg from "@/assets/photos/hero.jpg";
 
 interface Stage {
   number: string;
   title: string;
   outcome: string;
   description: string;
-  visual: ReactNode;
+  image: string;
+  imageAlt: string;
 }
 
 const stages: Stage[] = [
@@ -26,7 +23,8 @@ const stages: Stage[] = [
     outcome: "Identify system bottlenecks.",
     description:
       "An infrastructure scan across acquisition, conversion, and operations. Where revenue leaks, where channels concentrate risk, where decisions happen without data. The diagnosis defines what the engagement is actually solving for.",
-    visual: <DiagnoseVisual />,
+    image: diagnoseImg,
+    imageAlt: "Executive workspace prepared for commercial diagnosis",
   },
   {
     number: "02",
@@ -34,7 +32,8 @@ const stages: Stage[] = [
     outcome: "Infrastructure design.",
     description:
       "A systems map is generated from the diagnosis. Acquisition channels, sales mechanics, automation layers, and measurement loops are sequenced into a single coherent architecture before any build begins.",
-    visual: <ArchitectVisual />,
+    image: architectImg,
+    imageAlt: "City infrastructure viewed through architectural glass",
   },
   {
     number: "03",
@@ -42,7 +41,8 @@ const stages: Stage[] = [
     outcome: "System deployment.",
     description:
       "Components are constructed and connected. CRM logic, outbound sequences, sales workflows, automation pipes, reporting dashboards. The infrastructure assembles into a single operating layer the business can run.",
-    visual: <EngineerVisual />,
+    image: engineerImg,
+    imageAlt: "Precision data infrastructure in a quiet technology environment",
   },
   {
     number: "04",
@@ -50,7 +50,8 @@ const stages: Stage[] = [
     outcome: "Predictable acquisition.",
     description:
       "Demand begins flowing through the system. Pipelines fill, opportunities appear, conversations compound. The business shifts from reactive marketing to a measured, controllable acquisition rhythm.",
-    visual: <ActivateVisual />,
+    image: activateImg,
+    imageAlt: "Illuminated commercial corridor suggesting forward movement",
   },
   {
     number: "05",
@@ -58,7 +59,8 @@ const stages: Stage[] = [
     outcome: "Compounding efficiency.",
     description:
       "Feedback loops surface what is working and what is not. Insights inform decisions. Conversion improves at every stage. The same infrastructure produces more revenue over time without more input.",
-    visual: <OptimizeVisual />,
+    image: optimizeImg,
+    imageAlt: "Structural bridge cables engineered for sustained load",
   },
   {
     number: "06",
@@ -66,7 +68,8 @@ const stages: Stage[] = [
     outcome: "Sustainable predictable growth.",
     description:
       "The system becomes self-reinforcing. Authority compounds, data sharpens, automation deepens, the cost of acquiring the next client decreases. Growth becomes a property of the infrastructure, not the effort.",
-    visual: <CompoundVisual />,
+    image: compoundImg,
+    imageAlt: "Layered glass architecture reflecting morning light",
   },
 ];
 
@@ -131,24 +134,14 @@ const Process = () => {
                     {stage.description}
                   </p>
                 </div>
-                <div className="lg:col-span-6">
-                  <div
-                    className="diagram-frame aspect-[3/2]"
-                    style={{ color: "var(--svg-stroke)" }}
-                  >
-                    <div className="diagram-grid" />
-                    <div className="relative w-full h-full flex items-center justify-center p-4 md:p-6">
-                      {stage.visual}
-                    </div>
-                  </div>
+                <div className="lg:col-span-6 overflow-hidden aspect-[3/2]">
+                  <img src={stage.image} alt={stage.imageAlt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.025]" />
                 </div>
               </div>
             </ScrollReveal>
           ))}
         </div>
       </section>
-
-      <CTABlock />
     </div>
   );
 };

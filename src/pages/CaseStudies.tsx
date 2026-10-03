@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import CaseStudyCard from "@/components/CaseStudyCard";
-import CTABlock from "@/components/CTABlock";
 import Eyebrow from "@/components/Eyebrow";
 import { caseStudies, caseStudyCategories } from "@/lib/case-studies-data";
 import { cn } from "@/lib/utils";
@@ -96,8 +95,6 @@ const CaseStudies = () => {
           </ScrollReveal>
         </div>
       </section>
-
-      <CTABlock />
     </div>
   );
 };

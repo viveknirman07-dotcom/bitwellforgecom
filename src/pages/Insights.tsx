@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import CTABlock from "@/components/CTABlock";
 import ScrollReveal from "@/components/ScrollReveal";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
@@ -783,12 +782,6 @@ const Insights = () => {
           )}
         </div>
       </section>
-
-      <CTABlock
-        heading="Have a growth challenge?"
-        subtext="Let's explore whether a structured approach could help."
-        buttonLabel="Book Infrastructure Audit"
-      />
     </div>
   );
 };
