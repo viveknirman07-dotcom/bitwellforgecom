@@ -4,6 +4,7 @@ import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { getReferral, markReferralValidated } from "@/lib/referral";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
+import BrandWordmark from "@/components/BrandWordmark";
 import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
 
 interface Pricing {
@@ -190,9 +191,7 @@ const Checkout = () => {
     <div className="portal font-body flex min-h-screen w-full flex-col overflow-x-hidden">
       <header className="border-b portal-line">
         <div className="mx-auto flex h-14 w-full max-w-[1200px] items-center justify-between gap-4 px-5 sm:h-16 sm:px-8 lg:h-20 lg:px-10">
-          <Link to="/" className="font-heading text-base tracking-tight sm:text-lg lg:text-xl">
-            BitwellForge
-          </Link>
+          <Link to="/" className="text-base sm:text-lg lg:text-xl"><BrandWordmark /></Link>
           <span className="text-[10px] uppercase tracking-[0.18em] portal-muted sm:text-[11px] sm:tracking-[0.2em]">
             Secure checkout
           </span>

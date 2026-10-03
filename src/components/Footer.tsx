@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { Button } from "@/components/ui/button";
+import BrandWordmark from "@/components/BrandWordmark";
 
 const columns = [
   {
@@ -56,7 +57,7 @@ const Footer = () => {
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-10 pt-16 md:pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-border">
           <div className="lg:col-span-4">
-            <Link to="/" className="font-heading text-3xl font-semibold tracking-tight">BitwellForge</Link>
+            <Link to="/" className="text-[30px]"><BrandWordmark /></Link>
             <p className="mt-4 text-[15px] leading-[1.6] text-muted-foreground max-w-sm">
               Commercial architecture and constraint advisory for service businesses, delivered remotely worldwide.
             </p>
@@ -96,7 +97,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[13px] text-muted-foreground">
-          <p>© {new Date().getFullYear()} BitwellForge. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} <BrandWordmark />. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
             <Link to="/cookies" className="hover:text-foreground">Cookie Policy</Link>

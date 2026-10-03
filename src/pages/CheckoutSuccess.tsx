@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import VaultLink from "@/components/vault/VaultLink";
 import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import BrandWordmark from "@/components/BrandWordmark";
 
 interface Status {
   status: string;
@@ -54,7 +55,7 @@ const CheckoutSuccess = () => {
     <div className="portal font-body flex flex-col">
       <header className="border-b portal-line">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center">
-          <Link to="/" className="font-heading text-lg md:text-xl tracking-tight">BitwellForge</Link>
+          <Link to="/" className="text-lg md:text-xl"><BrandWordmark /></Link>
         </div>
       </header>
 
