@@ -148,8 +148,7 @@ const CaseStudyArticle = () => {
               <div className="relative">
                 <Eyebrow className="mb-4">Outcome</Eyebrow>
                 <p
-                  className="text-foreground text-xl md:text-2xl leading-[1.55] font-light italic"
-                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                  className="font-heading text-foreground text-xl md:text-2xl leading-[1.55] font-light italic"
                 >
                   {study.result}
                 </p>
