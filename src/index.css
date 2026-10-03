@@ -85,16 +85,6 @@
     --gold: 233 81% 10%;
     --gold-soft: 220 79% 48% / 0.10;
 
-    /* === SVG DIAGRAM TOKENS (light mode) === */
-    --svg-stroke:    rgba(15, 20, 40, 0.60);
-    --svg-fill:      rgba(15, 20, 40, 0.06);
-    --svg-text:      #0f1428;
-    --svg-accent:    rgba(15, 20, 40, 0.40);
-    --svg-highlight: rgba(10, 15, 35, 0.80);
-    --svg-secondary: rgba(10, 15, 35, 0.35);
-    --svg-glow:      rgba(10, 15, 35, 0.40);
-    --svg-border:    rgba(10, 15, 35, 0.10);
-    --svg-grid:      rgba(10, 15, 35, 0.04);
   }
 
   .dark {
@@ -149,16 +139,6 @@
     --eyebrow-color: 206 74% 89%;
     --eyebrow-line: 206 74% 89% / 0.5;
 
-    /* === SVG DIAGRAM TOKENS (dark mode) === */
-    --svg-stroke:    rgba(255, 255, 255, 0.70);
-    --svg-fill:      rgba(255, 255, 255, 0.08);
-    --svg-text:      #f0ece4;
-    --svg-accent:    rgba(255, 255, 255, 0.50);
-    --svg-highlight: rgba(255, 255, 255, 0.85);
-    --svg-secondary: rgba(255, 255, 255, 0.40);
-    --svg-glow:      rgba(255, 255, 255, 0.50);
-    --svg-border:    rgba(255, 255, 255, 0.10);
-    --svg-grid:      rgba(255, 255, 255, 0.04);
   }
 }
 
@@ -537,36 +517,6 @@ html:not(.dark) .hero-section {
     radial-gradient(ellipse 70% 50% at 60% 40%, hsl(220 79% 48% / 0.07) 0%, transparent 70%),
     radial-gradient(ellipse 40% 40% at 20% 80%, hsl(220 79% 48% / 0.04) 0%, transparent 60%),
     hsl(var(--background));
-}
-
-/* --- SVG diagram overrides ---
-   Hero/service diagrams hardcode white-tinted strokes/fills like
-   "hsl(0 0% 100% / 0.06)". Retune them to navy/blue for light mode. */
-html:not(.dark) svg line[stroke^="hsl(0 0% 100%"],
-html:not(.dark) svg circle[stroke^="hsl(0 0% 100%"],
-html:not(.dark) svg path[stroke^="hsl(0 0% 100%"] {
-  stroke: hsl(226 60% 10% / 0.30) !important;
-}
-html:not(.dark) svg circle[fill^="hsl(0 0% 100%"],
-html:not(.dark) svg rect[fill^="hsl(0 0% 100%"] {
-  fill: hsl(220 79% 48% / 0.55) !important;
-}
-
-/* Service visuals reference hsl(var(--gold) / X). In light mode --gold
-   is now navy, which is too heavy for soft fills. Re-route to blue. */
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.18)"],
-html:not(.dark) svg circle[fill="hsl(var(--gold))"] {
-  fill: hsl(220 79% 48% / 0.85) !important;
-}
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.25)"] {
-  fill: hsl(220 79% 48% / 0.40) !important;
-}
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.22)"] {
-  fill: hsl(220 79% 48% / 0.30) !important;
-}
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.05)"],
-html:not(.dark) svg rect[fill="hsl(var(--gold) / 0.04)"] {
-  fill: hsl(220 79% 48% / 0.06) !important;
 }
 
 /* Header and footer surfaces are controlled by their components. */

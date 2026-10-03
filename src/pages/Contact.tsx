@@ -7,7 +7,6 @@ import { useSEO } from "@/hooks/use-seo";
 const serviceOptions = [
   "General Inquiry",
   "Diagnose My Growth System",
-  "Book Infrastructure Audit",
   "Commercial Growth Strategy",
   "Client Acquisition Architecture",
   "High-Ticket Revenue Systems",
@@ -244,7 +243,7 @@ const Contact = () => {
                     className="inline-flex items-center bg-black text-white dark:bg-gold dark:text-navy px-8 py-4 rounded-full text-sm font-medium tracking-wide hover:opacity-90 hover:scale-[1.015] active:scale-[0.98] transition-all duration-300 mt-2"
                     style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                   >
-                    Book Infrastructure Audit
+                    Send inquiry
                   </button>
                 </form>
               </ScrollReveal>

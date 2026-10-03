@@ -165,15 +165,13 @@ const Vault = () => {
           <p className="portal-muted">
             {loadError
               ? "Your access has not changed. Refresh this page to reconnect securely."
-              : "This account does not yet hold access to the Commercial Growth System. Sign in with the purchasing email, or get access below."}
+              : "This account does not yet hold access to the Commercial Growth System. Sign in with the purchasing email or contact support if access is missing."}
           </p>
-          <div className="vault-empty-actions">
-            {loadError ? (
+          {loadError && (
+            <div className="vault-empty-actions">
               <Button onClick={() => window.location.reload()} className="portal-btn portal-btn--solid">Try again</Button>
-            ) : (
-              <VaultLink to="/forge-vault" className="portal-btn portal-btn--solid">View Forge Vault</VaultLink>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
 
