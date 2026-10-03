@@ -56,7 +56,7 @@ const Index = () => {
   return (
     <div className="bg-background text-foreground">
       {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[92svh] flex items-end overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[88svh] md:min-h-[92svh] flex items-end overflow-hidden">
         <motion.div className="absolute inset-0 -top-[10%] h-[120%] will-change-transform" style={{ y: imgY }}>
           <img src={heroImg} alt="BitwellForge advisors reviewing commercial strategy at dusk" width={1920} height={1088}
             className="w-full h-full object-cover" fetchPriority="high" />
