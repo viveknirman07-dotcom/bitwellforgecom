@@ -62,10 +62,10 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
               className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover max-w-full ${sizes[i]}`}
               initial={{ opacity: 0, scale: 0.82 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.5 + i * 0.4, ease }} />
+              transition={{ duration: 0.7, delay: 0.1 + i * 0.4, ease }} />
           ))}
           <motion.p className="relative z-10 font-heading font-normal text-center text-[52px] md:text-[124px] leading-[0.91] tracking-[-0.03em] px-5 max-w-[17ch] text-foreground"
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
+            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05, ease }}>
             {headline}
           </motion.p>
         </motion.div>
