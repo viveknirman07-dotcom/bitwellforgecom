@@ -6,18 +6,20 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useSEO } from "@/hooks/use-seo";
 import { articles } from "@/pages/Insights";
 import { caseStudies } from "@/lib/case-studies-data";
-import heroImg from "@/assets/photos/engineered-infrastructure.jpg";
-import revImg from "@/assets/photos/revenue.jpg";
-import globalImg from "@/assets/photos/global.jpg";
-import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
-import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
-import connectionsImg from "@/assets/photos/engineered-connections.jpg";
-import preStratImg from "@/assets/photos/preloader/engineered-strategy-640.webp";
-import preOpsImg from "@/assets/photos/preloader/engineered-operations-640.webp";
-import preKnowledgeImg from "@/assets/photos/preloader/engineered-knowledge-640.webp";
-import preConnectionsImg from "@/assets/photos/preloader/engineered-connections-640.webp";
-import prePathwaysImg from "@/assets/photos/preloader/engineered-pathways-640.webp";
-import preHeroImg from "@/assets/photos/preloader/engineered-infrastructure-640.webp";
+import heroImg from "@/assets/photos/system-hero.jpg";
+import revImg from "@/assets/photos/system-revenue.jpg";
+import strategyImg from "@/assets/photos/system-strategy.jpg";
+import operationsImg from "@/assets/photos/system-operations.jpg";
+import acquisitionImg from "@/assets/photos/system-acquisition.jpg";
+import processImg from "@/assets/photos/system-process.jpg";
+import insightsImg from "@/assets/photos/system-insights.jpg";
+import visibilityImg from "@/assets/photos/system-visibility.jpg";
+import preStratImg from "@/assets/photos/preloader/system-strategy-640.webp";
+import preOpsImg from "@/assets/photos/preloader/system-operations-640.webp";
+import preKnowledgeImg from "@/assets/photos/preloader/system-insights-640.webp";
+import preConnectionsImg from "@/assets/photos/preloader/system-acquisition-640.webp";
+import prePathwaysImg from "@/assets/photos/preloader/system-process-640.webp";
+import preHeroImg from "@/assets/photos/preloader/system-hero-640.webp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
@@ -61,7 +63,7 @@ const ArrowLink = ({ to, children, className = "" }: { to: string; children: Rea
 );
 
 const perspectiveLabels = ["Insight", "Analysis", "Trends"];
-const perspectiveImgs = [strategyModelImg, operationsPlantImg, connectionsImg];
+const perspectiveImgs = [strategyImg, operationsImg, insightsImg];
 
 const Index = () => {
   const reduced = useReducedMotion();
@@ -85,7 +87,7 @@ const Index = () => {
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
         <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
-          <motion.img src={heroImg} alt="Interconnected concrete and steel infrastructure beneath a monumental overpass" width={1920} height={1088} fetchPriority="high" decoding="async"
+          <motion.img src={heroImg} alt="Concrete and steel transit spans converging into an engineered infrastructure system" width={1920} height={1088} fetchPriority="high" decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-[57%_center] md:object-center"
             initial={reduced ? false : { scale: 1.15 }} animate={{ scale: 1 }} transition={{ duration: 1.8, ease }} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
@@ -115,7 +117,7 @@ const Index = () => {
           </div>
           <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none">
             <div className="w-[60%] md:w-[72%] aspect-[225/243] overflow-hidden mb-5">
-              <img src={revImg} alt="" aria-hidden loading="lazy" width={1600} height={1066} className="w-full h-full object-cover" />
+              <img src={revImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" />
             </div>
             <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{story.subtitle}</p>
             <ArrowLink to={`/case-studies/${story.id}`}>Learn how we helped</ArrowLink>
@@ -123,7 +125,7 @@ const Index = () => {
           </Reveal>
           <Reveal delay={0.1} className="md:col-span-8 md:row-start-2">
             <Link to={`/case-studies/${story.id}`} className="block overflow-hidden aspect-[930/484] group">
-              <img src={connectionsImg} alt="Converging structural routes representing the coordinated acquisition approach" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.04]" />
+              <img src={acquisitionImg} alt="Railway viaduct routes converging through an engineered junction" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.04]" />
             </Link>
           </Reveal>
         </div>
@@ -164,18 +166,18 @@ const Index = () => {
       <section className="pb-24 md:pb-32 overflow-hidden">
         <div className={`${wrap} grid grid-cols-12 gap-y-10 md:gap-x-6`}>
           <div className="col-span-12 md:col-span-6 relative h-[360px] md:h-[440px]">
-            <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={strategyModelImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
+            <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={strategyImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
             <Reveal delay={0.15} className="absolute left-[8%] md:left-[10%] top-[34%] w-[52%] md:w-[48%]">
-              <div className="aspect-[224/280] overflow-hidden"><img src={operationsPlantImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
+              <div className="aspect-[224/280] overflow-hidden"><img src={operationsImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
               <ArrowLink to="/about" className="mt-2">Meet the practice</ArrowLink>
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-6 relative h-[420px] md:h-[560px] md:mt-40">
             <Reveal className="absolute left-0 top-0 w-[70%] md:w-[60%]">
-              <div className="aspect-[342/428] overflow-hidden"><img src={connectionsImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
+              <div className="aspect-[342/428] overflow-hidden"><img src={processImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
               <ArrowLink to="/insights" className="mt-2">Recent insights</ArrowLink>
             </Reveal>
-            <Reveal delay={0.15} className="absolute right-[4%] md:right-[8%] top-[58%] w-[40%] aspect-[224/280]"><img src={globalImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" /></Reveal>
+            <Reveal delay={0.15} className="absolute right-[4%] md:right-[8%] top-[58%] w-[40%] aspect-[224/280]"><img src={visibilityImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
           </div>
           <div className="col-span-12 md:col-span-6 md:row-start-2 md:-mt-40">
             <Reveal><p className={`${cap} mb-6`}>Be part of our team</p></Reveal>

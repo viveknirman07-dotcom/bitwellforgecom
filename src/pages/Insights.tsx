@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 import { readingTime } from "@/lib/insights";
-import insightImage from "@/assets/photos/editorial-insight.jpg";
+import insightImage from "@/assets/photos/system-insights.jpg";
 
 export const articles = [
   {
@@ -706,7 +706,7 @@ const Insights = () => {
           </div>
 
           <div className="mb-12 md:mb-16 aspect-[16/7] overflow-hidden">
-            <img src={insightImage} alt="Natural light and structural shadows in a glass corridor" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            <img src={insightImage} alt="Natural light falling across rows of research folios in a stone archive" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
 
           <div className="max-w-xl mb-12 md:mb-16">
