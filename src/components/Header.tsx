@@ -86,7 +86,7 @@ const Header = () => {
 
   const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/");
   const solid = scrolled || openMega || searchOpen || mobileOpen;
-  const overHero = location.pathname === "/" && !solid;
+  const overHero = false;
 
   return (
     <header
