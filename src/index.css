@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Noto+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -216,15 +216,15 @@
       font-size: 13px;
       line-height: 1.7;
     }
-    h1 {
+    h1:not(.bf-home *) {
       font-size: 29px !important;
       line-height: 1.1 !important;
     }
-    h2 {
+    h2:not(.bf-home *) {
       font-size: 21.5px !important;
       line-height: 1.16 !important;
     }
-    h3 {
+    h3:not(.bf-home *) {
       font-size: 15.5px !important;
       line-height: 1.32 !important;
     }
@@ -232,13 +232,13 @@
       font-size: 13.5px !important;
       line-height: 1.32 !important;
     }
-    p, li { font-size: 13px !important; line-height: 1.7 !important; }
+    p:not(.bf-home *), li:not(.bf-home *) { font-size: 13px !important; line-height: 1.7 !important; }
   }
 
   /* Tablet alignment (~95% density, composed for the tablet measure) */
   @media (min-width: 768px) and (max-width: 1023px) {
-    h1 { font-size: clamp(38px, 4.75vw, 53px) !important; line-height: 1.1 !important; }
-    h2 { font-size: clamp(26.5px, 3.8vw, 36px) !important; line-height: 1.16 !important; }
+    h1:not(.bf-home *) { font-size: clamp(38px, 4.75vw, 53px) !important; line-height: 1.1 !important; }
+    h2:not(.bf-home *) { font-size: clamp(26.5px, 3.8vw, 36px) !important; line-height: 1.16 !important; }
     h3 { font-size: 19px !important; line-height: 1.28 !important; }
 
     .section-padding {
@@ -679,11 +679,11 @@ html.mobile-lock header {
 }
 
 /* Force mobile typography sitewide */
-html.mobile-lock h1 { font-size: 34px !important; line-height: 1.08 !important; letter-spacing: -0.01em !important; }
-html.mobile-lock h2 { font-size: 28px !important; line-height: 1.15 !important; }
-html.mobile-lock h3 { font-size: 19px !important; line-height: 1.28 !important; }
-html.mobile-lock p,
-html.mobile-lock li { font-size: 15px !important; line-height: 1.75 !important; }
+html.mobile-lock h1:not(.bf-home *) { font-size: 34px !important; line-height: 1.08 !important; letter-spacing: -0.01em !important; }
+html.mobile-lock h2:not(.bf-home *) { font-size: 28px !important; line-height: 1.15 !important; }
+html.mobile-lock h3:not(.bf-home *) { font-size: 19px !important; line-height: 1.28 !important; }
+html.mobile-lock p:not(.bf-home *),
+html.mobile-lock li:not(.bf-home *) { font-size: 15px !important; line-height: 1.75 !important; }
 
 html.mobile-lock .eyebrow,
 html.mobile-lock [class*="eyebrow"] { font-size: 10px !important; letter-spacing: 0.18em !important; }
@@ -693,7 +693,7 @@ html.mobile-lock .btn-primary,
 html.mobile-lock .btn-ghost { font-size: 13px !important; letter-spacing: 0.10em !important; }
 
 /* Force single-column on every grid */
-html.mobile-lock [class*="grid-cols"] { grid-template-columns: 1fr !important; }
+html.mobile-lock [class*="grid-cols"]:not(.bf-home *) { grid-template-columns: 1fr !important; }
 html.mobile-lock .lg\:grid-cols-12,
 html.mobile-lock .md\:grid-cols-12 { grid-template-columns: 1fr !important; }
 
@@ -702,7 +702,7 @@ html.mobile-lock .stats-grid,
 html.mobile-lock .grid.grid-cols-2 { grid-template-columns: 1fr 1fr !important; }
 
 /* Section padding to mobile */
-html.mobile-lock section { padding-left: 24px !important; padding-right: 24px !important; }
+html.mobile-lock section:not(.bf-home *) { padding-left: 24px !important; padding-right: 24px !important; }
 html.mobile-lock .section-padding { padding-left: 24px !important; padding-right: 24px !important; }
 html.mobile-lock .section-y { padding-top: 64px !important; padding-bottom: 64px !important; }
 
@@ -1432,58 +1432,56 @@ body.vault-transitioning--calm #root { animation: none; }
 
 
 
-/* === Institutional reconstruction system: midnight, ivory, lime, cobalt === */
+/* === Editorial institutional system (warm paper, deep navy, light serif) === */
 @layer base {
   :root {
-    --background: 43 33% 93%;
-    --foreground: 210 15% 8%;
-    --card: 50 9% 90%;
-    --card-foreground: 210 15% 8%;
-    --popover: 43 33% 95%;
-    --popover-foreground: 210 15% 8%;
-    --primary: 210 18% 4%;
-    --primary-foreground: 43 33% 93%;
-    --secondary: 50 9% 90%;
-    --secondary-foreground: 210 15% 8%;
-    --muted: 50 9% 88%;
-    --muted-foreground: 207 5% 39%;
-    --accent: 74 100% 47%;
-    --accent-foreground: 210 18% 4%;
-    --border: 210 15% 8% / 0.14;
-    --input: 50 9% 84%;
-    --ring: 226 100% 61%;
-    --radius: 0.125rem;
-    --navy: 210 18% 4%;
-    --navy-light: 210 12% 12%;
-    --navy-deepest: 210 20% 3%;
-    --gold: 210 15% 8%;
-    --lime: 74 100% 47%;
-    --cobalt: 226 100% 61%;
-    --eyebrow-color: 207 5% 39%;
-    --font-heading: 'Schibsted Grotesk', system-ui, sans-serif;
-    --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+    --background: 40 33% 96%;
+    --foreground: 230 8% 22%;
+    --card: 40 25% 93%;
+    --card-foreground: 230 8% 22%;
+    --popover: 40 33% 97%;
+    --popover-foreground: 230 8% 22%;
+    --primary: 230 94% 14%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 22% 92%;
+    --secondary-foreground: 230 8% 22%;
+    --muted: 40 18% 90%;
+    --muted-foreground: 230 6% 38%;
+    --accent: 230 94% 14%;
+    --accent-foreground: 0 0% 100%;
+    --border: 230 8% 22% / 0.35;
+    --input: 40 15% 85%;
+    --ring: 230 94% 14%;
+    --radius: 0rem;
+    --navy: 230 94% 14%;
+    --navy-light: 230 60% 22%;
+    --navy-deepest: 230 94% 10%;
+    --gold: 230 94% 14%;
+    --eyebrow-color: 230 8% 22%;
+    --font-heading: 'Newsreader', Georgia, serif;
+    --font-body: 'Noto Sans', system-ui, sans-serif;
   }
   .dark {
-    --background: 210 18% 4%;
-    --foreground: 43 33% 93%;
-    --card: 210 12% 8%;
-    --card-foreground: 43 33% 93%;
-    --popover: 210 12% 8%;
-    --popover-foreground: 43 33% 93%;
-    --primary: 43 33% 93%;
-    --primary-foreground: 210 18% 4%;
-    --secondary: 210 12% 8%;
-    --secondary-foreground: 43 33% 93%;
-    --muted: 210 12% 10%;
-    --muted-foreground: 45 6% 64%;
-    --accent: 74 100% 47%;
-    --accent-foreground: 210 18% 4%;
-    --border: 43 33% 93% / 0.14;
-    --input: 210 12% 14%;
-    --ring: 74 100% 47%;
-    --gold: 43 33% 93%;
-    --eyebrow-color: 45 6% 64%;
+    --background: 230 94% 14%;
+    --foreground: 0 0% 100%;
+    --card: 230 70% 18%;
+    --card-foreground: 0 0% 100%;
+    --popover: 230 70% 18%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 230 94% 14%;
+    --secondary: 230 70% 18%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 230 60% 20%;
+    --muted-foreground: 230 20% 80%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 230 94% 14%;
+    --border: 0 0% 100% / 0.25;
+    --input: 230 50% 24%;
+    --ring: 0 0% 100%;
+    --gold: 0 0% 100%;
+    --eyebrow-color: 230 20% 80%;
   }
-  h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); letter-spacing: -0.025em; }
+  h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); font-weight: 300; letter-spacing: -0.015em; }
   body { font-family: var(--font-body); }
 }

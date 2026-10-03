@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Schibsted Grotesk', 'system-ui', 'sans-serif'],
-        body: ['Hanken Grotesk', 'system-ui', 'sans-serif'],
+        heading: ['Newsreader', 'Georgia', 'serif'],
+        body: ['Noto Sans', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
         quote: ['Cormorant Garamond', 'Georgia', 'serif'],
       },
