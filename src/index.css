@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -1431,3 +1431,59 @@ body.vault-transitioning--calm #root { animation: none; }
 }
 
 
+
+/* === Institutional reconstruction system: midnight, ivory, lime, cobalt === */
+@layer base {
+  :root {
+    --background: 43 33% 93%;
+    --foreground: 210 15% 8%;
+    --card: 50 9% 90%;
+    --card-foreground: 210 15% 8%;
+    --popover: 43 33% 95%;
+    --popover-foreground: 210 15% 8%;
+    --primary: 210 18% 4%;
+    --primary-foreground: 43 33% 93%;
+    --secondary: 50 9% 90%;
+    --secondary-foreground: 210 15% 8%;
+    --muted: 50 9% 88%;
+    --muted-foreground: 207 5% 39%;
+    --accent: 74 100% 47%;
+    --accent-foreground: 210 18% 4%;
+    --border: 210 15% 8% / 0.14;
+    --input: 50 9% 84%;
+    --ring: 226 100% 61%;
+    --radius: 0.125rem;
+    --navy: 210 18% 4%;
+    --navy-light: 210 12% 12%;
+    --navy-deepest: 210 20% 3%;
+    --gold: 210 15% 8%;
+    --lime: 74 100% 47%;
+    --cobalt: 226 100% 61%;
+    --eyebrow-color: 207 5% 39%;
+    --font-heading: 'Schibsted Grotesk', system-ui, sans-serif;
+    --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+  }
+  .dark {
+    --background: 210 18% 4%;
+    --foreground: 43 33% 93%;
+    --card: 210 12% 8%;
+    --card-foreground: 43 33% 93%;
+    --popover: 210 12% 8%;
+    --popover-foreground: 43 33% 93%;
+    --primary: 43 33% 93%;
+    --primary-foreground: 210 18% 4%;
+    --secondary: 210 12% 8%;
+    --secondary-foreground: 43 33% 93%;
+    --muted: 210 12% 10%;
+    --muted-foreground: 45 6% 64%;
+    --accent: 74 100% 47%;
+    --accent-foreground: 210 18% 4%;
+    --border: 43 33% 93% / 0.14;
+    --input: 210 12% 14%;
+    --ring: 74 100% 47%;
+    --gold: 43 33% 93%;
+    --eyebrow-color: 45 6% 64%;
+  }
+  h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); letter-spacing: -0.025em; }
+  body { font-family: var(--font-body); }
+}
