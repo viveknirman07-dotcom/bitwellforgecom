@@ -1,10 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
-import diagnoseImg from "@/assets/photos/strategy.jpg";
-import architectImg from "@/assets/photos/global.jpg";
-import engineerImg from "@/assets/photos/operations.jpg";
 import optimizeImg from "@/assets/photos/revenue.jpg";
-import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
 import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
 import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
 import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";

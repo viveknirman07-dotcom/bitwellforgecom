@@ -86,6 +86,9 @@ export default {
         soft: "var(--shadow-md)",
         elevated: "var(--shadow-lg)",
       },
+      transitionDuration: {
+        1200: "1200ms",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

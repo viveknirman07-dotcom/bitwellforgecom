@@ -7,11 +7,7 @@ import { useSEO } from "@/hooks/use-seo";
 import { articles } from "@/pages/Insights";
 import { caseStudies } from "@/lib/case-studies-data";
 import heroImg from "@/assets/photos/engineered-infrastructure.jpg";
-import caseImg from "@/assets/photos/case.jpg";
-import acqImg from "@/assets/photos/acquisition.jpg";
 import revImg from "@/assets/photos/revenue.jpg";
-import stratImg from "@/assets/photos/strategy.jpg";
-import opsImg from "@/assets/photos/operations.jpg";
 import globalImg from "@/assets/photos/global.jpg";
 import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
 import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
@@ -38,7 +34,7 @@ const SplitReveal = ({ text, as: Tag = "h2", className = "", delay = 0, inView =
       variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: delay } } }} aria-label={text}>
       {words.map((w, i) => (
         <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.08em]" aria-hidden>
-          <motion.span className="inline-block" variants={{ hide: { y: "110%" }, show: { y: "0%", transition: { duration: 0.8, ease } } }}>
+          <motion.span className="inline-block" variants={{ hide: { y: "110%" }, show: { y: "0%", transition: { duration: reduced ? 0 : 0.8, ease } } }}>
             {w}{i < words.length - 1 ? "\u00A0" : ""}
           </motion.span>
         </span>
@@ -127,7 +123,7 @@ const Index = () => {
           </Reveal>
           <Reveal delay={0.1} className="md:col-span-8 md:row-start-2">
             <Link to={`/case-studies/${story.id}`} className="block overflow-hidden aspect-[930/484] group">
-              <img src={connectionsImg} alt="Converging structural routes representing the coordinated acquisition approach" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]" />
+              <img src={connectionsImg} alt="Converging structural routes representing the coordinated acquisition approach" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.04]" />
             </Link>
           </Reveal>
         </div>

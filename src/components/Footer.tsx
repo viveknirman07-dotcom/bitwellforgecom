@@ -80,7 +80,7 @@ const Footer = () => {
               return (
                 <div key={c.title} className="border-t border-border">
                   <Button variant="ghost" onClick={() => setOpen(isOpen ? null : c.title)} aria-expanded={isOpen}
-                    className="w-full min-h-[56px] flex items-center justify-between text-[15px] font-medium">
+                    className="w-full min-h-[56px] px-0 flex items-center justify-between text-[15px] font-medium hover:bg-transparent">
                     {c.title}
                     <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
                   </Button>
