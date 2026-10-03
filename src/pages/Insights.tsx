@@ -704,6 +704,10 @@ const Insights = () => {
             </ScrollReveal>
           </div>
 
+          <div className="mb-12 md:mb-16 aspect-[16/7] overflow-hidden">
+            <img src={insightImage} alt="Natural light and structural shadows in a glass corridor" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+          </div>
+
           <div className="max-w-xl mb-12 md:mb-16">
             <input
               type="text"
