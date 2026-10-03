@@ -4,22 +4,24 @@ import ScrollReveal from "@/components/ScrollReveal";
 import IdealFor from "@/components/services/IdealFor";
 import { serviceData, type ServiceSlug } from "@/data/services";
 import { useSEO } from "@/hooks/use-seo";
-import globalImg from "@/assets/photos/global.jpg";
-import knowledgeImg from "@/assets/photos/engineered-knowledge.jpg";
-import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
-import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
-import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
-import connectionsImg from "@/assets/photos/engineered-connections.jpg";
+import strategyImg from "@/assets/photos/system-strategy.jpg";
+import revenueImg from "@/assets/photos/system-revenue.jpg";
+import performanceImg from "@/assets/photos/system-performance.jpg";
+import acquisitionImg from "@/assets/photos/system-acquisition.jpg";
+import visibilityImg from "@/assets/photos/system-visibility.jpg";
+import operationsImg from "@/assets/photos/system-operations.jpg";
+import knowledgeImg from "@/assets/photos/system-knowledge.jpg";
+import productImg from "@/assets/photos/system-product.jpg";
 
 const serviceImages: Record<ServiceSlug, { src: string; alt: string }> = {
-  "growth-strategy": { src: strategyModelImg, alt: "Physical scale model and drawings showing an interconnected system designed before construction" },
-  "sales-systems": { src: infrastructureImg, alt: "Interconnected concrete and steel spans expressing a resilient revenue system" },
-  "performance-marketing": { src: globalImg, alt: "City lights reflecting measurable market activity" },
-  "lead-generation": { src: connectionsImg, alt: "Several pathways converging through a precisely engineered bridge junction" },
-  linkedin: { src: knowledgeImg, alt: "Organized archive expressing the structure behind market authority" },
-  "ai-automation": { src: operationsPlantImg, alt: "Coordinated mechanical assemblies and conduits in a precision-engineered facility" },
-  seo: { src: globalImg, alt: "Connected city environment representing digital visibility" },
-  "digital-products": { src: knowledgeImg, alt: "Organized physical knowledge archive with modular sections" },
+  "growth-strategy": { src: strategyImg, alt: "Layered physical architectural model assembled to plan a connected structure" },
+  "sales-systems": { src: revenueImg, alt: "Load-bearing beams and cross bracing beneath a structural bridge" },
+  "performance-marketing": { src: performanceImg, alt: "Adjustable testing fins in a daylight-lit wind tunnel" },
+  "lead-generation": { src: acquisitionImg, alt: "Engineered railway routes converging at a concrete viaduct junction" },
+  linkedin: { src: knowledgeImg, alt: "Ordered stone and steel archive preserving accumulated knowledge" },
+  "ai-automation": { src: operationsImg, alt: "Connected mechanical turbines and conduits in a working plant" },
+  seo: { src: visibilityImg, alt: "Limestone library atrium with a distinct structural spine between repeating bays" },
+  "digital-products": { src: productImg, alt: "Modular paper folios assembled on a precision production line" },
 };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
@@ -117,7 +119,7 @@ const ServiceDetail = () => {
           {/* ── Photographic context */}
           <ScrollReveal delay={200}>
             <div className="mb-12 aspect-[16/9] overflow-hidden">
-              <img src={serviceImage.src} alt={serviceImage.alt} width={1600} height={900} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+              <img src={serviceImage.src} alt={serviceImage.alt} width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </div>
           </ScrollReveal>
 

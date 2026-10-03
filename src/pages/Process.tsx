@@ -1,10 +1,11 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
-import optimizeImg from "@/assets/photos/revenue.jpg";
-import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
-import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
-import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
-import connectionsImg from "@/assets/photos/engineered-connections.jpg";
+import diagnoseImg from "@/assets/photos/system-diagnose.jpg";
+import strategyImg from "@/assets/photos/system-strategy.jpg";
+import operationsImg from "@/assets/photos/system-operations.jpg";
+import activateImg from "@/assets/photos/system-activate.jpg";
+import optimizeImg from "@/assets/photos/system-optimize.jpg";
+import compoundImg from "@/assets/photos/system-compound.jpg";
 
 interface Stage {
   number: string;
@@ -22,8 +23,8 @@ const stages: Stage[] = [
     outcome: "Identify system bottlenecks.",
     description:
       "An infrastructure scan across acquisition, conversion, and operations. Where revenue leaks, where channels concentrate risk, where decisions happen without data. The diagnosis defines what the engagement is actually solving for.",
-    image: strategyModelImg,
-    imageAlt: "Physical architectural model with layered plans and structural sections for diagnosing a system",
+    image: diagnoseImg,
+    imageAlt: "Exposed steel joint within an aging stone aqueduct reveals its underlying structure",
   },
   {
     number: "02",
@@ -31,8 +32,8 @@ const stages: Stage[] = [
     outcome: "Infrastructure design.",
     description:
       "A systems map is generated from the diagnosis. Acquisition channels, sales mechanics, automation layers, and measurement loops are sequenced into a single coherent architecture before any build begins.",
-    image: strategyModelImg,
-    imageAlt: "Scale model of interconnected infrastructure planned before construction",
+    image: strategyImg,
+    imageAlt: "Layered architectural scale model arranged before construction",
   },
   {
     number: "03",
@@ -40,8 +41,8 @@ const stages: Stage[] = [
     outcome: "System deployment.",
     description:
       "Components are constructed and connected. CRM logic, outbound sequences, sales workflows, automation pipes, reporting dashboards. The infrastructure assembles into a single operating layer the business can run.",
-    image: operationsPlantImg,
-    imageAlt: "Interconnected precision-engineered industrial systems in a turbine hall",
+    image: operationsImg,
+    imageAlt: "Interconnected precision-engineered machinery in an industrial plant",
   },
   {
     number: "04",
@@ -49,8 +50,8 @@ const stages: Stage[] = [
     outcome: "Predictable acquisition.",
     description:
       "Demand begins flowing through the system. Pipelines fill, opportunities appear, conversations compound. The business shifts from reactive marketing to a measured, controllable acquisition rhythm.",
-    image: connectionsImg,
-    imageAlt: "Several engineered routes converging at a structural junction",
+    image: activateImg,
+    imageAlt: "Measured water channels moving through a controlled distribution junction",
   },
   {
     number: "05",
@@ -59,7 +60,7 @@ const stages: Stage[] = [
     description:
       "Feedback loops surface what is working and what is not. Insights inform decisions. Conversion improves at every stage. The same infrastructure produces more revenue over time without more input.",
     image: optimizeImg,
-    imageAlt: "Structural bridge cables engineered for sustained load",
+    imageAlt: "Adjustable valves aligned along an industrial pipe network",
   },
   {
     number: "06",
@@ -67,8 +68,8 @@ const stages: Stage[] = [
     outcome: "Sustainable predictable growth.",
     description:
       "The system becomes self-reinforcing. Authority compounds, data sharpens, automation deepens, the cost of acquiring the next client decreases. Growth becomes a property of the infrastructure, not the effort.",
-    image: infrastructureImg,
-    imageAlt: "Interconnected structural spans carrying multiple routes through one system",
+    image: compoundImg,
+    imageAlt: "Interconnected viaduct spans extending through a mountain valley",
   },
 ];
 
@@ -134,7 +135,7 @@ const Process = () => {
                   </p>
                 </div>
                 <div className="lg:col-span-6 overflow-hidden aspect-[3/2]">
-                  <img src={stage.image} alt={stage.imageAlt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.025]" />
+                  <img src={stage.image} alt={stage.imageAlt} width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.025]" />
                 </div>
               </div>
             </ScrollReveal>
