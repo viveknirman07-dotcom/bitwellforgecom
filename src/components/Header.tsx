@@ -218,7 +218,7 @@ const Header = () => {
                   className="flex-1 h-11 bg-transparent text-foreground placeholder:text-muted-foreground outline-none" />
               </form>
               {navItems.map((item, i) => (
-                <motion.div key={item.href} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05, duration: 0.35, ease }}>
+                <motion.div key={item.href} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduced ? 0 : 0.1 + i * 0.05, duration: reduced ? 0 : 0.35, ease }}>
                   <div className="flex items-center border-b border-border">
                   <Link to={item.href} onClick={() => setMobileOpen(false)} className={`flex flex-1 items-center justify-between min-h-[56px] font-heading text-[24px] ${isActive(item.href) ? "text-foreground" : "text-foreground/80"}`}>
                     <span className="inline-flex items-center gap-2">{item.label}
