@@ -4,6 +4,7 @@ import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { getReferral, markReferralValidated } from "@/lib/referral";
 import CurrencySelect, { CurrencyOption } from "@/components/CurrencySelect";
+import BrandWordmark from "@/components/BrandWordmark";
 import { DEFAULT_CURRENCY, getCurrency, hasExplicitCurrency, setCurrency } from "@/lib/currency";
 
 interface Pricing {

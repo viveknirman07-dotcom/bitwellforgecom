@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Noto+Sans:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -1384,4 +1382,83 @@ body.vault-transitioning--calm #root { animation: none; }
   }
   h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); font-weight: 300; letter-spacing: -0.015em; }
   body { font-family: var(--font-body); }
+}
+
+/* The supplied BitwellForge reference is the source for this brand lockup. */
+:root {
+  --brand-header-bg: 205 100% 93%;
+  --brand-header-ink: 226 76% 17%;
+  --brand-divider: 220 12% 31%;
+  --site-header-height: 64px;
+}
+.brand-wordmark {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-optical-sizing: auto;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+.site-header {
+  background: hsl(var(--brand-header-bg));
+  color: hsl(var(--brand-header-ink));
+}
+.site-header-brandrow { height: var(--site-header-height); }
+.site-header-brandinner {
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-shrink: 1;
+  color: hsl(var(--brand-header-ink));
+  white-space: nowrap;
+  font-family: 'Newsreader', Georgia, serif;
+  line-height: 1;
+}
+.brand-lockup .brand-wordmark { font-size: 22px; }
+.brand-lockup-divider {
+  width: 1px;
+  height: 27px;
+  flex: none;
+  background: hsl(var(--brand-divider));
+}
+.brand-lockup-tagline { font-size: 17px; font-weight: 700; letter-spacing: 0; }
+.brand-lockup-tagline em { font-weight: 400; font-style: italic; }
+.site-header-actions { flex: none; color: hsl(var(--brand-header-ink)); }
+.site-header-actions button { color: inherit; }
+.site-header-nav { display: none; }
+@media (min-width: 768px) {
+  :root { --site-header-height: 82px; }
+  .site-header-brandinner { padding: 0 32px; }
+  .brand-lockup { gap: 16px; }
+  .brand-lockup .brand-wordmark { font-size: 34px; }
+  .brand-lockup-divider { height: 42px; width: 2px; }
+  .brand-lockup-tagline { font-size: 30px; }
+}
+@media (min-width: 1024px) {
+  :root { --site-header-height: 92px; }
+  .site-header-brandinner { padding: 0 40px; }
+  .brand-lockup { gap: 20px; }
+  .brand-lockup .brand-wordmark { font-size: 42px; }
+  .brand-lockup-divider { height: 51px; }
+  .brand-lockup-tagline { font-size: 38px; }
+  .site-header-nav { display: flex; }
+}
+@media (max-width: 390px) {
+  .site-header-brandinner { padding: 0 9px; }
+  .brand-lockup { gap: 5px; }
+  .brand-lockup .brand-wordmark { font-size: 19px; }
+  .brand-lockup-divider { height: 24px; }
+  .brand-lockup-tagline { font-size: 14px; }
 }

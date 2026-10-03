@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import VaultLink from "@/components/vault/VaultLink";
 import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import BrandWordmark from "@/components/BrandWordmark";
 
 interface Status {
   status: string;
