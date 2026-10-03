@@ -84,11 +84,12 @@ const Header = () => {
   };
 
   const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/");
-  const solid = scrolled || openMega || searchOpen;
+  const solid = scrolled || openMega || searchOpen || mobileOpen;
+  const overHero = location.pathname === "/" && !solid;
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 border-b ${
+      className={`${overHero ? "dark " : ""}fixed top-0 inset-x-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 border-b ${
         solid ? "bg-background/85 backdrop-blur-xl border-border" : "bg-transparent border-transparent"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.25,0.1,0.25,1)" }}
