@@ -100,7 +100,7 @@ const Footer = () => {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
             <Link to="/cookies" className="hover:text-foreground">Cookie Policy</Link>
-            <Link to="/contact" className="hover:text-foreground">Terms of use</Link>
+            <Button variant="ghost" size="sm" onClick={() => window.dispatchEvent(new Event("bitwellforge:open-cookie-settings"))} className="h-auto p-0 text-[13px] text-muted-foreground hover:text-foreground hover:bg-transparent">Cookie settings</Button>
           </div>
         </div>
       </div>

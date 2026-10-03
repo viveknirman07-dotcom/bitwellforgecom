@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,11 @@ export default function CookieConsent() {
   const [open, setOpen] = useState(false);
   const [manage, setManage] = useState(false);
   const [choices, setChoices] = useState<Choices>(saved ?? essential);
+  useEffect(() => {
+    const reopen = () => { setChoices(savedChoices() ?? essential); setManage(true); setOpen(true); };
+    window.addEventListener("bitwellforge:open-cookie-settings", reopen);
+    return () => window.removeEventListener("bitwellforge:open-cookie-settings", reopen);
+  }, []);
 
   const store = (next: Choices) => {
     try { localStorage.setItem(KEY, JSON.stringify(next)); } catch { /* Private mode may disable storage */ }
@@ -33,9 +38,6 @@ export default function CookieConsent() {
   };
 
   return <>
-    <div className="fixed bottom-3 left-3 z-[70] sm:bottom-5 sm:left-5">
-      {saved && !open && <Button variant="outline" size="sm" onClick={() => { setChoices(saved); setManage(true); setOpen(true); }} className="bg-background text-foreground border-border shadow-subtle">Cookie settings</Button>}
-    </div>
     {(!saved || open) && <div role="dialog" aria-modal="false" aria-label="Cookie preferences" className="fixed z-[70] bottom-0 inset-x-0 bg-background border-t border-border shadow-elevated text-foreground">
       <div className="max-w-[1280px] mx-auto px-5 md:px-10 py-5 md:py-7 flex flex-col md:flex-row md:items-end justify-between gap-5">
         <div className="max-w-[670px]">
