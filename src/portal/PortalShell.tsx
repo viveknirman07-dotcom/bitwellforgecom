@@ -8,7 +8,6 @@ import { useAuth } from "@/hooks/use-auth";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import VaultStage from "@/components/vault/VaultStage";
 import { Button } from "@/components/ui/button";
-import BrandWordmark from "@/components/BrandWordmark";
 
 
 interface Props {
@@ -44,7 +43,7 @@ const PortalShell = ({ title, eyebrow, variant = "vault", children }: Props) => 
         <div className="portal vault-workspace-shell font-body min-h-screen">
           <header className="vault-workspace-header">
             <Link to="/" className="vault-workspace-brand" aria-label="BitwellForge home">
-              <BrandWordmark />
+              <span>BitwellForge</span>
               <span aria-hidden="true" className="vault-workspace-brand-mark" />
               <span>Forge Vault</span>
             </Link>

@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { hasActiveOpenings } from "@/data/jobs";
 import { Button } from "@/components/ui/button";
-import BrandWordmark from "@/components/BrandWordmark";
 
 type Mega = { heading: string; intro: string; links: { label: string; href: string }[] };
 
@@ -97,33 +96,28 @@ const Header = () => {
 
   return (
     <header
-      className={`${overHero ? "dark " : ""}site-header fixed top-0 inset-x-0 z-50 transition-[background-color,border-color] duration-300 border-b ${
-        solid ? "border-border" : "border-transparent"
+      className={`${overHero ? "dark " : ""}fixed top-0 inset-x-0 z-50 transition-[background-color,border-color] duration-300 border-b ${
+        solid ? "bg-background border-border" : "bg-background border-transparent"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.25,0.1,0.25,1)" }}
       onMouseLeave={() => { closeTimer.current = window.setTimeout(() => setOpenMega(null), 150); }}
       onMouseEnter={() => window.clearTimeout(closeTimer.current)}
     >
-      <div className="site-header-brandrow">
-        <div className="site-header-brandinner">
-          <Link to="/" className="brand-lockup" aria-label="BitwellForge home">
-            <BrandWordmark />
-            <span className="brand-lockup-divider" aria-hidden="true" />
-            <span className="brand-lockup-tagline">The business <em>of better.</em></span>
-          </Link>
-          <div className="site-header-actions flex lg:hidden items-center gap-1">
-            <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </Button>
-            <Button variant="ghost" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={mobileOpen} aria-controls="mobile-site-menu"
-              className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </Button>
-          </div>
+      {/* Utility bar */}
+      <div className="hidden lg:block border-b border-border/60">
+        <div className="max-w-[1440px] mx-auto px-10 h-9 flex items-center justify-end gap-6 text-[12px] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5"><Globe size={13} aria-hidden /> Global, remote delivery</span>
+          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors min-h-[36px]">
+            {isDark ? <Sun size={13} /> : <Moon size={13} />} {isDark ? "Light" : "Dark"}
+          </Button>
         </div>
       </div>
 
-      <nav className="site-header-nav max-w-[1440px] mx-auto px-4 md:px-8 lg:px-10 h-[52px] items-center justify-between gap-6" aria-label="Main">
+      <nav className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-10 h-16 lg:h-[76px] flex items-center justify-between gap-6" aria-label="Main">
+        <Link to="/" className="font-heading text-[22px] lg:text-[26px] font-semibold tracking-tight text-foreground shrink-0">
+          BitwellForge
+        </Link>
+
         <ul className="hidden lg:flex items-center gap-8 h-full">
           {navItems.map((item) => {
             const hasMega = !!mega[item.label];
@@ -152,17 +146,22 @@ const Header = () => {
           })}
         </ul>
 
-        <div className="hidden lg:flex items-center gap-4">
-          <span className="inline-flex items-center gap-1.5 text-[12px] text-muted-foreground"><Globe size={13} aria-hidden /> Global, remote delivery</span>
-          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="inline-flex items-center gap-1.5 hover:text-foreground min-h-[36px]">
-            {isDark ? <Sun size={13} /> : <Moon size={13} />} {isDark ? "Light" : "Dark"}
-          </Button>
+        <div className="hidden lg:flex items-center">
           <Button variant="ghost" onClick={() => setSearchOpen((v) => !v)} aria-label="Search insights" aria-expanded={searchOpen}
             className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:bg-secondary transition-colors">
             {searchOpen ? <X size={18} /> : <Search size={18} />}
           </Button>
         </div>
 
+        <div className="flex lg:hidden items-center gap-1">
+          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </Button>
+          <Button variant="ghost" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={mobileOpen} aria-controls="mobile-site-menu"
+            className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </Button>
+        </div>
       </nav>
 
       {/* Search bar */}
@@ -211,7 +210,7 @@ const Header = () => {
           <motion.div initial={reduced ? false : { opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, x: "100%" }}
             transition={{ duration: reduced ? 0 : 0.45, ease }}
             id="mobile-site-menu" aria-label="Mobile navigation" role="navigation"
-            className="lg:hidden fixed inset-x-0 top-[var(--site-header-height)] h-[calc(100dvh-var(--site-header-height))] bg-background overflow-y-auto overscroll-contain touch-pan-y shadow-elevated">
+            className="lg:hidden fixed inset-x-0 top-16 h-[calc(100dvh-4rem)] bg-background overflow-y-auto overscroll-contain touch-pan-y shadow-elevated">
             <div className="px-4 md:px-8 py-6 pb-16 flex flex-col">
               <form onSubmit={onSearch} className="flex items-center gap-3 border-b border-border pb-4 mb-2">
                 <Search size={18} className="text-muted-foreground" aria-hidden />
