@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 export function useDarkMode() {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === "undefined") return true;
-    const stored = localStorage.getItem("theme");
+    const stored = localStorage.getItem("bwf-theme");
     if (stored) return stored === "dark";
-    return true; // default to dark to match the design system
+    return false; // ice blue light theme by default
   });
 
   useEffect(() => {
     const root = document.documentElement;
     if (isDark) {
       root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      localStorage.setItem("bwf-theme", "dark");
     } else {
       root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      localStorage.setItem("bwf-theme", "light");
     }
   }, [isDark]);
 
