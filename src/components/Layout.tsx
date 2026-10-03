@@ -15,8 +15,8 @@ const Layout = () => {
       <MovingCursor />
       <Header />
       <main className="flex-1">
-        {/* Forge Vault runs its own entry choreography, so the global wipe is skipped there. */}
-        {location.pathname === "/forge-vault" ? (
+        {/* The homepage and Forge Vault run their own entry choreography. */}
+        {location.pathname === "/" || location.pathname === "/forge-vault" ? (
           <Outlet />
         ) : (
           <AnimatePresence mode="wait">
