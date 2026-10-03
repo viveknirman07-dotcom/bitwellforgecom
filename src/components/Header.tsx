@@ -158,7 +158,7 @@ const Header = () => {
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </Button>
           <Button variant="ghost" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={mobileOpen} aria-controls="mobile-site-menu"
-            className="h-11 w-11 inline-flex items-center justify-center text-foreground">
+            className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </Button>
         </div>
