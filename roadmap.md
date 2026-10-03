@@ -11,9 +11,10 @@
 - [x] Route support and post-purchase contact references to support@bitwellforge.com
 - [x] Verify the previous contact address is absent project-wide
 
-## Corporate website restructure
-- [ ] Rebuild the public header with a desktop mega menu and full screen mobile navigation
-- [ ] Restructure the homepage around Hero, Our Expertise, Latest Insights, and Global Footprint
-- [ ] Rebuild the public footer with desktop columns and mobile accordions
-- [ ] Apply the BitwellForge black, ivory, gold, titanium, and navy design system
-- [ ] Verify responsive behavior, reduced motion, navigation, and metadata
+## Institutional website reconstruction
+- [ ] Establish the new semantic visual and typography system
+- [ ] Rebuild global public navigation and footer
+- [ ] Reconstruct the homepage authority journey and system visuals
+- [ ] Recompose Services, Process, Case Studies, Insights, About, Contact, and Careers
+- [ ] Align Forge Vault marketing pages without changing commerce logic
+- [ ] Verify accessibility, responsive behavior, performance, SEO, and protected handoffs
