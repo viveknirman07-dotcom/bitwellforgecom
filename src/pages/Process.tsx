@@ -6,6 +6,8 @@ import engineerImg from "@/assets/photos/operations.jpg";
 import activateImg from "@/assets/photos/acquisition.jpg";
 import optimizeImg from "@/assets/photos/revenue.jpg";
 import compoundImg from "@/assets/photos/hero.jpg";
+import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
+import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
 
 interface Stage {
   number: string;
@@ -24,7 +26,7 @@ const stages: Stage[] = [
     description:
       "An infrastructure scan across acquisition, conversion, and operations. Where revenue leaks, where channels concentrate risk, where decisions happen without data. The diagnosis defines what the engagement is actually solving for.",
     image: diagnoseImg,
-    imageAlt: "Executive workspace prepared for commercial diagnosis",
+    imageAlt: "Layered architectural structure used to examine the underlying system",
   },
   {
     number: "02",
@@ -50,8 +52,8 @@ const stages: Stage[] = [
     outcome: "Predictable acquisition.",
     description:
       "Demand begins flowing through the system. Pipelines fill, opportunities appear, conversations compound. The business shifts from reactive marketing to a measured, controllable acquisition rhythm.",
-    image: activateImg,
-    imageAlt: "Illuminated commercial corridor suggesting forward movement",
+    image: pathwaysImg,
+    imageAlt: "Connected pedestrian bridges and pathways converging through an interchange",
   },
   {
     number: "05",
@@ -68,8 +70,8 @@ const stages: Stage[] = [
     outcome: "Sustainable predictable growth.",
     description:
       "The system becomes self-reinforcing. Authority compounds, data sharpens, automation deepens, the cost of acquiring the next client decreases. Growth becomes a property of the infrastructure, not the effort.",
-    image: compoundImg,
-    imageAlt: "Layered glass architecture reflecting morning light",
+    image: infrastructureImg,
+    imageAlt: "Interconnected structural spans carrying multiple routes through one system",
   },
 ];
 

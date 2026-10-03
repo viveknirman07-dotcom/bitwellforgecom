@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useSEO } from "@/hooks/use-seo";
 import { articles } from "@/pages/Insights";
 import { caseStudies } from "@/lib/case-studies-data";
-import heroImg from "@/assets/photos/hero.jpg";
+import heroImg from "@/assets/photos/engineered-infrastructure.jpg";
 import caseImg from "@/assets/photos/case.jpg";
 import acqImg from "@/assets/photos/acquisition.jpg";
 import revImg from "@/assets/photos/revenue.jpg";
@@ -18,7 +18,7 @@ import preOpsImg from "@/assets/photos/preloader/operations-640.webp";
 import preCaseImg from "@/assets/photos/preloader/case-640.webp";
 import preAcqImg from "@/assets/photos/preloader/acquisition-640.webp";
 import preGlobalImg from "@/assets/photos/preloader/global-640.webp";
-import preHeroImg from "@/assets/photos/preloader/hero-640.webp";
+import preHeroImg from "@/assets/photos/preloader/engineered-infrastructure-640.webp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
@@ -86,8 +86,8 @@ const Index = () => {
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
         <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
-          <motion.img src={heroImg} alt="Glass atrium overlooking the city at dawn" width={1920} height={1080} fetchPriority="high" decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
+          <motion.img src={heroImg} alt="Interconnected concrete and steel infrastructure beneath a monumental overpass" width={1920} height={1088} fetchPriority="high" decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-[57%_center] md:object-center"
             initial={reduced ? false : { scale: 1.15 }} animate={{ scale: 1 }} transition={{ duration: 1.8, ease }} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>

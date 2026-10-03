@@ -9,16 +9,19 @@ import operationsImg from "@/assets/photos/operations.jpg";
 import acquisitionImg from "@/assets/photos/acquisition.jpg";
 import revenueImg from "@/assets/photos/revenue.jpg";
 import globalImg from "@/assets/photos/global.jpg";
+import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
+import knowledgeImg from "@/assets/photos/engineered-knowledge.jpg";
+import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
 
 const serviceImages: Record<ServiceSlug, { src: string; alt: string }> = {
-  "growth-strategy": { src: strategyImg, alt: "Executive strategy workspace with market materials" },
-  "sales-systems": { src: revenueImg, alt: "Engineered structural cables representing a resilient revenue system" },
+  "growth-strategy": { src: strategyImg, alt: "Layered architectural structure expressing a planned commercial strategy" },
+  "sales-systems": { src: infrastructureImg, alt: "Interconnected concrete and steel spans expressing a resilient revenue system" },
   "performance-marketing": { src: globalImg, alt: "City lights reflecting measurable market activity" },
-  "lead-generation": { src: acquisitionImg, alt: "Architectural corridor representing a clear acquisition path" },
-  linkedin: { src: strategyImg, alt: "Editorial workspace prepared for authority building" },
+  "lead-generation": { src: pathwaysImg, alt: "Connected pathways leading through a precisely engineered interchange" },
+  linkedin: { src: knowledgeImg, alt: "Organized archive expressing the structure behind market authority" },
   "ai-automation": { src: operationsImg, alt: "High performance computing infrastructure in operation" },
   seo: { src: globalImg, alt: "Connected city environment representing digital visibility" },
-  "digital-products": { src: acquisitionImg, alt: "Refined digital environment designed for product delivery" },
+  "digital-products": { src: knowledgeImg, alt: "Organized physical knowledge archive with modular sections" },
 };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (

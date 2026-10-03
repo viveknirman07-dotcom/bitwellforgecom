@@ -1,6 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
-import aboutImage from "@/assets/photos/editorial-insight.jpg";
+import aboutImage from "@/assets/photos/engineered-infrastructure.jpg";
 
 const ABOUT_DESCRIPTION =
   "BitwellForge is a Revenue Infrastructure consulting firm strengthening the commercial, operational, and digital systems behind sustainable B2B growth.";
@@ -87,7 +87,7 @@ const About = () => {
                 </ScrollReveal>
                 <ScrollReveal delay={300}>
                   <div className="mt-12 aspect-[3/2] overflow-hidden max-w-[520px]">
-                    <img src={aboutImage} alt="Daylight crossing a glass and concrete corridor" loading="lazy" decoding="async" width={1536} height={1024} className="h-full w-full object-cover" />
+                    <img src={aboutImage} alt="Interdependent structural spans within a monumental concrete interchange" loading="lazy" decoding="async" width={1920} height={1088} className="h-full w-full object-cover" />
                   </div>
                 </ScrollReveal>
               </div>
