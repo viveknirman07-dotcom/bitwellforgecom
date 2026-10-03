@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Sun, Moon, Search, ChevronDown, Globe, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { hasActiveOpenings } from "@/data/jobs";
 import { Button } from "@/components/ui/button";
@@ -56,6 +56,7 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { isDark, toggle } = useDarkMode();
+  const reduced = useReducedMotion();
   const closeTimer = useRef<number>();
 
   useEffect(() => {
@@ -206,8 +207,8 @@ const Header = () => {
       {/* Mobile full screen menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.45, ease }}
+          <motion.div initial={reduced ? false : { opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={reduced ? { opacity: 0 } : { opacity: 0, x: "100%" }}
+            transition={{ duration: reduced ? 0 : 0.45, ease }}
             id="mobile-site-menu" aria-label="Mobile navigation" role="navigation"
             className="lg:hidden fixed inset-x-0 top-16 h-[calc(100dvh-4rem)] bg-background overflow-y-auto overscroll-contain touch-pan-y shadow-elevated">
             <div className="px-4 md:px-8 py-6 pb-16 flex flex-col">
