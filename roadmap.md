@@ -23,6 +23,6 @@
 
 ## Public page finishing
 - [ ] Add crawlable page-specific structured data and social previews for services, case studies, and insights
-- [ ] Align all page typography with the homepage editorial type system
-- [ ] Add natural people-free photography where it supports the subject
-- [ ] Stabilize the homepage opening on mobile, slow networks, and reduced motion
+- [x] Align public page typography with the homepage editorial type system
+- [x] Add natural people-free photography where it supports the subject
+- [x] Stabilize the homepage opening on mobile, slow networks, and reduced motion
