@@ -16,6 +16,8 @@ BitwellForge is a revenue infrastructure consultancy. Engagements begin with an 
 - [Forge Vault](/forge-vault): The Commercial Growth System product.
 - [Affiliate Program](/affiliate): Partner and referral program overview.
 - [Contact](/contact): Book an infrastructure audit or open a discovery conversation.
+- [Privacy Policy](/privacy): How information is handled when browsing, contacting, applying, or purchasing.
+- [Cookie Policy](/cookies): Essential storage and optional cookie preferences.
 
 ## Services
 

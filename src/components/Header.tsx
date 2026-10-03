@@ -154,7 +154,7 @@ const Header = () => {
         </div>
 
         <div className="flex lg:hidden items-center gap-1">
-          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="h-11 w-11 inline-flex items-center justify-center text-foreground">
+          <Button variant="ghost" onClick={toggle} aria-label="Toggle theme" className="h-11 w-11 inline-flex items-center justify-center text-foreground hover:text-foreground hover:bg-secondary">
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </Button>
           <Button variant="ghost" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu" aria-expanded={mobileOpen} aria-controls="mobile-site-menu"
