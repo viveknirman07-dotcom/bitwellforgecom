@@ -25,6 +25,8 @@ import Checkout from "./pages/Checkout";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import Account from "./pages/Account";
 import ResetPassword from "./pages/ResetPassword";
+import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "@/hooks/use-auth";
 import RequireAuth from "@/portal/RequireAuth";
@@ -57,6 +59,8 @@ const App = () => {
                 <Route path="/forge-vault" element={<ForgeVault />} />
                 <Route path="/affiliate" element={<AffiliateProgram />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/cookies" element={<Cookies />} />
               </Route>
 
               <Route path="/checkout" element={<Checkout />} />

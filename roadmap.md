@@ -21,6 +21,13 @@
 - [x] Optimize the six-image homepage opening for mobile and slower connections
 - [ ] Verify accessibility, responsive behavior, performance, SEO, and protected handoffs
 
+## Editorial refinement and touch quality
+- [x] Replace the homepage infrastructure image with a contextual architectural photograph
+- [x] Apply contextual visual treatments to public service, process, case study, and about pages
+- [x] Repair touch menu navigation and submenu behavior
+- [x] Add persistent cookie choices, privacy and cookie pages, and a preferences control
+- [ ] Sweep key public pages and buyer handoffs across phone, tablet, and desktop
+
 ## Public page finishing
 - [ ] Add crawlable page-specific structured data and social previews for services, case studies, and insights
 - [x] Align public page typography with the homepage editorial type system

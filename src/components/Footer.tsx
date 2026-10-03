@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
+import { Button } from "@/components/ui/button";
 
 const columns = [
   {
@@ -78,11 +79,11 @@ const Footer = () => {
               const isOpen = open === c.title;
               return (
                 <div key={c.title} className="border-t border-border">
-                  <button onClick={() => setOpen(isOpen ? null : c.title)} aria-expanded={isOpen}
+                  <Button variant="ghost" onClick={() => setOpen(isOpen ? null : c.title)} aria-expanded={isOpen}
                     className="w-full min-h-[56px] flex items-center justify-between text-[15px] font-medium">
                     {c.title}
                     <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
-                  </button>
+                  </Button>
                   <div className={`grid transition-[grid-template-rows] duration-400 ease-in-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                     <ul className="overflow-hidden space-y-4">
                       {c.links.map((l, i) => <li key={l.href} className={i === c.links.length - 1 ? "pb-5" : ""}><FooterLink {...l} /></li>)}
@@ -97,9 +98,9 @@ const Footer = () => {
         <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[13px] text-muted-foreground">
           <p>© {new Date().getFullYear()} BitwellForge. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link to="/contact" className="hover:text-foreground">Privacy notice</Link>
+            <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
+            <Link to="/cookies" className="hover:text-foreground">Cookie Policy</Link>
             <Link to="/contact" className="hover:text-foreground">Terms of use</Link>
-            <button type="button" onClick={() => { try { localStorage.removeItem("cookie-consent"); } catch { /* noop */ } }} className="hover:text-foreground">Cookie settings</button>
           </div>
         </div>
       </div>
