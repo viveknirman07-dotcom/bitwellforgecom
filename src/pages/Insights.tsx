@@ -5,6 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Eyebrow from "@/components/Eyebrow";
 import { useSEO } from "@/hooks/use-seo";
 import { readingTime } from "@/lib/insights";
+import insightImage from "@/assets/photos/editorial-insight.jpg";
 
 export const articles = [
   {
