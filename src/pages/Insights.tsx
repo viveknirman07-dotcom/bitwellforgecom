@@ -685,7 +685,7 @@ const Insights = () => {
               <Eyebrow>The Archive</Eyebrow>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="mt-5 font-heading text-[34px] md:text-[56px] lg:text-[64px] font-semibold text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
+              <h1 className="mt-5 font-heading text-[34px] md:text-[56px] lg:text-[64px] font-normal text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
                 Strategic Intelligence on growth, systems, and{" "}
                 <span className="font-quote italic text-gold/95">revenue architecture.</span>
               </h1>
@@ -748,7 +748,7 @@ const Insights = () => {
                                   </p>
                                 </div>
                                 <div className="md:col-span-7">
-                                  <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-foreground leading-[1.2] tracking-tight group-hover:text-[hsl(var(--eyebrow-color))] transition-colors duration-300 mb-4 text-balance">
+                      <h2 className="font-heading text-[22px] md:text-[28px] font-normal text-foreground leading-[1.2] tracking-tight group-hover:text-[hsl(var(--eyebrow-color))] transition-colors duration-300 mb-4 text-balance">
                                     {article.title}
                                   </h2>
                                   <p className="text-[14.5px] md:text-[15px] text-muted-foreground leading-[1.8] font-light max-w-[58ch]">

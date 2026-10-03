@@ -93,7 +93,7 @@ const Process = () => {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-[34px] md:text-[56px] lg:text-[64px] font-semibold text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
+              <h1 className="font-heading text-[34px] md:text-[56px] lg:text-[64px] font-normal text-foreground leading-[1.06] tracking-tightest mb-6 md:mb-8 text-balance">
                 From chaos to{" "}
                 <span className="font-quote italic text-gold/95">compounding.</span>
               </h1>
@@ -124,7 +124,7 @@ const Process = () => {
                       Stage {stage.number}
                     </span>
                   </div>
-                  <h2 className="font-heading text-3xl md:text-[40px] lg:text-[44px] font-semibold text-foreground leading-[1.1] mb-5 tracking-tightest">
+                  <h2 className="font-heading text-3xl md:text-[40px] lg:text-[44px] font-normal text-foreground leading-[1.1] mb-5 tracking-tightest">
                     {stage.title}
                   </h2>
                   <p className="font-quote italic text-gold/90 text-lg md:text-xl mb-6">

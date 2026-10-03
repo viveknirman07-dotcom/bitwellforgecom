@@ -105,7 +105,7 @@ const InsightArticle = () => {
                   {minutes} min read
                 </span>
               </div>
-              <h1 className="font-heading text-[34px] md:text-[52px] lg:text-[60px] font-semibold text-foreground leading-[1.06] tracking-tightest text-balance">
+              <h1 className="font-heading text-[34px] md:text-[52px] lg:text-[60px] font-normal text-foreground leading-[1.06] tracking-tightest text-balance">
                 {article.title}
               </h1>
             </header>

@@ -86,14 +86,14 @@ const Index = () => {
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
         <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
-          <motion.img src={heroImg} alt="Glass atrium overlooking the city at dawn" width={1920} height={1080} fetchPriority="high"
+          <motion.img src={heroImg} alt="Glass atrium overlooking the city at dawn" width={1920} height={1080} fetchPriority="high" decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
             initial={reduced ? false : { scale: 1.15 }} animate={{ scale: 1 }} transition={{ duration: 1.8, ease }} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
-              {ready ? <SplitReveal as="h1" inView={false} delay={0.1} text="Real structure for compounding growth"
-                className="font-heading font-normal text-foreground text-[52px] md:text-[88px] lg:text-[124px] leading-[1] tracking-[-0.02em] max-w-[15ch]" /> : <h1 className="font-heading font-normal text-[52px] md:text-[88px] lg:text-[124px] leading-[1] opacity-0 max-w-[15ch]">Real structure for compounding growth</h1>}
+              <SplitReveal as="h1" inView={false} delay={ready ? 0.1 : 4.8} text="Real structure for compounding growth"
+                className="font-heading font-normal text-foreground text-[52px] md:text-[88px] lg:text-[124px] leading-[1] tracking-[-0.02em] max-w-[15ch]" />
             </div>
           </div>
         </div>
