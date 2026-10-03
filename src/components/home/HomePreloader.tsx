@@ -53,8 +53,9 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
       onDone();
     }}>
       {show && (
-        <motion.div className="fixed inset-0 z-[200] bg-muted flex items-center justify-center overflow-hidden"
+        <motion.div className="fixed inset-0 z-[200] bg-background flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0 }} transition={{ duration: 0.6, ease }} aria-hidden>
+          <img src={images[0]} alt="" fetchPriority="high" decoding="sync" className="absolute inset-0 h-full w-full object-cover opacity-20" />
           {images.slice(0, 6).map((src, i) => (
             <motion.img key={i} src={src} alt=""
               fetchPriority={i === 0 ? "high" : "low"}
@@ -65,7 +66,7 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
               transition={{ duration: 0.7, delay: 0.1 + i * 0.4, ease }} />
           ))}
           <motion.p className="relative z-10 font-heading font-normal text-center text-[52px] md:text-[124px] leading-[0.91] tracking-[-0.03em] px-5 max-w-[17ch] text-foreground"
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05, ease }}>
+            initial={{ opacity: 1, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05, ease }}>
             {headline}
           </motion.p>
         </motion.div>
