@@ -123,7 +123,7 @@ const Services = () => {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
-              <h1 className="font-heading text-[36px] md:text-[58px] lg:text-[68px] font-semibold text-foreground leading-[1.05] tracking-tightest mb-8 text-balance">
+              <h1 className="font-heading text-[36px] md:text-[58px] lg:text-[68px] font-normal text-foreground leading-[1.05] tracking-tightest mb-8 text-balance">
                 Infrastructure modules.{" "}
                 <span className="font-quote italic text-gold/95">One operating system.</span>
               </h1>
@@ -152,7 +152,7 @@ const Services = () => {
                           {s.layer}
                         </span>
                       </div>
-                      <h2 className="font-heading text-2xl md:text-[28px] font-semibold text-foreground tracking-tightest leading-[1.15] group-hover:text-gold/95 transition-colors duration-400">
+                      <h2 className="font-heading text-2xl md:text-[28px] font-normal text-foreground tracking-tightest leading-[1.15] group-hover:text-gold/95 transition-colors duration-400">
                         {s.title.split(" ").slice(0, -1).join(" ")}{" "}
                         <span className="font-quote italic text-gold/95 font-normal">
                           {s.title.split(" ").slice(-1)[0]}

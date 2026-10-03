@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
+import aboutImage from "@/assets/photos/editorial-insight.jpg";
 
 const ABOUT_DESCRIPTION =
   "BitwellForge is a Revenue Infrastructure consulting firm strengthening the commercial, operational, and digital systems behind sustainable B2B growth.";
@@ -74,7 +75,7 @@ const About = () => {
                 </ScrollReveal>
 
                 <ScrollReveal delay={160}>
-                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[32px] sm:text-[44px] lg:text-[52px] xl:text-[58px] font-semibold text-foreground leading-[1.06] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
+                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[32px] sm:text-[44px] lg:text-[52px] xl:text-[58px] font-normal text-foreground leading-[1.06] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
                     We work across the mechanisms through which revenue is originated, converted, operationalised, and compounded.
                   </h1>
                 </ScrollReveal>
@@ -83,6 +84,11 @@ const About = () => {
                   <p className="mt-10 sm:mt-14 lg:mt-16 border-l border-border/60 pl-5 sm:pl-7 font-body text-muted-foreground text-[15px] sm:text-[16.5px] leading-[1.75] font-light max-w-[38ch]">
                     Revenue Infrastructure is our lens, not a limitation on what we provide.
                   </p>
+                </ScrollReveal>
+                <ScrollReveal delay={300}>
+                  <div className="mt-12 aspect-[3/2] overflow-hidden max-w-[520px]">
+                    <img src={aboutImage} alt="Daylight crossing a glass and concrete corridor" loading="lazy" decoding="async" width={1536} height={1024} className="h-full w-full object-cover" />
+                  </div>
                 </ScrollReveal>
               </div>
             </div>

@@ -42,9 +42,9 @@ const labelClass = "block text-[13px] font-medium text-foreground mb-2";
 
 const Contact = () => {
   useSEO({
-    title: "Contact BitwellForge | Book an Infrastructure Audit",
+    title: "Contact BitwellForge | Commercial Enquiries",
     description:
-      "Start a discovery conversation with BitwellForge. Book an infrastructure audit and map the commercial architecture your business needs before scaling.",
+      "Start a discovery conversation with BitwellForge and map the commercial architecture your business needs before scaling.",
     canonicalPath: "/contact",
     jsonLd: contactJsonLd,
     jsonLdId: "contact-jsonld",
@@ -101,7 +101,7 @@ const Contact = () => {
                 </ScrollReveal>
 
                 <ScrollReveal delay={160}>
-                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[32px] sm:text-[44px] lg:text-[52px] xl:text-[58px] font-semibold text-foreground leading-[1.06] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
+                  <h1 className="mt-8 sm:mt-10 lg:mt-12 font-heading text-[32px] sm:text-[44px] lg:text-[52px] xl:text-[58px] font-normal text-foreground leading-[1.06] tracking-tightest text-balance max-w-[17ch] sm:max-w-[20ch]">
                     Every engagement begins with a conversation about the constraint.
                   </h1>
                 </ScrollReveal>

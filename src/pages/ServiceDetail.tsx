@@ -28,7 +28,7 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
 );
 
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="font-heading text-[26px] md:text-[30px] font-semibold text-foreground leading-tight tracking-[-0.01em] mb-5">
+  <h2 className="font-heading text-[26px] md:text-[30px] font-normal text-foreground leading-tight tracking-[-0.01em] mb-5">
     {children}
   </h2>
 );
@@ -105,7 +105,7 @@ const ServiceDetail = () => {
           {/* ── Hero / executive briefing */}
           <ScrollReveal delay={100}>
             <Eyebrow>Service Brief</Eyebrow>
-            <h1 className="font-heading text-[40px] md:text-[52px] font-semibold text-foreground leading-[1.05] tracking-[-0.02em] mb-6">
+            <h1 className="font-heading text-[40px] md:text-[52px] font-normal text-foreground leading-[1.05] tracking-[-0.02em] mb-6">
               {service.title}
             </h1>
             <p className="text-[17.5px] md:text-[19px] text-foreground/80 leading-[1.6] mb-10 max-w-[680px]">
@@ -116,7 +116,7 @@ const ServiceDetail = () => {
           {/* ── Photographic context */}
           <ScrollReveal delay={200}>
             <div className="mb-12 aspect-[16/9] overflow-hidden">
-              <img src={serviceImage.src} alt={serviceImage.alt} width={1600} height={900} decoding="async" className="h-full w-full object-cover" />
+              <img src={serviceImage.src} alt={serviceImage.alt} width={1600} height={900} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </div>
           </ScrollReveal>
 

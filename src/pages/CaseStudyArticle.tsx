@@ -51,7 +51,7 @@ const CaseStudyArticle = () => {
 
           <ScrollReveal delay={100}>
             <Eyebrow className="mb-6">{study.category}</Eyebrow>
-            <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-[1.05] mb-6 text-balance">
+            <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-normal text-foreground leading-[1.05] mb-6 text-balance">
               {study.title}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-[680px]">

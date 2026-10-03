@@ -184,7 +184,7 @@ const ListingView = ({ onOpen }: { onOpen: (j: Job) => void }) => {
           </p>
         </ScrollReveal>
         <ScrollReveal delay={120}>
-          <h1 className="font-heading text-4xl md:text-6xl font-semibold text-foreground leading-[1.05] text-balance mb-8 max-w-4xl">
+          <h1 className="font-heading text-4xl md:text-6xl font-normal text-foreground leading-[1.05] text-balance mb-8 max-w-4xl">
             Careers at BitwellForge.
           </h1>
         </ScrollReveal>
@@ -283,7 +283,7 @@ const DetailView = ({
         <p className="eyebrow mb-5">
           <span className="eyebrow-line mr-3" /> Open Role
         </p>
-        <h1 className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
+        <h1 className="font-heading text-3xl md:text-5xl font-normal text-foreground leading-tight mb-6 text-balance">
           {job.title}
         </h1>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs tracking-[0.16em] uppercase text-muted-foreground mb-12">
@@ -823,7 +823,7 @@ const ConfirmationView = ({ job, onBack }: { job: Job; onBack: () => void }) => 
         <p className="eyebrow mb-5">
           <span className="eyebrow-line mr-3" /> Almost There
         </p>
-        <h1 className="font-heading text-3xl md:text-5xl font-semibold text-foreground leading-tight mb-6 text-balance">
+        <h1 className="font-heading text-3xl md:text-5xl font-normal text-foreground leading-tight mb-6 text-balance">
           Your application is almost ready.
         </h1>
         <p className="text-muted-foreground leading-relaxed max-w-xl mb-12">

@@ -30,7 +30,7 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
     const preload = images.slice(0, 6).map((src) => new Promise<void>((resolve) => {
       const image = new Image();
       image.decoding = "async";
-      image.onload = () => resolve();
+      image.onload = () => { image.decode?.().catch(() => {}).finally(resolve); };
       image.onerror = () => resolve();
       image.src = src;
     }));
@@ -55,16 +55,19 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
       {show && (
         <motion.div className="fixed inset-0 z-[200] bg-background flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0 }} transition={{ duration: 0.6, ease }} aria-hidden>
-          <img src={images[0]} alt="" fetchPriority="high" decoding="sync" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+          <img src={images[0]} alt="" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-20" />
           {images.slice(0, 6).map((src, i) => (
-            <motion.img key={i} src={src} alt=""
-              fetchPriority={i === 0 ? "high" : "low"}
-              decoding={i === 0 ? "sync" : "async"}
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover max-w-full ${sizes[i]}`}
-              initial={{ opacity: 0, scale: 0.82 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.1 + i * 0.4, ease }} />
+            <div key={i} className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-full overflow-hidden ${sizes[i]}`}>
+              <motion.img src={src} alt=""
+                fetchPriority={i === 0 ? "high" : "low"}
+                decoding="async"
+                className="h-full w-full object-cover"
+                initial={{ opacity: 0, scale: 0.82 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.1 + i * 0.4, ease }} />
+            </div>
           ))}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/65 to-background/10 pointer-events-none" />
           <motion.p className="relative z-10 font-heading font-normal text-center text-[52px] md:text-[124px] leading-[0.91] tracking-[-0.03em] px-5 max-w-[17ch] text-foreground"
             initial={{ opacity: 1, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05, ease }}>
             {headline}
