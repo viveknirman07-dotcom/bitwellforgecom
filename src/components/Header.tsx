@@ -9,7 +9,7 @@ import VaultLink from "@/components/vault/VaultLink";
 type Mega = { heading: string; intro: string; links: { label: string; href: string }[] };
 
 const mega: Record<string, Mega> = {
-  Services: {
+  Capabilities: {
     heading: "Capabilities",
     intro: "Commercial architecture engineered across strategy, acquisition, revenue, and operations.",
     links: [
@@ -35,9 +35,10 @@ const mega: Record<string, Mega> = {
 };
 
 const navItems = [
-  { label: "Services", href: "/services" },
+  { label: "Capabilities", href: "/services" },
+  { label: "Approach", href: "/process" },
   { label: "Insights", href: "/insights" },
-  { label: "Case Studies", href: "/case-studies" },
+  { label: "Impact", href: "/case-studies" },
   { label: "About", href: "/about" },
   { label: "Careers", href: "/careers", hiring: true },
   { label: "Contact", href: "/contact" },
@@ -85,7 +86,7 @@ const Header = () => {
 
   const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/");
   const solid = scrolled || openMega || searchOpen || mobileOpen;
-  const overHero = location.pathname === "/" && !solid;
+  const overHero = false;
 
   return (
     <header
@@ -147,7 +148,7 @@ const Header = () => {
           </button>
           <Link to="/contact?service=General+Inquiry"
             className="group inline-flex items-center gap-2 h-11 px-5 bg-primary text-primary-foreground text-[13px] font-semibold tracking-wide transition-opacity hover:opacity-90">
-            Book Infrastructure Audit
+            Start a Conversation
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
@@ -229,7 +230,7 @@ const Header = () => {
                 Forge Vault <ArrowRight size={18} />
               </VaultLink>
               <Link to="/contact?service=General+Inquiry" className="mt-8 h-12 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-[14px] font-semibold">
-                Book Infrastructure Audit <ArrowRight size={15} />
+                Start a Conversation <ArrowRight size={15} />
               </Link>
               <p className="mt-6 inline-flex items-center gap-2 text-[13px] text-muted-foreground"><Globe size={14} aria-hidden /> Global, remote delivery</p>
             </div>
