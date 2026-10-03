@@ -1,11 +1,12 @@
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ReactNode, forwardRef } from "react";
 
-const PageTransition = ({ children }: { children: ReactNode }) => {
+const PageTransition = forwardRef<HTMLDivElement, { children: ReactNode }>(({ children }, ref) => {
+  const reduced = useReducedMotion();
   return (
     <>
       {/* Wipe overlay */}
-      <motion.div
+      {!reduced && <motion.div
         className="fixed inset-0 z-[60] bg-foreground origin-top pointer-events-none"
         initial={{ scaleY: 1 }}
         animate={{ scaleY: 0 }}
@@ -15,16 +16,17 @@ const PageTransition = ({ children }: { children: ReactNode }) => {
           ease: [0.76, 0, 0.24, 1],
         }}
         style={{ transformOrigin: "bottom" }}
-      />
+      />}
 
       {/* Content */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        ref={ref}
+        initial={reduced ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -15 }}
+        exit={reduced ? undefined : { opacity: 0, y: -15 }}
         transition={{
-          duration: 0.6,
-          delay: 0.25,
+          duration: reduced ? 0 : 0.6,
+          delay: reduced ? 0 : 0.25,
           ease: [0.22, 1, 0.36, 1],
         }}
       >
@@ -32,6 +34,7 @@ const PageTransition = ({ children }: { children: ReactNode }) => {
       </motion.div>
     </>
   );
-};
+});
+PageTransition.displayName = "PageTransition";
 
 export default PageTransition;

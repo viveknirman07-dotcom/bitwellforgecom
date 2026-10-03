@@ -3,9 +3,7 @@ import { useSEO } from "@/hooks/use-seo";
 import diagnoseImg from "@/assets/photos/strategy.jpg";
 import architectImg from "@/assets/photos/global.jpg";
 import engineerImg from "@/assets/photos/operations.jpg";
-import activateImg from "@/assets/photos/acquisition.jpg";
 import optimizeImg from "@/assets/photos/revenue.jpg";
-import compoundImg from "@/assets/photos/hero.jpg";
 import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
 import infrastructureImg from "@/assets/photos/engineered-infrastructure.jpg";
 

@@ -6,8 +6,6 @@ import { serviceData, type ServiceSlug } from "@/data/services";
 import { useSEO } from "@/hooks/use-seo";
 import strategyImg from "@/assets/photos/strategy.jpg";
 import operationsImg from "@/assets/photos/operations.jpg";
-import acquisitionImg from "@/assets/photos/acquisition.jpg";
-import revenueImg from "@/assets/photos/revenue.jpg";
 import globalImg from "@/assets/photos/global.jpg";
 import pathwaysImg from "@/assets/photos/engineered-pathways.jpg";
 import knowledgeImg from "@/assets/photos/engineered-knowledge.jpg";
