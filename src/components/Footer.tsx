@@ -1,77 +1,107 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
-import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
-const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Process", href: "/process" },
-  { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/contact" },
+const columns = [
+  {
+    title: "Capabilities",
+    links: [
+      { label: "Growth Strategy", href: "/services/growth-strategy" },
+      { label: "Sales Systems", href: "/services/sales-systems" },
+      { label: "Lead Generation", href: "/services/lead-generation" },
+      { label: "AI Revenue Operations", href: "/services/ai-automation" },
+      { label: "All services", href: "/services" },
+    ],
+  },
+  {
+    title: "Perspectives",
+    links: [
+      { label: "Insights", href: "/insights" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Process", href: "/process" },
+      { label: "Forge Vault", href: "/forge-vault" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Affiliate Program", href: "/affiliate" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Contact",
+    links: [
+      { label: "business@bitwellforge.com", href: "mailto:business@bitwellforge.com" },
+      { label: "support@bitwellforge.com", href: "mailto:support@bitwellforge.com" },
+    ],
+  },
 ];
 
-const Footer = () => {
-  const { ref, isVisible } = useScrollReveal({ once: true });
+const FooterLink = ({ label, href }: { label: string; href: string }) =>
+  href.startsWith("mailto:") ? (
+    <a href={href} className="text-[14px] opacity-80 hover:opacity-100 hover:underline underline-offset-4 break-all">{label}</a>
+  ) : (
+    <Link to={href} className="text-[14px] opacity-80 hover:opacity-100 hover:underline underline-offset-4">{label}</Link>
+  );
 
-  const fade = (delay: number) => ({
-    initial: { opacity: 0, y: 20 } as const,
-    animate: isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-  });
+const Footer = () => {
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <footer
-      ref={ref}
-      className="relative bg-navy-deepest text-foreground border-t border-gold/15 overflow-hidden"
-    >
-      {/* Subtle gold grid */}
-      <div className="absolute inset-0 bg-gold-grid opacity-30 pointer-events-none" />
-      <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay pointer-events-none" />
-
-      <div className="relative section-padding max-w-[1400px] mx-auto pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-10">
-          {/* Brand */}
-          <motion.div className="md:col-span-5" {...fade(0)}>
-            <Link to="/" className="inline-block mb-5">
-              <span className="font-heading text-2xl md:text-3xl font-semibold tracking-tightest text-white">
-                Bitwell<span className="text-white">Forge</span>
-              </span>
-            </Link>
-            <p className="font-quote italic text-[17px] md:text-lg text-muted-foreground leading-[1.55] max-w-sm mb-8">
-              Revenue infrastructure. Built to compound.
+    <footer className="dark bg-background text-foreground">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-10 pt-16 md:pt-20 pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-border">
+          <div className="lg:col-span-4">
+            <Link to="/" className="font-heading text-3xl font-semibold tracking-tight">BitwellForge</Link>
+            <p className="mt-4 text-[15px] leading-[1.6] text-muted-foreground max-w-sm">
+              Commercial architecture and constraint advisory for service businesses, delivered remotely worldwide.
             </p>
-            <SocialLinks size={16} animate />
-          </motion.div>
+            <div className="mt-6"><SocialLinks size={16} /></div>
+          </div>
 
-          {/* Nav */}
-          <motion.div className="md:col-span-7 md:text-right" {...fade(0.12)}>
-            <h4 className="text-[10px] tracking-[0.28em] uppercase text-gold mb-5 md:pr-0">Navigate</h4>
-            <ul className="space-y-3 md:ml-auto md:inline-block md:text-left">
-              {navLinks.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    to={l.href}
-                    className="text-[13.5px] text-muted-foreground hover:text-gold transition-colors duration-300 inline-flex items-center gap-2 group"
-                  >
-                    <span className="h-px w-0 bg-gold/60 transition-all duration-400 group-hover:w-3" />
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          {/* Desktop columns */}
+          <div className="hidden md:grid lg:col-span-8 grid-cols-4 gap-8">
+            {columns.map((c) => (
+              <div key={c.title}>
+                <h4 className="text-[12px] uppercase tracking-[0.2em] text-muted-foreground mb-5">{c.title}</h4>
+                <ul className="space-y-3">{c.links.map((l) => <li key={l.href}><FooterLink {...l} /></li>)}</ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile accordions */}
+          <div className="md:hidden">
+            {columns.map((c) => {
+              const isOpen = open === c.title;
+              return (
+                <div key={c.title} className="border-t border-border">
+                  <button onClick={() => setOpen(isOpen ? null : c.title)} aria-expanded={isOpen}
+                    className="w-full min-h-[56px] flex items-center justify-between text-[15px] font-medium">
+                    {c.title}
+                    <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  <div className={`grid transition-[grid-template-rows] duration-400 ease-in-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                    <ul className="overflow-hidden space-y-4">
+                      {c.links.map((l, i) => <li key={l.href} className={i === c.links.length - 1 ? "pb-5" : ""}><FooterLink {...l} /></li>)}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Gold divider */}
-        <div className="mt-16 mb-6 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-
-        <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-[11.5px]">
-          <p className="text-muted-foreground/70">
-            © {new Date().getFullYear()} BitwellForge. All rights reserved.
-          </p>
-          <p className="font-quote italic text-gold/80 text-[13px]">Crafted To Last</p>
+        <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[13px] text-muted-foreground">
+          <p>© {new Date().getFullYear()} BitwellForge. All rights reserved.</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link to="/contact" className="hover:text-foreground">Privacy notice</Link>
+            <Link to="/contact" className="hover:text-foreground">Terms of use</Link>
+            <button type="button" onClick={() => { try { localStorage.removeItem("cookie-consent"); } catch { /* noop */ } }} className="hover:text-foreground">Cookie settings</button>
+          </div>
         </div>
       </div>
     </footer>
