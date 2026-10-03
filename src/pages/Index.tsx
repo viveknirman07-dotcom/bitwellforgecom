@@ -25,11 +25,11 @@ const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
 const cap = "text-[13px] md:text-[14px] uppercase tracking-[0.02em] font-medium";
 
 /** Word-by-word rising reveal for large editorial headlines. */
-const SplitReveal = ({ text, as: Tag = "h2", className = "", delay = 0, inView = true }: { text: string; as?: "h1" | "h2"; className?: string; delay?: number; inView?: boolean }) => {
+const SplitReveal = ({ text, as: Tag = "h2", className = "", delay = 0, inView = true, play = true }: { text: string; as?: "h1" | "h2"; className?: string; delay?: number; inView?: boolean; play?: boolean }) => {
   const reduced = useReducedMotion();
   const words = text.split(" ");
   const MotionTag = Tag === "h1" ? motion.h1 : motion.h2;
-  const trigger = inView ? { whileInView: "show", viewport: { once: true, margin: "-80px" } } : { animate: "show" };
+  const trigger = inView ? { whileInView: "show", viewport: { once: true, margin: "-80px" } } : { animate: play ? "show" : "hide" };
   return (
     <MotionTag className={className} initial={reduced ? false : "hide"} {...trigger}
       variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: delay } } }} aria-label={text}>
@@ -92,7 +92,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
-              <SplitReveal as="h1" inView={false} delay={ready ? 0.1 : 4.8} text="Real structure for compounding growth"
+              <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Real structure for compounding growth"
                 className="font-heading font-normal text-foreground text-[52px] md:text-[88px] lg:text-[124px] leading-[1] tracking-[-0.02em] max-w-[15ch]" />
             </div>
           </div>
