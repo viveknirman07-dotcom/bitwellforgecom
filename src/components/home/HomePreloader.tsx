@@ -37,7 +37,7 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
               animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
               transition={{ duration: 0.7, delay: 0.5 + i * 0.4, ease }} />
           ))}
-          <motion.p className="relative z-10 font-heading font-normal text-center text-[52px] md:text-[124px] leading-[0.91] tracking-[-0.03em] px-5 max-w-[12ch] text-foreground"
+          <motion.p className="relative z-10 font-heading font-normal text-center text-[52px] md:text-[124px] leading-[0.91] tracking-[-0.03em] px-5 max-w-[17ch] text-foreground"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
             {headline}
           </motion.p>
