@@ -20,3 +20,9 @@
 - [x] Remove public diagrams and replace active diagram placements with natural photography
 - [x] Optimize the six-image homepage opening for mobile and slower connections
 - [ ] Verify accessibility, responsive behavior, performance, SEO, and protected handoffs
+
+## Public page finishing
+- [ ] Add crawlable page-specific structured data and social previews for services, case studies, and insights
+- [ ] Align all page typography with the homepage editorial type system
+- [ ] Add natural people-free photography where it supports the subject
+- [ ] Stabilize the homepage opening on mobile, slow networks, and reduced motion

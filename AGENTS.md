@@ -1,3 +1,4 @@
 - src/styles/density.css rules carry :not(.bf-home *) so the editorial homepage keeps its own type scale; preserve this if the density generator is re-run.
 - Public editorial pages use Newsreader for display text and Noto Sans for all supporting text because this keeps the reference-inspired typography consistent without proprietary fonts.
 - Promotional Forge Vault links stay out of public navigation while checkout fulfillment and authenticated buyer access remain intact.
+- Generate static route-specific HTML for editorial social previews after the Vite build because social crawlers do not execute React metadata effects.
