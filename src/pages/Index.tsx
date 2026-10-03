@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import HomePreloader from "@/components/home/HomePreloader";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -60,6 +61,8 @@ const perspectiveImgs = [stratImg, opsImg, acqImg];
 const Index = () => {
   const reduced = useReducedMotion();
   const [bannerOpen, setBannerOpen] = useState(true);
+  const [ready, setReady] = useState(false);
+  const handleDone = useCallback(() => setReady(true), []);
 
   useSEO({
     title: "BitwellForge | Commercial Architecture & Constraint Advisory",
@@ -73,6 +76,7 @@ const Index = () => {
 
   return (
     <div className="bf-home bg-background text-foreground">
+      <HomePreloader images={[stratImg, opsImg, caseImg, acqImg, globalImg, heroImg]} headline="Real structure for compounding growth" onDone={handleDone} />
       {/* Announcement */}
       {bannerOpen && (
         <div className="dark bg-background text-foreground relative z-[60] mt-[72px] lg:mt-[113px]">
@@ -91,14 +95,14 @@ const Index = () => {
       {/* HERO */}
       <section className={`relative ${bannerOpen ? "" : "mt-[72px] lg:mt-[113px]"}`}>
         <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
-          <motion.img src={heroImg} alt="Advisor overlooking the city at dusk" width={1920} height={1080} fetchPriority="high"
+          <motion.img src={heroImg} alt="Glass atrium overlooking the city at dawn" width={1920} height={1080} fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
             initial={reduced ? false : { scale: 1.15 }} animate={{ scale: 1 }} transition={{ duration: 1.8, ease }} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
-              <SplitReveal as="h1" inView={false} delay={0.4} text="Real structure for compounding growth"
-                className="font-heading text-foreground text-[44px] sm:text-[64px] md:text-[88px] lg:text-[104px] leading-[0.98] max-w-[15ch]" />
+              {ready ? <SplitReveal as="h1" inView={false} delay={0.1} text="Real structure for compounding growth"
+                className="font-heading font-normal text-foreground text-[52px] md:text-[88px] lg:text-[124px] leading-[1] tracking-[-0.02em] max-w-[15ch]" /> : <h1 className="font-heading font-normal text-[52px] md:text-[88px] lg:text-[124px] leading-[1] opacity-0 max-w-[15ch]">Real structure for compounding growth</h1>}
             </div>
           </div>
         </div>
@@ -117,13 +121,13 @@ const Index = () => {
         <div className={`${wrap} grid md:grid-cols-12 gap-y-10 md:gap-x-8`}>
           <Reveal className="md:col-span-4"><p className={cap}>Client story</p></Reveal>
           <div className="md:col-span-8">
-            <SplitReveal text={story.title} className="font-heading text-[36px] md:text-[52px] lg:text-[64px] leading-[1.1] max-w-[18ch]" />
+            <SplitReveal text={story.title} className="font-heading text-[32px] md:text-[48px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-normal max-w-[18ch]" />
           </div>
           <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none">
             <div className="w-[60%] md:w-[72%] aspect-[225/243] overflow-hidden mb-5">
               <img src={revImg} alt="" aria-hidden loading="lazy" className="w-full h-full object-cover" />
             </div>
-            <p className="text-[16px] leading-[1.5] max-w-[28ch] mb-5">{story.subtitle}</p>
+            <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{story.subtitle}</p>
             <ArrowLink to={`/case-studies/${story.id}`}>Learn how we helped</ArrowLink>
             <p className="mt-3 text-[12px] text-muted-foreground">Concept study</p>
           </Reveal>
@@ -138,7 +142,7 @@ const Index = () => {
       {/* FEATURED PERSPECTIVES */}
       <section className="pb-24 md:pb-40">
         <div className={wrap}>
-          <SplitReveal text="Featured perspectives" className="font-heading text-[44px] md:text-[72px] lg:text-[96px] leading-[1] mb-10 md:mb-14" />
+          <SplitReveal text="Featured perspectives" className="font-heading text-[42px] md:text-[64px] lg:text-[80px] leading-[1] tracking-[-0.02em] font-normal mb-10 md:mb-14" />
         </div>
         <div className="max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[12.5%]">
           <ol className="border-t border-foreground/60">
@@ -149,7 +153,7 @@ const Index = () => {
                   <div className="md:contents">
                     <span className={`${cap} block md:col-span-3 mb-3 md:mb-0`}>{perspectiveLabels[i]}</span>
                     <div className="md:col-span-6">
-                      <h3 className="font-heading text-[22px] md:text-[32px] leading-[1.12] mb-4 transition-colors">{a.title}</h3>
+                      <h3 className="font-heading text-[24px] md:text-[32px] leading-[1.1] tracking-[-0.01em] font-normal mb-4 transition-colors">{a.title}</h3>
                       <span className={`inline-flex items-center gap-3 ${cap}`}>
                         <ArrowRight size={16} strokeWidth={1.5} className="transition-transform duration-300 group-hover:translate-x-1" />
                         {a.category}
@@ -185,7 +189,7 @@ const Index = () => {
           </div>
           <div className="col-span-12 md:col-span-6 md:row-start-2 md:-mt-40">
             <Reveal><p className={`${cap} mb-6`}>Be part of our team</p></Reveal>
-            <SplitReveal text="Let's engineer real growth, together" className="font-heading text-[44px] md:text-[64px] lg:text-[80px] leading-[1.02] max-w-[11ch]" />
+            <SplitReveal text="Let's engineer real growth, together" className="font-heading text-[42px] md:text-[64px] lg:text-[80px] leading-[1] tracking-[-0.02em] font-normal max-w-[11ch]" />
             <ArrowLink to="/careers" className="mt-8">Careers</ArrowLink>
           </div>
         </div>
@@ -195,7 +199,7 @@ const Index = () => {
       <section className="dark bg-background text-foreground relative">
         <div className={`${wrap} pt-10 md:pt-12 pb-32 md:pb-48`}>
           <Reveal>
-            <h2 className="font-heading text-[56px] sm:text-[80px] md:text-[112px] lg:text-[136px] leading-[0.95] tracking-[-0.02em]">
+            <h2 className="font-heading text-[52px] md:text-[88px] lg:text-[124px] leading-[1] tracking-[-0.02em] font-normal">
               <em className="italic">Structure</em> powers
               <br />growth
             </h2>
