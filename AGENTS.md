@@ -1,0 +1,1 @@
+- src/styles/density.css rules carry :not(.bf-home *) so the editorial homepage keeps its own type scale; preserve this if the density generator is re-run.
