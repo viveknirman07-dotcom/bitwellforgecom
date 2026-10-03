@@ -12,11 +12,11 @@ import globalImg from "@/assets/photos/global.jpg";
 import strategyModelImg from "@/assets/photos/engineered-strategy.jpg";
 import operationsPlantImg from "@/assets/photos/engineered-operations.jpg";
 import connectionsImg from "@/assets/photos/engineered-connections.jpg";
-import preStratImg from "@/assets/photos/preloader/strategy-640.webp";
-import preOpsImg from "@/assets/photos/preloader/operations-640.webp";
-import preCaseImg from "@/assets/photos/preloader/case-640.webp";
-import preAcqImg from "@/assets/photos/preloader/acquisition-640.webp";
-import preGlobalImg from "@/assets/photos/preloader/global-640.webp";
+import preStratImg from "@/assets/photos/preloader/engineered-strategy-640.webp";
+import preOpsImg from "@/assets/photos/preloader/engineered-operations-640.webp";
+import preKnowledgeImg from "@/assets/photos/preloader/engineered-knowledge-640.webp";
+import preConnectionsImg from "@/assets/photos/preloader/engineered-connections-640.webp";
+import prePathwaysImg from "@/assets/photos/preloader/engineered-pathways-640.webp";
 import preHeroImg from "@/assets/photos/preloader/engineered-infrastructure-640.webp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -80,7 +80,7 @@ const Index = () => {
 
   return (
     <div className="bf-home bg-background text-foreground">
-      <HomePreloader images={[preStratImg, preOpsImg, preCaseImg, preAcqImg, preGlobalImg, preHeroImg]} headline="Real structure for compounding growth" onDone={handleDone} />
+      <HomePreloader images={[preStratImg, preOpsImg, preKnowledgeImg, preConnectionsImg, prePathwaysImg, preHeroImg]} headline="Real structure for compounding growth" onDone={handleDone} />
 
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
