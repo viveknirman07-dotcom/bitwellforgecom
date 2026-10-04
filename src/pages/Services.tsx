@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -164,7 +165,7 @@ const ServiceIndex = () => {
         </ol>
         <div className="relative">
           <div id="service-panel" role="tabpanel" className="md:sticky md:top-28 pt-10">
-            <div key={s.id} className="animate-fade-in">
+            <motion.div key={s.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
               <div className="flex items-baseline gap-4 mb-6">
                 <span className="font-quote italic text-gold text-5xl lg:text-6xl leading-none">{num(active)}</span>
                 <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">{s.layer}</span>
@@ -183,7 +184,7 @@ const ServiceIndex = () => {
                 Explore {s.title}
                 <ArrowRight size={14} className="transition-transform duration-500 group-hover:translate-x-1" />
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
