@@ -100,7 +100,7 @@ const Index = () => {
             <div className={wrap}>
               <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Real structure for compounding growth"
                 lines={["Real structure for", "compounding growth"]}
-                className="font-heading font-normal text-foreground text-[clamp(32px,10.4vw,52px)] md:text-[clamp(60px,8.6vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em]" />
+                className="font-heading font-normal text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em]" />
             </div>
           </div>
         </div>
