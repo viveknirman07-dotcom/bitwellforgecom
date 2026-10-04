@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SocialLinks from "@/components/SocialLinks";
 import { useSEO } from "@/hooks/use-seo";
+import contactVisual from "@/assets/photos/editorial-contact.jpg";
 
 const serviceOptions = [
   "General Inquiry",
@@ -158,6 +159,11 @@ const Contact = () => {
                       <dd><SocialLinks size={17} /></dd>
                     </div>
                   </dl>
+                </ScrollReveal>
+                <ScrollReveal delay={340}>
+                  <div className="mt-10 sm:mt-12 aspect-[16/9] overflow-hidden">
+                    <img src={contactVisual} alt="Two telephone receivers connected across a small paper bridge" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                  </div>
                 </ScrollReveal>
               </div>
             </div>
