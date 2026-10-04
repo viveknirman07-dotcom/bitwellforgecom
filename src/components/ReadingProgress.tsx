@@ -26,14 +26,18 @@ const ReadingProgress = () => {
   }, []);
 
   return (
-    <div
-      aria-hidden
-      className="fixed top-6 right-6 md:top-8 md:right-8 z-[60] pointer-events-none"
-    >
-      <span className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground/50 tabular-nums">
-        {progress}%
-      </span>
-    </div>
+    <>
+      {/* Mobile/tablet: anchors land below the fixed 64px header (+1px border) */}
+      <style>{`@media (max-width:1023px){html{scroll-padding-top:calc(65px + 16px)}}`}</style>
+      <div
+        aria-hidden
+        className="fixed top-[calc(65px+12px)] right-5 md:right-8 lg:top-8 lg:right-8 z-40 lg:z-[60] pointer-events-none"
+      >
+        <span className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground/50 tabular-nums">
+          {progress}%
+        </span>
+      </div>
+    </>
   );
 };
 
