@@ -42,8 +42,3 @@ const ReadingProgress = () => {
 };
 
 export default ReadingProgress;
-
-  );
-};
-
-export default ReadingProgress;
