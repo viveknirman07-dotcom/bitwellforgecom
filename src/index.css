@@ -1391,3 +1391,10 @@ body.vault-transitioning--calm #root { animation: none; }
 /* Brand name typography: applies only to the BitwellForge wordmark text. */
 :root { --font-brand: "Cormorant Garamond", serif; }
 .brand-name { font-family: var(--font-brand) !important; font-weight: 700 !important; }
+
+/* Decode before revealing media, without changing its sizing or existing effects. */
+img.bf-media-loading { opacity: 0 !important; }
+img.bf-media-ready { transition: opacity 420ms ease-out, transform 700ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  img.bf-media-ready { transition: none; }
+}

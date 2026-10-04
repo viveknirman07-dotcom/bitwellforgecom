@@ -31,6 +31,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "@/hooks/use-auth";
 import RequireAuth from "@/portal/RequireAuth";
 import ReferralGate from "@/components/ReferralGate";
+import VisualLoading from "@/components/VisualLoading";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <VisualLoading />
             <ScrollToTop />
             <ReferralGate />
             <Routes>
