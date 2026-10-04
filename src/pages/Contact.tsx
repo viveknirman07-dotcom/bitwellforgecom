@@ -217,7 +217,7 @@ const Contact = () => {
                     <span className="hidden md:block" />
                     <button
                       type="submit"
-                      className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-10 bg-primary text-primary-foreground px-7 py-5 text-[11px] tracking-[0.26em] uppercase font-medium transition-[opacity,transform] duration-500 hover:opacity-90 active:scale-[0.99]"
+                      className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-10 bg-primary !text-primary-foreground px-7 py-5 text-[11px] tracking-[0.26em] uppercase font-medium transition-[opacity,transform] duration-500 hover:opacity-90 active:scale-[0.99]"
                     >
                       Send inquiry
                       <ArrowRight size={16} className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
