@@ -107,7 +107,7 @@ const Index = () => {
 
         <div className={`${wrap} pt-10 md:pt-14 pb-24 md:pb-40`}>
           <Reveal>
-            <p className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(46px,4.2vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+            <p className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(40px,4vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
               <span className="block whitespace-nowrap">BitwellForge advises service businesses on</span>
               <span className="block whitespace-nowrap">the structural constraints governing</span>
               <span className="block whitespace-nowrap">commercial performance, identifying the</span>
