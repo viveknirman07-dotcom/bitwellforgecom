@@ -55,7 +55,7 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
       onDone();
     }}>
       {show && (
-        <motion.div className="fixed inset-0 z-[200] bg-background flex items-center justify-center overflow-hidden"
+        <motion.div data-visual-loading-exempt className="fixed inset-0 z-[200] bg-background flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0 }} transition={{ duration: 0.6, ease }} aria-hidden>
           <img src={images[0]} alt="" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-20" />
           {images.slice(0, 6).map((src, i) => (

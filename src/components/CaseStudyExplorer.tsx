@@ -37,6 +37,14 @@ const CaseStudyExplorer = ({ studies, archiveIndex }: Props) => {
 
   useEffect(() => { setAnimate(false); setPos(0); }, [studies]);
 
+  useEffect(() => {
+    if (total < 2) return;
+    const next = studies[(idx + 1) % total];
+    const image = new Image();
+    image.src = images[archiveIndex(next) % images.length];
+    image.decode?.().catch(() => {});
+  }, [idx, total, studies, archiveIndex]);
+
   // Seamless wrap: after sliding onto the clone, snap back to the first slide without motion.
   useEffect(() => {
     if (pos !== total || total < 2) return;
