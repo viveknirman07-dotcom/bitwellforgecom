@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import HomePreloader from "@/components/home/HomePreloader";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -60,6 +60,79 @@ const Reveal = ({ children, delay = 0, className = "" }: { children: React.React
   );
 };
 
+const storyLarge = [acquisitionImg, strategyImg, operationsImg, processImg, visibilityImg, insightsImg, revImg];
+const storySmall = [revImg, processImg, visibilityImg, strategyImg, insightsImg, acquisitionImg, operationsImg];
+const STORY_HOLD = 6500;
+
+const ClientStories = () => {
+  const reduced = useReducedMotion();
+  const [idx, setIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const resumeRef = useRef<number>();
+  const total = caseStudies.length;
+
+  useEffect(() => {
+    if (reduced || paused) return;
+    const t = window.setTimeout(() => {
+      if (document.visibilityState === "visible") setIdx((i) => (i + 1) % total);
+    }, STORY_HOLD);
+    return () => window.clearTimeout(t);
+  }, [idx, paused, reduced, total]);
+
+  useEffect(() => () => window.clearTimeout(resumeRef.current), []);
+  const pause = () => { window.clearTimeout(resumeRef.current); setPaused(true); };
+  const resume = () => { window.clearTimeout(resumeRef.current); resumeRef.current = window.setTimeout(() => setPaused(false), 3000); };
+
+  const layer = (i: number, kind: "text" | "img") => {
+    const on = i === idx;
+    const base = "[grid-area:1/1] will-change-[opacity,transform] transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
+    const dur = kind === "img" ? "duration-[1400ms]" : "duration-[1100ms]";
+    const state = on
+      ? "opacity-100 translate-y-0 scale-100"
+      : kind === "img" ? "opacity-0 translate-y-2 md:translate-y-3 scale-[0.99] md:scale-[0.985] pointer-events-none" : "opacity-0 translate-y-1.5 md:translate-y-2 pointer-events-none";
+    return `${base} ${dur} ${state} ${on && kind === "text" ? "delay-150" : ""}`;
+  };
+
+  return (
+    <section className="pb-24 md:pb-40" aria-roledescription="carousel" aria-label="Client stories"
+      onMouseEnter={pause} onMouseLeave={resume} onFocus={pause} onBlur={resume} onTouchStart={pause} onTouchEnd={resume}>
+      <div className={`${wrap} grid md:grid-cols-12 gap-y-10 md:gap-x-8`}>
+        <Reveal className="md:col-span-4"><p className={cap}>Client story</p></Reveal>
+        <div className="md:col-span-8 grid" aria-live={paused ? "polite" : "off"}>
+          {caseStudies.map((c, i) => (
+            <h2 key={c.id} aria-hidden={i !== idx} className={`${layer(i, "text")} font-heading text-[32px] md:text-[48px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-normal max-w-[18ch]`}>{c.title}</h2>
+          ))}
+        </div>
+        <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none">
+          <div className="w-[60%] md:w-[72%] aspect-[225/243] overflow-hidden mb-5 grid">
+            {caseStudies.map((c, i) => (
+              <img key={c.id} src={storySmall[i % storySmall.length]} alt="" aria-hidden loading={i < 2 ? "lazy" : "lazy"} width={1536} height={1024} className={`${layer(i, "img")} w-full h-full object-cover`} />
+            ))}
+          </div>
+          <div className="grid">
+            {caseStudies.map((c, i) => (
+              <div key={c.id} aria-hidden={i !== idx} {...(i !== idx ? { inert: "" } : {})} className={`${layer(i, "text")} self-start`}>
+                <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{c.subtitle}</p>
+                <ArrowLink to={`/case-studies/${c.id}`}>Learn how we helped</ArrowLink>
+                <p className="mt-3 text-[12px] text-muted-foreground">Concept study</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+        <Reveal delay={0.1} className="md:col-span-8 md:row-start-2">
+          <Link to={`/case-studies/${caseStudies[idx].id}`} className="grid overflow-hidden aspect-[930/484] group" aria-label={caseStudies[idx].title}>
+            {caseStudies.map((c, i) => (
+              <img key={c.id} src={storyLarge[i % storyLarge.length]} alt="" aria-hidden loading="lazy" width={1536} height={1024}
+                className={`${layer(i, "img")} w-full h-full object-cover group-hover:scale-[1.02]`} />
+            ))}
+          </Link>
+        </Reveal>
+      </div>
+    </section>
+  );
+};
+
+
 const ArrowLink = ({ to, children, className = "" }: { to: string; children: React.ReactNode; className?: string }) => (
   <Link to={to} className={`group inline-flex items-center gap-3 min-h-[44px] ${cap} ${className}`}>
     <ArrowRight size={16} strokeWidth={1.5} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -82,7 +155,6 @@ const Index = () => {
     canonicalPath: "/",
   });
 
-  const story = caseStudies[0];
   const perspectives = articles.slice(0, 3);
 
   return (
@@ -120,27 +192,7 @@ const Index = () => {
       </section>
 
       {/* CLIENT STORY */}
-      <section className="pb-24 md:pb-40">
-        <div className={`${wrap} grid md:grid-cols-12 gap-y-10 md:gap-x-8`}>
-          <Reveal className="md:col-span-4"><p className={cap}>Client story</p></Reveal>
-          <div className="md:col-span-8">
-            <SplitReveal text={story.title} className="font-heading text-[32px] md:text-[48px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-normal max-w-[18ch]" />
-          </div>
-          <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none">
-            <div className="w-[60%] md:w-[72%] aspect-[225/243] overflow-hidden mb-5">
-              <img src={revImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" />
-            </div>
-            <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{story.subtitle}</p>
-            <ArrowLink to={`/case-studies/${story.id}`}>Learn how we helped</ArrowLink>
-            <p className="mt-3 text-[12px] text-muted-foreground">Concept study</p>
-          </Reveal>
-          <Reveal delay={0.1} className="md:col-span-8 md:row-start-2">
-            <Link to={`/case-studies/${story.id}`} className="block overflow-hidden aspect-[930/484] group">
-              <img src={acquisitionImg} alt="Railway viaduct routes converging through an engineered junction" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover transition-transform duration-1200 ease-out group-hover:scale-[1.04]" />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      <ClientStories />
 
       {/* FEATURED PERSPECTIVES */}
       <section className="pb-24 md:pb-40">
