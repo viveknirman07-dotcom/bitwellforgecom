@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Cormorant+Garamond:wght@400&family=Montserrat:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -62,8 +62,8 @@
     --accent-blue-bg: 220 79% 48% / 0.08;
 
     /* Typography */
-    --font-heading: 'Newsreader', Georgia, serif;
-    --font-body: 'Montserrat', system-ui, sans-serif;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
 
     /* Shadows */
     --shadow-sm: 0 1px 3px hsl(226 30% 12% / 0.05);
@@ -267,12 +267,12 @@
     color: hsl(var(--eyebrow-color));
     font-size: 10.5px;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     font-family: var(--font-body);
   }
   @media (max-width: 767px) {
-    .eyebrow { font-size: 10px; letter-spacing: 0.16em; }
+    .eyebrow { font-size: 10px; letter-spacing: 0.2em; }
   }
   .eyebrow-line {
     display: inline-block;
@@ -589,7 +589,7 @@ html.mobile-lock p:not(.bf-home *),
 html.mobile-lock li:not(.bf-home *) { font-size: 15px !important; line-height: 1.75 !important; }
 
 html.mobile-lock .eyebrow,
-html.mobile-lock [class*="eyebrow"] { font-size: 10px !important; letter-spacing: 0.18em !important; }
+html.mobile-lock [class*="eyebrow"] { font-size: 10px !important; letter-spacing: 0.2em !important; }
 
 html.mobile-lock button,
 html.mobile-lock .btn-primary,
@@ -1358,8 +1358,8 @@ body.vault-transitioning--calm #root { animation: none; }
     --navy-deepest: 230 94% 10%;
     --gold: 230 94% 14%;
     --eyebrow-color: 230 8% 22%;
-    --font-heading: 'Newsreader', Georgia, serif;
-    --font-body: 'Montserrat', system-ui, sans-serif;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
   }
   .dark {
     --background: 230 94% 14%;
@@ -1382,7 +1382,7 @@ body.vault-transitioning--calm #root { animation: none; }
     --gold: 0 0% 100%;
     --eyebrow-color: 230 20% 80%;
   }
-  h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); font-weight: 300; letter-spacing: -0.015em; }
+  h1, h2, h3, h4, h5, h6, .font-heading { font-family: var(--font-heading); font-weight: 400; letter-spacing: -0.015em; }
   :root { --font-content: 'Montserrat', sans-serif; }
   body, p, li, dd, figcaption, blockquote p, .body-copy, .description, .supporting-text, .content-text { font-family: var(--font-content); }
   p, li, dd, .body-copy, .description, .supporting-text, .content-text { font-weight: 400; }
