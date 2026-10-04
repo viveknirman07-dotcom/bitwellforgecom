@@ -15,8 +15,8 @@ export default {
     extend: {
       fontFamily: {
         heading: ['Newsreader', 'Georgia', 'serif'],
-        body: ['Noto Sans', 'system-ui', 'sans-serif'],
-        mono: ['Noto Sans', 'system-ui', 'sans-serif'],
+        body: ['Montserrat', 'system-ui', 'sans-serif'],
+        mono: ['Montserrat', 'system-ui', 'sans-serif'],
         quote: ['Newsreader', 'Georgia', 'serif'],
       },
       colors: {
