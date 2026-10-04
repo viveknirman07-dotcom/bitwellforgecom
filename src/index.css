@@ -1392,9 +1392,9 @@ body.vault-transitioning--calm #root { animation: none; }
 :root { --font-brand: "Cormorant Garamond", serif; }
 .brand-name { font-family: var(--font-brand) !important; font-weight: 700 !important; }
 
-/* Decode before revealing media, without changing its sizing or existing effects. */
-img.bf-media-loading { opacity: 0 !important; }
-img.bf-media-ready { transition: opacity 420ms ease-out, transform 700ms ease-out; }
+/* Reserve the existing image box while its pixels decode; the timed opening is exempt. */
+img:not(.bf-media-ready):not([data-visual-loading-exempt] img) { opacity: 0 !important; }
+img.bf-media-ready { opacity: 1; transition: opacity 420ms ease-out, transform 700ms ease-out; }
 @media (prefers-reduced-motion: reduce) {
   img.bf-media-ready { transition: none; }
 }

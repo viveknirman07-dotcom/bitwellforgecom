@@ -151,7 +151,7 @@ const ClientStories = () => {
           <Track style={trackStyle} className="w-[60%] md:w-[72%] aspect-[225/243] mb-5">
             {slides.map((c, i) => (
               <div key={i} {...cell(i)} className="w-full h-full shrink-0">
-                <img src={storySmall[(i % total) % storySmall.length]} alt="" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" />
+                <img src={storySmall[(i % total) % storySmall.length]} alt="" loading={i < 2 ? "eager" : "lazy"} decoding="async" width={1536} height={1024} className="w-full h-full object-cover" />
               </div>
             ))}
           </Track>
@@ -170,7 +170,7 @@ const ClientStories = () => {
             <Track style={trackStyle} className="aspect-[930/484]">
               {slides.map((c, i) => (
                 <div key={i} aria-hidden className="w-full h-full shrink-0 overflow-hidden">
-                  <img src={storyLarge[(i % total) % storyLarge.length]} alt="" loading="lazy" width={1536} height={1024}
+                  <img src={storyLarge[(i % total) % storyLarge.length]} alt="" loading={i < 2 ? "eager" : "lazy"} decoding="async" width={1536} height={1024}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
                 </div>
               ))}

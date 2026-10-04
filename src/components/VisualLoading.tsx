@@ -13,12 +13,10 @@ export default function VisualLoading() {
       const token = ++sequence;
       pending.set(image, token);
       image.classList.remove("bf-media-ready");
-      image.classList.add("bf-media-loading");
 
       const reveal = () => {
         if (pending.get(image) !== token || !image.isConnected) return;
         image.classList.add("bf-media-ready");
-        image.classList.remove("bf-media-loading");
       };
 
       // Cached images are available immediately; never wait for another load event.
@@ -36,7 +34,6 @@ export default function VisualLoading() {
       const reveal = () => {
         if (pending.get(image) !== token || !image.isConnected) return;
         image.classList.add("bf-media-ready");
-        image.classList.remove("bf-media-loading");
       };
       image.decode?.().then(reveal, reveal) ?? reveal();
     };
@@ -45,7 +42,6 @@ export default function VisualLoading() {
       const image = event.target;
       if (image instanceof HTMLImageElement) {
         image.classList.add("bf-media-ready");
-        image.classList.remove("bf-media-loading");
       }
     };
 
