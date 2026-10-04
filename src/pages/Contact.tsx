@@ -177,8 +177,8 @@ const Contact = () => {
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       className={field} placeholder="your@email.com" />
                   </Row>
-                  <Row n="03" htmlFor="phone" label="Phone" note="(optional)">
-                    <input id="phone" type="tel" inputMode="tel" maxLength={32}
+                  <Row n="03" htmlFor="phone" label="Phone">
+                    <input id="phone" type="tel" inputMode="tel" required maxLength={32}
                       pattern="[0-9+()\s.-]{6,32}" title="Digits, spaces and + ( ) . - only"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
