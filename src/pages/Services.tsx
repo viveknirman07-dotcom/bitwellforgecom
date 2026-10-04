@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
+import servicesVisual from "@/assets/photos/editorial-services.jpg";
 
 interface ServiceModule {
   id: string;
@@ -265,6 +266,12 @@ const Services = () => {
               </p>
             </ScrollReveal>
           </div>
+
+          <ScrollReveal>
+            <div className="mb-16 md:mb-20 aspect-[4/3] sm:aspect-[16/7] overflow-hidden">
+              <img src={servicesVisual} alt="Physical steel and paper components converging at a central junction" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            </div>
+          </ScrollReveal>
 
           <ServiceIndex />
         </div>

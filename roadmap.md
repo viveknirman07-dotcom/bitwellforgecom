@@ -29,6 +29,7 @@
 - [x] Sweep public routes, consent, and mobile navigation across phone, tablet, and desktop; buyer authentication/payment handoffs require provider sessions
 
 ## Public page finishing
+- [x] Add contextual editorial collages to Services, Contact, Careers, Insights articles, and related homepage placements
 - [x] Smooth image decoding and reveals across public and protected pages without shifting layouts or changing visuals
 - [ ] Add crawlable page-specific structured data and social previews for services, case studies, and insights
 - [x] Align public page typography with the homepage editorial type system

@@ -6,6 +6,7 @@ import Eyebrow from "@/components/Eyebrow";
 import ReadingProgress from "@/components/ReadingProgress";
 import { useSEO } from "@/hooks/use-seo";
 import { readingTime, sectionHeadings, relatedArticles } from "@/lib/insights";
+import researchVisual from "@/assets/photos/editorial-research.jpg";
 
 const MetaDot = () => (
   <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-muted-foreground/40" />
@@ -130,6 +131,12 @@ const InsightArticle = () => {
               </section>
             </ScrollReveal>
           )}
+
+          <ScrollReveal>
+            <div className="mb-16 md:mb-20 aspect-[4/3] sm:aspect-[16/9] overflow-hidden">
+              <img src={researchVisual} alt="Research folios and a magnifying glass arranged for close examination" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            </div>
+          </ScrollReveal>
 
           {/* Briefing body */}
           <ScrollReveal delay={180}>
