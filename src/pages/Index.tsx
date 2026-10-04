@@ -62,69 +62,119 @@ const Reveal = ({ children, delay = 0, className = "" }: { children: React.React
 
 const storyLarge = [acquisitionImg, strategyImg, operationsImg, processImg, visibilityImg, insightsImg, revImg];
 const storySmall = [revImg, processImg, visibilityImg, strategyImg, insightsImg, acquisitionImg, operationsImg];
-const STORY_HOLD = 6500;
+const STORY_HOLD = 4000;
+const STORY_SLIDE = 1200;
+const STORY_EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
+
+const Track = ({ children, className = "", style }: { children: React.ReactNode; className?: string; style: React.CSSProperties }) => (
+  <div className={`overflow-hidden ${className}`}><div className="flex h-full" style={style}>{children}</div></div>
+);
 
 const ClientStories = () => {
   const reduced = useReducedMotion();
-  const [idx, setIdx] = useState(0);
+  const total = caseStudies.length;
+  const slides = [...caseStudies, caseStudies[0]];
+  const [pos, setPos] = useState(0);
+  const [animate, setAnimate] = useState(true);
   const [paused, setPaused] = useState(false);
   const resumeRef = useRef<number>();
-  const total = caseStudies.length;
+  const touchX = useRef<number | null>(null);
+  const idx = pos % total;
+
+  const go = useCallback((dir: 1 | -1) => {
+    if (dir === 1) { setAnimate(!reduced); setPos((p) => Math.min(p + 1, total)); return; }
+    setPos((p) => {
+      if (p === 0) {
+        // jump silently to clone, then slide back
+        setAnimate(false);
+        requestAnimationFrame(() => requestAnimationFrame(() => { setAnimate(!reduced); setPos(total - 1); }));
+        return total;
+      }
+      setAnimate(!reduced);
+      return p - 1;
+    });
+  }, [reduced, total]);
+
+  // seamless loop: after landing on the clone, snap to the real first slide
+  useEffect(() => {
+    if (pos !== total) return;
+    const t = window.setTimeout(() => { setAnimate(false); setPos(0); }, reduced ? 0 : STORY_SLIDE + 20);
+    return () => window.clearTimeout(t);
+  }, [pos, total, reduced]);
 
   useEffect(() => {
-    if (reduced || paused) return;
+    if (paused || pos === total) return;
     const t = window.setTimeout(() => {
-      if (document.visibilityState === "visible") setIdx((i) => (i + 1) % total);
-    }, STORY_HOLD);
+      if (document.visibilityState === "visible") go(1);
+    }, STORY_HOLD + (animate && !reduced ? STORY_SLIDE : 0));
     return () => window.clearTimeout(t);
-  }, [idx, paused, reduced, total]);
+  }, [pos, paused, go, total, animate, reduced]);
+
+  // preload next images
+  useEffect(() => {
+    const n = (idx + 1) % total;
+    [storyLarge[n % storyLarge.length], storySmall[n % storySmall.length]].forEach((s) => { const im = new Image(); im.src = s; });
+  }, [idx, total]);
 
   useEffect(() => () => window.clearTimeout(resumeRef.current), []);
   const pause = () => { window.clearTimeout(resumeRef.current); setPaused(true); };
-  const resume = () => { window.clearTimeout(resumeRef.current); resumeRef.current = window.setTimeout(() => setPaused(false), 3000); };
+  const resume = () => { window.clearTimeout(resumeRef.current); resumeRef.current = window.setTimeout(() => setPaused(false), 800); };
 
-  const layer = (i: number, kind: "text" | "img") => {
-    const on = i === idx;
-    const base = "[grid-area:1/1] will-change-[opacity,transform] transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
-    const dur = kind === "img" ? "duration-[1400ms]" : "duration-[1100ms]";
-    const state = on
-      ? "opacity-100 translate-y-0 scale-100"
-      : kind === "img" ? "opacity-0 translate-y-2 md:translate-y-3 scale-[0.99] md:scale-[0.985] pointer-events-none" : "opacity-0 translate-y-1.5 md:translate-y-2 pointer-events-none";
-    return `${base} ${dur} ${state} ${on && kind === "text" ? "delay-150" : ""}`;
+  const trackStyle: React.CSSProperties = {
+    transform: `translate3d(${-pos * 100}%,0,0)`,
+    transition: animate && !reduced ? `transform ${STORY_SLIDE}ms ${STORY_EASE}` : "none",
+    willChange: "transform",
   };
+  const cell = (i: number) => ({ "aria-hidden": i !== pos, ...(i !== pos ? { inert: "" } : {}), className: "w-full shrink-0 min-w-0" });
 
   return (
     <section className="pb-24 md:pb-40" aria-roledescription="carousel" aria-label="Client stories"
-      onMouseEnter={pause} onMouseLeave={resume} onFocus={pause} onBlur={resume} onTouchStart={pause} onTouchEnd={resume}>
+      onMouseEnter={pause} onMouseLeave={resume} onFocus={pause} onBlur={resume}
+      onTouchStart={(e) => { pause(); touchX.current = e.touches[0].clientX; }}
+      onTouchEnd={(e) => {
+        const s = touchX.current; touchX.current = null;
+        if (s !== null) { const dx = e.changedTouches[0].clientX - s; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); }
+        resume();
+      }}>
       <div className={`${wrap} grid md:grid-cols-12 gap-y-10 md:gap-x-8`}>
         <Reveal className="md:col-span-4"><p className={cap}>Client story</p></Reveal>
-        <div className="md:col-span-8 grid" aria-live={paused ? "polite" : "off"}>
-          {caseStudies.map((c, i) => (
-            <h2 key={c.id} aria-hidden={i !== idx} className={`${layer(i, "text")} font-heading text-[32px] md:text-[48px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-normal max-w-[18ch]`}>{c.title}</h2>
-          ))}
-        </div>
-        <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none">
-          <div className="w-[60%] md:w-[72%] aspect-[225/243] overflow-hidden mb-5 grid">
-            {caseStudies.map((c, i) => (
-              <img key={c.id} src={storySmall[i % storySmall.length]} alt="" aria-hidden loading={i < 2 ? "lazy" : "lazy"} width={1536} height={1024} className={`${layer(i, "img")} w-full h-full object-cover`} />
+        <div className="md:col-span-8 min-w-0" aria-live={paused ? "polite" : "off"}>
+          <Track style={trackStyle}>
+            {slides.map((c, i) => (
+              <div key={i} {...cell(i)}>
+                <h2 className="font-heading text-[32px] md:text-[48px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-normal max-w-[18ch]">{c.title}</h2>
+              </div>
             ))}
-          </div>
-          <div className="grid">
-            {caseStudies.map((c, i) => (
-              <div key={c.id} aria-hidden={i !== idx} {...(i !== idx ? { inert: "" } : {})} className={`${layer(i, "text")} self-start`}>
+          </Track>
+        </div>
+        <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none min-w-0">
+          <Track style={trackStyle} className="w-[60%] md:w-[72%] aspect-[225/243] mb-5">
+            {slides.map((c, i) => (
+              <div key={i} {...cell(i)} className="w-full h-full shrink-0">
+                <img src={storySmall[(i % total) % storySmall.length]} alt="" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </Track>
+          <Track style={trackStyle}>
+            {slides.map((c, i) => (
+              <div key={i} {...cell(i)}>
                 <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{c.subtitle}</p>
                 <ArrowLink to={`/case-studies/${c.id}`}>Learn how we helped</ArrowLink>
                 <p className="mt-3 text-[12px] text-muted-foreground">Concept study</p>
               </div>
             ))}
-          </div>
+          </Track>
         </Reveal>
-        <Reveal delay={0.1} className="md:col-span-8 md:row-start-2">
-          <Link to={`/case-studies/${caseStudies[idx].id}`} className="grid overflow-hidden aspect-[930/484] group" aria-label={caseStudies[idx].title}>
-            {caseStudies.map((c, i) => (
-              <img key={c.id} src={storyLarge[i % storyLarge.length]} alt="" aria-hidden loading="lazy" width={1536} height={1024}
-                className={`${layer(i, "img")} w-full h-full object-cover group-hover:scale-[1.02]`} />
-            ))}
+        <Reveal delay={0.1} className="md:col-span-8 md:row-start-2 min-w-0">
+          <Link to={`/case-studies/${caseStudies[idx].id}`} className="block group" aria-label={caseStudies[idx].title}>
+            <Track style={trackStyle} className="aspect-[930/484]">
+              {slides.map((c, i) => (
+                <div key={i} aria-hidden className="w-full h-full shrink-0 overflow-hidden">
+                  <img src={storyLarge[(i % total) % storyLarge.length]} alt="" loading="lazy" width={1536} height={1024}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+                </div>
+              ))}
+            </Track>
           </Link>
         </Reveal>
       </div>
