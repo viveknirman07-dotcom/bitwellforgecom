@@ -111,7 +111,7 @@ const ClientStories = () => {
           </div>
           <div className="grid">
             {caseStudies.map((c, i) => (
-              <div key={c.id} aria-hidden={i !== idx} className={`${layer(i, "text")} self-start`}>
+              <div key={c.id} aria-hidden={i !== idx} {...(i !== idx ? { inert: "" } : {})} className={`${layer(i, "text")} self-start`}>
                 <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{c.subtitle}</p>
                 <ArrowLink to={`/case-studies/${c.id}`}>Learn how we helped</ArrowLink>
                 <p className="mt-3 text-[12px] text-muted-foreground">Concept study</p>
