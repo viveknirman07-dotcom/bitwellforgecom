@@ -114,7 +114,7 @@ const Header = () => {
       </div>
 
       <nav className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-10 h-16 lg:h-[76px] flex items-center justify-between gap-6" aria-label="Main">
-        <Link to="/" className="font-heading text-[22px] lg:text-[26px] font-semibold tracking-tight text-foreground shrink-0">
+        <Link to="/" className="brand-name font-heading text-[22px] lg:text-[26px] font-semibold tracking-tight text-foreground shrink-0">
           BitwellForge
         </Link>
 
