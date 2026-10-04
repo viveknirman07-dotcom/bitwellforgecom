@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
-import CaseStudyCard from "@/components/CaseStudyCard";
+import CaseStudyExplorer from "@/components/CaseStudyExplorer";
 import Eyebrow from "@/components/Eyebrow";
 import { caseStudies, caseStudyCategories } from "@/lib/case-studies-data";
 import { cn } from "@/lib/utils";
@@ -19,10 +19,10 @@ const CaseStudies = () => {
 
   const [filter, setFilter] = useState<Filter>("All");
 
-  const filtered =
-    filter === "All"
-      ? caseStudies
-      : caseStudies.filter((s) => s.category === filter);
+  const filtered = useMemo(
+    () => (filter === "All" ? caseStudies : caseStudies.filter((s) => s.category === filter)),
+    [filter],
+  );
 
   const filters: Filter[] = ["All", ...caseStudyCategories];
 
@@ -56,7 +56,7 @@ const CaseStudies = () => {
       <section className="section-padding pb-10 md:pb-12">
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
-            <div className="flex flex-wrap gap-2 md:gap-3 border-b border-[hsl(var(--foreground)/0.10)] pb-6">
+            <div className="flex flex-wrap gap-x-2 gap-y-1">
               {filters.map((f) => {
                 const active = filter === f;
                 return (
@@ -64,10 +64,10 @@ const CaseStudies = () => {
                     key={f}
                     onClick={() => setFilter(f)}
                     className={cn(
-                      "px-4 py-2 rounded-full text-xs md:text-sm font-medium tracking-wide transition-all duration-300 border",
+                      "relative min-h-[44px] pr-6 text-xs md:text-sm tracking-wide transition-colors duration-300 after:absolute after:left-0 after:bottom-2 after:h-px after:bg-foreground after:transition-all after:duration-500",
                       active
-                        ? "bg-foreground text-background border-foreground"
-                        : "bg-transparent text-muted-foreground border-[hsl(var(--foreground)/0.15)] hover:text-foreground hover:border-[hsl(var(--foreground)/0.40)]",
+                        ? "text-foreground after:w-[calc(100%-1.5rem)]"
+                        : "text-muted-foreground hover:text-foreground after:w-0",
                     )}
                   >
                     {f}
@@ -82,13 +82,7 @@ const CaseStudies = () => {
       {/* GRID */}
       <section className="section-padding pb-20 md:pb-28">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {filtered.map((study, i) => (
-              <ScrollReveal key={study.id} delay={Math.min(i * 60, 360)}>
-                <CaseStudyCard study={study} index={i} />
-              </ScrollReveal>
-            ))}
-          </div>
+          <CaseStudyExplorer studies={filtered} archiveIndex={(st) => caseStudies.indexOf(st)} />
 
           <ScrollReveal delay={200}>
             <p className="mt-16 text-xs text-muted-foreground text-center max-w-2xl mx-auto leading-relaxed italic">
