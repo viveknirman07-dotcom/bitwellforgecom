@@ -26,21 +26,26 @@ const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
 const cap = "text-[13px] md:text-[14px] uppercase tracking-[0.02em] font-medium";
 
 /** Word-by-word rising reveal for large editorial headlines. */
-const SplitReveal = ({ text, as: Tag = "h2", className = "", delay = 0, inView = true, play = true }: { text: string; as?: "h1" | "h2"; className?: string; delay?: number; inView?: boolean; play?: boolean }) => {
+const SplitReveal = ({ text, lines, as: Tag = "h2", className = "", delay = 0, inView = true, play = true }: { text: string; lines?: string[]; as?: "h1" | "h2"; className?: string; delay?: number; inView?: boolean; play?: boolean }) => {
   const reduced = useReducedMotion();
-  const words = text.split(" ");
   const MotionTag = Tag === "h1" ? motion.h1 : motion.h2;
   const trigger = reduced ? { animate: "show" } : inView ? { whileInView: "show", viewport: { once: true, margin: "-80px" } } : { animate: play ? "show" : "hide" };
+  const renderWords = (t: string) => {
+    const words = t.split(" ");
+    return words.map((w, i) => (
+      <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.08em]" aria-hidden>
+        <motion.span className="inline-block" variants={{ hide: { y: "110%" }, show: { y: "0%", transition: { duration: reduced ? 0 : 0.8, ease } } }}>
+          {w}{i < words.length - 1 ? "\u00A0" : ""}
+        </motion.span>
+      </span>
+    ));
+  };
   return (
     <MotionTag className={className} initial={reduced ? false : "hide"} {...trigger}
       variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: delay } } }} aria-label={text}>
-      {words.map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.08em]" aria-hidden>
-          <motion.span className="inline-block" variants={{ hide: { y: "110%" }, show: { y: "0%", transition: { duration: reduced ? 0 : 0.8, ease } } }}>
-            {w}{i < words.length - 1 ? "\u00A0" : ""}
-          </motion.span>
-        </span>
-      ))}
+      {lines
+        ? lines.map((l, i) => <span key={i} className="block whitespace-nowrap">{renderWords(l)}</span>)
+        : renderWords(text)}
     </MotionTag>
   );
 };
@@ -94,7 +99,8 @@ const Index = () => {
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
               <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Real structure for compounding growth"
-                className="font-heading font-normal text-foreground text-[52px] md:text-[78px] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em] max-w-[18ch]" />
+                lines={["Real structure for", "compounding growth"]}
+                className="font-heading font-normal text-foreground text-[clamp(32px,10.4vw,52px)] md:text-[clamp(60px,8.6vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em]" />
             </div>
           </div>
         </div>
