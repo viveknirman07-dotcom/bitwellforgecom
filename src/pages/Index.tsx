@@ -66,6 +66,10 @@ const STORY_HOLD = 4000;
 const STORY_SLIDE = 1200;
 const STORY_EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
 
+const Track = ({ children, className = "", style }: { children: React.ReactNode; className?: string; style: React.CSSProperties }) => (
+  <div className={`overflow-hidden ${className}`}><div className="flex h-full" style={style}>{children}</div></div>
+);
+
 const ClientStories = () => {
   const reduced = useReducedMotion();
   const total = caseStudies.length;
@@ -121,9 +125,6 @@ const ClientStories = () => {
     transition: animate && !reduced ? `transform ${STORY_SLIDE}ms ${STORY_EASE}` : "none",
     willChange: "transform",
   };
-  const Track = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-    <div className={`overflow-hidden ${className}`}><div className="flex" style={trackStyle}>{children}</div></div>
-  );
   const cell = (i: number) => ({ "aria-hidden": i !== pos, ...(i !== pos ? { inert: "" } : {}), className: "w-full shrink-0 min-w-0" });
 
   return (
@@ -138,7 +139,7 @@ const ClientStories = () => {
       <div className={`${wrap} grid md:grid-cols-12 gap-y-10 md:gap-x-8`}>
         <Reveal className="md:col-span-4"><p className={cap}>Client story</p></Reveal>
         <div className="md:col-span-8 min-w-0" aria-live={paused ? "polite" : "off"}>
-          <Track>
+          <Track style={trackStyle}>
             {slides.map((c, i) => (
               <div key={i} {...cell(i)}>
                 <h2 className="font-heading text-[32px] md:text-[48px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] font-normal max-w-[18ch]">{c.title}</h2>
@@ -147,14 +148,14 @@ const ClientStories = () => {
           </Track>
         </div>
         <Reveal className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-end order-3 md:order-none min-w-0">
-          <Track className="w-[60%] md:w-[72%] aspect-[225/243] mb-5">
+          <Track style={trackStyle} className="w-[60%] md:w-[72%] aspect-[225/243] mb-5">
             {slides.map((c, i) => (
               <div key={i} {...cell(i)} className="w-full h-full shrink-0">
                 <img src={storySmall[(i % total) % storySmall.length]} alt="" loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" />
               </div>
             ))}
           </Track>
-          <Track>
+          <Track style={trackStyle}>
             {slides.map((c, i) => (
               <div key={i} {...cell(i)}>
                 <p className="text-[16px] leading-[1.5] max-w-[28ch] font-body mb-5">{c.subtitle}</p>
@@ -166,7 +167,7 @@ const ClientStories = () => {
         </Reveal>
         <Reveal delay={0.1} className="md:col-span-8 md:row-start-2 min-w-0">
           <Link to={`/case-studies/${caseStudies[idx].id}`} className="block group" aria-label={caseStudies[idx].title}>
-            <Track className="aspect-[930/484]">
+            <Track style={trackStyle} className="aspect-[930/484]">
               {slides.map((c, i) => (
                 <div key={i} aria-hidden className="w-full h-full shrink-0 overflow-hidden">
                   <img src={storyLarge[(i % total) % storyLarge.length]} alt="" loading="lazy" width={1536} height={1024}
