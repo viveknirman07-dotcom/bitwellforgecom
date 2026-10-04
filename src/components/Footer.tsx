@@ -56,7 +56,7 @@ const Footer = () => {
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-10 pt-16 md:pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-border">
           <div className="lg:col-span-4">
-            <Link to="/" className="font-heading text-3xl font-semibold tracking-tight">BitwellForge</Link>
+            <Link to="/" className="brand-name font-heading text-3xl font-semibold tracking-tight">BitwellForge</Link>
             <p className="mt-4 text-[15px] leading-[1.6] text-muted-foreground max-w-sm">
               Commercial architecture and constraint advisory for service businesses, delivered remotely worldwide.
             </p>

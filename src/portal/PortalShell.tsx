@@ -43,7 +43,7 @@ const PortalShell = ({ title, eyebrow, variant = "vault", children }: Props) => 
         <div className="portal vault-workspace-shell font-body min-h-screen">
           <header className="vault-workspace-header">
             <Link to="/" className="vault-workspace-brand" aria-label="BitwellForge home">
-              <span>BitwellForge</span>
+              <span className="brand-name">BitwellForge</span>
               <span aria-hidden="true" className="vault-workspace-brand-mark" />
               <span>Forge Vault</span>
             </Link>
