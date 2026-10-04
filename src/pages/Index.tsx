@@ -107,8 +107,13 @@ const Index = () => {
 
         <div className={`${wrap} pt-10 md:pt-14 pb-24 md:pb-40`}>
           <Reveal>
-            <p className="font-heading text-[28px] sm:text-[36px] md:text-[48px] lg:text-[54px] leading-[1.14] tracking-[-0.015em]">
-              BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.
+            <p className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(40px,4vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+              <span className="block whitespace-nowrap">BitwellForge advises service businesses on</span>
+              <span className="block whitespace-nowrap">the structural constraints governing</span>
+              <span className="block whitespace-nowrap">commercial performance, identifying the</span>
+              <span className="block whitespace-nowrap">interdependencies that impede growth</span>
+              <span className="block whitespace-nowrap">across strategy, acquisition, operations, and</span>
+              <span className="block whitespace-nowrap">digital execution.</span>
             </p>
           </Reveal>
         </div>
