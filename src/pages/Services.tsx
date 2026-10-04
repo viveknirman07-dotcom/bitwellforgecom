@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -104,6 +105,135 @@ const services: ServiceModule[] = [
   },
 ];
 
+const num = (i: number) => String(i + 1).padStart(2, "0");
+
+const Detail = ({ s }: { s: ServiceModule }) => (
+  <div className="space-y-6">
+    {([
+      ["Solves", s.solves, false],
+      ["Builds", s.builds, false],
+      ["Creates", s.creates, true],
+      ["Ideal For", s.idealFor, false],
+    ] as const).map(([label, text, em]) => (
+      <div key={label} className="grid grid-cols-1 md:grid-cols-[110px_1fr] gap-2 md:gap-6">
+        <p className="text-[10px] tracking-[0.22em] uppercase text-gold/70 pt-1">{label}</p>
+        <p className={`text-[13.5px] md:text-[15px] leading-[1.8] font-light ${em ? "text-foreground/90 italic" : "text-muted-foreground"}`}>{text}</p>
+      </div>
+    ))}
+  </div>
+);
+
+const ServiceIndex = () => {
+  const [active, setActive] = useState(0);
+  const [open, setOpen] = useState<number | null>(0);
+  const s = services[active];
+
+  return (
+    <>
+      {/* Tablet and desktop: index + detail panel */}
+      <div className="hidden md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-20 border-t border-gold/20">
+        <div className="flex items-baseline justify-between col-span-2 pt-5 -mb-4">
+          <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground">Service index</p>
+          <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground">
+            <span className="text-gold">{num(active)}</span> / {num(services.length - 1)}
+          </p>
+        </div>
+        <ol role="tablist" aria-orientation="vertical" aria-label="Services">
+          {services.map((item, i) => {
+            const on = i === active;
+            return (
+              <li key={item.id} className="border-b border-gold/10">
+                <button
+                  role="tab"
+                  aria-selected={on}
+                  aria-controls="service-panel"
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className="group w-full flex items-baseline gap-5 py-5 text-left"
+                >
+                  <span className={`font-quote italic text-lg transition-colors duration-500 ${on ? "text-gold" : "text-muted-foreground/60"}`}>{num(i)}</span>
+                  <span className={`font-heading text-xl lg:text-[26px] leading-[1.2] tracking-tightest transition-all duration-500 ${on ? "text-foreground translate-x-2" : "text-muted-foreground group-hover:text-foreground"}`}>
+                    {item.title}
+                  </span>
+                  <span className={`ml-auto h-px self-center bg-gold transition-all duration-500 origin-right ${on ? "w-8 opacity-100" : "w-0 opacity-0"}`} />
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+        <div className="relative">
+          <div id="service-panel" role="tabpanel" className="md:sticky md:top-28 pt-10">
+            <div key={s.id} className="animate-fade-in">
+              <div className="flex items-baseline gap-4 mb-6">
+                <span className="font-quote italic text-gold text-5xl lg:text-6xl leading-none">{num(active)}</span>
+                <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">{s.layer}</span>
+              </div>
+              <h2 className="font-heading text-3xl lg:text-[44px] font-normal text-foreground tracking-tightest leading-[1.1] mb-10 text-balance">
+                {s.title.split(" ").slice(0, -1).join(" ")}{" "}
+                <span className="font-quote italic text-gold/95 font-normal">{s.title.split(" ").slice(-1)[0]}</span>
+              </h2>
+              <div className="border-t border-gold/15 pt-8">
+                <Detail s={s} />
+              </div>
+              <Link
+                to={`/services/${s.id}`}
+                className="group inline-flex items-center gap-3 mt-10 text-[11px] tracking-[0.22em] uppercase text-foreground border-b border-gold/40 pb-2 hover:border-gold transition-colors duration-500"
+              >
+                Explore {s.title}
+                <ArrowRight size={14} className="transition-transform duration-500 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile: vertical expanding index */}
+      <ol className="md:hidden border-t border-gold/20">
+        {services.map((item, i) => {
+          const isOpen = open === i;
+          return (
+            <li key={item.id} className="border-b border-gold/10">
+              <button
+                aria-expanded={isOpen}
+                aria-controls={`svc-${item.id}`}
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="w-full flex items-start gap-4 py-6 text-left"
+              >
+                <span className={`font-quote italic text-lg pt-0.5 transition-colors duration-500 ${isOpen ? "text-gold" : "text-muted-foreground/60"}`}>{num(i)}</span>
+                <span className="flex-1 min-w-0">
+                  <span className="block text-[10px] tracking-[0.25em] uppercase text-gold/80 mb-2">{item.layer}</span>
+                  <span className="block font-heading text-[22px] leading-[1.2] tracking-tightest text-foreground">{item.title}</span>
+                </span>
+                <span className={`relative w-3 h-3 mt-2 shrink-0 transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`} aria-hidden>
+                  <span className="absolute inset-x-0 top-1/2 h-px bg-gold" />
+                  <span className="absolute inset-y-0 left-1/2 w-px bg-gold" />
+                </span>
+              </button>
+              <div
+                id={`svc-${item.id}`}
+                className={`grid transition-[grid-template-rows] duration-500 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+              >
+                <div className="overflow-hidden">
+                  <div className={`pl-9 pb-8 transition-opacity duration-500 ${isOpen ? "opacity-100" : "opacity-0"}`}>
+                    <Detail s={item} />
+                    <Link
+                      to={`/services/${item.id}`}
+                      className="inline-flex items-center gap-3 mt-8 text-[11px] tracking-[0.22em] uppercase text-foreground border-b border-gold/40 pb-2"
+                    >
+                      Explore <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </>
+  );
+};
+
 const Services = () => {
   useSEO({
     title: "Services | BitwellForge",
@@ -135,74 +265,7 @@ const Services = () => {
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-gold/15 border border-gold/15 rounded-xl overflow-hidden">
-            {services.map((s, i) => (
-              <ScrollReveal key={s.id} delay={(i % 2) * 80}>
-                <Link
-                  to={`/services/${s.id}`}
-                  className="group block h-full bg-background p-8 md:p-10 hover:bg-card/60 transition-colors duration-500 scroll-mt-24"
-                >
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="font-quote italic text-gold text-xl">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-[10px] tracking-[0.25em] uppercase text-gold/80">
-                          {s.layer}
-                        </span>
-                      </div>
-                      <h2 className="font-heading text-2xl md:text-[28px] font-normal text-foreground tracking-tightest leading-[1.15] group-hover:text-gold/95 transition-colors duration-400">
-                        {s.title.split(" ").slice(0, -1).join(" ")}{" "}
-                        <span className="font-quote italic text-gold/95 font-normal">
-                          {s.title.split(" ").slice(-1)[0]}
-                        </span>
-                      </h2>
-                    </div>
-                    <ArrowRight
-                      size={16}
-                      className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all duration-500 mt-2 shrink-0"
-                    />
-                  </div>
-
-                  <div className="space-y-5 mt-6 border-t border-gold/10 pt-6">
-                    <div>
-                      <p className="text-[10px] tracking-[0.22em] uppercase text-gold/70 mb-2">
-                        Solves
-                      </p>
-                      <p className="text-muted-foreground text-[13.5px] leading-[1.8] font-light">
-                        {s.solves}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] tracking-[0.22em] uppercase text-gold/70 mb-2">
-                        Builds
-                      </p>
-                      <p className="text-muted-foreground text-[13.5px] leading-[1.8] font-light">
-                        {s.builds}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] tracking-[0.22em] uppercase text-gold/70 mb-2">
-                        Creates
-                      </p>
-                      <p className="text-foreground/90 text-[13.5px] leading-[1.8] font-light italic">
-                        {s.creates}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] tracking-[0.22em] uppercase text-gold/70 mb-2">
-                        Ideal For
-                      </p>
-                      <p className="text-muted-foreground text-[13.5px] leading-[1.8] font-light">
-                        {s.idealFor}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
+          <ServiceIndex />
         </div>
       </section>
     </div>
