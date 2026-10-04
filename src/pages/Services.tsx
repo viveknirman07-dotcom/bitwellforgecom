@@ -153,7 +153,7 @@ const ServiceIndex = () => {
                   onClick={() => setActive(i)}
                   className="group w-full flex items-baseline gap-5 py-5 text-left"
                 >
-                  <span className={`font-quote italic text-lg transition-colors duration-500 ${on ? "text-gold" : "text-muted-foreground/60"}`}>{num(i)}</span>
+                  <span className={`w-7 shrink-0 font-quote italic text-lg transition-colors duration-500 ${on ? "text-gold" : "text-muted-foreground/60"}`}>{num(i)}</span>
                   <span className={`font-heading text-xl lg:text-[26px] leading-[1.2] tracking-tightest transition-all duration-500 ${on ? "text-foreground translate-x-2" : "text-muted-foreground group-hover:text-foreground"}`}>
                     {item.title}
                   </span>
@@ -201,7 +201,7 @@ const ServiceIndex = () => {
                 onClick={() => setOpen(isOpen ? null : i)}
                 className="w-full flex items-start gap-4 py-6 text-left"
               >
-                <span className={`font-quote italic text-lg pt-0.5 transition-colors duration-500 ${isOpen ? "text-gold" : "text-muted-foreground/60"}`}>{num(i)}</span>
+                <span className={`w-6 shrink-0 font-quote italic text-lg pt-0.5 transition-colors duration-500 ${isOpen ? "text-gold" : "text-muted-foreground/60"}`}>{num(i)}</span>
                 <span className="flex-1 min-w-0">
                   <span className="block text-[10px] tracking-[0.25em] uppercase text-gold/80 mb-2">{item.layer}</span>
                   <span className="block font-heading text-[22px] leading-[1.2] tracking-tightest text-foreground">{item.title}</span>
@@ -216,7 +216,7 @@ const ServiceIndex = () => {
                 className={`grid transition-[grid-template-rows] duration-500 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
               >
                 <div className="overflow-hidden">
-                  <div className={`pl-9 pb-8 transition-opacity duration-500 ${isOpen ? "opacity-100" : "opacity-0"}`}>
+                  <div className={`pl-10 pb-8 transition-opacity duration-500 ${isOpen ? "opacity-100" : "opacity-0"}`}>
                     <Detail s={item} />
                     <Link
                       to={`/services/${item.id}`}
