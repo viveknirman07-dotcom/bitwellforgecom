@@ -33,4 +33,4 @@
 - [x] Align public page typography with the homepage editorial type system
 - [x] Add natural people-free photography where it supports the subject
 - [x] Stabilize the homepage opening on mobile, slow networks, and reduced motion
-- [ ] Remake every site image in the editorial halftone collage direction (no people)
+- [x] Remake every site image in the editorial halftone collage direction (no people)
