@@ -199,7 +199,7 @@ const Index = () => {
   const handleDone = useCallback(() => setReady(true), []);
 
   useSEO({
-    title: "BitwellForge | Commercial Architecture & Constraint Advisory",
+    title: "BitwellForge | Consulting & Professional Services",
     description:
       "BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.",
     canonicalPath: "/",
