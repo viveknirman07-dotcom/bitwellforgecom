@@ -18,7 +18,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { activeJobs, getJobBySlug, type Job } from "@/data/jobs";
 import { getStatus, recordAttempt, formatUntil } from "@/lib/applicationGuard";
 import { useSEO } from "@/hooks/use-seo";
-import careersVisual from "@/assets/photos/editorial-careers.jpg";
 
 type Stage =
   | "listing"
@@ -195,12 +194,6 @@ const ListingView = ({ onOpen }: { onOpen: (j: Job) => void }) => {
             ambitious, and want to work at the intersection of strategy and execution,
             explore the roles below.
           </p>
-        </ScrollReveal>
-
-        <ScrollReveal delay={280}>
-          <div className="mb-16 aspect-[4/3] sm:aspect-[16/7] overflow-hidden">
-            <img src={careersVisual} alt="A separate stone piece beside a carefully assembled architectural structure" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-          </div>
         </ScrollReveal>
 
         <ScrollReveal delay={320}>

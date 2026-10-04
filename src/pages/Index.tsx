@@ -14,8 +14,6 @@ import acquisitionImg from "@/assets/photos/system-acquisition.jpg";
 import processImg from "@/assets/photos/system-process.jpg";
 import insightsImg from "@/assets/photos/system-insights.jpg";
 import visibilityImg from "@/assets/photos/system-visibility.jpg";
-import careersVisual from "@/assets/photos/editorial-careers.jpg";
-import researchVisual from "@/assets/photos/editorial-research.jpg";
 import preStratImg from "@/assets/photos/preloader/system-strategy-640.webp";
 import preOpsImg from "@/assets/photos/preloader/system-operations-640.webp";
 import preKnowledgeImg from "@/assets/photos/preloader/system-insights-640.webp";
@@ -193,7 +191,7 @@ const ArrowLink = ({ to, children, className = "" }: { to: string; children: Rea
 );
 
 const perspectiveLabels = ["Insight", "Analysis", "Trends"];
-const perspectiveImgs = [strategyImg, operationsImg, researchVisual];
+const perspectiveImgs = [strategyImg, operationsImg, insightsImg];
 
 const Index = () => {
   const reduced = useReducedMotion();
@@ -281,7 +279,7 @@ const Index = () => {
       <section className="pb-24 md:pb-32 overflow-hidden">
         <div className={`${wrap} grid grid-cols-12 gap-y-10 md:gap-x-6`}>
           <div className="col-span-12 md:col-span-6 relative h-[360px] md:h-[440px]">
-            <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={careersVisual} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
+            <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={strategyImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
             <Reveal delay={0.15} className="absolute left-[8%] md:left-[10%] top-[34%] w-[52%] md:w-[48%]">
               <div className="aspect-[224/280] overflow-hidden"><img src={operationsImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
               <ArrowLink to="/about" className="mt-2">Meet the practice</ArrowLink>
