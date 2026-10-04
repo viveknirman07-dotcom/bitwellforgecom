@@ -14,10 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Newsreader', 'Georgia', 'serif'],
-        body: ['Montserrat', 'system-ui', 'sans-serif'],
-        mono: ['Montserrat', 'system-ui', 'sans-serif'],
-        quote: ['Newsreader', 'Georgia', 'serif'],
+        heading: ['Cormorant Garamond', 'serif'],
+        body: ['Montserrat', 'sans-serif'],
+        mono: ['Montserrat', 'sans-serif'],
+        quote: ['Cormorant Garamond', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
