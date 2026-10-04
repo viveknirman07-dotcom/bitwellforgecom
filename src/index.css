@@ -1391,3 +1391,6 @@ body.vault-transitioning--calm #root { animation: none; }
 /* Brand name typography: applies only to the BitwellForge wordmark text. */
 :root { --font-brand: "Cormorant Garamond", serif; }
 .brand-name { font-family: var(--font-brand) !important; font-weight: 700 !important; }
+
+/* H1s alone use the real Cormorant Garamond SemiBold face. */
+h1 { font-family: var(--font-heading) !important; font-weight: 600 !important; }
