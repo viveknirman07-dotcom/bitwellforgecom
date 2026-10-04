@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Cormorant+Garamond:wght@400&family=Noto+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Cormorant+Garamond:wght@400&family=Montserrat:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -63,7 +63,7 @@
 
     /* Typography */
     --font-heading: 'Newsreader', Georgia, serif;
-    --font-body: 'Noto Sans', system-ui, sans-serif;
+    --font-body: 'Montserrat', system-ui, sans-serif;
 
     /* Shadows */
     --shadow-sm: 0 1px 3px hsl(226 30% 12% / 0.05);
@@ -1359,7 +1359,7 @@ body.vault-transitioning--calm #root { animation: none; }
     --gold: 230 94% 14%;
     --eyebrow-color: 230 8% 22%;
     --font-heading: 'Newsreader', Georgia, serif;
-    --font-body: 'Noto Sans', system-ui, sans-serif;
+    --font-body: 'Montserrat', system-ui, sans-serif;
   }
   .dark {
     --background: 230 94% 14%;
@@ -1383,5 +1383,7 @@ body.vault-transitioning--calm #root { animation: none; }
     --eyebrow-color: 230 20% 80%;
   }
   h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); font-weight: 300; letter-spacing: -0.015em; }
-  body { font-family: var(--font-body); }
+  :root { --font-content: 'Montserrat', sans-serif; }
+  body, p, li, dd, figcaption, blockquote p, .body-copy, .description, .supporting-text, .content-text { font-family: var(--font-content); }
+  p, li, dd, .body-copy, .description, .supporting-text, .content-text { font-weight: 400; }
 }
