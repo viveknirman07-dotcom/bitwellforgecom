@@ -285,7 +285,6 @@ const Index = () => {
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
         <HeroThesis play={ready} />
-        <img src={heroImg} alt="" width={1920} height={1088} className="hidden" aria-hidden />
 
 
         <div className={`${wrap} pt-10 md:pt-14 pb-24 md:pb-40`}>
