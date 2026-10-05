@@ -20,11 +20,6 @@ import preKnowledgeImg from "@/assets/photos/preloader/system-insights-640.webp"
 import preConnectionsImg from "@/assets/photos/preloader/system-acquisition-640.webp";
 import prePathwaysImg from "@/assets/photos/preloader/system-process-640.webp";
 import preHeroImg from "@/assets/photos/preloader/system-hero-640.webp";
-import thesis1 from "@/assets/photos/hero-thesis-01.jpg";
-import thesis2 from "@/assets/photos/hero-thesis-02.jpg";
-import thesis3 from "@/assets/photos/hero-thesis-03.jpg";
-import thesis4 from "@/assets/photos/hero-thesis-04.jpg";
-import thesis5 from "@/assets/photos/hero-thesis-05.jpg";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
@@ -198,72 +193,6 @@ const ArrowLink = ({ to, children, className = "" }: { to: string; children: Rea
 const perspectiveLabels = ["Insight", "Analysis", "Trends"];
 const perspectiveImgs = [strategyImg, operationsImg, insightsImg];
 
-const theses = [
-  { text: "Growth rarely stalls where it appears to.", img: thesis1, alt: "Collage of a structure held back by a hidden mechanical constraint" },
-  { text: "A business is a connected system.", img: thesis2, alt: "Collage of interlocking components working as one system" },
-  { text: "More activity does not mean more demand.", img: thesis3, alt: "Collage of busy movement around an unresponsive centre" },
-  { text: "Revenue can outgrow the business beneath it.", img: thesis4, alt: "Collage of a mass expanding beyond the base supporting it" },
-  { text: "Digital scale magnifies structural reality.", img: thesis5, alt: "Collage of a digital lens enlarging an underlying structure" },
-];
-const THESIS_HOLD = 2000;
-const THESIS_SLIDE = 1200;
-
-/** Primary H1: five theses that slide left to right on a continuous loop. */
-const HeroThesis = ({ play }: { play: boolean }) => {
-  const reduced = useReducedMotion();
-  const n = theses.length;
-  const slides = [...theses, theses[0]];
-  const [pos, setPos] = useState(0);
-  const [animate, setAnimate] = useState(true);
-  const touchX = useRef<number | null>(null);
-
-  useEffect(() => { theses.forEach((t) => { const im = new Image(); im.src = t.img; }); }, []);
-
-  useEffect(() => {
-    if (pos === n) {
-      const t = window.setTimeout(() => { setAnimate(false); setPos(0); }, reduced ? 0 : THESIS_SLIDE + 30);
-      return () => window.clearTimeout(t);
-    }
-    if (!play) return;
-    const t = window.setTimeout(() => { setAnimate(!reduced); setPos((p) => p + 1); },
-      THESIS_HOLD + (animate && pos !== 0 && !reduced ? THESIS_SLIDE : 0));
-    return () => window.clearTimeout(t);
-  }, [pos, play, animate, reduced, n]);
-
-  const style: React.CSSProperties = {
-    transform: `translate3d(${pos * 100}%,0,0)`,
-    transition: animate && !reduced ? `transform ${THESIS_SLIDE}ms cubic-bezier(0.65, 0, 0.35, 1)` : "none",
-    willChange: "transform",
-  };
-
-  return (
-    <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden touch-pan-y" aria-roledescription="carousel" aria-label="BitwellForge theses"
-      onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
-      onTouchEnd={(e) => {
-        const s = touchX.current; touchX.current = null;
-        if (s !== null && Math.abs(e.changedTouches[0].clientX - s) > 40 && pos < n) { setAnimate(!reduced); setPos((p) => p + 1); }
-      }}>
-      <h1 className="sr-only">{theses[pos % n].text}</h1>
-      <div className="flex flex-row-reverse h-full" style={style} data-visual-loading-exempt>
-        {slides.map((t, i) => (
-          <div key={i} className="relative w-full h-full shrink-0 overflow-hidden" aria-hidden>
-            <img src={t.img} alt={i === pos % n ? t.alt : ""} width={1920} height={1088} decoding="async" fetchPriority={i === 0 ? "high" : "auto"}
-              data-visual-loading-exempt className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
-            <div className="dark absolute inset-x-0 bottom-0 pb-10 md:pb-16">
-              <div className={wrap}>
-                <p className="font-heading text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em] max-w-[16ch]" style={{ fontWeight: 600 }}>
-                  {t.text}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const Index = () => {
   const reduced = useReducedMotion();
   const [ready, setReady] = useState(!!reduced);
@@ -284,8 +213,19 @@ const Index = () => {
 
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
-        <HeroThesis play={ready} />
-
+        <div className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
+          <motion.img src={heroImg} alt="Concrete and steel transit spans converging into an engineered infrastructure system" width={1920} height={1088} fetchPriority="high" decoding="async"
+            className="absolute inset-0 w-full h-full object-cover object-[57%_center] md:object-center"
+            initial={reduced ? false : { scale: 1.15 }} animate={{ scale: 1 }} transition={{ duration: 1.8, ease }} />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
+          <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
+            <div className={wrap}>
+              <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Real structure for compounding growth"
+                lines={["Real structure for", "compounding growth"]}
+                className="font-heading font-normal text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em]" />
+            </div>
+          </div>
+        </div>
 
         <div className={`${wrap} pt-10 md:pt-14 pb-24 md:pb-40`}>
           <Reveal>
