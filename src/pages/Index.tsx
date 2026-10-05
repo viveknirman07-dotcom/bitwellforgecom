@@ -252,7 +252,7 @@ const HeroThesis = ({ play }: { play: boolean }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
             <div className="dark absolute inset-x-0 bottom-0 pb-10 md:pb-16">
               <div className={wrap}>
-                <p className="font-heading font-semibold text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em] max-w-[16ch]">
+                <p className="font-heading text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em] max-w-[16ch]" style={{ fontWeight: 600 }}>
                   {t.text}
                 </p>
               </div>
