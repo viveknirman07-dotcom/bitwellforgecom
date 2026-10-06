@@ -223,6 +223,48 @@ export type Database = {
         }
         Relationships: []
       }
+      career_applications: {
+        Row: {
+          audio_url: string | null
+          created_at: string
+          email: string
+          email_status: string | null
+          full_name: string
+          id: string
+          linkedin_url: string
+          resume_path: string | null
+          role_id: string
+          role_title: string
+          summary: string | null
+        }
+        Insert: {
+          audio_url?: string | null
+          created_at?: string
+          email: string
+          email_status?: string | null
+          full_name: string
+          id?: string
+          linkedin_url: string
+          resume_path?: string | null
+          role_id: string
+          role_title: string
+          summary?: string | null
+        }
+        Update: {
+          audio_url?: string | null
+          created_at?: string
+          email?: string
+          email_status?: string | null
+          full_name?: string
+          id?: string
+          linkedin_url?: string
+          resume_path?: string | null
+          role_id?: string
+          role_title?: string
+          summary?: string | null
+        }
+        Relationships: []
+      }
       commissions: {
         Row: {
           affiliate_id: string
