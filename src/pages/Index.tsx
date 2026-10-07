@@ -62,7 +62,7 @@ const Reveal = ({ children, delay = 0, className = "" }: { children: React.React
 
 const storyLarge = [acquisitionImg, strategyImg, operationsImg, processImg, visibilityImg, insightsImg, revImg];
 const storySmall = [revImg, processImg, visibilityImg, strategyImg, insightsImg, acquisitionImg, operationsImg];
-const STORY_HOLD = 4000;
+const STORY_HOLD = 2600;
 const STORY_SLIDE = 1200;
 const STORY_EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
 
@@ -76,39 +76,59 @@ const ClientStories = () => {
   const slides = [...caseStudies, caseStudies[0]];
   const [pos, setPos] = useState(0);
   const [animate, setAnimate] = useState(true);
-  const [paused, setPaused] = useState(false);
-  const resumeRef = useRef<number>();
+  const [cycle, setCycle] = useState(0);
+  const posRef = useRef(0);
+  const transitionUntil = useRef(0);
+  const reverseFrame = useRef<number>();
   const touchX = useRef<number | null>(null);
   const idx = pos % total;
 
   const go = useCallback((dir: 1 | -1) => {
-    if (dir === 1) { setAnimate(!reduced); setPos((p) => Math.min(p + 1, total)); return; }
-    setPos((p) => {
-      if (p === 0) {
-        // jump silently to clone, then slide back
-        setAnimate(false);
-        requestAnimationFrame(() => requestAnimationFrame(() => { setAnimate(!reduced); setPos(total - 1); }));
-        return total;
-      }
-      setAnimate(!reduced);
-      return p - 1;
-    });
+    if (total < 2 || performance.now() < transitionUntil.current) return;
+    transitionUntil.current = performance.now() + (reduced ? 0 : STORY_SLIDE + 50);
+    const p = posRef.current;
+    if (dir === -1 && p === 0) {
+      // Jump silently to the clone, then slide back to the final story.
+      setAnimate(false);
+      posRef.current = total;
+      setPos(total);
+      reverseFrame.current = requestAnimationFrame(() => {
+        reverseFrame.current = requestAnimationFrame(() => {
+          setAnimate(!reduced);
+          posRef.current = total - 1;
+          setPos(total - 1);
+        });
+      });
+      return;
+    }
+    setAnimate(!reduced);
+    posRef.current = dir === 1 ? Math.min(p + 1, total) : p - 1;
+    setPos(posRef.current);
   }, [reduced, total]);
 
   // seamless loop: after landing on the clone, snap to the real first slide
   useEffect(() => {
     if (pos !== total) return;
-    const t = window.setTimeout(() => { setAnimate(false); setPos(0); }, reduced ? 0 : STORY_SLIDE + 20);
+    const t = window.setTimeout(() => { setAnimate(false); posRef.current = 0; setPos(0); }, reduced ? 0 : STORY_SLIDE + 20);
     return () => window.clearTimeout(t);
   }, [pos, total, reduced]);
 
   useEffect(() => {
-    if (paused || pos === total) return;
-    const t = window.setTimeout(() => {
-      if (document.visibilityState === "visible") go(1);
-    }, STORY_HOLD + (animate && !reduced ? STORY_SLIDE : 0));
-    return () => window.clearTimeout(t);
-  }, [pos, paused, go, total, animate, reduced]);
+    if (total < 2) return;
+    let deadline = performance.now() + STORY_HOLD;
+    let timer: number;
+    const advance = () => {
+      go(1);
+      // Absolute deadlines avoid accumulating callback/render/transition time.
+      // If the browser suspends the tab, resume without a burst of skipped stories.
+      const now = performance.now();
+      deadline += STORY_HOLD;
+      if (deadline <= now) deadline = now + STORY_HOLD;
+      timer = window.setTimeout(advance, Math.max(0, deadline - now));
+    };
+    timer = window.setTimeout(advance, STORY_HOLD);
+    return () => window.clearTimeout(timer);
+  }, [cycle, go, total]);
 
   // preload next images
   useEffect(() => {
@@ -116,9 +136,10 @@ const ClientStories = () => {
     [storyLarge[n % storyLarge.length], storySmall[n % storySmall.length]].forEach((s) => { const im = new Image(); im.src = s; });
   }, [idx, total]);
 
-  useEffect(() => () => window.clearTimeout(resumeRef.current), []);
-  const pause = () => { window.clearTimeout(resumeRef.current); setPaused(true); };
-  const resume = () => { window.clearTimeout(resumeRef.current); resumeRef.current = window.setTimeout(() => setPaused(false), 800); };
+  useEffect(() => () => {
+    if (reverseFrame.current !== undefined) cancelAnimationFrame(reverseFrame.current);
+  }, []);
+  const manualGo = (dir: 1 | -1) => { go(dir); setCycle((c) => c + 1); };
 
   const trackStyle: React.CSSProperties = {
     transform: `translate3d(${-pos * 100}%,0,0)`,
@@ -129,16 +150,14 @@ const ClientStories = () => {
 
   return (
     <section className="pb-24 md:pb-40" aria-roledescription="carousel" aria-label="Client stories"
-      onMouseEnter={pause} onMouseLeave={resume} onFocus={pause} onBlur={resume}
-      onTouchStart={(e) => { pause(); touchX.current = e.touches[0].clientX; }}
+      onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
       onTouchEnd={(e) => {
         const s = touchX.current; touchX.current = null;
-        if (s !== null) { const dx = e.changedTouches[0].clientX - s; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); }
-        resume();
+        if (s !== null) { const dx = e.changedTouches[0].clientX - s; if (Math.abs(dx) > 40) manualGo(dx < 0 ? 1 : -1); }
       }}>
       <div className={`${wrap} grid md:grid-cols-12 gap-y-10 md:gap-x-8`}>
         <Reveal className="md:col-span-4"><p className={cap}>Client story</p></Reveal>
-        <div className="md:col-span-8 min-w-0" aria-live={paused ? "polite" : "off"}>
+        <div className="md:col-span-8 min-w-0" aria-live="off">
           <Track style={trackStyle}>
             {slides.map((c, i) => (
               <div key={i} {...cell(i)}>

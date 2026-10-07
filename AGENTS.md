@@ -4,3 +4,4 @@
 - Cookie preferences are managed by the shared layout and stored locally; optional scripts must check consent before loading because a banner alone does not prevent tracking.
 - Public privacy and cookie explanations live on dedicated pages so footer links lead to meaningful policies rather than the contact form.
 - Image reveal is coordinated once at the app root after decode; retain native lazy loading and exempt the timed homepage preloader to prevent duplicated animation.
+- Client Stories uses one deadline-based autoplay scheduler independent of transition and clone reset state; manual swipes restart it to prevent drift and competing timers.
