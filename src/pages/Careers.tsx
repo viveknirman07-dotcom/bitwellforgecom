@@ -148,7 +148,7 @@ const Careers = () => {
                             </div>
                             <button
                               onClick={() => setApplying(m)}
-                              className="group/btn mt-10 inline-flex min-h-[48px] items-center gap-3 bg-primary px-7 text-[12px] font-medium uppercase tracking-[0.16em] text-primary-foreground transition-opacity hover:opacity-90"
+                              className="group/btn mt-10 inline-flex min-h-[48px] items-center gap-3 bg-primary px-7 text-[12px] font-medium [text-transform:uppercase] tracking-[0.16em] text-primary-foreground transition-opacity hover:opacity-90"
                             >
                               Submit Candidacy
                               <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -279,7 +279,7 @@ const ApplyDialog = ({ mandate, onClose }: { mandate: Mandate | null; onClose: (
             </DialogDescription>
             <button
               onClick={close}
-              className="mt-10 inline-flex min-h-[48px] items-center bg-primary px-7 text-[12px] font-medium uppercase tracking-[0.16em] text-primary-foreground"
+              className="mt-10 inline-flex min-h-[48px] items-center bg-primary px-7 text-[12px] font-medium [text-transform:uppercase] tracking-[0.16em] text-primary-foreground"
             >
               Close
             </button>
@@ -332,7 +332,7 @@ const ApplyDialog = ({ mandate, onClose }: { mandate: Mandate | null; onClose: (
             <button
               type="submit"
               disabled={sending}
-              className="group mt-10 flex min-h-[52px] w-full items-center justify-between bg-primary px-6 text-[12px] font-medium uppercase tracking-[0.16em] text-primary-foreground disabled:opacity-70"
+              className="group mt-10 flex min-h-[52px] w-full items-center justify-between bg-primary px-6 text-[12px] font-medium [text-transform:uppercase] tracking-[0.16em] text-primary-foreground disabled:opacity-70"
             >
               {sending ? "Transmitting" : "Transmit Candidacy"}
               {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
