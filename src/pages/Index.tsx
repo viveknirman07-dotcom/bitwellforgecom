@@ -62,7 +62,7 @@ const Reveal = ({ children, delay = 0, className = "" }: { children: React.React
 
 const storyLarge = [acquisitionImg, strategyImg, operationsImg, processImg, visibilityImg, insightsImg, revImg];
 const storySmall = [revImg, processImg, visibilityImg, strategyImg, insightsImg, acquisitionImg, operationsImg];
-const STORY_HOLD = 2600;
+const STORY_HOLD = 3000;
 const STORY_SLIDE = 1200;
 const STORY_EASE = "cubic-bezier(0.76, 0, 0.24, 1)";
 
