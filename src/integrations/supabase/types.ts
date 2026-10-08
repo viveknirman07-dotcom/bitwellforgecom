@@ -499,6 +499,7 @@ export type Database = {
         Row: {
           access_type: string
           created_at: string
+          expires_at: string | null
           granted_at: string
           id: string
           order_id: string | null
@@ -510,6 +511,7 @@ export type Database = {
         Insert: {
           access_type?: string
           created_at?: string
+          expires_at?: string | null
           granted_at?: string
           id?: string
           order_id?: string | null
@@ -521,6 +523,7 @@ export type Database = {
         Update: {
           access_type?: string
           created_at?: string
+          expires_at?: string | null
           granted_at?: string
           id?: string
           order_id?: string | null
@@ -902,34 +905,40 @@ export type Database = {
       }
       products: {
         Row: {
+          access_days: number | null
           created_at: string
           description: string | null
           id: string
           is_active: boolean
           name: string
           price_inr: number
+          price_usd: number | null
           slug: string
           tagline: string | null
           updated_at: string
         }
         Insert: {
+          access_days?: number | null
           created_at?: string
           description?: string | null
           id?: string
           is_active?: boolean
           name: string
           price_inr: number
+          price_usd?: number | null
           slug: string
           tagline?: string | null
           updated_at?: string
         }
         Update: {
+          access_days?: number | null
           created_at?: string
           description?: string | null
           id?: string
           is_active?: boolean
           name?: string
           price_inr?: number
+          price_usd?: number | null
           slug?: string
           tagline?: string | null
           updated_at?: string
