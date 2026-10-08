@@ -30,10 +30,9 @@ Deno.serve(async (req) => {
 
     const { data: entitlements } = await db
       .from('entitlements')
-      .select('product_id, expires_at')
+      .select('product_id')
       .eq('user_id', user.id)
       .is('revoked_at', null)
-      .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
 
     const productIds = (entitlements ?? []).map((e) => e.product_id)
     if (!isAdmin && productIds.length === 0) {

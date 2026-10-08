@@ -1,7 +1,7 @@
 /**
  * Currency resolution.
- * The commercial value is defined in USD (products.price_usd, Member Access
- * $1,100). Every other currency is a live-rate presentation of that value.
+ * The commercial value is ALWAYS ₹14,500 INR. Any other currency shown to a
+ * visitor is a live-rate presentation of that same value. Nothing is hardcoded.
  */
 
 export const COUNTRY_CURRENCY: Record<string, string> = {
@@ -159,21 +159,4 @@ export async function resolveCountry(req: Request, ip: string): Promise<string> 
     }
   }
   return 'IN'
-}
-
-/** INR equivalent of a USD amount, used to keep the INR ledger column accurate. */
-export async function usdToInr(amountUsd: number) {
-  const { rates } = await getRates()
-  if (!rates.USD) throw new Error('No USD rate available')
-  return roundFor('INR', amountUsd / rates.USD)
-}
-
-/** Converts the USD base price into the requested currency. USD is exact. */
-export async function convertFromUsd(amountUsd: number, currency: string) {
-  if (currency === 'USD') return { amount: roundFor('USD', amountUsd), rate: 1 }
-  const { rates } = await getRates()
-  const usdRate = rates.USD
-  const rate = currency === 'INR' ? 1 : rates[currency]
-  if (!usdRate || !rate) return { amount: roundFor('USD', amountUsd), rate: 1, currency: 'USD' }
-  return { amount: roundFor(currency, (amountUsd / usdRate) * rate), rate: rate / usdRate }
 }

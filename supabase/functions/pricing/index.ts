@@ -4,7 +4,6 @@ import {
   COUNTRY_CURRENCY,
   CURRENCY_NAMES,
   convertFromInr,
-  convertFromUsd,
   formatMoney,
   getRates,
   resolveCountry,
@@ -20,7 +19,7 @@ Deno.serve(async (req) => {
 
     const { data: product, error } = await admin()
       .from('products')
-      .select('id, slug, name, tagline, description, price_inr, price_usd, access_days')
+      .select('id, slug, name, tagline, description, price_inr')
       .eq('slug', 'commercial-growth-system')
       .eq('is_active', true)
       .maybeSingle()
@@ -35,14 +34,10 @@ Deno.serve(async (req) => {
       forced && /^[A-Z]{3}$/.test(forced) ? forced : geoCurrency
 
     const amountInr = Number(product.price_inr)
-    const amountUsd = product.price_usd != null ? Number(product.price_usd) : null
-    const accessDays = product.access_days ?? null
 
     let converted: { amount: number; rate: number; currency?: string }
     try {
-      converted = amountUsd != null
-        ? await convertFromUsd(amountUsd, currency)
-        : await convertFromInr(amountInr, currency)
+      converted = await convertFromInr(amountInr, currency)
     } catch (_) {
       // Never show a possibly-wrong converted price. Fall back to the base currency.
       return new Response(
@@ -55,12 +50,11 @@ Deno.serve(async (req) => {
           },
           country,
           suggested_currency: COUNTRY_CURRENCY[country] ?? 'USD',
-          base: amountUsd != null ? { currency: 'USD', amount: amountUsd } : { currency: 'INR', amount: amountInr },
-          access_days: accessDays,
+          base: { currency: 'INR', amount: amountInr },
           display: {
-            currency: amountUsd != null ? 'USD' : 'INR',
-            amount: amountUsd ?? amountInr,
-            formatted: amountUsd != null ? formatMoney('USD', amountUsd) : formatMoney('INR', amountInr),
+            currency: 'INR',
+            amount: amountInr,
+            formatted: formatMoney('INR', amountInr),
             rate: 1,
           },
           conversion_unavailable: true,
@@ -93,8 +87,7 @@ Deno.serve(async (req) => {
         },
         country,
         suggested_currency: COUNTRY_CURRENCY[country] ?? 'USD',
-        base: amountUsd != null ? { currency: 'USD', amount: amountUsd } : { currency: 'INR', amount: amountInr },
-        access_days: accessDays,
+        base: { currency: 'INR', amount: amountInr },
         display: {
           currency: resolvedCurrency,
           amount: converted.amount,

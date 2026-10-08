@@ -1,7 +1,7 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { z } from 'npm:zod@3.23.8'
 import { admin, clientIp, logActivity, rateLimit } from '../_shared/db.ts'
-import { COUNTRY_CURRENCY, convertFromInr, convertFromUsd, usdToInr, convertUsd, resolveCountry, roundFor, toUsd } from '../_shared/money.ts'
+import { COUNTRY_CURRENCY, convertFromInr, convertUsd, resolveCountry, roundFor, toUsd } from '../_shared/money.ts'
 import { paypalConfigured, paypalFetch } from '../_shared/paypal.ts'
 import { capDiscountUsd, verifyAttribution } from '../_shared/affiliate.ts'
 
@@ -83,20 +83,19 @@ Deno.serve(async (req) => {
 
     const { data: product } = await db
       .from('products')
-      .select('id, name, price_inr, price_usd, access_days')
+      .select('id, name, price_inr')
       .eq('slug', 'commercial-growth-system')
       .eq('is_active', true)
       .maybeSingle()
     if (!product) throw new Error('Product unavailable')
 
-    const amountUsd = product.price_usd != null ? Number(product.price_usd) : null
-    let amountInr = Number(product.price_inr)
+    const amountInr = Number(product.price_inr)
     const country = await resolveCountry(req, ip)
     const localCurrency = COUNTRY_CURRENCY[country] ?? 'USD'
 
     /*
      * The customer chooses the currency; the client never sends an amount.
-     * The charge is always recomputed here from the USD base price in the products table,
+     * The charge is always recomputed here from the ₹14,500 source of truth,
      * so a tampered client cannot influence what is billed.
      */
     const settleCurrency = (currency ?? 'USD').toUpperCase()
@@ -130,12 +129,7 @@ Deno.serve(async (req) => {
 
     let settle: { amount: number; rate: number; currency?: string }
     try {
-      if (amountUsd != null) {
-        settle = await convertFromUsd(amountUsd, settleCurrency)
-        amountInr = await usdToInr(amountUsd)
-      } else {
-        settle = await convertFromInr(amountInr, settleCurrency)
-      }
+      settle = await convertFromInr(amountInr, settleCurrency)
     } catch (_) {
       return json(
         { code: 'rates_unavailable', error: 'Currency conversion is temporarily unavailable. Please try again shortly.' },
@@ -204,7 +198,6 @@ Deno.serve(async (req) => {
         metadata: {
           selected_currency: settleCurrency,
           selected_amount: display.amount,
-          access_days: product.access_days ?? null,
           geo_currency: localCurrency,
           fx_rate: settle.rate,
           ip,
