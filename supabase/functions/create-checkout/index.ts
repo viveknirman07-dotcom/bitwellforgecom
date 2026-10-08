@@ -83,19 +83,20 @@ Deno.serve(async (req) => {
 
     const { data: product } = await db
       .from('products')
-      .select('id, name, price_inr')
+      .select('id, name, price_inr, price_usd, access_days')
       .eq('slug', 'commercial-growth-system')
       .eq('is_active', true)
       .maybeSingle()
     if (!product) throw new Error('Product unavailable')
 
-    const amountInr = Number(product.price_inr)
+    const amountUsd = product.price_usd != null ? Number(product.price_usd) : null
+    let amountInr = Number(product.price_inr)
     const country = await resolveCountry(req, ip)
     const localCurrency = COUNTRY_CURRENCY[country] ?? 'USD'
 
     /*
      * The customer chooses the currency; the client never sends an amount.
-     * The charge is always recomputed here from the ₹14,500 source of truth,
+     * The charge is always recomputed here from the USD base price in the products table,
      * so a tampered client cannot influence what is billed.
      */
     const settleCurrency = (currency ?? 'USD').toUpperCase()
@@ -129,7 +130,12 @@ Deno.serve(async (req) => {
 
     let settle: { amount: number; rate: number; currency?: string }
     try {
-      settle = await convertFromInr(amountInr, settleCurrency)
+      if (amountUsd != null) {
+        settle = await convertFromUsd(amountUsd, settleCurrency)
+        amountInr = await usdToInr(amountUsd)
+      } else {
+        settle = await convertFromInr(amountInr, settleCurrency)
+      }
     } catch (_) {
       return json(
         { code: 'rates_unavailable', error: 'Currency conversion is temporarily unavailable. Please try again shortly.' },
