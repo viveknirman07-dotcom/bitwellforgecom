@@ -1,7 +1,7 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { z } from 'npm:zod@3.23.8'
 import { admin, clientIp, logActivity, rateLimit } from '../_shared/db.ts'
-import { COUNTRY_CURRENCY, convertFromInr, convertUsd, resolveCountry, roundFor, toUsd } from '../_shared/money.ts'
+import { COUNTRY_CURRENCY, convertFromInr, convertFromUsd, usdToInr, convertUsd, resolveCountry, roundFor, toUsd } from '../_shared/money.ts'
 import { paypalConfigured, paypalFetch } from '../_shared/paypal.ts'
 import { capDiscountUsd, verifyAttribution } from '../_shared/affiliate.ts'
 
@@ -204,6 +204,7 @@ Deno.serve(async (req) => {
         metadata: {
           selected_currency: settleCurrency,
           selected_amount: display.amount,
+          access_days: product.access_days ?? null,
           geo_currency: localCurrency,
           fx_rate: settle.rate,
           ip,
