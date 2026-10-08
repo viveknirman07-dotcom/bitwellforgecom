@@ -59,17 +59,17 @@ function confirmationHtml(opts: {
   <div style="font-family:Georgia,'Times New Roman',serif;background:#0b0d10;color:#f4f1ea;padding:40px">
     <div style="max-width:560px;margin:0 auto">
       <p style="letter-spacing:.28em;text-transform:uppercase;font-size:11px;color:#c9a227;margin:0 0 18px">Access granted</p>
-      <h1 style="font-size:26px;margin:0 0 24px;font-weight:600">Your Forge Vault purchase is confirmed</h1>
+      <h1 style="font-size:26px;margin:0 0 24px;font-weight:600">Your Member Access is confirmed</h1>
       <p style="font-size:15px;line-height:1.8;color:#cfcbc2;margin:0 0 18px">
         ${opts.name ? `${opts.name}, thank` : 'Thank'} you. Your payment of
-        <strong style="color:#f4f1ea">${opts.currency} ${opts.amount}</strong> has been verified and lifetime
-        access to the Forge Vault has been issued to this email address.
+        <strong style="color:#f4f1ea">${opts.currency} ${opts.amount}</strong> has been verified and 275 days
+        of Member Access have been issued to this email address.
       </p>
       <p style="font-size:15px;line-height:1.8;color:#cfcbc2;margin:0 0 28px">
         If this is your first purchase, use the password link sent separately to set a password, then sign in.
       </p>
       <p style="margin:0 0 32px">
-        <a href="${SITE_URL}/vault" style="display:inline-block;background:#c9a227;color:#0b0d10;text-decoration:none;padding:14px 22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Open the Forge Vault</a>
+        <a href="${SITE_URL}/vault" style="display:inline-block;background:#c9a227;color:#0b0d10;text-decoration:none;padding:14px 22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Enter Member Access</a>
       </p>
       <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6f6a61;margin:0">
         Order reference ${opts.orderId.slice(0, 8)}
@@ -119,13 +119,13 @@ async function ensureUser(email: string, fullName: string | null) {
     await logEmail(
       normalized,
       'account_created',
-      'Your Forge Vault access is ready',
+      'Your Member Access is ready',
       linkErr ? 'failed' : 'sent',
       linkErr?.message,
       { action_link_generated: Boolean(link) },
     )
   } catch (e) {
-    await logEmail(normalized, 'account_created', 'Your Forge Vault access is ready', 'failed', String(e))
+    await logEmail(normalized, 'account_created', 'Your Member Access is ready', 'failed', String(e))
   }
 
   return { userId: created.user.id, created: true }
@@ -161,9 +161,16 @@ export async function fulfillOrder(orderId: string) {
     { onConflict: 'id' },
   )
 
+  const { data: product } = await db
+    .from('products')
+    .select('access_days')
+    .eq('id', order.product_id)
+    .maybeSingle()
+  const accessDays = Number(product?.access_days ?? 275)
+
   const { data: existing } = await db
     .from('entitlements')
-    .select('id')
+    .select('id, order_id, expires_at, access_type')
     .eq('user_id', userId)
     .eq('product_id', order.product_id)
     .maybeSingle()
@@ -173,8 +180,21 @@ export async function fulfillOrder(orderId: string) {
       user_id: userId,
       product_id: order.product_id,
       order_id: order.id,
-      access_type: 'lifetime',
+      access_type: 'term',
+      expires_at: new Date(Date.now() + accessDays * 86400000).toISOString(),
     })
+  } else if (existing.expires_at && existing.order_id !== order.id) {
+    // Renewal: a new paid order extends a term membership. Legacy lifetime
+    // entitlements (expires_at null) are never shortened.
+    const from = Math.max(Date.now(), new Date(existing.expires_at).getTime())
+    await db
+      .from('entitlements')
+      .update({
+        order_id: order.id,
+        revoked_at: null,
+        expires_at: new Date(from + accessDays * 86400000).toISOString(),
+      })
+      .eq('id', existing.id)
   }
 
   if (order.status !== 'paid') {
@@ -186,7 +206,7 @@ export async function fulfillOrder(orderId: string) {
     await sendEmail(
       order.email,
       'purchase_confirmation',
-      'Your Forge Vault purchase is confirmed',
+      'Your Member Access is confirmed',
       confirmationHtml({
         name: order.full_name,
         currency: String(order.display_currency ?? 'INR'),
