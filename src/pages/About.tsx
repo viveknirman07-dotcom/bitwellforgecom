@@ -129,10 +129,10 @@ const About = () => {
 
           <div className="relative grid grid-cols-12 gap-x-6 mt-12 sm:mt-16 lg:mt-20">
             <h1 className="col-span-12 lg:col-span-9 font-heading font-normal text-foreground leading-[0.95] tracking-tightest">
-              <ScrollReveal delay={80}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block">Growth is not</span></ScrollReveal>
-              <ScrollReveal delay={180}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block pl-[12%] italic">a tactic.</span></ScrollReveal>
-              <ScrollReveal delay={280}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block text-right lg:text-left lg:pl-[30%]">It is</span></ScrollReveal>
-              <ScrollReveal delay={380}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block lg:pl-[30%] italic text-primary">infrastructure.</span></ScrollReveal>
+              <ScrollReveal delay={80}><span style={{fontSize:"clamp(46px, 8.2vw, 112px)"}} className="block">Growth is not</span></ScrollReveal>
+              <ScrollReveal delay={180}><span style={{fontSize:"clamp(46px, 8.2vw, 112px)"}} className="block pl-[12%] italic">a tactic.</span></ScrollReveal>
+              <ScrollReveal delay={280}><span style={{fontSize:"clamp(46px, 8.2vw, 112px)"}} className="block text-right lg:text-left lg:pl-[22%]">It is</span></ScrollReveal>
+              <ScrollReveal delay={380}><span style={{fontSize:"clamp(46px, 8.2vw, 112px)"}} className="block lg:pl-[22%] italic text-primary">infrastructure.</span></ScrollReveal>
             </h1>
 
             <div className="col-span-12 sm:col-span-7 sm:col-start-6 lg:col-span-3 lg:col-start-10 mt-12 lg:mt-0 lg:self-end">
@@ -155,7 +155,7 @@ const About = () => {
           </div>
           <div className="col-span-12 md:col-span-8 lg:col-span-7 mt-6 md:mt-0">
             <ScrollReveal delay={100}>
-              <p className="font-heading text-[26px] sm:text-[34px] lg:text-[42px] leading-[1.22] text-foreground">
+              <p className="font-heading leading-[1.22] text-foreground" style={{fontSize:"clamp(22px, 3.2vw, 42px)"}}>
                 <Brand /> is a Revenue Infrastructure consulting firm serving agencies, consultants, coaches, and B2B service businesses across the commercial, operational, and digital dimensions of growth.
               </p>
             </ScrollReveal>
@@ -179,7 +179,7 @@ const About = () => {
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7 order-1 md:order-2">
             <p className="text-[10px] sm:text-[11px] tracking-[0.3em] [text-transform:uppercase] opacity-60">02 &nbsp; What we examine</p>
-            <h2 className="mt-6 font-heading font-normal text-[34px] sm:text-[48px] lg:text-[60px] leading-[1.04] tracking-tightest">
+            <h2 className="mt-6 font-heading font-normal leading-[1.04]" style={{fontSize:"clamp(32px, 4.6vw, 60px)"}} data-x=" tracking-tightest">
               The visible symptom is <em>not always</em> the underlying cause.
             </h2>
 
@@ -229,7 +229,7 @@ const About = () => {
                 <ScrollReveal delay={i * 40}>
                   <div className="flex items-baseline gap-5 sm:gap-8 py-4 sm:py-5">
                     <span className="w-8 shrink-0 text-[11px] font-body tabular-nums text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="font-heading text-[24px] sm:text-[34px] lg:text-[40px] leading-[1.1] text-foreground transition-transform duration-500 group-hover:translate-x-2 group-hover:italic">
+                    <span className="font-heading leading-[1.1]" style={{fontSize:"clamp(22px, 3.2vw, 40px)"}} data-x=" text-foreground transition-transform duration-500 group-hover:translate-x-2 group-hover:italic">
                       {d}
                     </span>
                   </div>
@@ -286,7 +286,7 @@ const About = () => {
             <div className="col-span-12 md:col-span-3"><ScrollReveal><Note>05 &nbsp; What this means</Note></ScrollReveal></div>
             <div className="col-span-12 md:col-span-9 lg:col-span-7 mt-6 md:mt-0">
               <ScrollReveal delay={100}>
-                <p className="font-heading text-[30px] sm:text-[44px] lg:text-[56px] leading-[1.1] tracking-tightest text-foreground">
+                <p className="font-heading leading-[1.1] tracking-tightest text-foreground" style={{fontSize:"clamp(30px, 4.4vw, 56px)"}}>
                   A structure that still holds <em>after we leave.</em>
                 </p>
               </ScrollReveal>
