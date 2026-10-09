@@ -129,10 +129,10 @@ const About = () => {
 
           <div className="relative grid grid-cols-12 gap-x-6 mt-12 sm:mt-16 lg:mt-20">
             <h1 className="col-span-12 lg:col-span-9 font-heading font-normal text-foreground leading-[0.95] tracking-tightest">
-              <ScrollReveal delay={80}><span className="block text-[44px] sm:text-[84px] lg:text-[120px]">Growth is not</span></ScrollReveal>
-              <ScrollReveal delay={180}><span className="block text-[44px] sm:text-[84px] lg:text-[120px] pl-[12%] italic">a tactic.</span></ScrollReveal>
-              <ScrollReveal delay={280}><span className="block text-[44px] sm:text-[84px] lg:text-[120px] text-right lg:text-left lg:pl-[30%]">It is</span></ScrollReveal>
-              <ScrollReveal delay={380}><span className="block text-[44px] sm:text-[84px] lg:text-[120px] lg:pl-[30%] italic text-primary">infrastructure.</span></ScrollReveal>
+              <ScrollReveal delay={80}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block">Growth is not</span></ScrollReveal>
+              <ScrollReveal delay={180}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block pl-[12%] italic">a tactic.</span></ScrollReveal>
+              <ScrollReveal delay={280}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block text-right lg:text-left lg:pl-[30%]">It is</span></ScrollReveal>
+              <ScrollReveal delay={380}><span style={{fontSize:"clamp(46px, 9.4vw, 132px)"}} className="block lg:pl-[30%] italic text-primary">infrastructure.</span></ScrollReveal>
             </h1>
 
             <div className="col-span-12 sm:col-span-7 sm:col-start-6 lg:col-span-3 lg:col-start-10 mt-12 lg:mt-0 lg:self-end">
@@ -257,7 +257,7 @@ const About = () => {
                     className="w-full grid grid-cols-12 gap-x-6 items-baseline py-6 sm:py-8 text-left min-h-[44px]"
                   >
                     <span className="col-span-2 sm:col-span-1 font-heading italic text-[18px] sm:text-[22px] text-muted-foreground">{p.n}</span>
-                    <span className="col-span-9 sm:col-span-10 font-heading text-[30px] sm:text-[52px] lg:text-[68px] leading-[1] tracking-tightest text-foreground">
+                    <span className="col-span-9 sm:col-span-10 font-heading leading-[1.02] tracking-tightest text-foreground break-words" style={{fontSize:"clamp(26px, 5vw, 68px)"}}>
                       {p.word} <span className="italic text-muted-foreground">{p.line}</span>
                     </span>
                     <span aria-hidden className={`col-span-1 justify-self-end text-[22px] text-foreground transition-transform duration-500 ${isOpen ? "rotate-45" : ""}`}>+</span>
