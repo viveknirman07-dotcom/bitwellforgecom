@@ -179,7 +179,7 @@ const About = () => {
           </div>
           <div className="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7 order-1 md:order-2">
             <p className="text-[10px] sm:text-[11px] tracking-[0.3em] [text-transform:uppercase] opacity-60">02 &nbsp; What we examine</p>
-            <h2 className="mt-6 font-heading font-normal leading-[1.04]" style={{fontSize:"clamp(32px, 4.6vw, 60px)"}} data-x=" tracking-tightest">
+            <h2 className="mt-6 font-heading font-normal leading-[1.04] tracking-tightest" style={{fontSize:"clamp(32px, 4.6vw, 60px)"}}>
               The visible symptom is <em>not always</em> the underlying cause.
             </h2>
 
@@ -229,7 +229,7 @@ const About = () => {
                 <ScrollReveal delay={i * 40}>
                   <div className="flex items-baseline gap-5 sm:gap-8 py-4 sm:py-5">
                     <span className="w-8 shrink-0 text-[11px] font-body tabular-nums text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="font-heading leading-[1.1]" style={{fontSize:"clamp(22px, 3.2vw, 40px)"}} data-x=" text-foreground transition-transform duration-500 group-hover:translate-x-2 group-hover:italic">
+                    <span className="font-heading leading-[1.1] text-foreground transition-transform duration-500 group-hover:translate-x-2 group-hover:italic" style={{fontSize:"clamp(22px, 3.2vw, 40px)"}}>
                       {d}
                     </span>
                   </div>
