@@ -155,9 +155,9 @@ const About = () => {
           </div>
           <div className="col-span-12 md:col-span-8 lg:col-span-7 mt-6 md:mt-0">
             <ScrollReveal delay={100}>
-              <p className="font-heading leading-[1.22] text-foreground" style={{fontSize:"clamp(22px, 3.2vw, 42px)"}}>
+              <div className="font-heading leading-[1.22] text-foreground" style={{fontSize:"clamp(22px, 3.2vw, 42px)"}}>
                 <Brand /> is a Revenue Infrastructure consulting firm serving agencies, consultants, coaches, and B2B service businesses across the commercial, operational, and digital dimensions of growth.
-              </p>
+              </div>
             </ScrollReveal>
             <ScrollReveal delay={180}>
               <p className="mt-8 max-w-[52ch] font-body text-muted-foreground text-[15.5px] sm:text-[17px] leading-[1.85] font-light">
@@ -286,9 +286,9 @@ const About = () => {
             <div className="col-span-12 md:col-span-3"><ScrollReveal><Note>05 &nbsp; What this means</Note></ScrollReveal></div>
             <div className="col-span-12 md:col-span-9 lg:col-span-7 mt-6 md:mt-0">
               <ScrollReveal delay={100}>
-                <p className="font-heading leading-[1.1] tracking-tightest text-foreground" style={{fontSize:"clamp(30px, 4.4vw, 56px)"}}>
+                <h2 className="font-heading font-normal leading-[1.1] tracking-tightest text-foreground" style={{fontSize:"clamp(30px, 4.4vw, 56px)"}}>
                   A structure that still holds <em>after we leave.</em>
-                </p>
+                </h2>
               </ScrollReveal>
               <ScrollReveal delay={180}>
                 <p className="mt-8 max-w-[50ch] font-body text-muted-foreground text-[15.5px] sm:text-[17px] leading-[1.85] font-light">
