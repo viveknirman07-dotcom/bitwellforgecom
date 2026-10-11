@@ -240,8 +240,7 @@ const Index = () => {
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
               <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Structure Compounds Growth."
-                lines={["Structure Compounds", "Growth."]}
-                className="font-heading font-semibold text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em]" />
+                className="bf-tagline-fit font-heading font-semibold text-foreground leading-[1] tracking-[-0.02em]" />
             </div>
           </div>
         </div>

@@ -70,7 +70,7 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
             </div>
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/65 to-background/10 pointer-events-none" />
-          <motion.p className="relative z-10 font-heading font-normal text-center text-[52px] md:text-[124px] leading-[0.91] tracking-[-0.03em] px-5 max-w-[17ch] text-foreground"
+          <motion.p className="relative z-10 bf-preloader-tagline font-heading font-normal text-center leading-[0.91] tracking-[-0.03em] px-5 text-foreground"
             initial={{ opacity: 1, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05, ease }}>
             {headline}
           </motion.p>
