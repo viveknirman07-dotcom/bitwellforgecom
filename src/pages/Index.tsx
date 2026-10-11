@@ -273,7 +273,7 @@ const Index = () => {
               <li key={a.slug} className="border-b border-foreground/60">
                 <Link to={`/insights/${a.slug}`} className="group grid grid-cols-[48px_1fr_80px] md:grid-cols-12 gap-4 md:gap-8 py-6 md:py-5 md:px-5 items-start">
                   <span className="text-[14px] font-medium md:col-span-1">{String(i + 1).padStart(2, "0")}</span>
-                  <div className="md:contents">
+                  <div className="md:contents min-w-0 break-words">
                     <span className={`${cap} block md:col-span-3 mb-3 md:mb-0`}>{perspectiveLabels[i]}</span>
                     <div className="md:col-span-6">
                       <h3 className="font-heading text-[24px] md:text-[32px] leading-[1.1] tracking-[-0.01em] font-normal mb-4 transition-colors">{a.title}</h3>
