@@ -240,8 +240,7 @@ const Index = () => {
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
               <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Structure Compounds Growth."
-                lines={["Structure Compounds", "Growth."]}
-                className="font-heading font-semibold text-foreground text-[clamp(28px,9.6vw,52px)] md:text-[clamp(60px,8.2vw,78px)] lg:text-[clamp(80px,8.5vw,108px)] leading-[1] tracking-[-0.02em]" />
+                className="bf-tagline-fit font-heading font-semibold text-foreground leading-[1] tracking-[-0.02em]" />
             </div>
           </div>
         </div>
@@ -274,7 +273,7 @@ const Index = () => {
               <li key={a.slug} className="border-b border-foreground/60">
                 <Link to={`/insights/${a.slug}`} className="group grid grid-cols-[48px_1fr_80px] md:grid-cols-12 gap-4 md:gap-8 py-6 md:py-5 md:px-5 items-start">
                   <span className="text-[14px] font-medium md:col-span-1">{String(i + 1).padStart(2, "0")}</span>
-                  <div className="md:contents">
+                  <div className="md:contents min-w-0 break-words">
                     <span className={`${cap} block md:col-span-3 mb-3 md:mb-0`}>{perspectiveLabels[i]}</span>
                     <div className="md:col-span-6">
                       <h3 className="font-heading text-[24px] md:text-[32px] leading-[1.1] tracking-[-0.01em] font-normal mb-4 transition-colors">{a.title}</h3>

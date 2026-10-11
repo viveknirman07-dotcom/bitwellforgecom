@@ -1398,3 +1398,19 @@ img.bf-media-ready { transition: opacity 420ms ease-out, transform 700ms ease-ou
 @media (prefers-reduced-motion: reduce) {
   img.bf-media-ready { transition: none; }
 }
+
+/* The homepage tagline holds its exact wording on one uninterrupted line at every width. */
+.bf-tagline-fit {
+  white-space: nowrap;
+  font-size: calc((100vw - 40px) / 12.2);
+}
+@media (min-width: 768px) {
+  .bf-tagline-fit { font-size: calc((100vw - 96px) / 12.2); }
+}
+@media (min-width: 1024px) {
+  .bf-tagline-fit { font-size: min(calc(73vw / 12.2), 115px); }
+}
+.bf-preloader-tagline {
+  white-space: nowrap;
+  font-size: min(calc((100vw - 40px) / 11.8), 124px);
+}
