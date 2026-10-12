@@ -98,6 +98,7 @@ const Footer = () => {
         <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[13px] text-muted-foreground">
           <p>© {new Date().getFullYear()} BitwellForge. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link to="/diagnosis" className="hover:text-foreground">Systems Diagnosis</Link>
             <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
             <Link to="/cookies" className="hover:text-foreground">Cookie Policy</Link>
             <Button variant="ghost" size="sm" onClick={() => window.dispatchEvent(new Event("bitwellforge:open-cookie-settings"))} className="h-auto p-0 text-[13px] text-muted-foreground hover:text-foreground hover:bg-transparent">Cookie settings</Button>
