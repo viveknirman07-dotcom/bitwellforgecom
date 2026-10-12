@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
       headline: clean(out.headline),
       summary: clean(out.summary),
       constraints: out.constraints.slice(0, 3).map((c) => ({ title: clean(c.title), explanation: clean(c.explanation) })),
-      focusAreas: out.focusAreas.slice(0, 3).map((f) => ({ area: clean(f.area), why: clean(f.why), firstMove: clean(f.firstMove) })),
+      focusAreas: out.focusAreas.slice(0, 3).map((f) => ({ area: clean(f.area).replace(/^\d+[.)]\s*/, ""), why: clean(f.why), firstMove: clean(f.firstMove) })),
       question: clean(out.question),
     }
     return json({ diagnosis })
