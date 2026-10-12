@@ -27,6 +27,7 @@ import Account from "./pages/Account";
 import ResetPassword from "./pages/ResetPassword";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
+import Diagnosis from "./pages/Diagnosis";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "@/hooks/use-auth";
 import RequireAuth from "@/portal/RequireAuth";
@@ -63,6 +64,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/cookies" element={<Cookies />} />
+                <Route path="/diagnosis" element={<Diagnosis />} />
               </Route>
 
               <Route path="/checkout" element={<Checkout />} />
