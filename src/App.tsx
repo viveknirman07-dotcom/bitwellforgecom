@@ -26,6 +26,7 @@ import CheckoutSuccess from "./pages/CheckoutSuccess";
 import Account from "./pages/Account";
 import ResetPassword from "./pages/ResetPassword";
 import Privacy from "./pages/Privacy";
+import Unsubscribe from "./pages/Unsubscribe";
 import Cookies from "./pages/Cookies";
 import Diagnosis from "./pages/Diagnosis";
 import ScrollToTop from "./components/ScrollToTop";
@@ -63,6 +64,7 @@ const App = () => {
                 <Route path="/affiliate" element={<AffiliateProgram />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy" element={<Privacy />} />
+                <Route path="/unsubscribe" element={<Unsubscribe />} />
                 <Route path="/cookies" element={<Cookies />} />
                 <Route path="/diagnosis" element={<Diagnosis />} />
               </Route>

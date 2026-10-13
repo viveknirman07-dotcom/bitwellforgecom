@@ -102,18 +102,19 @@ ${rowHtml('Summary', summary ? esc(summary).replace(/\n/g, '<br>') : 'Not provid
 </table><p style="font-family:Arial,sans-serif;font-size:12px;color:#8a90a0;margin-top:24px">Reference ${row.id}</p></div></div>`
 
   let status = 'skipped'
-  if (RESEND_API_KEY) {
-    try {
-      const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `career-${row.id}` },
-        body: JSON.stringify({ from: FROM_EMAIL, to: [TO_EMAIL], reply_to: email, subject, html }),
-      })
-      status = res.ok ? 'sent' : `failed: ${(await res.text()).slice(0, 300)}`
-    } catch (e) {
-      status = `failed: ${String(e).slice(0, 300)}`
-    }
+  try {
+    const { error: sendErr } = await db.functions.invoke('send-transactional-email', {
+      body: {
+        templateName: 'career-application',
+        idempotencyKey: `career-${row.id}`,
+        templateData: { roleTitle, name, email, linkedin, audio: audio || undefined, resumeLink: resumeLink || undefined, summary: summary || undefined, reference: row.id },
+      },
+    })
+    status = sendErr ? `failed: ${String(sendErr.message).slice(0, 300)}` : 'queued'
+  } catch (e) {
+    status = `failed: ${String(e).slice(0, 300)}`
   }
+  void subject; void html; void RESEND_API_KEY; void FROM_EMAIL; void TO_EMAIL
   await db.from('career_applications').update({ email_status: status }).eq('id', row.id)
 
   return json({ ok: true, id: row.id })
