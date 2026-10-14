@@ -1259,15 +1259,6 @@ export type Database = {
     }
     Functions: {
       current_affiliate_id: { Args: never; Returns: string }
-      delete_email: {
-        Args: { message_id: number; queue_name: string }
-        Returns: boolean
-      }
-      email_queue_dispatch: { Args: never; Returns: undefined }
-      enqueue_email: {
-        Args: { payload: Json; queue_name: string }
-        Returns: number
-      }
       has_entitlement: {
         Args: { _product_id: string; _user_id: string }
         Returns: boolean
@@ -1278,23 +1269,6 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
-      }
-      move_to_dlq: {
-        Args: {
-          dlq_name: string
-          message_id: number
-          payload: Json
-          source_queue: string
-        }
-        Returns: number
-      }
-      read_email_batch: {
-        Args: { batch_size: number; queue_name: string; vt: number }
-        Returns: {
-          message: Json
-          msg_id: number
-          read_ct: number
-        }[]
       }
     }
     Enums: {
