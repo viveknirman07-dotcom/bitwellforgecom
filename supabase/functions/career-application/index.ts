@@ -1,19 +1,15 @@
 import { createClient } from 'npm:@supabase/supabase-js@2'
+import { sendTemplateEmail } from '../_shared/transactional-email-templates/send-email.ts'
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
-const FROM_EMAIL = Deno.env.get('CAREERS_FROM_EMAIL') ?? 'BitwellForge Careers <careers@bitwellforge.com>'
 const TO_EMAIL = 'careers@bitwellforge.com'
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...cors, 'Content-Type': 'application/json' } })
-
-const esc = (s: string) =>
-  s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!))
 
 const isUrl = (s: string) => {
   try {
@@ -85,37 +81,49 @@ Deno.serve(async (req) => {
     resumeLink = data?.signedUrl ?? ''
   }
 
-  const subject = `[Candidacy Submission] ${roleTitle} - ${name}`
-  const rowHtml = (k: string, v: string) =>
-    `<tr><td style="padding:10px 16px 10px 0;color:#5b6478;font-size:12px;letter-spacing:.08em;text-transform:uppercase;vertical-align:top">${k}</td><td style="padding:10px 0;color:#050a30;font-size:15px">${v}</td></tr>`
-  const link = (u: string) => `<a href="${esc(u)}" style="color:#1b3fa0">${esc(u)}</a>`
-  const html = `<div style="font-family:Georgia,serif;background:#f7f5f0;padding:32px"><div style="max-width:620px;margin:0 auto;background:#fff;border:1px solid #d9dce4;padding:32px">
-<p style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5b6478;margin:0 0 8px">Candidacy Submission</p>
-<h1 style="font-weight:400;color:#050a30;margin:0 0 24px;font-size:26px">${esc(roleTitle)}</h1>
-<table style="border-collapse:collapse;width:100%;font-family:Arial,sans-serif">
-${rowHtml('Candidate', esc(name))}
-${rowHtml('Email', link(`mailto:${email}`).replace(`>${esc('mailto:' + email)}<`, `>${esc(email)}<`))}
-${rowHtml('LinkedIn', link(linkedin))}
-${rowHtml('Audio brief', audio ? link(audio) : 'Not provided')}
-${rowHtml('Resume', resumeLink ? `<a href="${esc(resumeLink)}" style="color:#1b3fa0">Download PDF</a> (link valid 30 days)` : 'Not provided')}
-${rowHtml('Summary', summary ? esc(summary).replace(/\n/g, '<br>') : 'Not provided')}
-</table><p style="font-family:Arial,sans-serif;font-size:12px;color:#8a90a0;margin-top:24px">Reference ${row.id}</p></div></div>`
-
-  let status = 'skipped'
+  let status = 'failed'
   try {
-    const { error: sendErr } = await db.functions.invoke('send-transactional-email', {
-      body: {
-        templateName: 'career-application',
-        idempotencyKey: `career-${row.id}`,
-        templateData: { roleTitle, name, email, linkedin, audio: audio || undefined, resumeLink: resumeLink || undefined, summary: summary || undefined, reference: row.id },
+    const result = await sendTemplateEmail('career-application', TO_EMAIL, {
+      idempotencyKey: `career-application-${row.id}`,
+      templateData: {
+        roleTitle,
+        name,
+        email,
+        linkedin,
+        audio: audio || undefined,
+        resumeLink: resumeLink || undefined,
+        summary: summary || undefined,
+        reference: row.id,
       },
     })
-    status = sendErr ? `failed: ${String(sendErr.message).slice(0, 300)}` : 'queued'
-  } catch (e) {
-    status = `failed: ${String(e).slice(0, 300)}`
+    status = result.sent ? 'sent' : 'suppressed'
+    const { error: logError } = await db.from('email_send_log').insert({
+      message_id: null,
+      template_name: 'career-application',
+      recipient_email: TO_EMAIL,
+      status,
+    })
+    if (logError) {
+      console.error('Failed to record career email outcome', { code: logError.code, message: logError.message })
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    status = `failed: ${message.slice(0, 300)}`
+    const { error: logError } = await db.from('email_send_log').insert({
+      message_id: null,
+      template_name: 'career-application',
+      recipient_email: TO_EMAIL,
+      status: 'failed',
+      error_message: message.slice(0, 1000),
+    })
+    if (logError) {
+      console.error('Failed to record career email failure', { code: logError.code, message: logError.message })
+    }
   }
-  void subject; void html; void RESEND_API_KEY; void FROM_EMAIL; void TO_EMAIL
-  await db.from('career_applications').update({ email_status: status }).eq('id', row.id)
+  const { error: statusError } = await db.from('career_applications').update({ email_status: status }).eq('id', row.id)
+  if (statusError) {
+    console.error('Failed to update career email status', { code: statusError.code, message: statusError.message })
+  }
 
   return json({ ok: true, id: row.id })
 })
