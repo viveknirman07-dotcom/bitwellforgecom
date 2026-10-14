@@ -40,5 +40,5 @@
 - [x] Re-render account emails for managed delivery
 - [x] Move Careers application notices to direct managed delivery
 - [x] Preserve bounce, complaint, unsubscribe, and send-history records
-- [ ] Remove legacy delivery files after replacement functions verify
-- [ ] Deploy and verify the updated email functions without publishing the site
+- [x] Remove legacy delivery files after replacement functions verify
+- [x] Deploy and verify the updated email functions without publishing the site
