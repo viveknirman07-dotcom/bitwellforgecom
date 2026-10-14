@@ -35,3 +35,10 @@
 - [x] Add natural people-free photography where it supports the subject
 - [x] Stabilize the homepage opening on mobile, slow networks, and reduced motion
 - [x] Remake every site image in the editorial halftone collage direction (no people)
+
+## Email delivery update
+- [x] Re-render account emails for managed delivery
+- [x] Move Careers application notices to direct managed delivery
+- [x] Preserve bounce, complaint, unsubscribe, and send-history records
+- [ ] Remove legacy delivery files after replacement functions verify
+- [ ] Deploy and verify the updated email functions without publishing the site
