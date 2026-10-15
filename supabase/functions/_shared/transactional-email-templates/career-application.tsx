@@ -1,5 +1,6 @@
 import * as React from 'npm:react@18.3.1'
 import { Body, Container, Head, Heading, Hr, Html, Link, Preview, Section, Text } from 'npm:@react-email/components@0.0.22'
+import { BrandFooter, BrandStrip } from '../email-brand.tsx'
 import type { TemplateEntry } from './registry.ts'
 
 interface Props {
@@ -26,6 +27,7 @@ const Email = ({ roleTitle, name, email, linkedin, audio, resumeLink, summary, r
     <Preview>{`New candidacy: ${roleTitle ?? 'Mandate'} from ${name ?? 'a candidate'}`}</Preview>
     <Body style={main}>
       <Container style={container}>
+        <BrandStrip />
         <Text style={eyebrow}>Candidacy Submission</Text>
         <Heading style={h1}>{roleTitle ?? 'Mandate'}</Heading>
         <Row label="Candidate">{name ?? 'Not provided'}</Row>
@@ -36,6 +38,7 @@ const Email = ({ roleTitle, name, email, linkedin, audio, resumeLink, summary, r
         <Row label="Summary">{summary || 'Not provided'}</Row>
         <Hr style={hr} />
         <Text style={foot}>BitwellForge Careers{reference ? `, reference ${reference}` : ''}</Text>
+        <BrandFooter kind="internal" />
       </Container>
     </Body>
   </Html>
