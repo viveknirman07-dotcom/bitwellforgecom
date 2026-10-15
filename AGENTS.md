@@ -7,3 +7,4 @@
 - Image reveal is coordinated once at the app root after decode; retain native lazy loading and exempt the timed homepage preloader to prevent duplicated animation.
 - Client Stories uses one deadline-based autoplay scheduler independent of transition and clone reset state; manual swipes restart it to prevent drift and competing timers.
 - App emails send only from their feature Edge Functions through the shared managed helper; Lovable hosts unsubscribe and delivery handling so no project-owned queue or unsubscribe route is added.
+- Careers receipt and internal notice are independent fixed-template sends keyed by the saved application ID; browser retries reuse an application UUID to prevent duplicate records and messages.
