@@ -1,6 +1,6 @@
 ## About editorial card redesign
-- [ ] Rebuild only About with the supplied centered introduction and asymmetrical card composition
-- [ ] Verify existing assets, shared styling preservation, and phone, tablet, desktop layouts
+- [x] Rebuild only About with the supplied centered introduction and asymmetrical card composition
+- [x] Verify existing assets, shared styling preservation, and phone, tablet, desktop layouts
 
 ## Vault portal and customer evidence
 - [x] Organize the purchased Vault into 31 modules and 44 assets
