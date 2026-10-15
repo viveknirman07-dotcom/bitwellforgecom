@@ -124,8 +124,9 @@
   .bf-about .about-composition { padding-top: 36px; }
   .bf-about .about-introduction { margin-bottom: 32px; }
   .bf-about .about-introduction h1,
-  .bf-about .about-introduction h2 { font-size: 32px !important; }
-  .bf-about .about-introduction p { font-size: 14px !important; margin-top: 14px; }
+  .bf-about .about-introduction h2 { font-size: 31.52px !important; }
+  .bf-about .about-introduction p { font-size: 13.79px !important; margin-top: 14px; }
+  .bf-about .about-label { font-size: 10.835px !important; }
   .bf-about .about-editorial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px; }
   .bf-about .about-feature { grid-column: 1; grid-row: 1 / 3; }
   .bf-about .about-system { grid-column: 2; grid-row: 1; }
@@ -134,10 +135,11 @@
   .bf-about .about-feature-card { padding: 10px; }
   .bf-about .about-feature-image { aspect-ratio: 4 / 5; }
   .bf-about .about-card-copy { padding: 16px 12px; }
-  .bf-about .about-card h2 { font-size: 24px !important; overflow-wrap: anywhere; }
+  .bf-about .about-card h2 { font-size: 23.64px !important; overflow-wrap: anywhere; }
   .bf-about .about-card p,
-  .bf-about .about-relationship p { font-size: 13px !important; line-height: 1.65 !important; }
-  .bf-about .about-meta { font-size: 10px !important; overflow-wrap: anywhere; }
+  .bf-about .about-relationship p { font-size: 12.805px !important; line-height: 1.65 !important; }
+  .bf-about .about-intent p { font-size: 13.79px !important; }
+  .bf-about .about-meta { font-size: 9.85px !important; overflow-wrap: anywhere; }
   .bf-about .about-feature-card .about-card-copy { padding: 20px 2px 8px; }
   .bf-about .about-system-image { aspect-ratio: 3 / 2; }
   .bf-about .about-constraint-card { padding: 16px 12px; gap: 24px; }
@@ -145,6 +147,6 @@
   .bf-about .about-wide-image { height: 100%; min-height: 220px; }
   .bf-about .about-relationships { padding-block: 56px 64px; }
   .bf-about .about-relationship-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 16px; }
-  .bf-about .about-relationship h3 { margin-top: 18px; font-size: 24px !important; overflow-wrap: anywhere; }
+  .bf-about .about-relationship h3 { margin-top: 18px; font-size: 23.64px !important; overflow-wrap: anywhere; }
   .bf-about .about-intent { margin-top: 36px; }
 }
