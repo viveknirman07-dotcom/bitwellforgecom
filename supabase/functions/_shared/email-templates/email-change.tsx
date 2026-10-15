@@ -13,7 +13,7 @@ import {
   Preview,
   Text,
 } from 'npm:@react-email/components@0.0.22'
-import { BrandFooter, BrandStrip } from '../email-brand.tsx'
+import { BrandFooter, BrandHeader, BrandFonts, BODY_FONT, DISPLAY_FONT } from '../email-brand.tsx'
 
 interface EmailChangeEmailProps {
   siteName: string
@@ -35,12 +35,13 @@ export const EmailChangeEmail = ({
 }: EmailChangeEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head>
+      <BrandFonts />
       <style>{darkModeCss}</style>
     </Head>
     <Preview>Confirm your email change for {siteName}</Preview>
     <Body style={main}>
       <Container style={container}>
-        <BrandStrip />
+        <BrandHeader />
         <Heading style={h1}>Confirm your email change</Heading>
         <Text style={text}>
           You requested to change your email address for {siteName} from{' '}
@@ -71,15 +72,17 @@ export const EmailChangeEmail = ({
 
 export default EmailChangeEmail
 
-const main = { backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }
+const main = { backgroundColor: '#ffffff', fontFamily: BODY_FONT, fontWeight: 400 }
 const container = { padding: '20px 25px' }
 const h1 = {
+  fontFamily: DISPLAY_FONT,
   fontSize: '22px',
-  fontWeight: 'bold' as const,
+  fontWeight: 400,
   color: '#000000',
   margin: '0 0 20px',
 }
 const text = {
+  fontFamily: BODY_FONT, fontWeight: 400, overflowWrap: 'anywhere' as const,
   fontSize: '14px',
   color: '#55575d',
   lineHeight: '1.5',
@@ -87,6 +90,7 @@ const text = {
 }
 const link = { color: 'inherit', textDecoration: 'underline' }
 const button = {
+  fontFamily: BODY_FONT,
   backgroundColor: '#000000',
   color: '#ffffff',
   fontSize: '14px',
@@ -95,7 +99,7 @@ const button = {
   padding: '12px 20px',
   textDecoration: 'none',
 }
-const footer = { fontSize: '12px', color: '#999999', margin: '30px 0 0' }
+const footer = { fontFamily: BODY_FONT, fontWeight: 400, fontSize: '12px', color: '#999999', margin: '30px 0 0' }
 // Rendered as a text child, which React may HTML-escape: keep this CSS free of >, &, and quotes.
 const darkModeCss = `
   @media (prefers-color-scheme: dark) {

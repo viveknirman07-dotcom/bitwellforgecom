@@ -1,26 +1,26 @@
 import * as React from 'npm:react@18.3.1'
 import { Hr, Img, Link, Section, Text } from 'npm:@react-email/components@0.0.22'
 
-// Shared BitwellForge email identity: one visual strip and one footer used by every email.
+// Shared email-only identity. A single image with a safe light fallback.
 export const NAVY = '#020E45'
 export const MUTED = '#5B6478'
 export const BODY_FONT = "'Montserrat', 'Helvetica Neue', Arial, sans-serif"
 export const DISPLAY_FONT = "'Cormorant Garamond', Georgia, 'Times New Roman', serif"
-export const FONT_LINK = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@400;500;600&display=swap'
+export const FONT_LINK = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Montserrat:wght@400;500;600&display=swap'
 export const SITE = 'https://www.bitwellforge.com'
 export const PRIVACY_URL = `${SITE}/privacy`
-export const STRIP_URL = `${SITE}/__l5e/assets-v1/55a90a9a-68b4-484c-b7b9-dceb42f580fa/bitwellforge-email-strip.jpg`
+export const LIGHT_BRAND_URL = `${SITE}/__l5e/assets-v1/27299fd3-4e36-4519-9c2b-6488259c72f1/bitwellforge-brand-light.jpeg`
+export const DARK_BRAND_URL = `${SITE}/__l5e/assets-v1/71f260f8-e772-49c2-85d0-4a81664f2881/bitwellforge-brand-dark.jpeg`
 
 export const BrandFonts = () => <link href={FONT_LINK} rel="stylesheet" />
 
-export const Wordmark = ({ size = 28 }: { size?: number }) => (
-  <Text style={{ fontFamily: DISPLAY_FONT, fontWeight: 700, fontSize: `${size}px`, lineHeight: `${size + 6}px`, color: NAVY, margin: '0' }}>BitwellForge</Text>
-)
-
-/** Decorative halftone strip; empty alt so blocked images leave nothing confusing behind. */
-export const BrandStrip = () => (
-  <Section style={{ backgroundColor: '#3322D6', lineHeight: '0', fontSize: '0' }}>
-    <Img src={STRIP_URL} width="600" height="150" alt="" style={{ display: 'block', width: '100%', maxWidth: '600px', height: 'auto', border: '0' }} />
+/** Clients supporting picture/media select dark; clients stripping it retain one light img. */
+export const BrandHeader = ({ mode = 'auto' }: { mode?: 'auto' | 'light' | 'dark' }) => (
+  <Section style={{ margin: '0 0 24px', lineHeight: '0', fontSize: '0' }}>
+    <picture>
+      {mode === 'auto' && <source media="(prefers-color-scheme: dark)" srcSet={DARK_BRAND_URL} type="image/jpeg" />}
+      <Img src={mode === 'dark' ? DARK_BRAND_URL : LIGHT_BRAND_URL} width="600" alt="BitwellForge | The business of better." style={{ display: 'block', width: '100%', maxWidth: '600px', height: 'auto', border: '0' }} />
+    </picture>
   </Section>
 )
 
@@ -49,7 +49,5 @@ export const BrandFooter = ({ kind }: { kind: FooterKind }) => (
       <span style={{ color: '#B8BECB' }}>{'   /   '}</span>
       <Link href={`mailto:${CONTACT[kind]}`} style={{ color: NAVY, textDecoration: 'underline' }}>Contact Us</Link>
     </Text>
-    <Wordmark size={20} />
-    <Text style={{ fontFamily: BODY_FONT, fontWeight: 400, fontSize: '11px', lineHeight: '18px', color: MUTED, margin: '4px 0 0' }}>Commercial Growth &amp; Revenue Infrastructure</Text>
   </Section>
 )

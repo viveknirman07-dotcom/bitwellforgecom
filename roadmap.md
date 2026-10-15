@@ -42,6 +42,8 @@
 - [x] Remake every site image in the editorial halftone collage direction (no people)
 
 ## Email delivery update
+- [x] Apply exact official single top branding and email-wide font hierarchy
+- [x] Validate all eight rendered emails, theme fallback and deploy affected sending functions
 - [x] Add branded applicant acknowledgement and preserve separate internal notices
 - [x] Verify real submission, two managed send events, retry deduplication, official link markup, responsive HTML and plain-text tests
 - [ ] Confirm inbox receipt and Gmail, Outlook, Apple Mail rendering; needs access to received test messages. LinkedIn blocks automated destination verification, but URL matches the official site link.
