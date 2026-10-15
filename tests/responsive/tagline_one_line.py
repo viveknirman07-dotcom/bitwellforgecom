@@ -8,7 +8,7 @@ import sys
 from playwright.async_api import async_playwright
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8080"
-TAGLINE = "Structure Compounds Growth."
+TAGLINE = "Structure Compounds Growth"
 VIEWPORTS = [(280, 640), (320, 640), (360, 780), (375, 812), (393, 852), (430, 932),
              (768, 1024), (834, 1194), (1024, 1366), (1280, 800), (1440, 900), (1920, 1080)]
 
