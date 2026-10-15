@@ -42,8 +42,9 @@
 - [x] Remake every site image in the editorial halftone collage direction (no people)
 
 ## Email delivery update
-- [ ] Add branded applicant acknowledgement and preserve separate internal notices
-- [ ] Verify real submission, email send outcomes, links, HTML and plain-text rendering
+- [x] Add branded applicant acknowledgement and preserve separate internal notices
+- [x] Verify real submission, two managed send events, retry deduplication, official link markup, responsive HTML and plain-text tests
+- [ ] Confirm inbox receipt and Gmail, Outlook, Apple Mail rendering; needs access to received test messages. LinkedIn blocks automated destination verification, but URL matches the official site link.
 - [x] Re-render account emails for managed delivery
 - [x] Move Careers application notices to direct managed delivery
 - [x] Preserve bounce, complaint, unsubscribe, and send-history records
