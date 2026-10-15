@@ -195,6 +195,7 @@ const ApplyDialog = ({ mandate, onClose }: { mandate: Mandate | null; onClose: (
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const honey = useRef<HTMLInputElement>(null);
+  const submissionId = useRef(crypto.randomUUID());
 
   const close = () => {
     onClose();
@@ -203,6 +204,7 @@ const ApplyDialog = ({ mandate, onClose }: { mandate: Mandate | null; onClose: (
       setErrors({});
       setFile(null);
       setDone(false);
+      submissionId.current = crypto.randomUUID();
     }, 300);
   };
 
@@ -241,6 +243,7 @@ const ApplyDialog = ({ mandate, onClose }: { mandate: Mandate | null; onClose: (
     setErrors({});
     const fd = new FormData();
     fd.append("role_id", mandate.id);
+    fd.append("submission_id", submissionId.current);
     fd.append("role_title", mandate.title);
     Object.entries(r.data).forEach(([k, v]) => fd.append(k, v));
     fd.append("website", honey.current?.value ?? "");

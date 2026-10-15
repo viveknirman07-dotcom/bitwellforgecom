@@ -42,6 +42,8 @@
 - [x] Remake every site image in the editorial halftone collage direction (no people)
 
 ## Email delivery update
+- [ ] Add branded applicant acknowledgement and preserve separate internal notices
+- [ ] Verify real submission, email send outcomes, links, HTML and plain-text rendering
 - [x] Re-render account emails for managed delivery
 - [x] Move Careers application notices to direct managed delivery
 - [x] Preserve bounce, complaint, unsubscribe, and send-history records
