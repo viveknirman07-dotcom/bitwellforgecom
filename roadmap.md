@@ -1,4 +1,5 @@
 ## About editorial card redesign
+- [x] Replace only the whole-system image with reference-inspired collage and verify readable desktop-like About mobile presentation
 - [x] Rebuild only About with the supplied centered introduction and asymmetrical card composition
 - [x] Verify existing assets, shared styling preservation, and phone, tablet, desktop layouts
 
