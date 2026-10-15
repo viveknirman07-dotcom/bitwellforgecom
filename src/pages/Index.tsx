@@ -228,7 +228,7 @@ const Index = () => {
 
   return (
     <div className="bf-home bg-background text-foreground">
-      <HomePreloader images={[preStratImg, preOpsImg, preKnowledgeImg, preConnectionsImg, prePathwaysImg, preHeroImg]} headline="Structure Compounds Growth." onDone={handleDone} />
+      <HomePreloader images={[preStratImg, preOpsImg, preKnowledgeImg, preConnectionsImg, prePathwaysImg, preHeroImg]} headline="Structure Compounds Growth" onDone={handleDone} />
 
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
@@ -239,7 +239,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
             <div className={wrap}>
-              <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Structure Compounds Growth."
+              <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Structure Compounds Growth"
                 className="bf-tagline-fit font-heading font-semibold text-foreground leading-[1] tracking-[-0.02em]" />
             </div>
           </div>
