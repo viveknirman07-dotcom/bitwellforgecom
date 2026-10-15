@@ -11,12 +11,14 @@ Deno.test('Applicant receipt preserves exact copy, two official links and plaint
   const normalizedHtml = html.replace(/<!--.*?-->/g, '')
   const normalizedText = text.replace(/\s+/g, ' ').replace(/\*/g, '')
   check(template.subject === 'Application Received | BitwellForge Careers', 'Subject changed')
-  for (const phrase of ['APPLICATION RECEIVED', 'Dear Alex Morgan,', 'Revenue Architect', '3–5 business days', 'does not guarantee shortlisting or selection', 'Commercial Growth &amp; Revenue Infrastructure']) {
+  for (const phrase of ['APPLICATION RECEIVED', 'Dear Alex Morgan,', 'Revenue Architect', '3–5 business days', 'does not guarantee shortlisting or selection']) {
     check(normalizedHtml.includes(phrase), `Missing HTML content: ${phrase}`)
   }
   check((html.match(/<a\s/g) || []).length === 4, 'Expected two CTAs plus Privacy and Contact links')
   check(html.includes('href="https://www.bitwellforge.com/privacy"'), 'Missing privacy link')
-  check(html.includes('font-weight:700') && html.includes('Cormorant Garamond'), 'Wordmark weight')
+  check((html.match(/<img\s/g) || []).length === 1, 'Expected exactly one official header image')
+  check(html.includes('bitwellforge-brand-light.jpeg') && html.includes('bitwellforge-brand-dark.jpeg'), 'Missing official theme artwork')
+  check(html.includes('Cormorant Garamond') && html.includes('Montserrat'), 'Missing email typography')
   check(html.includes('relates to the recruitment process'), 'Recruitment footer')
   for (const url of [WEBSITE_URL, LINKEDIN_URL]) {
     check(html.includes(`href="${url}"`), `Missing link ${url}`)
