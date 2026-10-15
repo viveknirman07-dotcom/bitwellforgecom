@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useSEO } from "@/hooks/use-seo";
 import columnImg from "@/assets/photos/editorial/column-compass.jpg";
 import bridgeImg from "@/assets/photos/editorial/bridge.jpg";
-import gearsImg from "@/assets/photos/editorial/gears.jpg";
+import systemImg from "@/assets/photos/editorial/woven-system.jpg";
 import "@/styles/about.css";
 
 const ABOUT_DESCRIPTION =
@@ -106,7 +106,7 @@ const About = () => {
 
           <Reveal className="about-system" delay={0.08}>
             <article className="about-card about-system-card bg-card text-card-foreground">
-              <img src={gearsImg} alt="Interlocking gears and a watch movement showing the relationship between parts" width={1536} height={1024} loading="eager" decoding="async" className="about-system-image" />
+              <img src={systemImg} alt="Threads on a loom woven into a single cloth, many parts forming one system" width={1536} height={1024} loading="eager" decoding="async" className="about-system-image" />
               <div className="about-card-copy">
                 <h2>Read the whole system.</h2>
                 <p>Strategic, acquisition, operational, and digital decisions do not work in isolation.</p>
