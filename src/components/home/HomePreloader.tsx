@@ -59,7 +59,7 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
       const letters = Array.from(element.querySelectorAll(".bf-opening-letter"));
       await Promise.all(letters.map((letter, i) => animate(letter,
         [{ transform: "translateY(110%)" }, { transform: "translateY(0)" }],
-        { duration: 450, delay: letters.length > 1 ? i * 750 / (letters.length - 1) : 0, easing: "cubic-bezier(0.215,0.61,0.355,1)" }))));
+        { duration: 450, delay: letters.length > 1 ? i * 750 / (letters.length - 1) : 0, easing: "cubic-bezier(0.215,0.61,0.355,1)" })));
       await wait(100);
       if (!active) return;
       element.dataset.phase = "images";
