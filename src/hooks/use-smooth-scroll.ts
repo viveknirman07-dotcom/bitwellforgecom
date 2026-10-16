@@ -10,14 +10,23 @@ export function useSmoothScroll() {
       infinite: false,
     });
 
+    const syncOpening = () => {
+      if (document.documentElement.hasAttribute("data-bf-opening")) lenis.stop();
+      else lenis.start();
+    };
+    window.addEventListener("bf-opening-change", syncOpening);
+    syncOpening();
+    let frame: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      frame = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    frame = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("bf-opening-change", syncOpening);
       lenis.destroy();
     };
   }, []);
