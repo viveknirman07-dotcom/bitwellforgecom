@@ -1,4 +1,6 @@
-## About editorial card redesign
+## About editorial reconstruction
+- [x] Replace the previous About cards with an original unframed editorial composition using existing content and assets only
+- [x] Verify About across mobile, tablet, desktop and reduced motion without changing shared pages
 - [x] Replace only the whole-system image with reference-inspired collage and verify readable desktop-like About mobile presentation
 - [x] Rebuild only About with the supplied centered introduction and asymmetrical card composition
 - [x] Verify existing assets, shared styling preservation, and phone, tablet, desktop layouts
