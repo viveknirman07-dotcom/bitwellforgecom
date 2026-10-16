@@ -2,145 +2,151 @@
   padding-top: 113px;
   font-family: var(--font-body);
 }
-.bf-about .about-shell {
-  width: 100%;
+.bf-about .about-composition,
+.bf-about .about-relationships {
+  width: min(1440px, 100%);
+  margin-inline: auto;
   padding-inline: 40px;
 }
-.bf-about .about-opening { padding-top: 48px; }
-.bf-about .about-masthead {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  padding-block: 18px;
-  border-top: 1px solid hsl(var(--border));
+.bf-about .about-composition { padding-top: 64px; }
+.bf-about .about-introduction {
+  max-width: 700px;
+  margin: 0 0 48px;
+  text-align: left;
 }
-.bf-about .about-label {
+.bf-about .about-label,
+.bf-about .about-meta {
   display: block;
   font-family: var(--font-body);
   font-size: 11px !important;
   font-weight: 500;
-  line-height: 1.5 !important;
+  line-height: 1.5;
   letter-spacing: 0 !important;
   color: hsl(var(--muted-foreground));
 }
-.bf-about h1,
-.bf-about h2,
-.bf-about h3,
-.bf-about .about-lead,
-.bf-about .about-intent p {
+.bf-about .about-label { margin-bottom: 16px; text-transform: uppercase; }
+.bf-about .about-introduction h1,
+.bf-about .about-introduction h2 {
   font-family: var(--font-heading);
+  font-size: 48px !important;
+  font-weight: 400;
+  line-height: 1.1 !important;
+  letter-spacing: 0 !important;
+  margin: 0;
+}
+.bf-about .about-introduction p {
+  max-width: 580px;
+  margin: 18px 0 0;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: hsl(var(--muted-foreground));
+}
+.bf-about .about-editorial-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr !important;
+  gap: 16px;
+  align-items: stretch;
+}
+.bf-about .about-feature { grid-column: 1; grid-row: 1 / 3; }
+.bf-about .about-system { grid-column: 2; grid-row: 1; }
+.bf-about .about-constraint { grid-column: 3; grid-row: 1; }
+.bf-about .about-durability { grid-column: 2 / 4; grid-row: 2; }
+.bf-about .about-card { height: 100%; border-radius: 8px; overflow: hidden; }
+.bf-about .about-editorial-grid > div,
+.bf-about .about-relationship-grid > div { min-width: 0; }
+.bf-about .about-card-copy { padding: 26px; }
+.bf-about .about-card h2 {
+  font-family: var(--font-heading);
+  font-size: 32px !important;
+  font-weight: 400;
+  line-height: 1.12 !important;
+  letter-spacing: 0 !important;
+  margin: 0;
+}
+.bf-about .about-card p,
+.bf-about .about-relationship p,
+.bf-about .about-intent p {
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+  margin: 14px 0 0;
+  color: hsl(var(--muted-foreground));
+}
+.bf-about .about-card-copy .about-meta { margin-bottom: 14px; }
+.bf-about img { display: block; width: 100%; object-fit: cover; }
+.bf-about .about-feature-card { display: flex; flex-direction: column; padding: 16px; }
+.bf-about .about-feature-image { aspect-ratio: 1 / 1; border-radius: 4px; }
+.bf-about .about-feature-card .about-card-copy { padding: 28px 10px 14px; }
+.bf-about .about-system-image { aspect-ratio: 2 / 1; }
+.bf-about .about-constraint-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px;
+  gap: 46px;
+}
+.bf-about .about-constraint-card .about-card-copy { padding: 0; }
+.bf-about .about-wide-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr !important;
+  min-height: 240px;
+}
+.bf-about .about-wide-card .about-card-copy { align-self: center; }
+.bf-about .about-wide-image { height: 100%; min-height: 240px; object-position: 64% center; }
+.bf-about .about-relationships { padding-block: 88px 96px; }
+.bf-about .about-relationship-grid { display: grid; grid-template-columns: repeat(4, 1fr) !important; gap: 28px; }
+.bf-about .about-relationship { height: 100%; border-top: 1px solid hsl(var(--border)); padding-top: 18px; }
+.bf-about .about-relationship h3 {
+  font-family: var(--font-heading);
+  font-size: 28px !important;
   font-weight: 400;
   letter-spacing: 0 !important;
-  text-align: left;
-  margin: 0;
-  color: hsl(var(--foreground));
+  line-height: 1.15 !important;
+  margin: 28px 0 0;
 }
-.bf-about h1 { font-size: 72px !important; line-height: 1.02 !important; margin-block: 24px 48px; }
-.bf-about h2 { font-size: 48px !important; line-height: 1.08 !important; }
-.bf-about h3 { font-size: 28px !important; line-height: 1.15 !important; }
-.bf-about p {
-  margin: 18px 0 0;
-  font-size: 14px !important;
-  line-height: 1.75 !important;
-  color: hsl(var(--muted-foreground));
-  max-width: 560px;
-}
-.bf-about .about-opening-grid,
-.bf-about .about-systems-grid,
-.bf-about .about-continuity-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-  gap: 32px;
-}
-.bf-about .about-opening-grid > *,
-.bf-about .about-systems-grid > *,
-.bf-about .about-continuity-grid > * { min-width: 0; }
-.bf-about img { display: block; width: 100%; object-fit: cover; border-radius: 0; }
-.bf-about .about-column-visual { grid-column: 1 / 6; }
-.bf-about .about-column-visual img { aspect-ratio: 5 / 6; }
-.bf-about .about-practice { grid-column: 7 / 13; padding-block: 24px 0; align-self: center; }
-.bf-about .about-lead { font-size: 32px !important; line-height: 1.25 !important; margin-top: 20px; }
-.bf-about .about-starting-point { border-top: 1px solid hsl(var(--border)); margin-top: 40px; padding-top: 24px; }
-.bf-about .about-starting-point h2 { font-size: 32px !important; line-height: 1.15 !important; margin-top: 16px; max-width: 400px; }
-.bf-about .about-systems { padding-top: 88px; }
-.bf-about .about-section-rule { border-top: 1px solid hsl(var(--border)); padding-block: 18px 40px; }
-.bf-about .about-system-perspective { grid-column: 1 / 6; }
-.bf-about .about-system-perspective p { max-width: 350px; }
-.bf-about .about-system-perspective img { aspect-ratio: 3 / 2; margin-top: 40px; }
-.bf-about .about-relationships { grid-column: 7 / 13; }
-.bf-about .about-relationship-intro { padding-bottom: 28px; }
-.bf-about .about-relationship {
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) !important;
-  gap: 20px;
-  border-top: 1px solid hsl(var(--border));
-  padding-block: 24px;
-}
-.bf-about .about-number { font-family: var(--font-body); font-size: 11px !important; font-weight: 500; line-height: 1.5 !important; color: hsl(var(--muted-foreground)); padding-top: 6px; }
-.bf-about .about-relationship p { margin-top: 12px; }
-.bf-about .about-continuity { padding-block: 64px 88px; }
-.bf-about .about-bridge-visual { grid-column: 1 / 8; }
-.bf-about .about-bridge-visual img { aspect-ratio: 16 / 9; }
-.bf-about .about-continuity-copy { grid-column: 9 / 13; align-self: center; }
-.bf-about .about-intent { margin-top: 48px; border-top: 1px solid hsl(var(--border)); padding-top: 32px; }
-.bf-about .about-intent p { max-width: 920px; font-size: 32px !important; line-height: 1.3 !important; }
-@media (min-width: 1600px) {
-  .bf-about .about-shell { padding-right: max(40px, calc(100% - 1520px)); }
-}
+.bf-about .about-intent { max-width: 660px; text-align: left; margin: 56px 0 0; }
 @media (max-width: 1023px) {
   .bf-about { padding-top: 72px; }
-  .bf-about .about-shell { padding-inline: 32px; }
-  .bf-about .about-opening { padding-top: 36px; }
-  .bf-about h1 { font-size: 64px !important; margin-block: 20px 36px; }
-  .bf-about h2 { font-size: 40px !important; }
-  .bf-about .about-opening-grid,
-  .bf-about .about-systems-grid,
-  .bf-about .about-continuity-grid { gap: 24px; }
-  .bf-about .about-practice { grid-column: 6 / 13; padding-top: 0; }
-  .bf-about .about-lead { font-size: 28px !important; }
-  .bf-about .about-starting-point { margin-top: 28px; }
-  .bf-about .about-system-perspective { grid-column: 1 / 6; }
-  .bf-about .about-relationships { grid-column: 6 / 13; }
-  .bf-about .about-relationship { gap: 12px; grid-template-columns: 24px minmax(0, 1fr) !important; }
-  .bf-about .about-continuity-copy { grid-column: 8 / 13; }
-  .bf-about .about-systems { padding-top: 64px; }
-  .bf-about .about-continuity { padding-block: 48px 64px; }
+  .bf-about .about-composition,
+  .bf-about .about-relationships { padding-inline: 32px; }
+  .bf-about .about-composition { padding-top: 48px; }
+  .bf-about .about-editorial-grid { grid-template-columns: 1fr 1fr !important; }
+  .bf-about .about-feature { grid-column: 1; grid-row: 1 / 3; }
+  .bf-about .about-system { grid-column: 2; grid-row: 1; }
+  .bf-about .about-constraint { grid-column: 2; grid-row: 2; }
+  .bf-about .about-durability { grid-column: 1 / 3; grid-row: 3; }
+  .bf-about .about-feature-image { aspect-ratio: 4 / 5; }
+  .bf-about .about-constraint-card { gap: 24px; }
+  .bf-about .about-relationship-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px; }
 }
 @media (max-width: 599px) {
-  .bf-about .about-shell { padding-inline: 20px; }
-  .bf-about .about-opening { padding-top: 24px; }
-  .bf-about .about-masthead { gap: 16px; padding-block: 14px; }
-  .bf-about .about-label { font-size: 9.85px !important; }
-  .bf-about h1 { font-size: 39.4px !important; line-height: 1.05 !important; margin-block: 20px 28px; }
-  .bf-about h2 { font-size: 31.52px !important; }
-  .bf-about h3 { font-size: 23.64px !important; }
-  .bf-about p { font-size: 12.805px !important; line-height: 1.7 !important; margin-top: 14px; }
-  .bf-about .about-opening-grid,
-  .bf-about .about-systems-grid,
-  .bf-about .about-continuity-grid { gap: 24px 16px; }
-  .bf-about .about-column-visual { grid-column: 1 / 8; }
-  .bf-about .about-column-visual img { aspect-ratio: 1 / 1; }
-  .bf-about .about-practice { grid-column: 1 / 13; }
-  .bf-about .about-lead { font-size: 27.58px !important; line-height: 1.25 !important; margin-top: 14px; }
-  .bf-about .about-starting-point { margin-top: 28px; padding-top: 20px; }
-  .bf-about .about-starting-point h2 { font-size: 23.64px !important; max-width: 260px; }
-  .bf-about .about-systems { padding-top: 48px; }
-  .bf-about .about-section-rule { padding-block: 14px 28px; }
-  .bf-about .about-system-perspective { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 16px; }
-  .bf-about .about-system-perspective h2 { grid-column: 1; }
-  .bf-about .about-system-perspective p { grid-column: 1; margin-top: 0; }
-  .bf-about .about-system-perspective img { grid-column: 2; grid-row: 1 / 3; align-self: center; aspect-ratio: 4 / 5; margin-top: 0; }
-  .bf-about .about-relationships { grid-column: 1 / 13; margin-top: 12px; }
-  .bf-about .about-relationship-intro { padding-bottom: 24px; }
-  .bf-about .about-number { font-size: 9.85px !important; }
-  .bf-about .about-relationship { padding-block: 20px; }
-  .bf-about .about-continuity { padding-block: 32px 48px; }
-  .bf-about .about-bridge-visual { grid-column: 1 / 13; }
-  .bf-about .about-continuity-copy { grid-column: 1 / 13; }
-  .bf-about .about-intent { margin-top: 32px; padding-top: 24px; }
-  .bf-about .about-intent p { font-size: 23.64px !important; line-height: 1.3 !important; }
-}
-@media (max-width: 359px) {
-  .bf-about h1 { font-size: 31.52px !important; }
-  .bf-about .about-system-perspective h2 { font-size: 27.58px !important; }
+  .bf-about .about-composition,
+  .bf-about .about-relationships { width: 100%; padding-inline: 20px; }
+  .bf-about .about-composition { padding-top: 36px; }
+  .bf-about .about-introduction { margin-bottom: 32px; }
+  .bf-about .about-introduction h1,
+  .bf-about .about-introduction h2 { font-size: 31.52px !important; }
+  .bf-about .about-introduction p { font-size: 13.79px !important; margin-top: 14px; }
+  .bf-about .about-label { font-size: 10.835px !important; }
+  .bf-about .about-editorial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px; }
+  .bf-about .about-feature { grid-column: 1; grid-row: 1 / 3; }
+  .bf-about .about-system { grid-column: 2; grid-row: 1; }
+  .bf-about .about-constraint { grid-column: 2; grid-row: 2; }
+  .bf-about .about-durability { grid-column: 1 / 3; grid-row: 3; }
+  .bf-about .about-feature-card { padding: 10px; }
+  .bf-about .about-feature-image { aspect-ratio: 4 / 5; }
+  .bf-about .about-card-copy { padding: 16px 12px; }
+  .bf-about .about-card h2 { font-size: 23.64px !important; overflow-wrap: anywhere; }
+  .bf-about .about-card p,
+  .bf-about .about-relationship p { font-size: 12.805px !important; line-height: 1.65 !important; }
+  .bf-about .about-intent p { font-size: 13.79px !important; }
+  .bf-about .about-meta { font-size: 9.85px !important; overflow-wrap: anywhere; }
+  .bf-about .about-feature-card .about-card-copy { padding: 20px 2px 8px; }
+  .bf-about .about-system-image { aspect-ratio: 3 / 2; }
+  .bf-about .about-constraint-card { padding: 16px 12px; gap: 24px; }
+  .bf-about .about-wide-card { grid-template-columns: 1.1fr 1fr !important; min-height: 220px; }
+  .bf-about .about-wide-image { height: 100%; min-height: 220px; }
+  .bf-about .about-relationships { padding-block: 56px 64px; }
+  .bf-about .about-relationship-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 16px; }
+  .bf-about .about-relationship h3 { margin-top: 18px; font-size: 23.64px !important; overflow-wrap: anywhere; }
+  .bf-about .about-intent { margin-top: 36px; }
 }

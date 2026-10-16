@@ -1,6 +1,6 @@
 - src/styles/density.css rules carry :not(.bf-home *) so the editorial homepage keeps its own type scale; preserve this if the density generator is re-run.
 - Public editorial pages use Cormorant Garamond for display text and Montserrat for all supporting text because this keeps the reference-inspired typography consistent without proprietary fonts.
-- About uses an unframed editorial grid with page-imported styles scoped under .bf-about; scoped typography overrides reconcile density rules without changing shared typography or unrelated pages.
+- About presentation styles are scoped under .bf-about in a page-imported stylesheet so density overrides can be reconciled without changing shared typography or unrelated pages.
 - Promotional Forge Vault links stay out of public navigation while checkout fulfillment and authenticated buyer access remain intact.
 - Cookie preferences are managed by the shared layout and stored locally; optional scripts must check consent before loading because a banner alone does not prevent tracking.
 - Public privacy and cookie explanations live on dedicated pages so footer links lead to meaningful policies rather than the contact form.
