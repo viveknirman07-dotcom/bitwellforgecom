@@ -1,0 +1,40 @@
+.bf-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  touch-action: none;
+}
+.bf-opening-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  margin: 0;
+  pointer-events: none;
+}
+.bf-opening-title-mask { overflow: hidden; padding-bottom: .1em; }
+.bf-opening-letter { display: inline-block; transform: translateY(110%); }
+.bf-opening-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  overflow: hidden;
+  max-width: 100%;
+  transform: scale(0);
+  will-change: transform;
+}
+.bf-opening-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bf-opening-frame-0 { width: 150px; height: 200px; }
+.bf-opening-frame-1 { width: 180px; height: 300px; }
+.bf-opening-frame-2 { width: 350px; height: 350px; }
+.bf-opening-frame-3 { width: min(60dvh, 100vw); height: min(80dvh, calc(100dvh - 180px)); }
+.bf-opening-frame-4 { width: 100dvh; height: 100dvh; }
+.bf-opening-frame-5 { width: 100vw; height: 100dvh; max-width: none; }
+.bf-opening[data-phase="handoff"] { background: transparent; pointer-events: none; }
+html[data-bf-opening] { overflow: hidden; }
