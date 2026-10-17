@@ -1,8 +1,19 @@
-import { cleanup, render } from "@testing-library/react";
+import { act } from "react";
+import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import HomePreloader from "./HomePreloader";
 
 vi.mock("framer-motion", () => ({ useReducedMotion: () => false }));
+
+let root: Root | undefined;
+const render = (element: React.ReactNode) => {
+  const container = document.createElement("div");
+  document.body.appendChild(container);
+  const current = createRoot(container);
+  root = current;
+  act(() => current.render(element));
+  return { unmount: () => act(() => current.unmount()) };
+};
 
 describe("opening lifecycle", () => {
   beforeEach(() => {
@@ -11,7 +22,9 @@ describe("opening lifecycle", () => {
     Object.defineProperty(document, "fonts", { configurable: true, value: { ready: new Promise(() => {}) } });
   });
   afterEach(() => {
-    cleanup();
+    act(() => root?.unmount());
+    root = undefined;
+    document.body.replaceChildren();
     vi.useRealTimers();
     vi.restoreAllMocks();
   });
