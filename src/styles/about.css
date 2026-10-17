@@ -13,9 +13,9 @@
   margin: 0;
   overflow-wrap: normal;
 }
-.bf-about h1 { font-size: 48px !important; line-height: 1.1 !important; }
-.bf-about h2 { font-size: 32px !important; line-height: 1.15 !important; }
-.bf-about h3 { font-size: 28px !important; line-height: 1.2 !important; }
+.bf-about .about-opening h1 { font-size: 48px !important; line-height: 1.1 !important; }
+.bf-about section h2 { font-size: 32px !important; line-height: 1.15 !important; }
+.bf-about .about-relationship h3 { font-size: 28px !important; line-height: 1.2 !important; }
 .bf-about p {
   font-family: var(--font-body);
   font-size: 14px !important;
@@ -78,9 +78,9 @@
 }
 @media (max-width: 599px) {
   .bf-about { padding: 108px 20px 56px; }
-  .bf-about h1 { font-size: 31.52px !important; }
-  .bf-about h2,
-  .bf-about h3 { font-size: 23.64px !important; }
+  .bf-about .about-opening h1 { font-size: 31.52px !important; }
+  .bf-about section h2,
+  .bf-about .about-relationship h3 { font-size: 23.64px !important; }
   .bf-about p { font-size: 12.805px !important; line-height: 1.7 !important; }
   .bf-about .about-lead,
   .bf-about .about-closing { font-size: 13.79px !important; }
