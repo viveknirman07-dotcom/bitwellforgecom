@@ -1,3 +1,7 @@
+## Restrained About rebuild
+- [x] Recompose About without cards, decorative labels or unnecessary animation using existing assets and typography
+- [x] Verify alignment, readability, images and overflow on phone, tablet and desktop
+
 ## Reference opening experience
 - [x] Observe reference entrance timing, masking, image sequence and repeat behavior
 - [x] Implement opening-only choreography with existing brand assets and safe lifecycle
