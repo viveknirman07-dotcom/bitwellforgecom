@@ -67,6 +67,17 @@
 }
 .bf-about .about-principles article { min-width: 0; max-width: 460px; }
 .bf-about .about-closing { margin-top: 48px; max-width: 680px; }
+@media (min-width: 600px) {
+  .bf-about > header,
+  .bf-about > section { max-width: none; width: 100%; }
+  .bf-about .about-practice { align-items: start; }
+  .bf-about .about-practice-copy,
+  .bf-about .about-principles article { max-width: none; }
+  .bf-about .about-section-intro > *,
+  .bf-about .about-relationship > * { min-width: 0; }
+  .bf-about .about-section-intro p,
+  .bf-about .about-relationship p { max-width: none; }
+}
 @media (max-width: 1023px) {
   .bf-about { padding: 120px 32px 72px; }
   .bf-about .about-practice,
