@@ -92,6 +92,13 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
       element.querySelector(".bf-opening-title")?.setAttribute("hidden", "");
       if (hero && final && imgs[5]?.naturalWidth) {
         const rect = hero.getBoundingClientRect();
+        const sx = rect.width / element.clientWidth;
+        const sy = rect.height / element.clientHeight;
+        void animate(imgs[5], [
+          { transform: "scale(1)" },
+          { transform: `scale(${1 / sx},${1 / sy})`, offset: .8 },
+          { transform: `scale(${1 / sx},${1 / sy})` },
+        ], { duration: 600, easing: "cubic-bezier(0.65,0,0.35,1)" });
         // Connect the full-viewport last image to the unchanged hero's real box.
         await animate(final, [
           { transform: "translate(0,0) scale(1)", opacity: 1 },

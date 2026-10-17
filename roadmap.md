@@ -1,7 +1,7 @@
 ## Reference opening experience
-- [ ] Observe reference entrance timing, masking, image sequence and repeat behavior
-- [ ] Implement opening-only choreography with existing brand assets and safe lifecycle
-- [ ] Verify desktop, tablet, mobile, reduced motion, slow assets and navigation
+- [x] Observe reference entrance timing, masking, image sequence and repeat behavior
+- [x] Implement opening-only choreography with existing brand assets and safe lifecycle
+- [x] Verify desktop, tablet, mobile, reduced motion, slow assets and navigation
 
 ## About editorial card redesign
 - [x] Replace only the whole-system image with reference-inspired collage and verify readable desktop-like About mobile presentation
