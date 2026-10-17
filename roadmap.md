@@ -1,6 +1,6 @@
 ## Restrained About rebuild
-- [ ] Recompose About without cards, decorative labels or unnecessary animation using existing assets and typography
-- [ ] Verify alignment, readability, images and overflow on phone, tablet and desktop
+- [x] Recompose About without cards, decorative labels or unnecessary animation using existing assets and typography
+- [x] Verify alignment, readability, images and overflow on phone, tablet and desktop
 
 ## Reference opening experience
 - [x] Observe reference entrance timing, masking, image sequence and repeat behavior
