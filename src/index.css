@@ -1347,6 +1347,7 @@ body.vault-transitioning--calm #root { animation: none; }
     --secondary-foreground: 230 8% 22%;
     --muted: 40 18% 90%;
     --muted-foreground: 230 6% 38%;
+    --client-story-body: 230 6% 42%;
     --accent: 230 94% 14%;
     --accent-foreground: 0 0% 100%;
     --border: 230 8% 22% / 0.35;
@@ -1374,6 +1375,7 @@ body.vault-transitioning--calm #root { animation: none; }
     --secondary-foreground: 0 0% 100%;
     --muted: 230 60% 20%;
     --muted-foreground: 230 20% 80%;
+    --client-story-body: 230 20% 83%;
     --accent: 0 0% 100%;
     --accent-foreground: 230 94% 14%;
     --border: 0 0% 100% / 0.25;
@@ -1389,6 +1391,12 @@ body.vault-transitioning--calm #root { animation: none; }
 }
 
 /* Brand name typography: applies only to the BitwellForge wordmark text. */
+.bf-home .bf-client-story-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: hsl(var(--client-story-body));
+}
+
 :root { --font-brand: "Cormorant Garamond", serif; }
 .brand-name { font-family: var(--font-brand) !important; font-weight: 700 !important; }
 
