@@ -1,3 +1,8 @@
+## About alignment and Client Story paragraphs
+- [ ] Remove bold from the About name and refine desktop and tablet alignment
+- [ ] Apply Montserrat 400 and softer text to Client Story body paragraphs only
+- [ ] Verify rendered paragraphs on every slide in both themes and check About across screen sizes
+
 ## Restrained About rebuild
 - [x] Recompose About without cards, decorative labels or unnecessary animation using existing assets and typography
 - [x] Verify alignment, readability, images and overflow on phone, tablet and desktop
