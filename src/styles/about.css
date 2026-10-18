@@ -57,6 +57,30 @@
 .bf-about .about-section-intro { margin-bottom: 32px; }
 .bf-about .about-section-intro p,
 .bf-about .about-relationship p { margin-top: 0; }
+.bf-about .about-section-intro p + p { margin-top: 16px; }
+.bf-about .about-editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 64px;
+  align-items: start;
+  border-top: 1px solid hsl(var(--border));
+  padding: 56px 0;
+}
+.bf-about .about-editorial-copy { min-width: 0; }
+.bf-about .about-editorial-copy p { max-width: none; }
+.bf-about .about-editorial-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.bf-about .about-capabilities {
+  border-top: 1px solid hsl(var(--border));
+  padding: 48px 0;
+}
+.bf-about .about-capabilities .about-section-intro { margin-bottom: 0; }
+.bf-about .about-systems { padding-bottom: 40px; }
 .bf-about .about-relationship { padding: 24px 0; border-top: 1px solid hsl(var(--border)); }
 .bf-about .about-principles {
   display: grid;
@@ -103,7 +127,9 @@
   .bf-about .about-opening,
   .bf-about .about-section-intro,
   .bf-about .about-relationship,
-  .bf-about .about-principles { gap: 32px; }
+  .bf-about .about-principles,
+  .bf-about .about-editorial { gap: 32px; }
+  .bf-about .about-editorial { padding: 40px 0; }
   .bf-about .about-opening { margin-bottom: 40px; }
   .bf-about .about-practice { padding-bottom: 48px; }
 }
@@ -119,7 +145,11 @@
   .bf-about .about-practice,
   .bf-about .about-section-intro,
   .bf-about .about-relationship,
-  .bf-about .about-principles { grid-template-columns: minmax(0, 1fr) !important; }
+  .bf-about .about-principles,
+  .bf-about .about-editorial { grid-template-columns: minmax(0, 1fr) !important; }
+  .bf-about .about-editorial { gap: 28px; padding: 32px 0; }
+  .bf-about .about-capabilities { padding: 32px 0; }
+  .bf-about .about-systems { padding-bottom: 24px; }
   .bf-about .about-practice { gap: 28px; padding-bottom: 36px; }
   .bf-about .about-practice-copy { max-width: none; }
   .bf-about .about-systems { padding-top: 32px; }
