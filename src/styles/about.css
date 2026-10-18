@@ -14,6 +14,7 @@
   overflow-wrap: normal;
 }
 .bf-about .about-opening h1 { font-size: 48px !important; line-height: 1.1 !important; }
+.bf-about .about-opening .brand-name { font-weight: 400 !important; }
 .bf-about section h2 { font-size: 32px !important; line-height: 1.15 !important; }
 .bf-about .about-relationship h3 { font-size: 28px !important; line-height: 1.2 !important; }
 .bf-about p {
@@ -69,7 +70,14 @@
 .bf-about .about-closing { margin-top: 48px; max-width: 680px; }
 @media (min-width: 600px) {
   .bf-about > header,
-  .bf-about > section { max-width: none; width: 100%; }
+  .bf-about > section { max-width: 1440px; width: 100%; }
+  .bf-about .about-opening {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 64px;
+    align-items: baseline;
+  }
+  .bf-about .about-lead { margin-top: 0; max-width: none; }
   .bf-about .about-practice { align-items: start; }
   .bf-about .about-practice-copy,
   .bf-about .about-principles article { max-width: none; }
@@ -77,10 +85,22 @@
   .bf-about .about-relationship > * { min-width: 0; }
   .bf-about .about-section-intro p,
   .bf-about .about-relationship p { max-width: none; }
+  .bf-about .about-section-intro,
+  .bf-about .about-relationship { align-items: baseline; }
+  .bf-about .about-practice-copy p,
+  .bf-about .about-principles p { max-width: none; }
+  .bf-about .about-principles { row-gap: 16px; }
+  .bf-about .about-principles article {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+  }
+  .bf-about .about-principles p { margin-top: 0; }
 }
 @media (max-width: 1023px) {
   .bf-about { padding: 120px 32px 72px; }
   .bf-about .about-practice,
+  .bf-about .about-opening,
   .bf-about .about-section-intro,
   .bf-about .about-relationship,
   .bf-about .about-principles { gap: 32px; }
