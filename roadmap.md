@@ -1,6 +1,6 @@
 ## Detailed About expansion
-- [ ] Expand About with substantive firm and approach detail and four existing visuals in separate placements
-- [ ] Verify image loading, regular wordmark, alignment and readability on desktop, tablet and phone
+- [x] Expand About with substantive firm and approach detail and four existing visuals in separate placements
+- [x] Verify image loading, regular wordmark, alignment and readability on desktop, tablet and phone
 
 ## About alignment and Client Story paragraphs
 - [x] Remove bold from the About name and refine desktop and tablet alignment
