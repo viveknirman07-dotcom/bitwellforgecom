@@ -234,7 +234,7 @@ const Index = () => {
       <section className="relative mt-[72px] lg:mt-[113px]">
         <div data-opening-hero className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
           <motion.img src={heroImg} alt="Concrete and steel transit spans converging into an engineered infrastructure system" width={1920} height={1088} fetchPriority="high" decoding="async"
-            className="absolute inset-0 w-full h-full object-cover object-[57%_center] md:object-center"
+            className="absolute inset-0 w-full h-full object-cover object-[74%_center] md:object-[62%_center] lg:object-center"
             initial={reduced ? false : { scale: 1.15 }} animate={{ scale: ready ? 1 : 1.15 }} transition={{ duration: 1.8, ease }} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
           <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
