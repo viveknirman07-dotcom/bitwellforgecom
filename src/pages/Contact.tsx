@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Check } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SocialLinks from "@/components/SocialLinks";
 import { useSEO } from "@/hooks/use-seo";
+import { supabase } from "@/integrations/supabase/client";
 
 const serviceOptions = [
   "General Inquiry",
@@ -86,6 +87,11 @@ const Contact = () => {
     challenge: "",
   });
   const [prefilled, setPrefilled] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [done, setDone] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const submissionId = useRef(crypto.randomUUID());
+  const honey = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const serviceParam = searchParams.get("service");
@@ -99,13 +105,27 @@ const Contact = () => {
     }
   }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent("New Inquiry from BitwellForge Website");
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nCompany: ${form.company}\nInterested In: ${form.service}\nCurrent Challenge: ${form.challenge}`
-    );
-    window.location.href = `mailto:business@bitwellforge.com?subject=${subject}&body=${body}`;
+    if (sending) return;
+    setSending(true);
+    setFormError(null);
+    const { data, error } = await supabase.functions.invoke("contact-inquiry", {
+      body: { ...form, submission_id: submissionId.current, website: honey.current?.value ?? "" },
+    });
+    setSending(false);
+    if (error || !data?.ok) {
+      let msg = "Transmission failed. Please try again.";
+      try {
+        const body = await (error as { context?: Response })?.context?.json();
+        if (body?.error) msg = body.error;
+      } catch {
+        /* keep default */
+      }
+      setFormError(msg);
+      return;
+    }
+    setDone(true);
   };
 
   return (
