@@ -186,7 +186,20 @@ const Contact = () => {
             <div className="lg:col-span-7 lg:col-start-6 xl:col-span-6 xl:col-start-7">
               <ScrollReveal delay={160}>
                 <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground mb-2">Enquiry</p>
+                {done ? (
+                  <div className="border-t border-border/70 pt-10 sm:pt-12">
+                    <span className="flex h-12 w-12 items-center justify-center border border-foreground/30">
+                      <Check className="h-5 w-5" />
+                    </span>
+                    <h2 className="mt-8 font-heading text-3xl font-normal text-foreground">Inquiry received</h2>
+                    <p className="mt-4 font-body text-[15px] leading-[1.75] font-light text-muted-foreground max-w-[44ch]">
+                      Thank you. Your enquiry has been transmitted to our team and a confirmation is on its way to
+                      your inbox. We respond within 24 hours.
+                    </p>
+                  </div>
+                ) : (
                 <form onSubmit={handleSubmit} className="border-t border-border/70">
+                  <input ref={honey} type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                   <Row n="01" htmlFor="name" label="Name">
                     <input id="name" type="text" required maxLength={100} value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -235,16 +248,23 @@ const Contact = () => {
 
                   <div className="md:grid md:grid-cols-[150px_1fr] gap-x-8 pt-10 sm:pt-12">
                     <span className="hidden md:block" />
-                    <button
-                      type="submit"
-                      className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-10 px-7 py-5 text-[11px] font-medium transition-[opacity,transform] duration-500 hover:opacity-90 active:scale-[0.99]"
-                      style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
-                    >
-                      <span style={{ letterSpacing: "0.26em", textTransform: "uppercase" }}>Send inquiry</span>
-                      <ArrowRight size={16} className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
-                    </button>
+                    <div>
+                      <button
+                        type="submit"
+                        disabled={sending}
+                        className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-10 px-7 py-5 text-[11px] font-medium transition-[opacity,transform] duration-500 hover:opacity-90 active:scale-[0.99] disabled:opacity-60 disabled:pointer-events-none"
+                        style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
+                      >
+                        <span style={{ letterSpacing: "0.26em", textTransform: "uppercase" }}>{sending ? "Sending" : "Send inquiry"}</span>
+                        <ArrowRight size={16} className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
+                      </button>
+                      {formError && (
+                        <p className="mt-4 text-[13px] leading-relaxed text-destructive">{formError}</p>
+                      )}
+                    </div>
                   </div>
                 </form>
+                )}
               </ScrollReveal>
             </div>
           </div>
