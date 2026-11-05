@@ -1,6 +1,6 @@
 ## Sharp opening branding rebuild
-- [ ] Rebuild only the opening with live serif branding, italic tagline and reference-led motion
-- [ ] Verify sharpness, alignment, handoff and safe lifecycle on mobile, tablet, desktop and high-resolution displays
+- [x] Rebuild only the opening with live serif branding, italic tagline and reference-led motion
+- [x] Verify sharpness, alignment, handoff and safe lifecycle on mobile, tablet, desktop and high-resolution displays
 
 ## Detailed About expansion
 - [x] Expand About with substantive firm and approach detail and four existing visuals in separate placements

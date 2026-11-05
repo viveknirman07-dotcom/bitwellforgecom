@@ -45,6 +45,8 @@
 .bf-opening-light p { transform: translateY(115%); }
 .bf-opening[data-phase="handoff"] { pointer-events: none; }
 html[data-bf-opening] { overflow: hidden; }
+html[data-bf-opening] .cursor-ring,
+html[data-bf-opening] .cursor-ring + div { visibility: hidden; }
 @media (max-width: 1023px) {
   .bf-opening-brand { font-size: var(--bf-brand-fit, 76px); }
 }
