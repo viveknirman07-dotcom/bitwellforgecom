@@ -13,6 +13,7 @@
 .bf-opening-light,
 .bf-opening-navy {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   padding: 32px;
 }
