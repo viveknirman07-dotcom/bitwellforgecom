@@ -48,6 +48,8 @@
     --sidebar-ring: 220 79% 48%;
 
     /* Custom tokens */
+    --opening-navy: 233 81% 10%;
+    --opening-blue: 206 74% 89%;
     --navy: 233 81% 10%;
     --navy-light: 226 30% 22%;          /* #2d3a52 */
     --navy-deepest: 233 85% 7%;
