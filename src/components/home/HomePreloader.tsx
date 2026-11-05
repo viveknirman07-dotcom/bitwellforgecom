@@ -1,8 +1,8 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import regularFont from "@/assets/fonts/opening-cormorant-normal-400.ttf.asset.json";
-import boldFont from "@/assets/fonts/opening-cormorant-normal-700.ttf.asset.json";
-import italicFont from "@/assets/fonts/opening-cormorant-italic-400.ttf.asset.json";
+import regularFont from "@/assets/fonts/opening-cormorant-normal-400.woff";
+import boldFont from "@/assets/fonts/opening-cormorant-normal-700.woff";
+import italicFont from "@/assets/fonts/opening-cormorant-italic-400.woff";
 import "./opening.css";
 
 let openingSeen = false;
@@ -14,9 +14,9 @@ const hasOpened = () => {
 const loadBrandFonts = () => {
   if (!brandFonts) {
     brandFonts = Promise.all([
-      [regularFont.url, "400", "normal"],
-      [boldFont.url, "700", "normal"],
-      [italicFont.url, "400", "italic"],
+      [regularFont, "400", "normal"],
+      [boldFont, "700", "normal"],
+      [italicFont, "400", "italic"],
     ].map(async ([url, weight, style]) => {
       const face = new FontFace("BF Opening Cormorant", `url(${url})`, { weight, style });
       document.fonts.add(await face.load());
