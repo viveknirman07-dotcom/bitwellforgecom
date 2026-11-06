@@ -1,8 +1,6 @@
 import type * as React from 'npm:react@18.3.1'
 import { template as careerApplication } from './career-application.tsx'
 import { template as applicantConfirmation } from './applicant-confirmation.tsx'
-import { template as contactInquiry } from './contact-inquiry.tsx'
-import { template as contactConfirmation } from './contact-confirmation.tsx'
 
 export interface TemplateEntry {
   component: React.ComponentType<any>
@@ -15,6 +13,4 @@ export interface TemplateEntry {
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'career-application': careerApplication,
   'applicant-confirmation': applicantConfirmation,
-  'contact-inquiry': contactInquiry,
-  'contact-confirmation': contactConfirmation,
 }

@@ -24,22 +24,18 @@ export const BrandHeader = ({ mode = 'auto' }: { mode?: 'auto' | 'light' | 'dark
   </Section>
 )
 
-export type FooterKind = 'recruitment' | 'internal' | 'account' | 'inquiry' | 'inquiry-internal'
+export type FooterKind = 'recruitment' | 'internal' | 'account'
 
 const COPY: Record<FooterKind, string> = {
   recruitment: 'You are receiving this email because you submitted an application to BitwellForge. This message confirms receipt of your application and relates to the recruitment process. For information about how we handle personal data, please read our Privacy Policy.',
   internal: 'This is an internal recruitment notice generated when a candidate submits an application through the BitwellForge Careers page. Candidate data is handled under our Privacy Policy.',
   account: 'You are receiving this email because an action was requested on your BitwellForge account. It is a service message related to account access. For information about how we handle personal data, please read our Privacy Policy.',
-  inquiry: 'You are receiving this email because you sent an enquiry through the BitwellForge contact page. This message confirms receipt of your enquiry. For information about how we handle personal data, please read our Privacy Policy.',
-  'inquiry-internal': 'This is an internal notice generated when a visitor submits an enquiry through the BitwellForge contact page. Enquiry data is handled under our Privacy Policy.',
 }
 
 const CONTACT: Record<FooterKind, string> = {
   recruitment: 'careers@bitwellforge.com',
   internal: 'careers@bitwellforge.com',
   account: 'support@bitwellforge.com',
-  inquiry: 'business@bitwellforge.com',
-  'inquiry-internal': 'business@bitwellforge.com',
 }
 
 /** Standardized privacy and contact footer. Email preference links are appended automatically by the email service where applicable. */

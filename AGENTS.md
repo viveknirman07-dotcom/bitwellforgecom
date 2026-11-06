@@ -7,7 +7,7 @@
 - Public privacy and cookie explanations live on dedicated pages so footer links lead to meaningful policies rather than the contact form.
 - Image reveal is coordinated once at the app root after decode; retain native lazy loading and exempt the timed homepage preloader to prevent duplicated animation.
 - Client Stories uses one deadline-based autoplay scheduler independent of transition and clone reset state; manual swipes restart it to prevent drift and competing timers.
-- The opening uses native live typography with separately loaded brand fonts and transform-only background reveals, never scaled text or preview bitmaps; one cancellable timeline, bounded font/hero waiting and shared Lenis lock preserve sharpness and safe navigation.
+- The opening owns one cancellable transform-only timeline with bounded decode waiting and a shared Lenis lock; preserve session suppression and reduced-motion bypass to avoid navigation replays or stuck scrolling.
 - App emails send only from their feature Edge Functions through the shared managed helper; Lovable hosts unsubscribe and delivery handling so no project-owned queue or unsubscribe route is added.
 - Careers receipt and internal notice are independent fixed-template sends keyed by the saved application ID; browser retries reuse an application UUID to prevent duplicate records and messages.
 - Outgoing templates share one email header and typography definitions; use one img with picture/media enhancement and a light fallback so unsupported email clients never receive stacked artwork.

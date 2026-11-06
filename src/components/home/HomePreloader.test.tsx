@@ -19,8 +19,6 @@ describe("opening lifecycle", () => {
   beforeEach(() => {
     sessionStorage.clear();
     vi.useFakeTimers();
-    vi.stubGlobal("ResizeObserver", class { observe() {} disconnect() {} });
-    vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
     Object.defineProperty(document, "fonts", { configurable: true, value: { ready: new Promise(() => {}) } });
   });
   afterEach(() => {
@@ -29,7 +27,6 @@ describe("opening lifecycle", () => {
     document.body.replaceChildren();
     vi.useRealTimers();
     vi.restoreAllMocks();
-    vi.unstubAllGlobals();
   });
   it("does not replay on cached session visits", () => {
     sessionStorage.setItem("bf-preloaded", "1");
