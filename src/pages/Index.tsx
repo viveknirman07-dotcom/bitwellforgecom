@@ -14,6 +14,9 @@ import acquisitionImg from "@/assets/photos/system-acquisition.jpg";
 import processImg from "@/assets/photos/system-process.jpg";
 import insightsImg from "@/assets/photos/system-insights.jpg";
 import visibilityImg from "@/assets/photos/system-visibility.jpg";
+import practiceVisual from "@/assets/photos/editorial/column-compass.jpg";
+import insightsVisual from "@/assets/photos/editorial/archive-drawers.jpg";
+import signalVisual from "@/assets/photos/editorial/signal-tower.jpg";
 import preStratImg from "@/assets/photos/preloader/system-strategy-640.webp";
 import preOpsImg from "@/assets/photos/preloader/system-operations-640.webp";
 import preKnowledgeImg from "@/assets/photos/preloader/system-insights-640.webp";
@@ -299,16 +302,16 @@ const Index = () => {
           <div className="col-span-12 md:col-span-6 relative h-[360px] md:h-[440px]">
             <Reveal className="absolute left-[30%] md:left-[30%] top-0 w-[52%] md:w-[48%] aspect-[224/280]"><img src={strategyImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
             <Reveal delay={0.15} className="absolute left-[8%] md:left-[10%] top-[34%] w-[52%] md:w-[48%]">
-              <div className="aspect-[224/280] overflow-hidden"><img src={operationsImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
+              <div className="aspect-[224/280] overflow-hidden"><img src={practiceVisual} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover object-[52%_center]" /></div>
               <ArrowLink to="/about" className="mt-2">Meet the practice</ArrowLink>
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-6 relative h-[420px] md:h-[560px] md:mt-40">
             <Reveal className="absolute left-0 top-0 w-[70%] md:w-[60%]">
-              <div className="aspect-[342/428] overflow-hidden"><img src={processImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></div>
+              <div className="aspect-[342/428] overflow-hidden"><img src={insightsVisual} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover object-[45%_center]" /></div>
               <ArrowLink to="/insights" className="mt-2">Recent insights</ArrowLink>
             </Reveal>
-            <Reveal delay={0.15} className="absolute right-[4%] md:right-[8%] top-[58%] w-[40%] aspect-[224/280]"><img src={visibilityImg} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover" /></Reveal>
+            <Reveal delay={0.15} className="absolute right-[4%] md:right-[8%] top-[58%] w-[40%] aspect-[224/280]"><img src={signalVisual} alt="" aria-hidden loading="lazy" width={1536} height={1024} className="w-full h-full object-cover object-center" /></Reveal>
           </div>
           <div className="col-span-12 md:col-span-6 md:row-start-2 md:-mt-40">
             <Reveal><p className={`${cap} mb-6`}>Be part of our team</p></Reveal>
