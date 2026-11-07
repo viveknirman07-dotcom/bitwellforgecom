@@ -1,7 +1,7 @@
 ## Restricted artwork palette
-- [ ] Recolour each existing public visual with a distinct combination of the nine user-approved colours only
-- [ ] Preserve exact compositions, dimensions, crops, layout and text; refresh opening derivatives
-- [ ] Verify artwork and public pages on phone, tablet and desktop
+- [x] Recolour each existing public visual with a distinct combination of the nine user-approved colours only
+- [x] Preserve exact compositions, dimensions, crops, layout and text; refresh opening derivatives
+- [x] Verify artwork and public pages on phone, tablet and desktop
 
 ## Image colours and breathing room
 - [x] Give existing public artwork distinct colour treatments without changing subjects or page design
