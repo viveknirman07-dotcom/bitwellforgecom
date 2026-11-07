@@ -1,3 +1,8 @@
+## Image colours and breathing room
+- [x] Give existing public artwork distinct colour treatments without changing subjects or page design
+- [x] Loosen image framing slightly and refresh matching opening copies without changing card dimensions
+- [x] Verify image loading and unchanged layout on phone, tablet and desktop
+
 ## Detailed About expansion
 - [x] Expand About with substantive firm and approach detail and four existing visuals in separate placements
 - [x] Verify image loading, regular wordmark, alignment and readability on desktop, tablet and phone
