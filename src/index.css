@@ -1422,8 +1422,3 @@ img.bf-media-ready { transition: opacity 420ms ease-out, transform 700ms ease-ou
   white-space: nowrap;
   font-size: min(calc((100vw - 40px) / 11.8), 124px);
 }
-
-/* Loosened visual crops: subjects gain breathing room inside unchanged frames.
-   The mat tone matches the collage paper so the exposed edge blends in. */
-.bf-visual-frame { overflow: hidden; background-color: hsl(40 30% 94%); }
-.bf-visual-frame > img:not(.bf-visual-zoom) { transform: scale(0.94); }

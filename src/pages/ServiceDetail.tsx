@@ -118,7 +118,7 @@ const ServiceDetail = () => {
 
           {/* ── Photographic context */}
           <ScrollReveal delay={200}>
-            <div className="mb-12 aspect-[16/9] bf-visual-frame">
+            <div className="mb-12 aspect-[16/9] overflow-hidden">
               <img src={serviceImage.src} alt={serviceImage.alt} width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </div>
           </ScrollReveal>

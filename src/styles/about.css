@@ -43,7 +43,6 @@
   height: auto;
   aspect-ratio: 1264 / 848;
   object-fit: cover;
-  transform: scale(0.94);
 }
 .bf-about .about-systems {
   border-top: 1px solid hsl(var(--border));
@@ -75,7 +74,6 @@
   height: auto;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-  transform: scale(0.94);
 }
 .bf-about .about-capabilities {
   border-top: 1px solid hsl(var(--border));

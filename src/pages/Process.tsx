@@ -134,8 +134,8 @@ const Process = () => {
                     {stage.description}
                   </p>
                 </div>
-                <div className="lg:col-span-6 bf-visual-frame aspect-[3/2]">
-                  <img src={stage.image} alt={stage.imageAlt} width={1536} height={1024} loading="lazy" decoding="async" className="bf-visual-zoom h-full w-full object-cover transition-transform duration-700 scale-[0.94] hover:scale-[0.965]" />
+                <div className="lg:col-span-6 overflow-hidden aspect-[3/2]">
+                  <img src={stage.image} alt={stage.imageAlt} width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.025]" />
                 </div>
               </div>
             </ScrollReveal>
