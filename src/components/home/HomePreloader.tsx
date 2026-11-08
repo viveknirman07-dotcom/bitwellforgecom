@@ -12,7 +12,9 @@ const hasOpened = () => {
   try { return Boolean(sessionStorage.getItem("bf-preloaded")); } catch { return false; }
 };
 
-export default function HomePreloader({ images, headline, onDone }: { images: string[]; headline: string; onDone: () => void }) {
+export type LockupPart = { text: string; className?: string };
+
+export default function HomePreloader({ images, lines, ariaLabel, onDone }: { images: string[]; lines: LockupPart[][]; ariaLabel: string; onDone: () => void }) {
   const reduced = useReducedMotion();
   const root = useRef<HTMLDivElement>(null);
   const done = useRef(onDone);
