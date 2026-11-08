@@ -12,7 +12,9 @@ const hasOpened = () => {
   try { return Boolean(sessionStorage.getItem("bf-preloaded")); } catch { return false; }
 };
 
-export default function HomePreloader({ images, headline, onDone }: { images: string[]; headline: string; onDone: () => void }) {
+export type LockupPart = { text: string; className?: string };
+
+export default function HomePreloader({ images, lines, ariaLabel, onDone }: { images: string[]; lines: LockupPart[][]; ariaLabel: string; onDone: () => void }) {
   const reduced = useReducedMotion();
   const root = useRef<HTMLDivElement>(null);
   const done = useRef(onDone);
@@ -122,8 +124,19 @@ export default function HomePreloader({ images, headline, onDone }: { images: st
   if (!show || reduced) return null;
   return (
     <div ref={root} data-visual-loading-exempt data-phase="preparing" className="bf-opening" aria-hidden="true">
-      <p className="bf-opening-title bf-preloader-tagline font-heading font-normal leading-[0.91]" aria-label={headline}>
-        <span className="bf-opening-title-mask">{Array.from(headline).map((char, i) => <span key={i} className="bf-opening-letter">{char === " " ? "\u00a0" : char}</span>)}</span>
+      <p className="bf-opening-title bf-preloader-tagline font-heading font-normal leading-[0.91]" aria-label={ariaLabel}>
+        <span className="bf-opening-title-mask">
+          {lines.map((line, li) => (
+            <span key={li} className={li === 1 ? "block bf-opening-tagline" : "block"}>
+              {line.map((part, pi) => (
+                <span key={pi} className={part.className}>
+                  {Array.from(part.text).map((char, ci) => <span key={ci} className="bf-opening-letter">{char === " " ? " " : char}</span>)}
+                  {pi < line.length - 1 ? " " : ""}
+                </span>
+              ))}
+            </span>
+          ))}
+        </span>
       </p>
       {images.slice(0, 6).map((src, i) => (
         <div key={src} className={`bf-opening-frame bf-opening-frame-${i}`}>
