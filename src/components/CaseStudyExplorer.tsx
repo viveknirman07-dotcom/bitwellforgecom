@@ -133,7 +133,7 @@ const CaseStudyExplorer = ({ studies, archiveIndex }: Props) => {
                     {s.title}
                   </h2>
                   <div className="mt-8 grid grid-cols-1 sm:grid-cols-12 gap-6 sm:gap-8">
-                    <div className="sm:col-span-8 aspect-[4/3] sm:aspect-[16/11] overflow-hidden">
+                    <div className="sm:col-span-8 aspect-[4/3] sm:aspect-[16/11] bf-visual-frame">
                       <img src={images[a % images.length]} alt="" loading={i < 2 ? "eager" : "lazy"} decoding="async" width={1536} height={1024} className="h-full w-full object-cover" />
                     </div>
                     <div className="sm:col-span-4 flex flex-col">

@@ -705,7 +705,7 @@ const Insights = () => {
             </ScrollReveal>
           </div>
 
-          <div className="mb-12 md:mb-16 aspect-[16/7] overflow-hidden">
+          <div className="mb-12 md:mb-16 aspect-[16/7] bf-visual-frame">
             <img src={insightImage} alt="Natural light falling across rows of research folios in a stone archive" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
 

@@ -109,7 +109,7 @@ const InsightArticle = () => {
               <h1 className="font-heading text-[34px] md:text-[52px] lg:text-[60px] font-normal text-foreground leading-[1.06] tracking-tightest text-balance">
                 {article.title}
               </h1>
-              <figure className="mt-10 md:mt-12 aspect-[3/2] overflow-hidden bg-muted">
+              <figure className="mt-10 md:mt-12 aspect-[3/2] bf-visual-frame">
                 <img src={editorialVisualFor(article.category).src} alt={editorialVisualFor(article.category).alt} width={1536} height={1024} loading="eager" decoding="async" className="h-full w-full object-cover" />
               </figure>
             </header>
