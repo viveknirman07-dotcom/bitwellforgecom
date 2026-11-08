@@ -46,7 +46,7 @@ const CaseStudies = () => {
               system, run the system, let the system compound.
             </p>
           </ScrollReveal>
-          <div className="mt-12 md:mt-16 aspect-[16/7] overflow-hidden">
+          <div className="mt-12 md:mt-16 aspect-[16/7] bf-visual-frame">
             <img src={caseImage} alt="Different bridge structures spanning the same quarry, each with a distinct engineered solution" width={1536} height={1024} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
         </div>
