@@ -335,6 +335,42 @@ export type Database = {
           },
         ]
       }
+      contact_inquiries: {
+        Row: {
+          challenge: string
+          company: string | null
+          created_at: string
+          email: string
+          email_status: string | null
+          full_name: string
+          id: string
+          phone: string
+          service: string
+        }
+        Insert: {
+          challenge: string
+          company?: string | null
+          created_at?: string
+          email: string
+          email_status?: string | null
+          full_name: string
+          id?: string
+          phone: string
+          service: string
+        }
+        Update: {
+          challenge?: string
+          company?: string | null
+          created_at?: string
+          email?: string
+          email_status?: string | null
+          full_name?: string
+          id?: string
+          phone?: string
+          service?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           challenge: string
