@@ -1,5 +1,6 @@
 import { admin, logActivity } from './db.ts'
 import { recordCommission } from './affiliate.ts'
+import { AUDIT_SLUG, fulfillAudit } from './audit.ts'
 
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bitwellforgecom.lovable.app'
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
@@ -143,6 +144,13 @@ export async function fulfillOrder(orderId: string) {
     .eq('id', orderId)
     .maybeSingle()
   if (error || !order) throw new Error(`Order not found: ${orderId}`)
+
+  const { data: product } = await db.from('products').select('slug').eq('id', order.product_id).maybeSingle()
+  if (product?.slug === AUDIT_SLUG) {
+    await fulfillAudit(order)
+    await logActivity('order.fulfilled', { order_id: order.id, product: AUDIT_SLUG }, null)
+    return { userId: null, orderId: order.id }
+  }
 
   let userId = order.user_id as string | null
   if (!userId) {

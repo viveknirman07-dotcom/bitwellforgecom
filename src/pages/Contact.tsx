@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { useSearchParams } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -7,6 +8,7 @@ import { useSEO } from "@/hooks/use-seo";
 
 const serviceOptions = [
   "General Inquiry",
+  "Revenue Infrastructure Audit",
   "Diagnose My Growth System",
   "Commercial Growth Strategy",
   "Client Acquisition Architecture",
@@ -99,13 +101,28 @@ const Contact = () => {
     }
   }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent("New Inquiry from BitwellForge Website");
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nCompany: ${form.company}\nInterested In: ${form.service}\nCurrent Challenge: ${form.challenge}`
-    );
-    window.location.href = `mailto:business@bitwellforge.com?subject=${subject}&body=${body}`;
+    if (status === "sending") return;
+    setStatus("sending");
+    setErrorMsg("");
+    const { data, error } = await supabase.functions.invoke("contact-inquiry", {
+      body: { ...form, submission_id: submissionId, website: (e.currentTarget as HTMLFormElement).website?.value ?? "" },
+    });
+    if (error || !data?.ok) {
+      let msg = "Your enquiry could not be sent. Please try again or email business@bitwellforge.com.";
+      try { const body = await (error as any)?.context?.json?.(); if (body?.error) msg = body.error; } catch { /* keep default */ }
+      setErrorMsg(msg);
+      setStatus("error");
+      return;
+    }
+    setStatus("sent");
+    setForm({ name: "", email: "", phone: "", company: "", service: "General Inquiry", challenge: "" });
+    setSubmissionId(crypto.randomUUID());
   };
 
   return (
@@ -167,6 +184,7 @@ const Contact = () => {
               <ScrollReveal delay={160}>
                 <p className="text-[10px] tracking-[0.28em] uppercase text-muted-foreground mb-2">Enquiry</p>
                 <form onSubmit={handleSubmit} className="border-t border-border/70">
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
                   <Row n="01" htmlFor="name" label="Name">
                     <input id="name" type="text" required maxLength={100} value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -217,12 +235,18 @@ const Contact = () => {
                     <span className="hidden md:block" />
                     <button
                       type="submit"
+                      disabled={status === "sending"}
                       className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-10 px-7 py-5 text-[11px] font-medium transition-[opacity,transform] duration-500 hover:opacity-90 active:scale-[0.99]"
                       style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
                     >
-                      <span style={{ letterSpacing: "0.26em", textTransform: "uppercase" }}>Send inquiry</span>
+                      <span style={{ letterSpacing: "0.26em", textTransform: "uppercase" }}>{status === "sending" ? "Sending" : "Send inquiry"}</span>
                       <ArrowRight size={16} className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
                     </button>
+                  </div>
+                  <div aria-live="polite" className="md:grid md:grid-cols-[150px_1fr] gap-x-8">
+                    <span className="hidden md:block" />
+                    {status === "sent" && <p className="pt-6 text-[15px] text-foreground">Thank you. Your enquiry has been received and a confirmation has been sent to your email.</p>}
+                    {status === "error" && <p className="pt-6 text-[15px] text-destructive">{errorMsg}</p>}
                   </div>
                 </form>
               </ScrollReveal>

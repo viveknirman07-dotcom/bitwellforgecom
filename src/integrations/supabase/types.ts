@@ -223,6 +223,112 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_engagements: {
+        Row: {
+          access_token: string
+          created_at: string
+          delivered_at: string | null
+          document_paths: string[]
+          email: string
+          findings_path: string | null
+          full_name: string | null
+          id: string
+          intake: Json | null
+          intake_submitted_at: string | null
+          meeting_at: string | null
+          meeting_url: string | null
+          order_id: string
+          presentation_completed_at: string | null
+          report_path: string | null
+          roadmap_path: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          access_token?: string
+          created_at?: string
+          delivered_at?: string | null
+          document_paths?: string[]
+          email: string
+          findings_path?: string | null
+          full_name?: string | null
+          id?: string
+          intake?: Json | null
+          intake_submitted_at?: string | null
+          meeting_at?: string | null
+          meeting_url?: string | null
+          order_id: string
+          presentation_completed_at?: string | null
+          report_path?: string | null
+          roadmap_path?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          delivered_at?: string | null
+          document_paths?: string[]
+          email?: string
+          findings_path?: string | null
+          full_name?: string | null
+          id?: string
+          intake?: Json | null
+          intake_submitted_at?: string | null
+          meeting_at?: string | null
+          meeting_url?: string | null
+          order_id?: string
+          presentation_completed_at?: string | null
+          report_path?: string | null
+          roadmap_path?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_engagements_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: true
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_status_history: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          engagement_id: string
+          id: string
+          note: string | null
+          status: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          engagement_id: string
+          id?: string
+          note?: string | null
+          status: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          engagement_id?: string
+          id?: string
+          note?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_status_history_engagement_id_fkey"
+            columns: ["engagement_id"]
+            isOneToOne: false
+            referencedRelation: "audit_engagements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       career_applications: {
         Row: {
           audio_url: string | null

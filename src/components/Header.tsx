@@ -30,6 +30,7 @@ const mega: Record<string, Mega> = {
       { label: "All insights", href: "/insights" },
       { label: "Case studies", href: "/case-studies" },
       { label: "Our process", href: "/process" },
+      { label: "Revenue Infrastructure Audit", href: "/audit" },
     ],
   },
 };
@@ -37,6 +38,7 @@ const mega: Record<string, Mega> = {
 const navItems = [
   { label: "Our Expertise", href: "/services" },
   { label: "Our Approach", href: "/process" },
+  { label: "The Audit", href: "/audit" },
   { label: "Our Insights", href: "/insights" },
   { label: "Our Impact", href: "/case-studies" },
   { label: "About", href: "/about" },

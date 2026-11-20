@@ -72,3 +72,8 @@
 - [x] Deploy and verify the updated email functions without publishing the site
 
 - [x] Audit diagrams as SVG on a new /audit page
+
+## Audit and contact
+- [ ] Audit link in navigation and service sections
+- [ ] Audit purchase flow: payment, intake form, emails, presentation booking
+- [ ] Contact form saves inquiries, sends internal notice and sender confirmation, tested
