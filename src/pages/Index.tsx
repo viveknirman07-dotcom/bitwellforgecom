@@ -236,14 +236,11 @@ const Index = () => {
 
         <div className={`${wrap} pt-12 md:pt-20 pb-24 md:pb-40`}>
           <Reveal>
-            <h1 className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(40px,4vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
-              <span className="block whitespace-nowrap">BitwellForge advises service businesses on</span>
-              <span className="block whitespace-nowrap">the structural constraints governing</span>
-              <span className="block whitespace-nowrap">commercial performance, identifying the</span>
-              <span className="block whitespace-nowrap">interdependencies that impede growth</span>
-              <span className="block whitespace-nowrap">across strategy, acquisition, operations, and</span>
-              <span className="block whitespace-nowrap">digital execution.</span>
-            </h1>
+            <div className="border border-transparent md:max-w-[95%]">
+              <h1 className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(28.5px,4.37vw,43.7px)] lg:text-[clamp(38px,3.8vw,55.1px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+                BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.
+              </h1>
+            </div>
           </Reveal>
         </div>
       </section>
