@@ -22,6 +22,7 @@ import Diagnosis from "./pages/Diagnosis";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "@/hooks/use-auth";
 import VisualLoading from "@/components/VisualLoading";
+import OpeningGate from "@/components/opening/OpeningGate";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <VisualLoading />
+            <OpeningGate />
             <ScrollToTop />
             <Routes>
               <Route element={<Layout />}>

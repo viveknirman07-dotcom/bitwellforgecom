@@ -11,3 +11,4 @@
 - App emails send only from their feature Edge Functions through the shared managed helper; Lovable hosts unsubscribe and delivery handling so no project-owned queue or unsubscribe route is added.
 - Careers receipt and internal notice are independent fixed-template sends keyed by the saved application ID; browser retries reuse an application UUID to prevent duplicate records and messages.
 - Outgoing templates share one email header and typography definitions; use one img with picture/media enhancement and a light fallback so unsupported email clients never receive stacked artwork.
+- The brand opening is mounted once at the app root (OpeningGate) and only when a visit starts on the homepage, so the homepage page itself never owns intro timing or state.

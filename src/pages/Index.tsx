@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import HomePreloader from "@/components/home/HomePreloader";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -18,12 +17,6 @@ import visibilityImg from "@/assets/photos/system-visibility.jpg";
 import practiceVisual from "@/assets/photos/editorial/column-compass.jpg";
 import insightsVisual from "@/assets/photos/editorial/archive-drawers.jpg";
 import signalVisual from "@/assets/photos/editorial/signal-tower.jpg";
-import preStratImg from "@/assets/photos/preloader/system-strategy-640.webp";
-import preOpsImg from "@/assets/photos/preloader/system-operations-640.webp";
-import preKnowledgeImg from "@/assets/photos/preloader/system-insights-640.webp";
-import preConnectionsImg from "@/assets/photos/preloader/system-acquisition-640.webp";
-import prePathwaysImg from "@/assets/photos/preloader/system-process-640.webp";
-import preHeroImg from "@/assets/photos/preloader/system-hero-640.webp";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const wrap = "max-w-[1920px] mx-auto px-5 md:px-12 lg:px-[13.5%]";
@@ -218,8 +211,6 @@ const perspectiveImgs = [strategyImg, operationsImg, insightsImg];
 
 const Index = () => {
   const reduced = useReducedMotion();
-  const [ready, setReady] = useState(!!reduced);
-  const handleDone = useCallback(() => setReady(true), []);
 
   useSEO({
     title: "BitwellForge | Consulting & Professional Services",
@@ -232,7 +223,6 @@ const Index = () => {
 
   return (
     <div className="bf-home bg-background text-foreground">
-      <HomePreloader images={[preStratImg, preOpsImg, preKnowledgeImg, preConnectionsImg, prePathwaysImg, preHeroImg]} headline="The business of better." onDone={handleDone} />
 
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
@@ -240,28 +230,20 @@ const Index = () => {
           <picture>
             <source media="(min-width: 768px)" srcSet={heroWide} />
             <motion.img src={heroSquare} alt="A cobalt semicircle rising over a luminous horizon on deep navy" width={1254} height={1254} fetchPriority="high" decoding="async"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              initial={reduced ? false : { scale: 1.06 }} animate={{ scale: ready ? 1 : 1.06 }} transition={{ duration: 1.8, ease }} />
+              className="absolute inset-0 w-full h-full object-cover object-center" />
           </picture>
         </div>
 
-        <div className={`${wrap} pt-12 md:pt-20`}>
-          <h1 className="bf-business-tagline text-foreground leading-[1] tracking-[-0.015em]" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
-            <span style={{ fontWeight: 700 }}>The business</span>{" "}
-            <span style={{ fontWeight: 400, fontStyle: "italic" }}>of better.</span>
-          </h1>
-        </div>
-
-        <div className={`${wrap} pt-8 md:pt-12 pb-24 md:pb-40`}>
+        <div className={`${wrap} pt-12 md:pt-20 pb-24 md:pb-40`}>
           <Reveal>
-            <p className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(40px,4vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+            <h1 className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(40px,4vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
               <span className="block whitespace-nowrap">BitwellForge advises service businesses on</span>
               <span className="block whitespace-nowrap">the structural constraints governing</span>
               <span className="block whitespace-nowrap">commercial performance, identifying the</span>
               <span className="block whitespace-nowrap">interdependencies that impede growth</span>
               <span className="block whitespace-nowrap">across strategy, acquisition, operations, and</span>
               <span className="block whitespace-nowrap">digital execution.</span>
-            </p>
+            </h1>
           </Reveal>
         </div>
       </section>

@@ -31,20 +31,20 @@ describe("opening lifecycle", () => {
   it("does not replay on cached session visits", () => {
     sessionStorage.setItem("bf-preloaded", "1");
     const done = vi.fn();
-    render(<HomePreloader images={[]} headline="The business of better." onDone={done} />);
+    render(<HomePreloader onDone={done} />);
     expect(done).toHaveBeenCalledTimes(1);
     expect(document.documentElement.hasAttribute("data-bf-opening")).toBe(false);
   });
   it("bypasses the opening for reduced-motion visitors", () => {
     vi.spyOn(window, "matchMedia").mockReturnValue({ matches: true } as MediaQueryList);
     const done = vi.fn();
-    render(<HomePreloader images={[]} headline="The business of better." onDone={done} />);
+    render(<HomePreloader onDone={done} />);
     expect(done).toHaveBeenCalledTimes(1);
     expect(document.documentElement.hasAttribute("data-bf-opening")).toBe(false);
   });
   it("releases the scroll lock and timers on interrupted navigation", () => {
     const done = vi.fn();
-    const view = render(<HomePreloader images={[]} headline="The business of better." onDone={done} />);
+    const view = render(<HomePreloader onDone={done} />);
     expect(document.documentElement.hasAttribute("data-bf-opening")).toBe(true);
     view.unmount();
     expect(document.documentElement.hasAttribute("data-bf-opening")).toBe(false);
