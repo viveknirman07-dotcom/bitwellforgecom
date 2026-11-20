@@ -6,7 +6,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useSEO } from "@/hooks/use-seo";
 import { articles } from "@/pages/Insights";
 import { caseStudies } from "@/lib/case-studies-data";
-import heroImg from "@/assets/photos/system-hero.jpg";
+import heroWide from "@/assets/photos/horizon-hero-wide.jpg";
+import heroSquare from "@/assets/photos/horizon-hero-square.jpg";
 import revImg from "@/assets/photos/system-revenue.jpg";
 import strategyImg from "@/assets/photos/system-strategy.jpg";
 import operationsImg from "@/assets/photos/system-operations.jpg";
@@ -231,24 +232,27 @@ const Index = () => {
 
   return (
     <div className="bf-home bg-background text-foreground">
-      <HomePreloader images={[preStratImg, preOpsImg, preKnowledgeImg, preConnectionsImg, prePathwaysImg, preHeroImg]} headline="Structure Compounds Growth" onDone={handleDone} />
+      <HomePreloader images={[preStratImg, preOpsImg, preKnowledgeImg, preConnectionsImg, prePathwaysImg, preHeroImg]} headline="The business of better." onDone={handleDone} />
 
       {/* HERO */}
       <section className="relative mt-[72px] lg:mt-[113px]">
-        <div data-opening-hero className="relative h-[46svh] md:h-[62svh] min-h-[320px] overflow-hidden">
-          <motion.img src={heroImg} alt="Concrete and steel transit spans converging into an engineered infrastructure system" width={1920} height={1088} fetchPriority="high" decoding="async"
-            className="absolute inset-0 w-full h-full object-cover object-[74%_center] md:object-[62%_center] lg:object-[center_top]"
-            initial={reduced ? false : { scale: 1.15 }} animate={{ scale: ready ? 1 : 1.15 }} transition={{ duration: 1.8, ease }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" aria-hidden />
-          <div className={`dark absolute inset-x-0 bottom-0 pb-10 md:pb-16`}>
-            <div className={wrap}>
-              <SplitReveal as="h1" inView={false} play={ready} delay={0.1} text="Structure Compounds Growth"
-                className="bf-tagline-fit font-heading font-semibold text-foreground leading-[1] tracking-[-0.02em]" />
-            </div>
-          </div>
+        <div data-opening-hero className="relative w-full aspect-[10/9] md:aspect-[2/1] md:max-h-[78svh] overflow-hidden bg-primary">
+          <picture>
+            <source media="(min-width: 768px)" srcSet={heroWide} />
+            <motion.img src={heroSquare} alt="A cobalt semicircle rising over a luminous horizon on deep navy" width={1254} height={1254} fetchPriority="high" decoding="async"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              initial={reduced ? false : { scale: 1.06 }} animate={{ scale: ready ? 1 : 1.06 }} transition={{ duration: 1.8, ease }} />
+          </picture>
         </div>
 
-        <div className={`${wrap} pt-10 md:pt-14 pb-24 md:pb-40`}>
+        <div className={`${wrap} pt-12 md:pt-20`}>
+          <h1 className="bf-business-tagline text-foreground leading-[1] tracking-[-0.015em]" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+            <span style={{ fontWeight: 700 }}>The business</span>{" "}
+            <span style={{ fontWeight: 400, fontStyle: "italic" }}>of better.</span>
+          </h1>
+        </div>
+
+        <div className={`${wrap} pt-8 md:pt-12 pb-24 md:pb-40`}>
           <Reveal>
             <p className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(30px,4.6vw,46px)] lg:text-[clamp(40px,4vw,58px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
               <span className="block whitespace-nowrap">BitwellForge advises service businesses on</span>

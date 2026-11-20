@@ -16,22 +16,11 @@ import ServiceDetail from "./pages/ServiceDetail";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyArticle from "./pages/CaseStudyArticle";
 import Careers from "./pages/Careers";
-import AffiliateProgram from "./pages/AffiliateProgram";
-import AffiliateDashboard from "./pages/AffiliateDashboard";
-import AdminAffiliates from "./pages/AdminAffiliates";
-import Vault from "./pages/Vault";
-import ForgeVault from "./pages/ForgeVault";
-import Checkout from "./pages/Checkout";
-import CheckoutSuccess from "./pages/CheckoutSuccess";
-import Account from "./pages/Account";
-import ResetPassword from "./pages/ResetPassword";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
 import Diagnosis from "./pages/Diagnosis";
 import ScrollToTop from "./components/ScrollToTop";
 import { AuthProvider } from "@/hooks/use-auth";
-import RequireAuth from "@/portal/RequireAuth";
-import ReferralGate from "@/components/ReferralGate";
 import VisualLoading from "@/components/VisualLoading";
 
 const queryClient = new QueryClient();
@@ -46,7 +35,6 @@ const App = () => {
           <BrowserRouter>
             <VisualLoading />
             <ScrollToTop />
-            <ReferralGate />
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<Index />} />
@@ -59,43 +47,11 @@ const App = () => {
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/insights/:slug" element={<InsightArticle />} />
                 <Route path="/careers" element={<Careers />} />
-                <Route path="/forge-vault" element={<ForgeVault />} />
-                <Route path="/affiliate" element={<AffiliateProgram />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/cookies" element={<Cookies />} />
                 <Route path="/diagnosis" element={<Diagnosis />} />
               </Route>
-
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/checkout/success" element={<CheckoutSuccess />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route
-                path="/vault"
-                element={
-                  <RequireAuth>
-                    <Vault />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="/affiliate/dashboard"
-                element={
-                  <RequireAuth>
-                    <AffiliateDashboard />
-                  </RequireAuth>
-                }
-              />
-
-              <Route
-                path="/admin/affiliates"
-                element={
-                  <RequireAuth>
-                    <AdminAffiliates />
-                  </RequireAuth>
-                }
-              />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -16,8 +16,8 @@ const Layout = () => {
       <MovingCursor />
       <Header />
       <main className="flex-1">
-        {/* The homepage and Forge Vault run their own entry choreography. */}
-        {location.pathname === "/" || location.pathname === "/forge-vault" ? (
+        {/* The homepage runs its own entry choreography. */}
+        {location.pathname === "/" ? (
           <Outlet />
         ) : (
           <AnimatePresence mode="wait">

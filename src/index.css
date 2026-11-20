@@ -1418,6 +1418,8 @@ img.bf-media-ready { transition: opacity 420ms ease-out, transform 700ms ease-ou
 @media (min-width: 1024px) {
   .bf-tagline-fit { font-size: min(calc(73vw / 12.2), 115px); }
 }
+.bf-business-tagline { font-size: clamp(40px, 11vw, 64px); white-space: nowrap; }
+@media (min-width: 768px) { .bf-business-tagline { font-size: clamp(64px, 7vw, 112px); } }
 .bf-preloader-tagline {
   white-space: nowrap;
   font-size: min(calc((100vw - 40px) / 11.8), 124px);
