@@ -236,8 +236,8 @@ const Index = () => {
 
         <div className={`${wrap} pt-12 md:pt-20 pb-24 md:pb-40`}>
           <Reveal>
-            <div className="border border-transparent md:max-w-[95%]">
-              <h1 className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[clamp(28.5px,4.37vw,43.7px)] lg:text-[clamp(38px,3.8vw,55.1px)] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
+            <div className="border border-transparent">
+              <h1 className="font-normal text-foreground text-[clamp(14px,4.6vw,24px)] md:text-[34.5px] lg:text-[46px] leading-[1.12] tracking-normal" style={{ fontFamily: '"Cormorant Garamond", serif' }}>
                 BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.
               </h1>
             </div>
