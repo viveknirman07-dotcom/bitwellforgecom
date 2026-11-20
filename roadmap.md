@@ -70,3 +70,5 @@
 - [x] Preserve bounce, complaint, unsubscribe, and send-history records
 - [x] Remove legacy delivery files after replacement functions verify
 - [x] Deploy and verify the updated email functions without publishing the site
+
+- [x] Audit diagrams as SVG on a new /audit page
