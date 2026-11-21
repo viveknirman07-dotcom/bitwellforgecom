@@ -18,3 +18,12 @@ project_id = "vtseplrffxvrzygsswfk"
 
   [functions.contact-inquiry]
     verify_jwt = false
+
+  [functions.audit-checkout]
+    verify_jwt = false
+
+  [functions.audit-portal]
+    verify_jwt = false
+
+  [functions.audit-admin]
+    verify_jwt = false

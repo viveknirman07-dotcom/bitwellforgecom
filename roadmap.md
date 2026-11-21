@@ -77,3 +77,4 @@
 - [ ] Audit link in navigation and service sections
 - [ ] Audit purchase flow: payment, intake form, emails, presentation booking
 - [ ] Contact form saves inquiries, sends internal notice and sender confirmation, tested
+- [ ] Own findings presentation booking page with real Google Meet links via Google Calendar
