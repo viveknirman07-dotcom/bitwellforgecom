@@ -4,7 +4,7 @@ import { sendTemplateEmail } from './transactional-email-templates/send-email.ts
 export const AUDIT_SLUG = 'revenue-infrastructure-audit'
 export const AUDIT_PRICE_USD = 1199
 export const AUDIT_SITE = 'https://www.bitwellforge.com'
-export const BOOKING_URL = Deno.env.get('AUDIT_BOOKING_URL') || ''
+export const bookingUrl = (token: string) => `${AUDIT_SITE}/audit/findings-presentation?t=${token}`
 export const orderRef = (id: string) => `BWF-${id.slice(0, 8).toUpperCase()}`
 
 export async function setStatus(engagementId: string, status: string, note?: string, actorId?: string | null) {

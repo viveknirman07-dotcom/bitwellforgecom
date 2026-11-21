@@ -1,6 +1,6 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { admin, clientIp, rateLimit } from '../_shared/db.ts'
-import { BOOKING_URL, orderRef, sendAudit } from '../_shared/audit.ts'
+import { bookingUrl, orderRef, sendAudit } from '../_shared/audit.ts'
 
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 const UUID = /^[0-9a-f-]{36}$/i
@@ -15,7 +15,7 @@ const publicView = async (eng: Record<string, any>) => {
   const sign = async (p: string | null) => p && delivered ? (await db.storage.from('audit-files').createSignedUrl(p, 3600)).data?.signedUrl ?? null : null
   return {
     status: eng.status, name: eng.full_name, order_ref: orderRef(eng.order_id), intake_submitted_at: eng.intake_submitted_at,
-    booking_url: delivered ? BOOKING_URL || null : null, meeting_at: eng.meeting_at, meeting_url: eng.meeting_url,
+    booking_url: delivered ? bookingUrl(eng.access_token) : null, meeting_at: eng.meeting_at, meeting_url: eng.meeting_url,
     deliverables: delivered ? { report: await sign(eng.report_path), findings: await sign(eng.findings_path), roadmap: await sign(eng.roadmap_path) } : null,
   }
 }

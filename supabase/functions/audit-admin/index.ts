@@ -1,7 +1,7 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { admin } from '../_shared/db.ts'
-import { BOOKING_URL, orderRef, sendAudit, setStatus } from '../_shared/audit.ts'
+import { bookingUrl, orderRef, sendAudit, setStatus } from '../_shared/audit.ts'
 
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 const TEAM_STATUSES = new Set(['audit_in_progress', 'audit_ready', 'presentation_completed'])
@@ -61,7 +61,7 @@ Deno.serve(async (req) => {
     if (action === 'deliver') {
       if (!eng.report_path || !eng.findings_path || !eng.roadmap_path) return json({ error: 'All three deliverables must be uploaded first' }, 400)
       if (!['audit_ready', 'deliverables_sent'].includes(eng.status)) return json({ error: 'Mark the audit as ready first' }, 400)
-      const sent = await sendAudit('audit-delivered', eng.email, eng.id, { name: eng.full_name, token: eng.access_token, bookingUrl: BOOKING_URL || undefined })
+      const sent = await sendAudit('audit-delivered', eng.email, eng.id, { name: eng.full_name, token: eng.access_token, bookingUrl: bookingUrl(eng.access_token) })
       if (sent !== 'sent') return json({ error: `Delivery email ${sent}. Please retry.` }, 502)
       if (eng.status !== 'deliverables_sent') {
         await db.from('audit_engagements').update({ delivered_at: new Date().toISOString() }).eq('id', eng.id)
@@ -70,6 +70,7 @@ Deno.serve(async (req) => {
       return json({ ok: true })
     }
     if (action === 'meeting') {
+      // Manual fallback for meetings arranged outside the booking page; requires the real link.
       const when = new Date(String(body.meeting_at ?? ''))
       let url: URL
       try { url = new URL(String(body.meeting_url ?? '')) } catch { return json({ error: 'Enter the real meeting link' }, 400) }
@@ -78,7 +79,7 @@ Deno.serve(async (req) => {
       await db.from('audit_engagements').update({ meeting_at: when.toISOString(), meeting_url: url.toString() }).eq('id', eng.id)
       await setStatus(eng.id, 'presentation_scheduled', when.toISOString(), u.user.id)
       const label = when.toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC'
-      const sent = await sendAudit('audit-presentation-confirmed', eng.email, `${eng.id}-${when.getTime()}`, { name: eng.full_name, when: label, meetingUrl: url.toString(), calendarUrl: gcal(when, url.toString()), bookingUrl: BOOKING_URL || undefined })
+      const sent = await sendAudit('audit-presentation-confirmed', eng.email, `${eng.id}-${when.getTime()}`, { name: eng.full_name, when: label, meetingUrl: url.toString(), calendarUrl: gcal(when, url.toString()), bookingUrl: bookingUrl(eng.access_token) })
       return json({ ok: true, email: sent })
     }
     return json({ error: 'Unknown action' }, 400)

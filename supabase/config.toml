@@ -27,3 +27,6 @@ project_id = "vtseplrffxvrzygsswfk"
 
   [functions.audit-admin]
     verify_jwt = false
+
+  [functions.audit-booking]
+    verify_jwt = false

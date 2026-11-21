@@ -223,6 +223,59 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_bookings: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          engagement_id: string
+          full_name: string
+          google_event_id: string | null
+          id: string
+          meet_url: string | null
+          slot_end: string
+          slot_start: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          engagement_id: string
+          full_name: string
+          google_event_id?: string | null
+          id?: string
+          meet_url?: string | null
+          slot_end: string
+          slot_start: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          engagement_id?: string
+          full_name?: string
+          google_event_id?: string | null
+          id?: string
+          meet_url?: string | null
+          slot_end?: string
+          slot_start?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_bookings_engagement_id_fkey"
+            columns: ["engagement_id"]
+            isOneToOne: false
+            referencedRelation: "audit_engagements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_engagements: {
         Row: {
           access_token: string
