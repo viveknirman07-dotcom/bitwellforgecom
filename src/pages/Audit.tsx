@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSEO } from "@/hooks/use-seo";
+import Purchase from "./audit/Purchase";
 import { StructuralArchitecture, BusinessFramework, SystemsFeedbackLoops } from "@/components/diagrams/AuditDiagrams";
 
 const frameworks = [
@@ -52,7 +53,7 @@ const Audit = () => {
               <div className="lg:col-span-7 mx-auto w-full max-w-[560px]"><C /></div>
             </div>
           ))}
-          <div className="border-t border-gold/15 pt-14 md:pt-20 grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="border-t border-gold/15 py-14 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-12">
             {timeline.map((s) => (
               <div key={s.t}>
                 <p className="text-[10px] tracking-[0.25em] uppercase text-gold/80 mb-4">{s.w}</p>
@@ -61,6 +62,7 @@ const Audit = () => {
               </div>
             ))}
           </div>
+          <Purchase />
         </div>
       </section>
     </div>

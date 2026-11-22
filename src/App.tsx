@@ -9,6 +9,13 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Process from "./pages/Process";
 import Audit from "./pages/Audit";
+import AuditThankYou from "./pages/audit/ThankYou";
+import AuditIntake from "./pages/audit/Intake";
+import AuditOnboardingConfirmed from "./pages/audit/OnboardingConfirmed";
+import AuditClientStatus from "./pages/audit/ClientStatus";
+import AuditFindingsPresentation from "./pages/audit/FindingsPresentation";
+import AuditAuditAdmin from "./pages/audit/AuditAdmin";
+
 import Insights from "./pages/Insights";
 import InsightArticle from "./pages/InsightArticle";
 import Contact from "./pages/Contact";
@@ -48,6 +55,13 @@ const App = () => {
                 <Route path="/case-studies/:id" element={<CaseStudyArticle />} />
                 <Route path="/process" element={<Process />} />
                 <Route path="/audit" element={<Audit />} />
+                <Route path="/audit/thank-you" element={<AuditThankYou />} />
+                <Route path="/audit/intake" element={<AuditIntake />} />
+                <Route path="/audit/onboarding-confirmed" element={<AuditOnboardingConfirmed />} />
+                <Route path="/audit/client" element={<AuditClientStatus />} />
+                <Route path="/audit/findings-presentation" element={<AuditFindingsPresentation />} />
+                <Route path="/audit/admin" element={<AuditAuditAdmin />} />
+
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/insights/:slug" element={<InsightArticle />} />
                 <Route path="/careers" element={<Careers />} />
