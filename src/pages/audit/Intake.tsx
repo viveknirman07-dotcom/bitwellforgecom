@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useSEO } from "@/hooks/use-seo";
-import { Lead, Note, Page, btn, call, field } from "./shared";
+import { Lead, Note, Page, btn, call, field , btnStyle } from "./shared";
 
 type F = { name: string; label: string; long?: boolean; optional?: boolean; type?: string };
 const sections: { id: string; title: string; fields: F[] }[] = [
@@ -90,7 +90,7 @@ const Intake = () => {
             <span className="text-[14px] leading-[1.7] text-muted-foreground">I confirm the information submitted is accurate and may be used by BitwellForge for the purpose of conducting this audit.</span>
           </label>
           {error && <div className="mb-6"><Note tone="error">{error}</Note></div>}
-          <button type="submit" disabled={sending} className={btn}>{sending ? "Submitting" : "Submit Business Information"}</button>
+          <button type="submit" disabled={sending} className={btn} style={btnStyle}>{sending ? "Submitting" : "Submit Business Information"}</button>
         </form>
       )}
     </Page>

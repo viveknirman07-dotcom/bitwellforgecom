@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useSEO } from "@/hooks/use-seo";
-import { Lead, Note, Page, Progress, STATUS_LABEL, btn, call } from "./shared";
+import { Lead, Note, Page, Progress, STATUS_LABEL, btn, call , btnStyle } from "./shared";
 
 const ORDER = ["intake_pending", "intake_completed", "audit_in_progress", "audit_ready", "deliverables_sent", "presentation_scheduled", "presentation_completed"];
 
@@ -21,7 +21,7 @@ const ClientStatus = () => {
         <>
           <Lead>Current status: {STATUS_LABEL[s.status] ?? s.status}</Lead>
           <Progress stages={["Payment & Business Information", "Audit Preparation", "Deliverables & Presentation"]} done={done} />
-          {s.status === "intake_pending" && <Link to={`/audit/intake?t=${token}`} className={btn}>Complete Your Business Information</Link>}
+          {s.status === "intake_pending" && <Link to={`/audit/intake?t=${token}`} className={btn} style={btnStyle}>Complete Your Business Information</Link>}
           {s.deliverables && (
             <div className="border-t border-border/70">
               {[["report", "Complete Audit Report"], ["findings", "Executive Findings PDF"], ["roadmap", "90-Day Priority Roadmap"]].map(([k, label]) => (
@@ -40,7 +40,7 @@ const ClientStatus = () => {
               {s.meeting_url && <a href={s.meeting_url} target="_blank" rel="noreferrer" className="text-foreground border-b border-foreground text-[15px]">Join Google Meet</a>}
             </div>
           )}
-          {s.booking_url && <Link to={`/audit/findings-presentation?t=${token}`} className={btn}>{s.meeting_at ? "Reschedule Presentation" : "Schedule Your Findings Presentation"}</Link>}
+          {s.booking_url && <Link to={`/audit/findings-presentation?t=${token}`} className={btn} style={btnStyle}>{s.meeting_at ? "Reschedule Presentation" : "Schedule Your Findings Presentation"}</Link>}
         </>
       )}
     </Page>

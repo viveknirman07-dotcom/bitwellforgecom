@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/use-seo";
-import { Note, Page, STATUS_LABEL, btn, btnGhost, call, field } from "./shared";
+import { Note, Page, STATUS_LABEL, btn, btnGhost, call, field , btnStyle } from "./shared";
 
 const AuditAdmin = () => {
   useSEO({ title: "Audit Records | BitwellForge", description: "Internal audit records.", canonicalPath: "/audit/admin" });
@@ -40,7 +40,7 @@ const AuditAdmin = () => {
       <form className="max-w-sm space-y-6" onSubmit={async (e) => { e.preventDefault(); const { error } = await supabase.auth.signInWithPassword(cred); if (error) setMsg(error.message); }}>
         <input className={field} type="email" placeholder="Email" required value={cred.email} onChange={(e) => setCred({ ...cred, email: e.target.value })} />
         <input className={field} type="password" placeholder="Password" required value={cred.password} onChange={(e) => setCred({ ...cred, password: e.target.value })} />
-        <button className={btn}>Sign in</button>
+        <button className={btn} style={btnStyle}>Sign in</button>
         {msg && <Note tone="error">{msg}</Note>}
       </form>
     </Page>
@@ -89,7 +89,7 @@ const AuditAdmin = () => {
                 <input type="file" accept="application/pdf" disabled={busy} onChange={(e) => { const f = e.target.files?.[0]; if (!f) return; const fd = new FormData(); fd.set("action", "upload"); fd.set("id", id); fd.set("slot", slot); fd.set("file", f); act(fd); }} className="text-[13px]" />
               </label>
             ))}
-            <button disabled={busy || !detail.report_path || !detail.findings_path || !detail.roadmap_path} className={btn} onClick={() => act({ action: "deliver", id })}>Send deliverables to client</button>
+            <button disabled={busy || !detail.report_path || !detail.findings_path || !detail.roadmap_path} className={btn} style={btnStyle} onClick={() => act({ action: "deliver", id })}>Send deliverables to client</button>
           </div>
           {detail.meeting_at && <Note>Presentation: {new Date(detail.meeting_at).toLocaleString()} · <a className="underline" href={detail.meeting_url}>{detail.meeting_url}</a></Note>}
           <div className="border-t border-border/70 pt-6">

@@ -74,7 +74,7 @@
 - [x] Audit diagrams as SVG on a new /audit page
 
 ## Audit and contact
-- [ ] Audit link in navigation and service sections
-- [ ] Audit purchase flow: payment, intake form, emails, presentation booking
+- [x] Audit link in navigation and service sections
+- [x] Audit purchase flow: payment, intake form, emails, presentation booking
 - [ ] Contact form saves inquiries, sends internal notice and sender confirmation, tested
-- [ ] Own findings presentation booking page with real Google Meet links via Google Calendar
+- [x] Own findings presentation booking page with real Google Meet links via Google Calendar

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useSEO } from "@/hooks/use-seo";
-import { Lead, Note, Page, Progress, btn, call } from "./shared";
+import { Lead, Note, Page, Progress, btn, call , btnStyle } from "./shared";
 
 type State = { payment_status: string; order_ref: string; token: string | null };
 
@@ -36,7 +36,7 @@ const ThankYou = () => {
       {error && <Note tone="error">{error}</Note>}
       {!state && !error && <Lead>We are verifying your payment with the payment provider. This usually takes a few seconds.</Lead>}
       {state && !paid && !failed && <Lead>Your payment is still being confirmed by the payment provider. This page updates automatically. Crypto payments can take several minutes to confirm.</Lead>}
-      {failed && (<><Lead>No charge has been confirmed for this order. You can try again from the audit page.</Lead><Link to="/audit#purchase" className={btn}>Return to the audit</Link></>)}
+      {failed && (<><Lead>No charge has been confirmed for this order. You can try again from the audit page.</Lead><Link to="/audit#purchase" className={btn} style={btnStyle}>Return to the audit</Link></>)}
       {paid && (
         <>
           <Lead>Your payment has been successfully received. The next step is to provide the information required for your audit.</Lead>
@@ -45,7 +45,7 @@ const ThankYou = () => {
           <Progress stages={["Payment Confirmed", "Business Information Submission", "Audit Preparation & Delivery"]} done={1} />
           <p className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-2">Order reference</p>
           <p className="font-heading text-2xl text-foreground mb-10">{state.order_ref}</p>
-          {state.token && <Link to={`/audit/intake?t=${state.token}`} className={btn}>Complete Your Business Information</Link>}
+          {state.token && <Link to={`/audit/intake?t=${state.token}`} className={btn} style={btnStyle}>Complete Your Business Information</Link>}
         </>
       )}
     </Page>

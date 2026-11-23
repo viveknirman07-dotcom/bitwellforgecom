@@ -3,8 +3,11 @@ import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
 export const field = "w-full bg-transparent border-0 border-b border-border/70 focus:border-foreground focus:outline-none py-3 text-[15px] text-foreground placeholder:text-muted-foreground/60 transition-colors";
-export const btn = "inline-flex items-center justify-center px-7 py-4 text-[11px] font-medium uppercase tracking-[0.26em] bg-foreground text-background transition-opacity hover:opacity-90 disabled:opacity-50";
-export const btnGhost = "inline-flex items-center justify-center px-7 py-4 text-[11px] font-medium uppercase tracking-[0.26em] border border-foreground text-foreground transition-opacity hover:opacity-80 disabled:opacity-50";
+export const btn = "inline-flex items-center justify-center px-7 py-4 text-[11px] font-medium uppercase [letter-spacing:0.26em] bg-primary text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50";
+export const btnGhost = "inline-flex items-center justify-center px-7 py-4 text-[11px] font-medium uppercase [letter-spacing:0.26em] border border-foreground text-foreground transition-opacity hover:opacity-80 disabled:opacity-50";
+
+/** Inline colour guards against global button/link colour rules. */
+export const btnStyle = { color: "hsl(var(--background))" };
 
 export async function call<T = any>(fn: string, body: Record<string, unknown> | FormData): Promise<T> {
   const { data, error } = await supabase.functions.invoke(fn, { body });

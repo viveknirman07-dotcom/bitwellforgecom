@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSEO } from "@/hooks/use-seo";
-import { Lead, Note, Page, btn, call, field } from "./shared";
+import { Lead, Note, Page, btn, call, field , btnStyle } from "./shared";
 
 const TZ = "Asia/Kolkata";
 const dayKey = (iso: string) => new Date(iso).toLocaleDateString("en-CA", { timeZone: TZ });
@@ -43,7 +43,7 @@ const FindingsPresentation = () => {
     <Page eyebrow="Findings Presentation" title="Your Presentation Is Booked.">
       <Lead>{fmt(booked.slot_start, { dateStyle: "full", timeStyle: "short" })} India Standard Time, for 45–60 minutes.</Lead>
       <Lead>A confirmation email and a calendar invitation are on their way to {form.email}.</Lead>
-      <a href={booked.meet_url} target="_blank" rel="noreferrer" className={btn}>Open Google Meet link</a>
+      <a href={booked.meet_url} target="_blank" rel="noreferrer" className={btn} style={btnStyle}>Open Google Meet link</a>
     </Page>
   );
 
@@ -87,7 +87,7 @@ const FindingsPresentation = () => {
                   </label>
                 ))}
               </div>
-              <button type="submit" disabled={!slot || sending} className={btn}>{sending ? "Booking" : slot ? `Confirm ${fmt(slot, { weekday: "short", day: "numeric", month: "short" })}, ${fmt(slot, { hour: "2-digit", minute: "2-digit", hour12: false })}` : "Select a time"}</button>
+              <button type="submit" disabled={!slot || sending} className={btn} style={btnStyle}>{sending ? "Booking" : slot ? `Confirm ${fmt(slot, { weekday: "short", day: "numeric", month: "short" })}, ${fmt(slot, { hour: "2-digit", minute: "2-digit", hour12: false })}` : "Select a time"}</button>
             </>
           )}
         </form>
