@@ -249,6 +249,11 @@ const ServiceDetail = () => {
 
           {/* ── Ideal For */}
           <IdealFor items={service.idealFor} />
+
+          <Divider />
+          <Link to="/audit" className="group inline-flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase text-foreground border-b border-gold/40 pb-2 hover:border-gold transition-colors duration-500">
+            Begin with the Revenue Infrastructure Audit
+          </Link>
         </div>
       </section>
     </div>

@@ -184,6 +184,9 @@ const ServiceIndex = () => {
                 Explore {s.title}
                 <ArrowRight size={14} className="transition-transform duration-500 group-hover:translate-x-1" />
               </Link>
+              <Link to="/audit" className="block mt-6 text-[13px] text-muted-foreground hover:text-foreground transition-colors">
+                Not sure where to start? Begin with the Revenue Infrastructure Audit.
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -224,6 +227,7 @@ const ServiceIndex = () => {
                     >
                       Explore <ArrowRight size={14} />
                     </Link>
+                    <Link to="/audit" className="block mt-5 text-[13px] text-muted-foreground">Begin with the Revenue Infrastructure Audit</Link>
                   </div>
                 </div>
               </div>
