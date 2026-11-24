@@ -5,7 +5,7 @@ export function useDarkMode() {
     if (typeof window === "undefined") return true;
     const stored = localStorage.getItem("bwf-theme");
     if (stored) return stored === "dark";
-    return false; // ice blue light theme by default
+    return true; // deep navy dark theme by default
   });
 
   useEffect(() => {

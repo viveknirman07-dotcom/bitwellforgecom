@@ -7,7 +7,14 @@
     <meta name="description" content="BitwellForge advises service businesses on the structural constraints governing commercial performance, identifying the interdependencies that impede growth across strategy, acquisition, operations, and digital execution.">
     <meta name="author" content="BitwellForge" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="theme-color" content="#CEE6F8" />
+    <meta name="theme-color" content="#050D2E" />
+    <script>
+      // Apply theme before first paint: stored choice wins, dark is the default
+      (function() {
+        var stored = localStorage.getItem("bwf-theme");
+        if (stored !== "light") document.documentElement.classList.add("dark");
+      })();
+    </script>
     <link rel="icon" href="/favicon.png?v=3" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
 
