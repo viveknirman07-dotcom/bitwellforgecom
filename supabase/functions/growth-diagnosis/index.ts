@@ -1,6 +1,7 @@
 import { createOpenAI } from 'npm:@ai-sdk/openai'
 import { streamText, Output, NoObjectGeneratedError } from 'npm:ai'
 import { z } from 'npm:zod'
+import { createClient } from 'npm:@supabase/supabase-js@2'
 import { createLovableAiGatewayRunIdFetch, getLovableAiGatewayRunId } from '../_shared/run-id.ts'
 
 const cors = {
@@ -43,6 +44,26 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
   const apiKey = Deno.env.get('LOVABLE_API_KEY')
   if (!apiKey) return json({ error: 'The diagnosis service is not configured.' }, 500)
+
+  // Abuse guard: 5 diagnoses per visitor per hour, 300 per day overall.
+  try {
+    const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+    const ip = (req.headers.get('x-forwarded-for') ?? '').split(',')[0].trim() || 'unknown'
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ip))
+    const id = Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('')
+    const now = new Date()
+    const bump = async (bucket: string, key: string, limit: number) => {
+      const { data } = await db.from('rate_limits').select('id, hits').eq('bucket', bucket).eq('identifier', key).maybeSingle()
+      if (data && data.hits >= limit) return false
+      if (data) await db.from('rate_limits').update({ hits: data.hits + 1 }).eq('id', data.id)
+      else await db.from('rate_limits').insert({ bucket, identifier: key, hits: 1, window_start: now.toISOString() })
+      return true
+    }
+    const hour = now.toISOString().slice(0, 13)
+    const day = now.toISOString().slice(0, 10)
+    if (!(await bump('diagnosis-day', day, 300)) || !(await bump('diagnosis-ip', `${id}:${hour}`, 5)))
+      return json({ error: 'Too many diagnoses requested. Please try again later.' }, 429)
+  } catch { return json({ error: 'The diagnosis service is temporarily unavailable.' }, 503) }
 
   let body: Record<string, unknown>
   try { body = await req.json() } catch { return json({ error: 'Invalid request.' }, 400) }

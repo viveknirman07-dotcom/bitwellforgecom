@@ -89,13 +89,7 @@ async function ensureUser(email: string, fullName: string | null) {
   const db = admin()
   const normalized = email.trim().toLowerCase()
 
-  const { data: existingProfile } = await db
-    .from('profiles')
-    .select('id')
-    .eq('email', normalized)
-    .maybeSingle()
-  if (existingProfile) return { userId: existingProfile.id as string, created: false }
-
+  // Match only against verified sign-in identities, never editable profile emails.
   const { data: created, error } = await db.auth.admin.createUser({
     email: normalized,
     email_confirm: true,
@@ -104,9 +98,12 @@ async function ensureUser(email: string, fullName: string | null) {
 
   if (error || !created?.user) {
     // The address may already exist in auth without a profile row.
-    const { data: list } = await db.auth.admin.listUsers({ page: 1, perPage: 200 })
-    const match = list?.users?.find((u) => u.email?.toLowerCase() === normalized)
-    if (match) return { userId: match.id, created: false }
+    for (let page = 1; page <= 50; page++) {
+      const { data: list } = await db.auth.admin.listUsers({ page, perPage: 200 })
+      const match = list?.users?.find((u) => u.email?.toLowerCase() === normalized)
+      if (match) return { userId: match.id, created: false }
+      if (!list?.users || list.users.length < 200) break
+    }
     throw new Error(`Unable to provision account: ${error?.message}`)
   }
 

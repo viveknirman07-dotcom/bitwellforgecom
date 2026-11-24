@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
   const submissionId = g('submission_id')
   if (g('website')) return json({ ok: true }) // honeypot
 
-  if (!roleId || !roleTitle) return json({ error: 'Missing mandate' }, 400)
+  if (!roleId || !roleTitle || !/^[a-z0-9][a-z0-9-]{0,79}$/i.test(roleId)) return json({ error: 'Missing mandate' }, 400)
   if (!name || name.length > 120) return json({ error: 'Please enter your full name' }, 400)
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255) return json({ error: 'Please enter a valid email' }, 400)
   if (!isUrl(linkedin) || linkedin.length > 500) return json({ error: 'Please enter a valid LinkedIn URL' }, 400)
