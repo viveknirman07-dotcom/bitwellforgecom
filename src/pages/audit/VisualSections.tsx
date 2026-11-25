@@ -31,28 +31,44 @@ export const StrategicVisual = () => (
   </figure>
 );
 
-export const DataVisual = () => (
-  <figure>
-    <svg viewBox="0 0 480 360" role="img" aria-labelledby="audit-evidence-title audit-evidence-desc" className="w-full h-auto font-body">
-      <title id="audit-evidence-title">Connecting commercial evidence to operational evidence</title>
-      <desc id="audit-evidence-desc">Three paired evidence lenses connect demand to capacity, conversion to handoffs, and revenue to delivery effort. No client metrics or performance results are depicted.</desc>
-      <text x="16" y="32" fill={muted} fontSize="16">COMMERCIAL</text>
-      <text x="300" y="32" fill={muted} fontSize="16">OPERATIONAL</text>
-      {[["Demand", "Capacity"], ["Conversion", "Handoffs"], ["Revenue", "Delivery effort"]].map(([a, b], i) => {
-        const y = 94 + i * 91;
-        return <g key={a}>
-          <line x1="16" y1={y + 34} x2="464" y2={y + 34} stroke={line} />
-          <text x="16" y={y} fill={ink} fontSize="21">{a}</text>
-          <line x1="165" y1={y - 7} x2="274" y2={y - 7} stroke={accent} strokeWidth="2" />
-          <circle cx="165" cy={y - 7} r="4" fill={accent} />
-          <path d={`M266 ${y - 13} L274 ${y - 7} L266 ${y - 1}`} fill="none" stroke={accent} strokeWidth="2" />
-          <text x="300" y={y} fill={ink} fontSize="21">{b}</text>
-        </g>;
-      })}
-    </svg>
-    <FigureNote>Illustrative evidence relationships. Quantitative conclusions depend on the records supplied, their completeness and their comparability.</FigureNote>
-  </figure>
-);
+export const DataVisual = () => {
+  const lenses = [
+    { r: 46, label: "Demand", sub: "Enquiry volume" },
+    { r: 62, label: "Conversion", sub: "Win patterns" },
+    { r: 78, label: "Capacity", sub: "Team load" },
+    { r: 94, label: "Revenue", sub: "Margin by offer" },
+  ];
+  let x = 18;
+  const placed = lenses.map((l, i) => { const cx = x + l.r; x = cx + l.r * 0.42; return { ...l, cx, i }; });
+  const base = 250;
+  return (
+    <figure>
+      <svg viewBox="0 0 480 330" role="img" aria-labelledby="audit-evidence-title audit-evidence-desc" className="w-full h-auto font-body overflow-visible">
+        <title id="audit-evidence-title">Overlapping evidence lenses</title>
+        <desc id="audit-evidence-desc">Four graduated, overlapping circles representing demand, conversion, capacity and revenue evidence. Their overlaps mark where findings are formed. No client metrics are depicted.</desc>
+        <text x="18" y="26" fill={muted} fontSize="11" letterSpacing="2.5">EVIDENCE LENSES</text>
+        <text x="462" y="26" fill={muted} fontSize="11" letterSpacing="2.5" textAnchor="end">ILLUSTRATIVE</text>
+        <line x1="18" y1="40" x2="462" y2="40" stroke={line} />
+        {placed.map((c) => (
+          <circle key={c.label} cx={c.cx} cy={base - c.r} r={c.r} fill={accent} fillOpacity={0.1 + c.i * 0.07} stroke={accent} strokeOpacity={0.35 + c.i * 0.15} strokeWidth="1" />
+        ))}
+        {placed.map((c) => (
+          <circle key={c.label + "c"} cx={c.cx} cy={base - c.r} r="2.5" fill={ink} />
+        ))}
+        <line x1="18" y1={base} x2="462" y2={base} stroke={ink} strokeWidth="1.25" />
+        {placed.map((c) => (
+          <g key={c.label + "t"}>
+            <line x1={c.cx} y1={base} x2={c.cx} y2={base + 10} stroke={ink} />
+            <text x={c.cx} y={base + 32} textAnchor="middle" fill={ink} fontSize="15" className="font-heading">{c.label}</text>
+            <text x={c.cx} y={base + 50} textAnchor="middle" fill={muted} fontSize="10" letterSpacing="0.5">{c.sub}</text>
+          </g>
+        ))}
+        <text x="462" y="66" textAnchor="end" fill={muted} fontSize="10" letterSpacing="1.5">OVERLAP = WHERE FINDINGS FORM</text>
+      </svg>
+      <FigureNote>Illustrative evidence relationships. Quantitative conclusions depend on the records supplied, their completeness and their comparability.</FigureNote>
+    </figure>
+  );
+};
 
 export const ReportsVisual = () => (
   <figure>
@@ -74,27 +90,58 @@ export const MotionVisual = () => {
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const active = !reduced && !paused && visible;
+  const D = 7.2;
+  const units = Array.from({ length: 6 }, (_, i) => i);
   return (
     <figure>
       <motion.div onViewportEnter={() => setVisible(true)} onViewportLeave={() => setVisible(false)}>
-        <svg viewBox="0 0 480 300" role="img" aria-labelledby="audit-motion-title audit-motion-desc" className="w-full h-auto font-body">
-          <title id="audit-motion-title">A constraint carries through to the next function</title>
-          <desc id="audit-motion-desc">A signal travels from demand through delivery to revenue. A narrower delivery stage illustrates why increasing demand alone may not resolve a capacity constraint.</desc>
-          <line x1="40" y1="140" x2="440" y2="140" stroke={line} strokeWidth="2" />
-          {[80, 240, 400].map((x, i) => (
-            <g key={x}>
-              <rect x={x - (i === 1 ? 24 : 42)} y="94" width={i === 1 ? 48 : 84} height="92" fill="hsl(var(--background))" stroke={i === 1 ? accent : ink} strokeWidth="1.5" />
-              <text x={x} y="222" textAnchor="middle" fontSize="20" fill={ink}>{["Demand", "Delivery", "Revenue"][i]}</text>
-            </g>
+        <svg viewBox="0 0 480 320" role="img" aria-labelledby="audit-motion-title audit-motion-desc" className="w-full h-auto font-body">
+          <title id="audit-motion-title">A capacity constraint limits throughput</title>
+          <desc id="audit-motion-desc">Work enters from demand at a steady rate. The delivery stage is narrower, so only part of the work passes through to revenue while the rest waits in a queue. Increasing demand alone lengthens the queue rather than revenue.</desc>
+          <text x="20" y="28" fill={muted} fontSize="11" letterSpacing="2.5">SYSTEM FLOW</text>
+          <text x="460" y="28" fill={muted} fontSize="11" letterSpacing="2.5" textAnchor="end">ILLUSTRATIVE</text>
+          <line x1="20" y1="42" x2="460" y2="42" stroke={line} />
+          {/* channel */}
+          <path d="M20 110 H196 L222 134 H258 L284 110 H460 M20 210 H196 L222 186 H258 L284 210 H460" fill="none" stroke={ink} strokeWidth="1.25" />
+          <rect x="222" y="134" width="36" height="52" fill={accent} fillOpacity="0.14" />
+          <line x1="240" y1="70" x2="240" y2="134" stroke={accent} strokeDasharray="3 4" />
+          <text x="240" y="62" textAnchor="middle" fill={accent} fontSize="11" letterSpacing="2">CONSTRAINT</text>
+          {[110, 250, 370].map((x, i) => (
+            <text key={x} x={x} y="244" textAnchor="middle" fill={ink} fontSize="17" className="font-heading">{["Demand", "Delivery", "Revenue"][i]}</text>
           ))}
-          <motion.circle cx="80" cy="140" r="7" fill={accent}
-            animate={active ? { x: [0, 136, 160, 184, 320], opacity: [0, 1, 1, 1, 0] } : { x: 160, opacity: 1 }}
-            transition={active ? { duration: 6, times: [0, 0.28, 0.6, 0.78, 1], repeat: Infinity, ease: "linear" } : { duration: 0 }} />
-          <text x="240" y="58" textAnchor="middle" fontSize="16" fill={muted}>CAPACITY CONSTRAINT</text>
+          {[["Inflow", 110], ["Queue forms", 196], ["Throughput", 370]].map(([t, x]) => (
+            <text key={t as string} x={x as number} y="262" textAnchor="middle" fill={muted} fontSize="10" letterSpacing="0.6">{t}</text>
+          ))}
+          {/* waiting queue */}
+          {[0, 1, 2].map((q) => (
+            <motion.rect key={q} x={180 - q * 16} y="152" width="10" height="16" fill={ink}
+              initial={{ opacity: 0.25 }}
+              animate={active ? { opacity: [0.15, 0.15, 0.85, 0.85, 0.15] } : { opacity: 0.6 }}
+              transition={active ? { duration: D, delay: q * 0.8, times: [0, 0.3, 0.42, 0.85, 1], repeat: Infinity, ease: "easeInOut" } : { duration: 0 }} />
+          ))}
+          {/* flowing units */}
+          {units.map((i) => {
+            const pass = i % 2 === 0;
+            return (
+              <motion.circle key={i} cx="20" cy={pass ? 160 : 160 + (i % 3 - 1) * 22} r="5" fill={pass ? accent : ink}
+                initial={{ opacity: 0 }}
+                animate={active
+                  ? pass
+                    ? { x: [0, 170, 220, 260, 430], opacity: [0, 1, 1, 1, 0] }
+                    : { x: [0, 150, 158, 158], opacity: [0, 1, 0.9, 0] }
+                  : { x: pass ? 220 : 120, opacity: 0.9 }}
+                transition={active ? { duration: D, delay: (i * D) / units.length, times: pass ? [0, 0.3, 0.55, 0.65, 1] : [0, 0.35, 0.7, 1], repeat: Infinity, ease: "easeInOut" } : { duration: 0 }} />
+            );
+          })}
+          <line x1="20" y1="288" x2="460" y2="288" stroke={line} />
+          <circle cx="26" cy="304" r="4" fill={accent} />
+          <text x="38" y="308" fill={muted} fontSize="10">Work converted to revenue</text>
+          <circle cx="220" cy="304" r="4" fill={ink} />
+          <text x="232" y="308" fill={muted} fontSize="10">Work waiting on capacity</text>
         </svg>
       </motion.div>
       <div className="flex items-center justify-between gap-4 border-t border-gold/15 pt-4">
-        <span className="text-xs text-muted-foreground">Illustrative system behaviour</span>
+        <span className="text-xs text-muted-foreground">More demand lengthens the queue, not the revenue line.</span>
         {!reduced && <Button variant="ghost" size="icon" aria-label={paused ? "Play explainer" : "Pause explainer"} title={paused ? "Play explainer" : "Pause explainer"} onClick={() => setPaused(!paused)}>{paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}</Button>}
       </div>
       <FigureNote>A simplified explanation for the findings discussion. It is not a simulation of your business or an additional commissioned animation.</FigureNote>
