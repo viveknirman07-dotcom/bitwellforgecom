@@ -13,3 +13,4 @@
 - Outgoing templates share one email header and typography definitions; use one img with picture/media enhancement and a light fallback so unsupported email clients never receive stacked artwork.
 - The brand opening is mounted once at the app root (OpeningGate) and only when a visit starts on the homepage, so the homepage page itself never owns intro timing or state.
 - Findings presentation booking reads availability from and creates events on the connected Google Calendar via the audit-booking function, with a partial unique index on active slot_start, because the database index is the atomic double-booking guard and Meet links must come from real calendar events.
+- Audit explanatory visuals live in a page-local module separate from the original audit diagrams and purchase controls, so presentation additions cannot alter shared artwork or payment behavior.

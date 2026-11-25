@@ -1,3 +1,8 @@
+## Audit explanation and visual additions
+- [x] Expand audit page explanations without changing existing visuals or commerce
+- [x] Add strategic frameworks, data visualizations, report previews and motion explainers
+- [x] Verify audit page on desktop, tablet and mobile in both themes
+
 ## Detailed About expansion
 - [x] Expand About with substantive firm and approach detail and four existing visuals in separate placements
 - [x] Verify image loading, regular wordmark, alignment and readability on desktop, tablet and phone
